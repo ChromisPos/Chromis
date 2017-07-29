@@ -1,0 +1,46 @@
+// Get multiple items from a range of products for a fixed price
+// To qualify, there must be at least one product from all the types listed
+// in the ticket. If a product type is missing, the deal is not activated.
+//
+// Items in the promotion need two things: one is on the stock screen, select
+// a promotion based upon this script, the second is on the product properties
+// tab where you need to add a line similar to the one below to define the type
+// of product it is. for example for a meal deal you may have
+// a snack, a drink and a sandwich.
+// Promotion lines are added as a discount to the end of the ticket
+
+
+/* add the lines below to the product Properties tab, remember to change the
+// mealdeal.type to one in the list you gave in USER EDITABLE VARIABLES 
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <entry key="deal.producttype">drink</entry>
+</properties>
+
+ End of lines to add to product properties - do NOT add this line */
+
+ArrayList LIST_TYPES = new ArrayList();
+
+// START OF USER EDITABLE VARIABLES
+
+// Types of product - at least one of each must be present to qualify
+LIST_TYPES.add( "drink" );
+LIST_TYPES.add( "snack" );
+LIST_TYPES.add( "sandwich" );
+
+Double DEAL_PRICE = 2.5;                    // Price to pay for this deal
+String PROPERTY_KEY = "deal.producttype";   // Key name in product properties
+
+// END OF USER EDITABLE VARIABLES
+
+//
+//
+// DO NOT EDIT THE CODE BELOW UNLESS YOU REALLY KNOW WHAT YOU ARE DOING
+//      
+
+    support.UpdateMealDeal( ticket, promotion,
+        "  *" + promotion.getName(),
+        LIST_TYPES, PROPERTY_KEY,
+        DEAL_PRICE );

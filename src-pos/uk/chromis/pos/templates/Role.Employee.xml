@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+   Chromis POS - The New Face of Open Source POS 
+   Copyright (c) (c) 2015-2016Chromis , previous uniCenta & Openbravo POS works   
+
+   This file is part of chromis oPOS
+
+   Chromis POS is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Chromis POS is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!--
+    The Administrator Role Permissions has full access to all Chromis POS
+    functionality.
+    The Administrator Role should only be used to make system changes.
+    
+    *** Do not change unless you know what you are doing ***
+-->
+<!--
+    These reports will report an error with Derby DB's due to SQL limitations 
+    Remove the comment at beginning and end of line
+    You will also need to enable in Administration>Resources>Roles>Administrator/Manager & etc ***
+-->
+
+
+<permissions>
+    <class name="uk.chromis.pos.sales.JPanelTicketSales"/>
+    <class name="uk.chromis.pos.sales.JPanelTicketEdits"/>
+    <class name="uk.chromis.pos.customers.CustomersPayment"/>
+    <class name="uk.chromis.pos.panels.JPanelPayments"/>
+
+    <class name="sales.EditLines"/>
+    <class name="sales.EditTicket"/>
+    <class name="sales.PrintTicket"/>
+    <class name="sales.Total"/>
+    <class name="sales.ChangeTaxOptions"/>
+    <class name="payment.bank"/>
+    <class name="payment.cash"/>
+    <class name="payment.cheque"/>
+    <class name="payment.paper"/>
+    <class name="payment.magcard"/>
+    <class name="payment.debt"/>
+    <class name="sales.PrintKitchen"/>
+
+    <!-- Standard button scripts -->
+    <class name="button.totaldiscount"/>
+    <class name="button.print"/>
+    <class name="button.opendrawer"/>
+    
+    <!-- Additional button scripts -->
+    <class name="button.linediscount"/>
+    <class name="button.sendorder"/>
+
+    <class name="uk.chromis.pos.forms.MenuCustomers"/>
+    <class name="uk.chromis.pos.customers.CustomersPanel"/>
+    <class name="/uk/chromis/reports/customers.bs"/>
+    <class name="/uk/chromis/reports/customersb.bs"/>
+    <class name="/uk/chromis/reports/customersdiary.bs"/>
+
+    <class name="uk.chromis.pos.forms.MenuStockManagement"/>
+    <class name="uk.chromis.pos.inventory.AuxiliarPanel"/>
+    <class name="uk.chromis.pos.inventory.CategoriesPanel"/>
+    <class name="uk.chromis.pos.inventory.ProductsPanel"/>
+
+    <class name="/uk/chromis/reports/barcodesheet.bs"/>
+    <class name="/uk/chromis/reports/productscatalog.bs"/>
+    <class name="/uk/chromis/reports/products.bs"/>
+    <class name="/uk/chromis/reports/productlabels.bs"/>
+    <class name="/uk/chromis/reports/salecatalog.bs"/>
+    <class name="/uk/chromis/reports/shelfedgelabels.bs"/>
+
+    <class name="uk.chromis.pos.forms.MenuSalesManagement"/>
+    <class name="/uk/chromis/reports/productsales.bs"/>
+
+    <class name="uk.chromis.pos.epm.JPanelEmployeePresence" />
+    <class name="Menu.ChangePassword"/>
+
+</permissions>

@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    
+    <changeSet author="Chromis POS" id="Remove constraints PRODUCTS_CAT_FK_1 on Derby (NV)" dbms="derby">   
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PRODUCTS_CAT" foreignKeyName="PRODUCTS_CAT_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PRODUCTS_CAT" constraintName="PRODUCTS_CAT_FK_1"/>
+    </changeSet>
+       
+    <changeSet author="Chromis POS" id="Remove constraints PRODUCTS_COM_FK_1 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PRODUCTS_COM" foreignKeyName="PRODUCTS_COM_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PRODUCTS_COM" constraintName="PRODUCTS_COM_FK_1"/>
+    </changeSet>      
+  
+    <changeSet author="Chromis POS" id="Remove constraints PRODUCTS_COM_FK_2 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PRODUCTS_COM" foreignKeyName="PRODUCTS_COM_FK_2"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PRODUCTS_COM" constraintName="PRODUCTS_COM_FK_2"/>
+    </changeSet>        
+       
+    <changeSet author="Chromis POS" id="Remove constraints STOCKDIARY_FK_1 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKDIARY" foreignKeyName="STOCKDIARY_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKDIARY" constraintName="STOCKDIARY_FK_1"/>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Remove constraints STOCKDIARY_FK_2 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKDIARY" foreignKeyName="STOCKDIARY_FK_2"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKDIARY" constraintName="STOCKDIARY_FK_2"/>
+    </changeSet>                  
+      
+    <changeSet author="Chromis POS" id="Remove constraints STOCKLEVEL_PRODUCT on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKLEVEL" foreignKeyName="STOCKLEVEL_PRODUCT"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKLEVEL" constraintName="STOCKLEVEL_PRODUCT"/>
+    </changeSet>                                     
+                                                                    
+    <changeSet author="Chromis POS" id="Remove constraints STOCKCURRENT_FK_1 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKCURRENT" foreignKeyName="STOCKCURRENT_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKCURRENT" constraintName="STOCKCURRENT_FK_1"/>
+    </changeSet>
+    
+    <changeSet author="Chromis POS" id="Remove constraints STOCKCURRENT_FK_2 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKCURRENT" foreignKeyName="STOCKCURRENT_FK_2"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKCURRENT" constraintName="STOCKCURRENT_FK_2"/>
+    </changeSet> 
+                                                                                                                                  
+    <changeSet author="Chromis POS" id="Remove constraints TICKETLINES_FK_2 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TICKETLINES" foreignKeyName="TICKETLINES_FK_2"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TICKETLINES" constraintName="TICKETLINES_FK_2"/>
+    </changeSet>                                                                                                                                                                                                                                                                   
+    
+    <changeSet author="Chromis POS" id="Remove constraints ATTUSE_SET on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="ATTRIBUTEUSE" foreignKeyName="ATTUSE_SET"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="ATTRIBUTEUSE" constraintName="ATTUSE_SET"/>
+    </changeSet>
+  
+    <changeSet author="Chromis POS" id="Remove constraints STOCKCURRENT_ATTSETINST on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKCURRENT" foreignKeyName="STOCKCURRENT_ATTSETINST"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKCURRENT" constraintName="STOCKCURRENT_ATTSETINST"/>
+    </changeSet>
+  
+    <changeSet author="Chromis POS" id="Remove constraints ATTINST_SET on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="ATTRIBUTEINSTANCE" foreignKeyName="ATTINST_SET"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="ATTRIBUTEINSTANCE" constraintName="ATTINST_SET"/>
+    </changeSet>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+   
+    <changeSet author="Chromis POS" id="Remove constraints ATTVAL_ATT on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="ATTRIBUTEVALUE" foreignKeyName="ATTVAL_ATT"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="ATTRIBUTEVALUE" constraintName="ATTVAL_ATT"/>
+    </changeSet>    
+    
+    <changeSet author="Chromis POS" id="Remove constraints ATTUSE_ATT on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="ATTRIBUTEUSE" foreignKeyName="ATTUSE_ATT"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="ATTRIBUTEUSE" constraintName="ATTUSE_ATT"/>
+    </changeSet>        
+            
+    <changeSet author="Chromis POS" id="Remove constraints ATTINST_ATT on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="ATTRIBUTEINSTANCE" foreignKeyName="ATTINST_ATT"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="ATTRIBUTEINSTANCE" constraintName="ATTINST_ATT"/>
+    </changeSet>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+   
+    <changeSet author="Chromis POS" id="Remove constraints STOCKDIARY_ATTSETINST on Derby (NV)" dbms="derby"> 
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="STOCKDIARY" foreignKeyName="STOCKDIARY_ATTSETINST"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="STOCKDIARY" constraintName="STOCKDIARY_ATTSETINST"/>
+    </changeSet>          
+            
+    <changeSet author="Chromis POS" id="Remove constraints ATTSETINST_SET on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="ATTRIBUTESETINSTANCE" foreignKeyName="ATTSETINST_SET"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="ATTRIBUTESETINSTANCE" constraintName="ATTSETINST_SET"/>
+    </changeSet>                                                                               
+    
+    <changeSet author="Chromis POS" id="Remove constraints TICKETLINES_ATTSETINST on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TICKETLINES" foreignKeyName="TICKETLINES_ATTSETINST"/>           
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TICKETLINES" constraintName="TICKETLINES_ATTSETINST"/>
+    </changeSet>     
+      
+    <changeSet author="Chromis POS" id="Remove constraints PEOPLE_FK_1 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PEOPLE" foreignKeyName="PEOPLE_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PEOPLE" constraintName="PEOPLE_FK_1"/>
+    </changeSet>       
+        
+    <changeSet author="Chromis POS" id="Remove constraints TICKETS_FK_2 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TICKETS" foreignKeyName="TICKETS_FK_2"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TICKETS" constraintName="TICKETS_FK_2"/>
+    </changeSet>          
+  
+    <changeSet author="Chromis POS" id="Remove constraints CUSTOMERS_TAXCAT on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="CUSTOMERS" foreignKeyName="CUSTOMERS_TAXCAT"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="CUSTOMERS" constraintName="CUSTOMERS_TAXCAT"/>
+    </changeSet>                  
+
+    <changeSet author="Chromis POS" id="Remove constraints TAXES_CUSTCAT_FK on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TAXES" foreignKeyName="TAXES_CUSTCAT_FK"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TAXES" constraintName="TAXES_CUSTCAT_FK"/>
+    </changeSet>
+ 
+    <changeSet author="Chromis POS" id="Remove constraints CATEGORIES_FK_1 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="CATEGORIES" foreignKeyName="CATEGORIES_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="CATEGORIES" constraintName="CATEGORIES_FK_1"/>
+    </changeSet>                                      
+
+    <changeSet author="Chromis POS" id="Remove constraints TAXES_CAT_FK on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TAXES" foreignKeyName="TAXES_CAT_FK"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TAXES" constraintName="TAXES_CAT_FK"/>
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Remove constraints TAXES_TAXES_FK on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TAXES" foreignKeyName="TAXES_TAXES_FK"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TAXES" constraintName="TAXES_TAXES_FK"/>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Remove constraints TICKETLINES_FK_3 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TICKETLINES" foreignKeyName="TICKETLINES_FK_3"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TICKETLINES" constraintName="TICKETLINES_FK_3"/>
+    </changeSet>   
+
+    <changeSet author="Chromis POS" id="Remove constraints TAXLINES_TAX on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="TAXLINES" foreignKeyName="TAXLINES_TAX"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="TAXLINES" constraintName="TAXLINES_TAX"/>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Remove constraints RECEIPTS_FK_MONEY on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="RECEIPTS" foreignKeyName="RECEIPTS_FK_MONEY"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="RECEIPTS" constraintName="RECEIPTS_FK_MONEY"/>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Remove constraints PRODUCTS_KIT_FK_1 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PRODUCTS_KIT" foreignKeyName="PRODUCTS_KIT_FK_1"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PRODUCTS_KIT" constraintName="PRODUCTS_KIT_FK_1"/>
+    </changeSet>
+    
+    <changeSet author="Chromis POS" id="Remove constraints PRODUCTS_KIT_FK_2 on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PRODUCTS_KIT" foreignKeyName="PRODUCTS_KIT_FK_2"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PRODUCTS_KIT" constraintName="PRODUCTS_KIT_FK_2"/>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Remove constraints PRODUCTS_PACKPRODUCT_FK on Derby (NV)" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <foreignKeyConstraintExists foreignKeyTableName="PRODUCTS" foreignKeyName="PRODUCTS_PACKPRODUCT_FK"/>            
+        </preConditions>  
+        <dropForeignKeyConstraint baseTableName="PRODUCTS" constraintName="PRODUCTS_PACKPRODUCT_FK"/>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="check for primary key on ticketlines table (NV)">        
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="TICKETLINES"/>   
+            </not>         
+        </preConditions>  
+        <sql>ALTER TABLE TICKETLINES ADD PRIMARY KEY (TICKET, LINE)</sql>
+    </changeSet>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    <changeSet author="Chromis POS" id="Refactor PRODUCTS (NV)" dbms="derby">  
+        <sql>ALTER TABLE PRODUCTS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="PRODUCTS"/>
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="TEXTTIP" tableName="PRODUCTS"/>
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="CATEGORY" tableName="PRODUCTS"/>
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="TAXCAT" tableName="PRODUCTS"/>          
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="ATTRIBUTESET_ID" tableName="PRODUCTS"/>        
+        <renameColumn newColumnName="JDL_TMP6" oldColumnName="DISPLAY" tableName="PRODUCTS"/>     
+        <renameColumn newColumnName="JDL_TMP7" oldColumnName="REFERENCE" tableName="PRODUCTS"/>
+        <renameColumn newColumnName="JDL_TMP8" oldColumnName="CODE" tableName="PRODUCTS"/>          
+        <renameColumn newColumnName="JDL_TMP9" oldColumnName="CODETYPE" tableName="PRODUCTS"/>        
+        <renameColumn newColumnName="JDL_TMP10" oldColumnName="NAME" tableName="PRODUCTS"/>                       
+        <sql>
+            ALTER TABLE PRODUCTS ADD COLUMN ID VARCHAR(255);            
+            ALTER TABLE PRODUCTS ADD COLUMN TEXTTIP VARCHAR(255);                      
+            ALTER TABLE PRODUCTS ADD COLUMN CATEGORY VARCHAR(255);
+            ALTER TABLE PRODUCTS ADD COLUMN TAXCAT VARCHAR(255);
+            ALTER TABLE PRODUCTS ADD COLUMN ATTRIBUTESET_ID VARCHAR(255);
+            ALTER TABLE PRODUCTS ADD COLUMN DISPLAY VARCHAR(255);            
+            ALTER TABLE PRODUCTS ADD COLUMN REFERENCE VARCHAR(255);
+            ALTER TABLE PRODUCTS ADD COLUMN CODE VARCHAR(255);
+            ALTER TABLE PRODUCTS ADD COLUMN CODETYPE VARCHAR(255);
+            ALTER TABLE PRODUCTS ADD COLUMN NAME VARCHAR(255);
+            UPDATE PRODUCTS SET ID = JDL_TMP1;            
+            UPDATE PRODUCTS SET TEXTTIP = JDL_TMP2;
+            UPDATE PRODUCTS SET CATEGORY = JDL_TMP3;
+            UPDATE PRODUCTS SET TAXCAT = JDL_TMP4;
+            UPDATE PRODUCTS SET ATTRIBUTESET_ID = JDL_TMP5;
+            UPDATE PRODUCTS SET DISPLAY = JDL_TMP6;
+            UPDATE PRODUCTS SET REFERENCE = JDL_TMP7;
+            UPDATE PRODUCTS SET CODE = JDL_TMP8;
+            UPDATE PRODUCTS SET CODETYPE = JDL_TMP9;
+            UPDATE PRODUCTS SET NAME = JDL_TMP10;
+            ALTER TABLE PRODUCTS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE PRODUCTS ALTER COLUMN CATEGORY NOT NULL;
+            ALTER TABLE PRODUCTS ALTER COLUMN TAXCAT NOT NULL;
+            ALTER TABLE PRODUCTS ALTER COLUMN REFERENCE NOT NULL;
+            ALTER TABLE PRODUCTS ALTER COLUMN CODE NOT NULL;
+            ALTER TABLE PRODUCTS ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE PRODUCTS ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP4" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP5" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP6" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP7" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP8" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP9" tableName="PRODUCTS"/>
+        <dropColumn columnName="JDL_TMP10" tableName="PRODUCTS"/>
+        <sql>
+            CREATE UNIQUE INDEX PRODUCTS_INX_0 ON PRODUCTS(REFERENCE);
+            CREATE UNIQUE INDEX PRODUCTS_INX_1 ON PRODUCTS(CODE);
+            CREATE UNIQUE INDEX PRODUCTS_NAME_INX ON PRODUCTS(NAME)
+        </sql>
+    </changeSet> 
+                 
+    <changeSet author="Chromis POS" id="Refactor ATTRIBUTE (NV)" dbms="derby">       
+        <sql>ALTER TABLE ATTRIBUTE DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ATTRIBUTE"/>                           
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="ATTRIBUTE"/>                           
+        <sql>
+            ALTER TABLE ATTRIBUTE ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTE ADD COLUMN NAME VARCHAR(255);
+            UPDATE ATTRIBUTE SET ID = JDL_TMP1;            
+            UPDATE ATTRIBUTE SET NAME = JDL_TMP2; 
+            ALTER TABLE ATTRIBUTE ALTER COLUMN ID NOT NULL;
+            ALTER TABLE ATTRIBUTE ALTER COLUMN NAME NOT NULL;          
+            ALTER TABLE ATTRIBUTE ADD PRIMARY KEY (ID)                       
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ATTRIBUTE"/>
+        <dropColumn columnName="JDL_TMP2" tableName="ATTRIBUTE"/>
+    </changeSet>  
+    
+    <changeSet author="Chromis POS" id="Refactor ATTRIBUTEVALUE (NV)" dbms="derby">       
+        <sql>ALTER TABLE ATTRIBUTEVALUE DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ATTRIBUTEVALUE"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="ATTRIBUTE_ID" tableName="ATTRIBUTEVALUE"/>                                    
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="VALUE" tableName="ATTRIBUTEVALUE"/>                                    
+        <sql>
+            ALTER TABLE ATTRIBUTEVALUE ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEVALUE ADD COLUMN ATTRIBUTE_ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEVALUE ADD COLUMN VALUE VARCHAR(255);
+            UPDATE ATTRIBUTEVALUE SET ID = JDL_TMP1; 
+            UPDATE ATTRIBUTEVALUE SET ATTRIBUTE_ID = JDL_TMP2;                                  
+            UPDATE ATTRIBUTEVALUE SET VALUE = JDL_TMP3;             
+            ALTER TABLE ATTRIBUTEVALUE ALTER COLUMN ID NOT NULL;
+            ALTER TABLE ATTRIBUTEVALUE ALTER COLUMN ATTRIBUTE_ID NOT NULL;                                
+            ALTER TABLE ATTRIBUTEVALUE ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ATTRIBUTEVALUE"/>
+        <dropColumn columnName="JDL_TMP2" tableName="ATTRIBUTEVALUE"/>
+        <dropColumn columnName="JDL_TMP3" tableName="ATTRIBUTEVALUE"/>
+    </changeSet>    
+  
+    <changeSet author="Chromis POS" id="Refactor ATTRIBUTESET (NV)" dbms="derby">       
+        <sql>ALTER TABLE ATTRIBUTESET DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ATTRIBUTESET"/>            
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="ATTRIBUTESET"/>            
+        <sql>
+            ALTER TABLE ATTRIBUTESET ADD COLUMN ID VARCHAR(255);            
+            ALTER TABLE ATTRIBUTESET ADD COLUMN NAME VARCHAR(255);
+            UPDATE ATTRIBUTESET SET ID = JDL_TMP1;                                              
+            UPDATE ATTRIBUTESET SET NAME = JDL_TMP2; 
+            ALTER TABLE ATTRIBUTESET ALTER COLUMN ID NOT NULL;                                            
+            ALTER TABLE ATTRIBUTESET ALTER COLUMN NAME NOT NULL;                                            
+            ALTER TABLE ATTRIBUTESET ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ATTRIBUTESET"/>        
+        <dropColumn columnName="JDL_TMP2" tableName="ATTRIBUTESET"/>        
+    </changeSet>     
+      
+    <changeSet author="Chromis POS" id="Refactor ATTRIBUTEUSE (NV)" dbms="derby">       
+        <sql>ALTER TABLE ATTRIBUTEUSE DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ATTRIBUTEUSE"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="ATTRIBUTESET_ID" tableName="ATTRIBUTEUSE"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="ATTRIBUTE_ID" tableName="ATTRIBUTEUSE"/>          
+                                         
+        <sql>
+            ALTER TABLE ATTRIBUTEUSE ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEUSE ADD COLUMN ATTRIBUTESET_ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEUSE ADD COLUMN ATTRIBUTE_ID VARCHAR(255);
+            UPDATE ATTRIBUTEUSE SET ID = JDL_TMP1; 
+            UPDATE ATTRIBUTEUSE SET ATTRIBUTESET_ID = JDL_TMP2;  
+            UPDATE ATTRIBUTEUSE SET ATTRIBUTE_ID = JDL_TMP3;                
+            ALTER TABLE ATTRIBUTEUSE ALTER COLUMN ID NOT NULL; 
+            ALTER TABLE ATTRIBUTEUSE ALTER COLUMN ATTRIBUTESET_ID NOT NULL; 
+            ALTER TABLE ATTRIBUTEUSE ALTER COLUMN ATTRIBUTE_ID NOT NULL;                             
+            ALTER TABLE ATTRIBUTEUSE ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ATTRIBUTEUSE"/>
+        <dropColumn columnName="JDL_TMP2" tableName="ATTRIBUTEUSE"/>
+        <dropColumn columnName="JDL_TMP3" tableName="ATTRIBUTEUSE"/>
+        <sql>CREATE UNIQUE INDEX ATTUSE_LINE ON ATTRIBUTEUSE(ATTRIBUTESET_ID, LINENO)</sql>
+    </changeSet>        
+                                                                                                                                                                                                                
+    <changeSet author="Chromis POS" id="Refactor ATTRIBUTESETINSTANCE (NV)" dbms="derby">       
+        <sql>ALTER TABLE ATTRIBUTESETINSTANCE DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ATTRIBUTESETINSTANCE"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="ATTRIBUTESET_ID" tableName="ATTRIBUTESETINSTANCE"/>                                                            
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="DESCRIPTION" tableName="ATTRIBUTESETINSTANCE"/>                                                            
+        <sql>
+            ALTER TABLE ATTRIBUTESETINSTANCE ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTESETINSTANCE ADD COLUMN ATTRIBUTESET_ID VARCHAR(255);            
+            ALTER TABLE ATTRIBUTESETINSTANCE ADD COLUMN DESCRIPTION VARCHAR(255);            
+            UPDATE ATTRIBUTESETINSTANCE SET ID = JDL_TMP1; 
+            UPDATE ATTRIBUTESETINSTANCE SET ATTRIBUTESET_ID = JDL_TMP2;                                              
+            UPDATE ATTRIBUTESETINSTANCE SET DESCRIPTION = JDL_TMP3;              
+            ALTER TABLE ATTRIBUTESETINSTANCE ALTER COLUMN ID NOT NULL;  
+            ALTER TABLE ATTRIBUTESETINSTANCE ALTER COLUMN ATTRIBUTESET_ID NOT NULL;                                           
+            ALTER TABLE ATTRIBUTESETINSTANCE ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ATTRIBUTESETINSTANCE"/>
+        <dropColumn columnName="JDL_TMP2" tableName="ATTRIBUTESETINSTANCE"/>       
+        <dropColumn columnName="JDL_TMP3" tableName="ATTRIBUTESETINSTANCE"/>       
+    </changeSet>              
+               
+    <changeSet author="Chromis POS" id="Refactor ATTRIBUTEINSTANCE (NV)" dbms="derby">       
+        <sql>ALTER TABLE ATTRIBUTEINSTANCE DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ATTRIBUTEINSTANCE"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="ATTRIBUTESETINSTANCE_ID" tableName="ATTRIBUTEINSTANCE"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="ATTRIBUTE_ID" tableName="ATTRIBUTEINSTANCE"/>                                                    
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="VALUE" tableName="ATTRIBUTEINSTANCE"/>                                                    
+        <sql>
+            ALTER TABLE ATTRIBUTEINSTANCE ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEINSTANCE ADD COLUMN ATTRIBUTESETINSTANCE_ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEINSTANCE ADD COLUMN ATTRIBUTE_ID VARCHAR(255);
+            ALTER TABLE ATTRIBUTEINSTANCE ADD COLUMN VALUE VARCHAR(255);
+            UPDATE ATTRIBUTEINSTANCE SET ID = JDL_TMP1; 
+            UPDATE ATTRIBUTEINSTANCE SET ATTRIBUTESETINSTANCE_ID = JDL_TMP2;  
+            UPDATE ATTRIBUTEINSTANCE SET ATTRIBUTE_ID = JDL_TMP3;                                
+            UPDATE ATTRIBUTEINSTANCE SET VALUE = JDL_TMP4;              
+            ALTER TABLE ATTRIBUTEINSTANCE ALTER COLUMN ID NOT NULL;
+            ALTER TABLE ATTRIBUTEINSTANCE ALTER COLUMN ATTRIBUTESETINSTANCE_ID NOT NULL;
+            ALTER TABLE ATTRIBUTEINSTANCE ALTER COLUMN ATTRIBUTE_ID NOT NULL;                                          
+            ALTER TABLE ATTRIBUTEINSTANCE ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ATTRIBUTEINSTANCE"/>
+        <dropColumn columnName="JDL_TMP2" tableName="ATTRIBUTEINSTANCE"/>
+        <dropColumn columnName="JDL_TMP3" tableName="ATTRIBUTEINSTANCE"/>        
+        <dropColumn columnName="JDL_TMP4" tableName="ATTRIBUTEINSTANCE"/>        
+    </changeSet>                           
+     
+                                                                                                                        
+                                                                                                                                                                                                          
+    <changeSet author="Chromis POS" id="Refactor STOCKDIARY (NV)" dbms="derby">       
+        <sql>ALTER TABLE STOCKDIARY DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="STOCKDIARY"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="LOCATION" tableName="STOCKDIARY"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PRODUCT" tableName="STOCKDIARY"/>   
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="APPUSER" tableName="STOCKDIARY"/>  
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="ATTRIBUTESETINSTANCE_ID" tableName="STOCKDIARY"/>                                                        
+        <sql>
+            ALTER TABLE STOCKDIARY ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE STOCKDIARY ADD COLUMN LOCATION VARCHAR(255);
+            ALTER TABLE STOCKDIARY ADD COLUMN PRODUCT VARCHAR(255);
+            ALTER TABLE STOCKDIARY ADD COLUMN APPUSER VARCHAR(255);
+            ALTER TABLE STOCKDIARY ADD COLUMN ATTRIBUTESETINSTANCE_ID VARCHAR(255);            
+            UPDATE STOCKDIARY SET ID = JDL_TMP1; 
+            UPDATE STOCKDIARY SET LOCATION = JDL_TMP2;  
+            UPDATE STOCKDIARY SET PRODUCT = JDL_TMP3; 
+            UPDATE STOCKDIARY SET APPUSER = JDL_TMP4;  
+            UPDATE STOCKDIARY SET ATTRIBUTESETINSTANCE_ID = JDL_TMP5;                
+            ALTER TABLE STOCKDIARY ALTER COLUMN ID NOT NULL; 
+            ALTER TABLE STOCKDIARY ALTER COLUMN LOCATION NOT NULL;
+            ALTER TABLE STOCKDIARY ALTER COLUMN PRODUCT NOT NULL;                                      
+            ALTER TABLE STOCKDIARY ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="STOCKDIARY"/>
+        <dropColumn columnName="JDL_TMP2" tableName="STOCKDIARY"/>
+        <dropColumn columnName="JDL_TMP3" tableName="STOCKDIARY"/>   
+        <dropColumn columnName="JDL_TMP4" tableName="STOCKDIARY"/>
+        <dropColumn columnName="JDL_TMP5" tableName="STOCKDIARY"/>   
+        <sql>CREATE INDEX STOCKDIARY_INX_1 ON STOCKDIARY(DATENEW);</sql>   
+    </changeSet>                           
+                                                                          
+    <changeSet author="Chromis POS" id="Refactor SHIFT_BREAKS (NV)" dbms="derby">       
+        <sql>ALTER TABLE SHIFT_BREAKS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="SHIFT_BREAKS"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="SHIFTID" tableName="SHIFT_BREAKS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="BREAKID" tableName="SHIFT_BREAKS"/>                                                         
+        <sql>
+            ALTER TABLE SHIFT_BREAKS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE SHIFT_BREAKS ADD COLUMN SHIFTID VARCHAR(255);
+            ALTER TABLE SHIFT_BREAKS ADD COLUMN BREAKID VARCHAR(255);
+            UPDATE SHIFT_BREAKS SET ID = JDL_TMP1; 
+            UPDATE SHIFT_BREAKS SET SHIFTID = JDL_TMP2;  
+            UPDATE SHIFT_BREAKS SET BREAKID = JDL_TMP3;             
+            ALTER TABLE SHIFT_BREAKS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE SHIFT_BREAKS ALTER COLUMN SHIFTID NOT NULL;
+            ALTER TABLE SHIFT_BREAKS ALTER COLUMN BREAKID NOT NULL;                                                      
+            ALTER TABLE SHIFT_BREAKS ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="SHIFT_BREAKS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="SHIFT_BREAKS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="SHIFT_BREAKS"/>     
+    </changeSet>                                                                      
+                                                                                    
+    <changeSet author="Chromis POS" id="Refactor DRAWEROPENED (NV)" dbms="derby">       
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="NAME" tableName="DRAWEROPENED"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="TICKETID" tableName="DRAWEROPENED"/>                                                                 
+        <sql>
+            ALTER TABLE DRAWEROPENED ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE DRAWEROPENED ADD COLUMN TICKETID VARCHAR(255);                      
+            UPDATE DRAWEROPENED SET NAME = JDL_TMP1; 
+            UPDATE DRAWEROPENED SET TICKETID = JDL_TMP2                                                                                                                
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="DRAWEROPENED"/>
+        <dropColumn columnName="JDL_TMP2" tableName="DRAWEROPENED"/>
+    </changeSet>                                                                      
+                                                                                                                   
+    <changeSet author="Chromis POS" id="Refactor BREAKS (NV)" dbms="derby">       
+        <sql>ALTER TABLE BREAKS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="BREAKS"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="BREAKS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="NOTES" tableName="BREAKS"/>                                                         
+        <sql>
+            ALTER TABLE BREAKS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE BREAKS ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE BREAKS ADD COLUMN NOTES VARCHAR(255);            
+            UPDATE BREAKS SET ID = JDL_TMP1; 
+            UPDATE BREAKS SET NAME = JDL_TMP2;  
+            UPDATE BREAKS SET NOTES = JDL_TMP3;             
+            ALTER TABLE BREAKS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE BREAKS ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE BREAKS ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="BREAKS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="BREAKS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="BREAKS"/>     
+    </changeSet>                                                                                                               
+                                                                                                                              
+    <changeSet author="Chromis POS" id="Refactor LEAVES (NV)" dbms="derby">       
+        <sql>ALTER TABLE LEAVES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="LEAVES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="LEAVES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PPLID" tableName="LEAVES"/>                                                         
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="NOTES" tableName="LEAVES"/> 
+        <sql>
+            ALTER TABLE LEAVES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE LEAVES ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE LEAVES ADD COLUMN PPLID VARCHAR(255);
+            ALTER TABLE LEAVES ADD COLUMN NOTES VARCHAR(255);            
+            UPDATE LEAVES SET ID = JDL_TMP1; 
+            UPDATE LEAVES SET NAME = JDL_TMP2;  
+            UPDATE LEAVES SET PPLID = JDL_TMP3;   
+            UPDATE LEAVES SET NOTES = JDL_TMP4;                   
+            ALTER TABLE LEAVES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE LEAVES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE LEAVES ALTER COLUMN PPLID NOT NULL;
+            ALTER TABLE LEAVES ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="LEAVES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="LEAVES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="LEAVES"/>  
+        <dropColumn columnName="JDL_TMP4" tableName="LEAVES"/>     
+    </changeSet>                                                                                                                                            
+                                                                                                                                                          
+    <changeSet author="Chromis POS" id="Refactor SHIFTS (NV)" dbms="derby">       
+        <sql>ALTER TABLE SHIFTS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="SHIFTS"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="PPLID" tableName="SHIFTS"/>                            
+        <sql>
+            ALTER TABLE SHIFTS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE SHIFTS ADD COLUMN PPLID VARCHAR(255); 
+            UPDATE SHIFTS SET ID = JDL_TMP1; 
+            UPDATE SHIFTS SET PPLID = JDL_TMP2;                  
+            ALTER TABLE SHIFTS ALTER COLUMN ID NOT NULL;       
+            ALTER TABLE SHIFTS ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="SHIFTS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="SHIFTS"/>
+    </changeSet>                                                                                                                                                                     
+                                                                                                                                                                                      
+    <changeSet author="Chromis POS" id="Refactor ROLES (NV)" dbms="derby">       
+        <sql>ALTER TABLE ROLES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="ROLES"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="ROLES"/>                            
+        <sql>
+            ALTER TABLE ROLES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE ROLES ADD COLUMN NAME VARCHAR(255);
+            UPDATE ROLES SET ID = JDL_TMP1; 
+            UPDATE ROLES SET NAME = JDL_TMP2;             
+            ALTER TABLE ROLES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE ROLES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE ROLES ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="ROLES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="ROLES"/>
+        <sql>CREATE UNIQUE INDEX ROLES_NAME_INX ON ROLES(NAME)</sql>
+    </changeSet>                                                                                                                                                                                                    
+                                                                                                                                                                                                                  
+    <changeSet author="Chromis POS" id="Refactor PEOPLE (NV)" dbms="derby">       
+        <sql>ALTER TABLE PEOPLE DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="PEOPLE"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="PEOPLE"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="APPPASSWORD" tableName="PEOPLE"/>   
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="CARD" tableName="PEOPLE"/>  
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="ROLE" tableName="PEOPLE"/>                                                        
+        <sql>
+            ALTER TABLE PEOPLE ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE PEOPLE ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE PEOPLE ADD COLUMN APPPASSWORD VARCHAR(255);  
+            ALTER TABLE PEOPLE ADD COLUMN CARD VARCHAR(255);
+            ALTER TABLE PEOPLE ADD COLUMN ROLE VARCHAR(255);
+            UPDATE PEOPLE SET ID = JDL_TMP1; 
+            UPDATE PEOPLE SET NAME = JDL_TMP2;  
+            UPDATE PEOPLE SET APPPASSWORD = JDL_TMP3; 
+            UPDATE PEOPLE SET CARD = JDL_TMP4;
+            UPDATE PEOPLE SET ROLE = JDL_TMP5;            
+            ALTER TABLE PEOPLE ALTER COLUMN ID NOT NULL;
+            ALTER TABLE PEOPLE ALTER COLUMN ROLE NOT NULL;
+            ALTER TABLE PEOPLE ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="PEOPLE"/>
+        <dropColumn columnName="JDL_TMP2" tableName="PEOPLE"/>
+        <dropColumn columnName="JDL_TMP3" tableName="PEOPLE"/>   
+        <dropColumn columnName="JDL_TMP4" tableName="PEOPLE"/>
+        <dropColumn columnName="JDL_TMP5" tableName="PEOPLE"/>   
+        <sql>CREATE UNIQUE INDEX PEOPLE_NAME_INX ON PEOPLE(NAME);
+            CREATE INDEX PEOPLE_CARD_INX ON PEOPLE(CARD);
+        </sql>   
+    </changeSet>      
+                                                                                                                                                                                                                                              
+    <changeSet author="Chromis POS" id="Refactor RESOURCES (NV)" dbms="derby">       
+        <sql>ALTER TABLE RESOURCES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="RESOURCES"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="RESOURCES"/>                            
+        <sql>
+            ALTER TABLE RESOURCES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE RESOURCES ADD COLUMN NAME VARCHAR(255);
+            UPDATE RESOURCES SET ID = JDL_TMP1; 
+            UPDATE RESOURCES SET NAME = JDL_TMP2;                
+            ALTER TABLE RESOURCES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE RESOURCES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE RESOURCES ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="RESOURCES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="RESOURCES"/>
+        <sql>CREATE UNIQUE INDEX RESOURCES_NAME_INX ON RESOURCES(NAME)</sql>
+    </changeSet>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+    <changeSet author="Chromis POS" id="Refactor TAXCUSTCATEGORIES (NV)" dbms="derby">       
+        <sql>ALTER TABLE TAXCUSTCATEGORIES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="TAXCUSTCATEGORIES"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="TAXCUSTCATEGORIES"/>                            
+        <sql>
+            ALTER TABLE TAXCUSTCATEGORIES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE TAXCUSTCATEGORIES ADD COLUMN NAME VARCHAR(255);
+            UPDATE TAXCUSTCATEGORIES SET ID = JDL_TMP1; 
+            UPDATE TAXCUSTCATEGORIES SET NAME = JDL_TMP2;              
+            ALTER TABLE TAXCUSTCATEGORIES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE TAXCUSTCATEGORIES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE TAXCUSTCATEGORIES ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="TAXCUSTCATEGORIES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="TAXCUSTCATEGORIES"/>
+        <sql>CREATE UNIQUE INDEX TAXCUSTCAT_NAME_INX ON TAXCUSTCATEGORIES(NAME)</sql>  
+    </changeSet>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    <changeSet author="Chromis POS" id="Refactor CATEGORIES (NV)" dbms="derby">       
+        <sql>ALTER TABLE CATEGORIES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="CATEGORIES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="CATEGORIES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PARENTID" tableName="CATEGORIES"/>                                                         
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="TEXTTIP" tableName="CATEGORIES"/> 
+        <sql>
+            ALTER TABLE CATEGORIES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE CATEGORIES ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE CATEGORIES ADD COLUMN PARENTID VARCHAR(255); 
+            ALTER TABLE CATEGORIES ADD COLUMN TEXTTIP VARCHAR(255) DEFAULT NULL;            
+            UPDATE CATEGORIES SET ID = JDL_TMP1; 
+            UPDATE CATEGORIES SET NAME = JDL_TMP2;  
+            UPDATE CATEGORIES SET PARENTID = JDL_TMP3;   
+            UPDATE CATEGORIES SET TEXTTIP = JDL_TMP4;               
+            ALTER TABLE CATEGORIES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE CATEGORIES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE CATEGORIES ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="CATEGORIES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="CATEGORIES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="CATEGORIES"/>  
+        <dropColumn columnName="JDL_TMP4" tableName="CATEGORIES"/>    
+        <sql>CREATE UNIQUE INDEX CATEGORIES_NAME_INX ON CATEGORIES(NAME)</sql>   
+    </changeSet>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+
+    <changeSet author="Chromis POS" id="Refactor TAXCATEGORIES (NV)" dbms="derby">       
+        <sql>ALTER TABLE TAXCATEGORIES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="TAXCATEGORIES"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="TAXCATEGORIES"/>                            
+        <sql>
+            ALTER TABLE TAXCATEGORIES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE TAXCATEGORIES ADD COLUMN NAME VARCHAR(255);
+            UPDATE TAXCATEGORIES SET ID = JDL_TMP1; 
+            UPDATE TAXCATEGORIES SET NAME = JDL_TMP2;                
+            ALTER TABLE TAXCATEGORIES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE TAXCATEGORIES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE TAXCATEGORIES ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="TAXCATEGORIES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="TAXCATEGORIES"/>
+        <sql>CREATE UNIQUE INDEX TAXCAT_NAME_INX ON TAXCATEGORIES(NAME)</sql>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor TAXES (NV)" dbms="derby">       
+        <sql>ALTER TABLE TAXES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="TAXES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="CATEGORY" tableName="TAXES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="CUSTCATEGORY" tableName="TAXES"/>                                                         
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="PARENTID" tableName="TAXES"/> 
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="NAME" tableName="TAXES"/> 
+        <sql>
+            ALTER TABLE TAXES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE TAXES ADD COLUMN CATEGORY VARCHAR(255);
+            ALTER TABLE TAXES ADD COLUMN CUSTCATEGORY VARCHAR(255); 
+            ALTER TABLE TAXES ADD COLUMN PARENTID VARCHAR(255);            
+            ALTER TABLE TAXES ADD COLUMN NAME VARCHAR(255);
+            UPDATE TAXES SET ID = JDL_TMP1; 
+            UPDATE TAXES SET CATEGORY = JDL_TMP2;  
+            UPDATE TAXES SET CUSTCATEGORY = JDL_TMP3;   
+            UPDATE TAXES SET PARENTID = JDL_TMP4;                                                    
+            UPDATE TAXES SET NAME = JDL_TMP5;             
+            ALTER TABLE TAXES ALTER COLUMN ID NOT NULL; 
+            ALTER TABLE TAXES ALTER COLUMN CATEGORY NOT NULL;
+            ALTER TABLE TAXES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE TAXES ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="TAXES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="TAXES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="TAXES"/>  
+        <dropColumn columnName="JDL_TMP4" tableName="TAXES"/>    
+        <dropColumn columnName="JDL_TMP5" tableName="TAXES"/> 
+        <sql>CREATE UNIQUE INDEX TAXES_NAME_INX ON TAXES(NAME);</sql>   
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Refactor SHAREDTICKETS (NV)" dbms="derby">       
+        <sql>ALTER TABLE SHAREDTICKETS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="SHAREDTICKETS"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="APPUSER" tableName="SHAREDTICKETS"/>                            
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="NAME" tableName="SHAREDTICKETS"/> 
+        <sql>
+            ALTER TABLE SHAREDTICKETS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE SHAREDTICKETS ADD COLUMN APPUSER VARCHAR(255);
+            ALTER TABLE SHAREDTICKETS ADD COLUMN NAME VARCHAR(255);
+            UPDATE SHAREDTICKETS SET ID = JDL_TMP1; 
+            UPDATE SHAREDTICKETS SET APPUSER = JDL_TMP2;            
+            UPDATE SHAREDTICKETS SET NAME = JDL_TMP3;            
+            ALTER TABLE SHAREDTICKETS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE SHAREDTICKETS ALTER COLUMN APPUSER NOT NULL;
+            ALTER TABLE SHAREDTICKETS ALTER COLUMN NAME NOT NULL; 
+            ALTER TABLE SHAREDTICKETS ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="SHAREDTICKETS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="SHAREDTICKETS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="SHAREDTICKETS"/>
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Refactor RESERVATION_CUSTOMERS (NV)" dbms="derby">       
+        <sql>ALTER TABLE RESERVATION_CUSTOMERS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="RESERVATION_CUSTOMERS"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="CUSTOMER" tableName="RESERVATION_CUSTOMERS"/>                            
+        <sql>
+            ALTER TABLE RESERVATION_CUSTOMERS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE RESERVATION_CUSTOMERS ADD COLUMN CUSTOMER VARCHAR(255);
+            UPDATE RESERVATION_CUSTOMERS SET ID = JDL_TMP1; 
+            UPDATE RESERVATION_CUSTOMERS SET CUSTOMER = JDL_TMP2;               
+            ALTER TABLE RESERVATION_CUSTOMERS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE RESERVATION_CUSTOMERS ALTER COLUMN CUSTOMER NOT NULL;
+            ALTER TABLE RESERVATION_CUSTOMERS ADD PRIMARY KEY (ID)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="RESERVATION_CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="RESERVATION_CUSTOMERS"/>
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Refactor RESERVATIONS (NV)" dbms="derby">       
+        <sql>ALTER TABLE RESERVATIONS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="RESERVATIONS"/>                                                                
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="TITLE" tableName="RESERVATIONS"/>                                                                
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="DESCRIPTION" tableName="RESERVATIONS"/>                                                                
+        <sql>
+            ALTER TABLE RESERVATIONS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE RESERVATIONS ADD COLUMN TITLE VARCHAR(255);
+            ALTER TABLE RESERVATIONS ADD COLUMN DESCRIPTION VARCHAR(255);                                                                        
+            UPDATE RESERVATIONS SET ID = JDL_TMP1;
+            UPDATE RESERVATIONS SET TITLE = JDL_TMP2;
+            UPDATE RESERVATIONS SET DESCRIPTION = JDL_TMP3;               
+            ALTER TABLE RESERVATIONS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE RESERVATIONS ALTER COLUMN TITLE NOT NULL;
+            ALTER TABLE RESERVATIONS ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="RESERVATIONS"/>   
+        <dropColumn columnName="JDL_TMP2" tableName="RESERVATIONS"/>   
+        <dropColumn columnName="JDL_TMP3" tableName="RESERVATIONS"/>   
+        <sql>CREATE INDEX RESERVATIONS_INX_1 ON RESERVATIONS(DATENEW)</sql>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor PLACES (NV)" dbms="derby">       
+        <sql>ALTER TABLE PLACES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="PLACES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="FLOOR" tableName="PLACES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="CUSTOMER" tableName="PLACES"/>   
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="WAITER" tableName="PLACES"/>  
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="TICKETID" tableName="PLACES"/>                                                        
+        <renameColumn newColumnName="JDL_TMP6" oldColumnName="NAME" tableName="PLACES"/>   
+        <sql>
+            ALTER TABLE PLACES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE PLACES ADD COLUMN FLOOR VARCHAR(255);
+            ALTER TABLE PLACES ADD COLUMN CUSTOMER VARCHAR(255);  
+            ALTER TABLE PLACES ADD COLUMN WAITER VARCHAR(255);
+            ALTER TABLE PLACES ADD COLUMN TICKETID VARCHAR(255);            
+            ALTER TABLE PLACES ADD COLUMN NAME VARCHAR(255);
+            UPDATE PLACES SET ID = JDL_TMP1; 
+            UPDATE PLACES SET FLOOR = JDL_TMP2;  
+            UPDATE PLACES SET CUSTOMER = JDL_TMP3; 
+            UPDATE PLACES SET WAITER = JDL_TMP4;  
+            UPDATE PLACES SET TICKETID = JDL_TMP5;                                           
+            UPDATE PLACES SET NAME = JDL_TMP6;                              
+            ALTER TABLE PLACES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE PLACES ALTER COLUMN FLOOR NOT NULL;
+            ALTER TABLE PLACES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE PLACES ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="PLACES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="PLACES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="PLACES"/>   
+        <dropColumn columnName="JDL_TMP4" tableName="PLACES"/>
+        <dropColumn columnName="JDL_TMP5" tableName="PLACES"/>   
+        <dropColumn columnName="JDL_TMP6" tableName="PLACES"/>           
+        <sql>CREATE UNIQUE INDEX PLACES_NAME_INX ON PLACES(NAME)</sql>   
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor FLOORS (NV)" dbms="derby">       
+        <sql>ALTER TABLE FLOORS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="FLOORS"/>
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="FLOORS"/>                                                                
+        <sql>
+            ALTER TABLE FLOORS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE FLOORS ADD COLUMN NAME VARCHAR(255);
+            UPDATE FLOORS SET ID = JDL_TMP1;      
+            UPDATE FLOORS SET NAME = JDL_TMP2;                
+            ALTER TABLE FLOORS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE FLOORS ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE FLOORS ADD PRIMARY KEY (ID)                                  
+        </sql>                                                  
+        <dropColumn columnName="JDL_TMP1" tableName="FLOORS"/>  
+        <dropColumn columnName="JDL_TMP2" tableName="FLOORS"/>   
+        <sql>CREATE UNIQUE INDEX FLOORS_NAME_INX ON FLOORS(NAME)</sql>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor LINEREMOVED (NV)" dbms="derby">               
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="NAME" tableName="LINEREMOVED"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="TICKETID" tableName="LINEREMOVED"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PRODUCTID" tableName="LINEREMOVED"/>                                                         
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="PRODUCTNAME" tableName="LINEREMOVED"/> 
+        <sql>
+            ALTER TABLE LINEREMOVED ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE LINEREMOVED ADD COLUMN TICKETID VARCHAR(255);
+            ALTER TABLE LINEREMOVED ADD COLUMN PRODUCTID VARCHAR(255); 
+            ALTER TABLE LINEREMOVED ADD COLUMN PRODUCTNAME VARCHAR(255);            
+            UPDATE LINEREMOVED SET NAME = JDL_TMP1; 
+            UPDATE LINEREMOVED SET TICKETID = JDL_TMP2;  
+            UPDATE LINEREMOVED SET PRODUCTID = JDL_TMP3;   
+            UPDATE LINEREMOVED SET PRODUCTNAME = JDL_TMP4;                                                                                                
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="LINEREMOVED"/>
+        <dropColumn columnName="JDL_TMP2" tableName="LINEREMOVED"/>
+        <dropColumn columnName="JDL_TMP3" tableName="LINEREMOVED"/>  
+        <dropColumn columnName="JDL_TMP4" tableName="LINEREMOVED"/>        
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Refactor PAYMENTS (NV)" dbms="derby">    
+        <sql>ALTER TABLE PAYMENTS DROP PRIMARY KEY</sql>           
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="PAYMENTS"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="RECEIPT" tableName="PAYMENTS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="NOTES" tableName="PAYMENTS"/>                                                         
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="CARDNAME" tableName="PAYMENTS"/> 
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="PAYMENT" tableName="PAYMENTS"/>                                                         
+        <renameColumn newColumnName="JDL_TMP6" oldColumnName="TRANSID" tableName="PAYMENTS"/> 
+        <sql>
+            ALTER TABLE PAYMENTS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE PAYMENTS ADD COLUMN RECEIPT VARCHAR(255);
+            ALTER TABLE PAYMENTS ADD COLUMN NOTES VARCHAR(255); 
+            ALTER TABLE PAYMENTS ADD COLUMN CARDNAME VARCHAR(255);   
+            ALTER TABLE PAYMENTS ADD COLUMN PAYMENT VARCHAR(255);
+            ALTER TABLE PAYMENTS ADD COLUMN TRANSID VARCHAR(255);          
+            UPDATE PAYMENTS SET ID = JDL_TMP1; 
+            UPDATE PAYMENTS SET RECEIPT = JDL_TMP2;  
+            UPDATE PAYMENTS SET NOTES = JDL_TMP3;   
+            UPDATE PAYMENTS SET CARDNAME = JDL_TMP4;    
+            UPDATE PAYMENTS SET PAYMENT = JDL_TMP5;   
+            UPDATE PAYMENTS SET TRANSID = JDL_TMP6;            
+            ALTER TABLE PAYMENTS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE PAYMENTS ALTER COLUMN RECEIPT NOT NULL;
+            ALTER TABLE PAYMENTS ALTER COLUMN PAYMENT NOT NULL;
+            ALTER TABLE PAYMENTS ADD PRIMARY KEY (ID)                                                                                             
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="PAYMENTS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="PAYMENTS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="PAYMENTS"/>  
+        <dropColumn columnName="JDL_TMP4" tableName="PAYMENTS"/>  
+        <dropColumn columnName="JDL_TMP5" tableName="PAYMENTS"/>  
+        <dropColumn columnName="JDL_TMP6" tableName="PAYMENTS"/>
+        <sql>CREATE INDEX PAYMENTS_INX_1 ON PAYMENTS(PAYMENT)</sql>          
+    </changeSet>  
+    
+    <changeSet author="Chromis POS" id="Refactor TAXLINES (NV)" dbms="derby">    
+        <sql>ALTER TABLE TAXLINES DROP PRIMARY KEY</sql>           
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="TAXLINES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="RECEIPT" tableName="TAXLINES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="TAXID" tableName="TAXLINES"/>                                                         
+        <sql>
+            ALTER TABLE TAXLINES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE TAXLINES ADD COLUMN RECEIPT VARCHAR(255);
+            ALTER TABLE TAXLINES ADD COLUMN TAXID VARCHAR(255);           
+            UPDATE TAXLINES SET ID = JDL_TMP1; 
+            UPDATE TAXLINES SET RECEIPT = JDL_TMP2;  
+            UPDATE TAXLINES SET TAXID = JDL_TMP3;                
+            ALTER TABLE TAXLINES ALTER COLUMN ID NOT NULL;   
+            ALTER TABLE TAXLINES ADD PRIMARY KEY (ID)                                                                                             
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="TAXLINES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="TAXLINES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="TAXLINES"/>                  
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Refactor TICKETLINES (NV)" dbms="derby"> 
+        <sql>ALTER TABLE TICKETLINES DROP PRIMARY KEY</sql>                     
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="TICKET" tableName="TICKETLINES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="PRODUCT" tableName="TICKETLINES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="ATTRIBUTESETINSTANCE_ID" tableName="TICKETLINES"/>                                                         
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="TAXID" tableName="TICKETLINES"/> 
+        <sql>
+            ALTER TABLE TICKETLINES ADD COLUMN TICKET VARCHAR(255);
+            ALTER TABLE TICKETLINES ADD COLUMN PRODUCT VARCHAR(255);
+            ALTER TABLE TICKETLINES ADD COLUMN ATTRIBUTESETINSTANCE_ID VARCHAR(255); 
+            ALTER TABLE TICKETLINES ADD COLUMN TAXID VARCHAR(255);
+            UPDATE TICKETLINES SET TICKET = JDL_TMP1; 
+            UPDATE TICKETLINES SET PRODUCT = JDL_TMP2;  
+            UPDATE TICKETLINES SET ATTRIBUTESETINSTANCE_ID = JDL_TMP3;   
+            UPDATE TICKETLINES SET TAXID = JDL_TMP4;                  
+            ALTER TABLE TICKETLINES ALTER COLUMN TICKET NOT NULL;
+            ALTER TABLE TICKETLINES ALTER COLUMN TAXID NOT NULL;
+            ALTER TABLE TICKETLINES ADD PRIMARY KEY (TICKET, LINE)                                                                                          
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="TICKETLINES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="TICKETLINES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="TICKETLINES"/>  
+        <dropColumn columnName="JDL_TMP4" tableName="TICKETLINES"/>          
+    </changeSet>
+    
+    <changeSet author="Chromis POS" id="Refactor TICKETS (NV)" dbms="derby">       
+        <sql>ALTER TABLE TICKETS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="TICKETS"/>              
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="PERSON" tableName="TICKETS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="CUSTOMER" tableName="TICKETS"/>                                                        
+        <sql>
+            ALTER TABLE TICKETS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE TICKETS ADD COLUMN PERSON VARCHAR(255);
+            ALTER TABLE TICKETS ADD COLUMN CUSTOMER VARCHAR(255);            
+            UPDATE TICKETS SET ID = JDL_TMP1;  
+            UPDATE TICKETS SET PERSON = JDL_TMP2;  
+            UPDATE TICKETS SET CUSTOMER = JDL_TMP3;               
+            ALTER TABLE TICKETS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE TICKETS ALTER COLUMN PERSON NOT NULL;
+            ALTER TABLE TICKETS ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="TICKETS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="TICKETS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="TICKETS"/>  
+        <sql>CREATE INDEX TICKETS_TICKETID ON TICKETS(TICKETTYPE, TICKETID)</sql>          
+    </changeSet>    
+    
+    <changeSet author="Chromis POS" id="Refactor STOCKLEVEL (NV)" dbms="derby">       
+        <sql>ALTER TABLE STOCKLEVEL DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="STOCKLEVEL"/>              
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="LOCATION" tableName="STOCKLEVEL"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PRODUCT" tableName="STOCKLEVEL"/>                                                        
+        <sql>
+            ALTER TABLE STOCKLEVEL ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE STOCKLEVEL ADD COLUMN LOCATION VARCHAR(255);
+            ALTER TABLE STOCKLEVEL ADD COLUMN PRODUCT VARCHAR(255);
+            UPDATE STOCKLEVEL SET ID = JDL_TMP1;  
+            UPDATE STOCKLEVEL SET LOCATION = JDL_TMP2;  
+            UPDATE STOCKLEVEL SET PRODUCT = JDL_TMP3;                
+            ALTER TABLE STOCKLEVEL ALTER COLUMN ID NOT NULL;
+            ALTER TABLE STOCKLEVEL ALTER COLUMN LOCATION NOT NULL;
+            ALTER TABLE STOCKLEVEL ALTER COLUMN PRODUCT NOT NULL;
+            ALTER TABLE STOCKLEVEL ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="STOCKLEVEL"/>
+        <dropColumn columnName="JDL_TMP2" tableName="STOCKLEVEL"/>
+        <dropColumn columnName="JDL_TMP3" tableName="STOCKLEVEL"/>   
+    </changeSet>   
+    
+    <changeSet author="Chromis POS" id="Refactor STOCKCURRENT (NV)" dbms="derby">       
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="LOCATION" tableName="STOCKCURRENT"/>              
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="PRODUCT" tableName="STOCKCURRENT"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="ATTRIBUTESETINSTANCE_ID" tableName="STOCKCURRENT"/>                                                        
+        <sql>
+            ALTER TABLE STOCKCURRENT ADD COLUMN LOCATION VARCHAR(255);
+            ALTER TABLE STOCKCURRENT ADD COLUMN PRODUCT VARCHAR(255);
+            ALTER TABLE STOCKCURRENT ADD COLUMN ATTRIBUTESETINSTANCE_ID VARCHAR(255);            
+            UPDATE STOCKCURRENT SET LOCATION = JDL_TMP1;  
+            UPDATE STOCKCURRENT SET PRODUCT = JDL_TMP2;              
+            ALTER TABLE STOCKCURRENT ALTER COLUMN LOCATION NOT NULL;
+            ALTER TABLE STOCKCURRENT ALTER COLUMN PRODUCT NOT NULL;
+            UPDATE STOCKCURRENT SET ATTRIBUTESETINSTANCE_ID = JDL_TMP3;                                                                            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="STOCKCURRENT"/>
+        <dropColumn columnName="JDL_TMP2" tableName="STOCKCURRENT"/>
+        <dropColumn columnName="JDL_TMP3" tableName="STOCKCURRENT"/>   
+        <sql>CREATE UNIQUE INDEX STOCKCURRENT_INX ON STOCKCURRENT(LOCATION, PRODUCT, ATTRIBUTESETINSTANCE_ID)</sql>
+    </changeSet>    
+    
+    <changeSet author="Chromis POS" id="Refactor CLOSEDCASH (NV)" dbms="derby">       
+        <sql>ALTER TABLE CLOSEDCASH DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="MONEY" tableName="CLOSEDCASH"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="HOST" tableName="CLOSEDCASH"/>                            
+        <sql>
+            ALTER TABLE CLOSEDCASH ADD COLUMN MONEY VARCHAR(255);
+            ALTER TABLE CLOSEDCASH ADD COLUMN HOST VARCHAR(255);
+            UPDATE CLOSEDCASH SET MONEY = JDL_TMP1; 
+            UPDATE CLOSEDCASH SET HOST = JDL_TMP2;                    
+            ALTER TABLE CLOSEDCASH ALTER COLUMN MONEY NOT NULL;
+            ALTER TABLE CLOSEDCASH ALTER COLUMN HOST NOT NULL;
+            ALTER TABLE CLOSEDCASH ADD PRIMARY KEY (MONEY)            
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="CLOSEDCASH"/>
+        <dropColumn columnName="JDL_TMP2" tableName="CLOSEDCASH"/>
+        <sql>CREATE INDEX CLOSEDCASH_INX_1 ON CLOSEDCASH(DATESTART);
+            CREATE UNIQUE INDEX CLOSEDCASH_INX_SEQ ON CLOSEDCASH(HOST, HOSTSEQUENCE)
+        </sql>
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Refactor RECEIPTS (NV)" dbms="derby"> 
+        <sql>ALTER TABLE RECEIPTS DROP PRIMARY KEY</sql>      
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="RECEIPTS"/>              
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="MONEY" tableName="RECEIPTS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PERSON" tableName="RECEIPTS"/>                                                        
+        <sql>
+            ALTER TABLE RECEIPTS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE RECEIPTS ADD COLUMN MONEY VARCHAR(255);
+            ALTER TABLE RECEIPTS ADD COLUMN PERSON VARCHAR(255);            
+            UPDATE RECEIPTS SET ID = JDL_TMP1;  
+            UPDATE RECEIPTS SET MONEY = JDL_TMP2;  
+            UPDATE RECEIPTS SET PERSON = JDL_TMP3;               
+            ALTER TABLE RECEIPTS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE RECEIPTS ALTER COLUMN MONEY NOT NULL;
+            ALTER TABLE RECEIPTS ADD PRIMARY KEY (ID)                                                                         
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="RECEIPTS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="RECEIPTS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="RECEIPTS"/>         
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Refactor LOCATIONS (NV)" dbms="derby"> 
+        <sql>ALTER TABLE LOCATIONS DROP PRIMARY KEY</sql>      
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="LOCATIONS"/>              
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="LOCATIONS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="ADDRESS" tableName="LOCATIONS"/>                                                        
+        <sql>
+            ALTER TABLE LOCATIONS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE LOCATIONS ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE LOCATIONS ADD COLUMN ADDRESS VARCHAR(255);            
+            UPDATE LOCATIONS SET ID = JDL_TMP1;  
+            UPDATE LOCATIONS SET NAME = JDL_TMP2;  
+            UPDATE LOCATIONS SET ADDRESS = JDL_TMP3;               
+            ALTER TABLE LOCATIONS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE LOCATIONS ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE LOCATIONS ADD PRIMARY KEY (ID)                                                                         
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="LOCATIONS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="LOCATIONS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="LOCATIONS"/>   
+        <sql>CREATE UNIQUE INDEX LOCATIONS_NAME_INX ON LOCATIONS(NAME)</sql>      
+    </changeSet> 
+
+
+    <changeSet author="Chromis POS" id="Refactor CUSTOMERS (NV)" dbms="derby">       
+        <sql>ALTER TABLE CUSTOMERS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="CUSTOMERS"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="SEARCHKEY" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="TAXID" tableName="CUSTOMERS"/>   
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="NAME" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="TAXCATEGORY" tableName="CUSTOMERS"/>          
+        <renameColumn newColumnName="JDL_TMP6" oldColumnName="CARD" tableName="CUSTOMERS"/>     
+        <renameColumn newColumnName="JDL_TMP7" oldColumnName="ADDRESS" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP8" oldColumnName="ADDRESS2" tableName="CUSTOMERS"/>   
+        <renameColumn newColumnName="JDL_TMP9" oldColumnName="POSTAL" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP10" oldColumnName="CITY" tableName="CUSTOMERS"/>         
+        <renameColumn newColumnName="JDL_TMP11" oldColumnName="REGION" tableName="CUSTOMERS"/>     
+        <renameColumn newColumnName="JDL_TMP12" oldColumnName="COUNTRY" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP13" oldColumnName="FIRSTNAME" tableName="CUSTOMERS"/>   
+        <renameColumn newColumnName="JDL_TMP14" oldColumnName="LASTNAME" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP15" oldColumnName="EMAIL" tableName="CUSTOMERS"/>           
+        <renameColumn newColumnName="JDL_TMP16" oldColumnName="PHONE" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP17" oldColumnName="PHONE2" tableName="CUSTOMERS"/>   
+        <renameColumn newColumnName="JDL_TMP18" oldColumnName="FAX" tableName="CUSTOMERS"/>  
+        <renameColumn newColumnName="JDL_TMP19" oldColumnName="NOTES" tableName="CUSTOMERS"/>                                                                       
+        <sql>
+            ALTER TABLE CUSTOMERS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE CUSTOMERS ADD COLUMN SEARCHKEY VARCHAR(255);
+            ALTER TABLE CUSTOMERS ADD COLUMN TAXID VARCHAR(255);  
+            ALTER TABLE CUSTOMERS ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE CUSTOMERS ADD COLUMN TAXCATEGORY VARCHAR(255);             
+            ALTER TABLE CUSTOMERS ADD COLUMN CARD VARCHAR(255);  
+            ALTER TABLE CUSTOMERS ADD COLUMN ADDRESS VARCHAR(255);
+            ALTER TABLE CUSTOMERS ADD COLUMN ADDRESS2 VARCHAR(255);            
+            ALTER TABLE CUSTOMERS ADD COLUMN POSTAL VARCHAR(255);  
+            ALTER TABLE CUSTOMERS ADD COLUMN CITY VARCHAR(255);           
+            ALTER TABLE CUSTOMERS ADD COLUMN REGION VARCHAR(255);            
+            ALTER TABLE CUSTOMERS ADD COLUMN COUNTRY VARCHAR(255);  
+            ALTER TABLE CUSTOMERS ADD COLUMN FIRSTNAME VARCHAR(255);
+            ALTER TABLE CUSTOMERS ADD COLUMN LASTNAME VARCHAR(255);            
+            ALTER TABLE CUSTOMERS ADD COLUMN EMAIL VARCHAR(255);              
+            ALTER TABLE CUSTOMERS ADD COLUMN PHONE VARCHAR(255);
+            ALTER TABLE CUSTOMERS ADD COLUMN PHONE2 VARCHAR(255);            
+            ALTER TABLE CUSTOMERS ADD COLUMN FAX VARCHAR(255);  
+            ALTER TABLE CUSTOMERS ADD COLUMN NOTES VARCHAR(255);            
+            UPDATE CUSTOMERS SET ID = JDL_TMP1; 
+            UPDATE CUSTOMERS SET SEARCHKEY = JDL_TMP2;  
+            UPDATE CUSTOMERS SET TAXID = JDL_TMP3; 
+            UPDATE CUSTOMERS SET NAME = JDL_TMP4;  
+            UPDATE CUSTOMERS SET TAXCATEGORY = JDL_TMP5;              
+            UPDATE CUSTOMERS SET CARD = JDL_TMP6; 
+            UPDATE CUSTOMERS SET ADDRESS = JDL_TMP7;  
+            UPDATE CUSTOMERS SET ADDRESS2 = JDL_TMP8; 
+            UPDATE CUSTOMERS SET POSTAL = JDL_TMP9;  
+            UPDATE CUSTOMERS SET CITY = JDL_TMP10;            
+            UPDATE CUSTOMERS SET REGION = JDL_TMP11; 
+            UPDATE CUSTOMERS SET COUNTRY = JDL_TMP12;  
+            UPDATE CUSTOMERS SET FIRSTNAME = JDL_TMP13; 
+            UPDATE CUSTOMERS SET LASTNAME = JDL_TMP14;  
+            UPDATE CUSTOMERS SET EMAIL = JDL_TMP15;            
+            UPDATE CUSTOMERS SET PHONE = JDL_TMP16; 
+            UPDATE CUSTOMERS SET PHONE2 = JDL_TMP17;  
+            UPDATE CUSTOMERS SET FAX = JDL_TMP18; 
+            UPDATE CUSTOMERS SET NOTES = JDL_TMP19;                
+            ALTER TABLE CUSTOMERS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE CUSTOMERS ALTER COLUMN SEARCHKEY NOT NULL;
+            ALTER TABLE CUSTOMERS ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE CUSTOMERS ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP2" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP3" tableName="CUSTOMERS"/>   
+        <dropColumn columnName="JDL_TMP4" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP5" tableName="CUSTOMERS"/>   
+        <dropColumn columnName="JDL_TMP6" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP7" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP8" tableName="CUSTOMERS"/>   
+        <dropColumn columnName="JDL_TMP9" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP10" tableName="CUSTOMERS"/> 
+        <dropColumn columnName="JDL_TMP11" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP12" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP13" tableName="CUSTOMERS"/>   
+        <dropColumn columnName="JDL_TMP14" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP15" tableName="CUSTOMERS"/> 
+        <dropColumn columnName="JDL_TMP16" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP17" tableName="CUSTOMERS"/>
+        <dropColumn columnName="JDL_TMP18" tableName="CUSTOMERS"/>   
+        <dropColumn columnName="JDL_TMP19" tableName="CUSTOMERS"/>        
+        <sql>
+            CREATE UNIQUE INDEX CUSTOMERS_SKEY_INX ON CUSTOMERS(SEARCHKEY);
+            CREATE INDEX CUSTOMERS_TAXID_INX ON CUSTOMERS(TAXID);
+            CREATE INDEX CUSTOMERS_NAME_INX ON CUSTOMERS(NAME);
+            CREATE INDEX CUSTOMERS_CARD_INX ON CUSTOMERS(CARD)
+        </sql>  
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor THIRDPARTIES (NV)" dbms="derby">       
+        <sql>ALTER TABLE THIRDPARTIES DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="THIRDPARTIES"/>     
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="CIF" tableName="THIRDPARTIES"/>  
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="NAME" tableName="THIRDPARTIES"/>   
+        <renameColumn newColumnName="JDL_TMP4" oldColumnName="ADDRESS" tableName="THIRDPARTIES"/>  
+        <renameColumn newColumnName="JDL_TMP5" oldColumnName="CONTACTCOMM" tableName="THIRDPARTIES"/>          
+        <renameColumn newColumnName="JDL_TMP6" oldColumnName="CONTACTFACT" tableName="THIRDPARTIES"/>     
+        <renameColumn newColumnName="JDL_TMP7" oldColumnName="PAYRULE" tableName="THIRDPARTIES"/>  
+        <renameColumn newColumnName="JDL_TMP8" oldColumnName="FAXNUMBER" tableName="THIRDPARTIES"/>   
+        <renameColumn newColumnName="JDL_TMP9" oldColumnName="PHONENUMBER" tableName="THIRDPARTIES"/>  
+        <renameColumn newColumnName="JDL_TMP10" oldColumnName="MOBILENUMBER" tableName="THIRDPARTIES"/>         
+        <renameColumn newColumnName="JDL_TMP11" oldColumnName="EMAIL" tableName="THIRDPARTIES"/>     
+        <renameColumn newColumnName="JDL_TMP12" oldColumnName="WEBPAGE" tableName="THIRDPARTIES"/>  
+        <renameColumn newColumnName="JDL_TMP13" oldColumnName="NOTES" tableName="THIRDPARTIES"/>                                                                         
+        <sql>
+            ALTER TABLE THIRDPARTIES ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE THIRDPARTIES ADD COLUMN CIF VARCHAR(255);
+            ALTER TABLE THIRDPARTIES ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE THIRDPARTIES ADD COLUMN ADDRESS VARCHAR(255);
+            ALTER TABLE THIRDPARTIES ADD COLUMN CONTACTCOMM VARCHAR(255);             
+            ALTER TABLE THIRDPARTIES ADD COLUMN CONTACTFACT VARCHAR(255);  
+            ALTER TABLE THIRDPARTIES ADD COLUMN PAYRULE VARCHAR(255);
+            ALTER TABLE THIRDPARTIES ADD COLUMN FAXNUMBER VARCHAR(255);            
+            ALTER TABLE THIRDPARTIES ADD COLUMN PHONENUMBER VARCHAR(255);  
+            ALTER TABLE THIRDPARTIES ADD COLUMN MOBILENUMBER VARCHAR(255);            
+            ALTER TABLE THIRDPARTIES ADD COLUMN EMAIL VARCHAR(255);            
+            ALTER TABLE THIRDPARTIES ADD COLUMN WEBPAGE VARCHAR(255);  
+            ALTER TABLE THIRDPARTIES ADD COLUMN NOTES VARCHAR(255);           
+            UPDATE THIRDPARTIES SET ID = JDL_TMP1; 
+            UPDATE THIRDPARTIES SET CIF = JDL_TMP2;  
+            UPDATE THIRDPARTIES SET NAME = JDL_TMP3; 
+            UPDATE THIRDPARTIES SET ADDRESS = JDL_TMP4;  
+            UPDATE THIRDPARTIES SET CONTACTCOMM = JDL_TMP5;              
+            UPDATE THIRDPARTIES SET CONTACTFACT = JDL_TMP6; 
+            UPDATE THIRDPARTIES SET PAYRULE = JDL_TMP7;  
+            UPDATE THIRDPARTIES SET FAXNUMBER = JDL_TMP8; 
+            UPDATE THIRDPARTIES SET PHONENUMBER = JDL_TMP9;  
+            UPDATE THIRDPARTIES SET MOBILENUMBER = JDL_TMP10;            
+            UPDATE THIRDPARTIES SET EMAIL = JDL_TMP11; 
+            UPDATE THIRDPARTIES SET WEBPAGE = JDL_TMP12;  
+            UPDATE THIRDPARTIES SET NOTES = JDL_TMP13;                
+            ALTER TABLE THIRDPARTIES ALTER COLUMN ID NOT NULL;
+            ALTER TABLE THIRDPARTIES ALTER COLUMN CIF NOT NULL;
+            ALTER TABLE THIRDPARTIES ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE THIRDPARTIES ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP2" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP3" tableName="THIRDPARTIES"/>   
+        <dropColumn columnName="JDL_TMP4" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP5" tableName="THIRDPARTIES"/>   
+        <dropColumn columnName="JDL_TMP6" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP7" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP8" tableName="THIRDPARTIES"/>   
+        <dropColumn columnName="JDL_TMP9" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP10" tableName="THIRDPARTIES"/> 
+        <dropColumn columnName="JDL_TMP11" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP12" tableName="THIRDPARTIES"/>
+        <dropColumn columnName="JDL_TMP13" tableName="THIRDPARTIES"/>          
+        <sql>
+            CREATE UNIQUE INDEX THIRDPARTIES_CIF_INX ON THIRDPARTIES(CIF);
+            CREATE UNIQUE INDEX THIRDPARTIES_NAME_INX ON THIRDPARTIES(NAME)
+        </sql>  
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor PRODUCTS_CAT (NV)" dbms="derby">   
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="PRODUCTS_CAT"/>
+        </preConditions>
+           
+        <sql>ALTER TABLE PRODUCTS_CAT DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="PRODUCT" tableName="PRODUCTS_CAT"/>                                                                
+        <sql>
+            ALTER TABLE PRODUCTS_CAT ADD COLUMN PRODUCT VARCHAR(255);
+            UPDATE PRODUCTS_CAT SET PRODUCT = JDL_TMP1;              
+            ALTER TABLE PRODUCTS_CAT ALTER COLUMN PRODUCT NOT NULL;                                                   
+            ALTER TABLE PRODUCTS_CAT ADD PRIMARY KEY (PRODUCT)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="PRODUCTS_CAT"/>   
+        <sql>CREATE INDEX PRODUCTS_CAT_INX_1 ON PRODUCTS_CAT(CATORDER)</sql>
+    </changeSet>
+    
+    <changeSet author="Chromis POS" id="Refactor PRODUCTS_COM (NV)" dbms="derby">       
+        <sql>ALTER TABLE PRODUCTS_COM DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="PRODUCTS_COM"/>                                                                
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="PRODUCT" tableName="PRODUCTS_COM"/>   
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="PRODUCT2" tableName="PRODUCTS_COM"/>   
+        <sql>
+            ALTER TABLE PRODUCTS_COM ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE PRODUCTS_COM ADD COLUMN PRODUCT VARCHAR(255);
+            ALTER TABLE PRODUCTS_COM ADD COLUMN PRODUCT2 VARCHAR(255);
+            UPDATE PRODUCTS_COM SET ID = JDL_TMP1; 
+            UPDATE PRODUCTS_COM SET PRODUCT = JDL_TMP2;
+            UPDATE PRODUCTS_COM SET PRODUCT2 = JDL_TMP3;                
+            ALTER TABLE PRODUCTS_COM ALTER COLUMN ID NOT NULL;
+            ALTER TABLE PRODUCTS_COM ALTER COLUMN PRODUCT NOT NULL;
+            ALTER TABLE PRODUCTS_COM ALTER COLUMN PRODUCT2 NOT NULL;
+            ALTER TABLE PRODUCTS_COM ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="PRODUCTS_COM"/>   
+        <dropColumn columnName="JDL_TMP2" tableName="PRODUCTS_COM"/>   
+        <dropColumn columnName="JDL_TMP3" tableName="PRODUCTS_COM"/>   
+        <sql>CREATE UNIQUE INDEX PCOM_INX_PROD ON PRODUCTS_COM(PRODUCT, PRODUCT2)</sql>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Refactor APPLICATIONS (NV)" dbms="derby">       
+        <sql>ALTER TABLE APPLICATIONS DROP PRIMARY KEY</sql>
+        <renameColumn newColumnName="JDL_TMP1" oldColumnName="ID" tableName="APPLICATIONS"/> 
+        <renameColumn newColumnName="JDL_TMP2" oldColumnName="NAME" tableName="APPLICATIONS"/>
+        <renameColumn newColumnName="JDL_TMP3" oldColumnName="VERSION" tableName="APPLICATIONS"/>                                                               
+        <sql>
+            ALTER TABLE APPLICATIONS ADD COLUMN ID VARCHAR(255);
+            ALTER TABLE APPLICATIONS ADD COLUMN NAME VARCHAR(255);
+            ALTER TABLE APPLICATIONS ADD COLUMN VERSION VARCHAR(255);
+            UPDATE APPLICATIONS SET ID = JDL_TMP1;                                                    
+            UPDATE APPLICATIONS SET NAME = JDL_TMP2;
+            UPDATE APPLICATIONS SET VERSION = JDL_TMP3;
+            
+            ALTER TABLE APPLICATIONS ALTER COLUMN ID NOT NULL;
+            ALTER TABLE APPLICATIONS ALTER COLUMN NAME NOT NULL;
+            ALTER TABLE APPLICATIONS ALTER COLUMN VERSION NOT NULL;
+            ALTER TABLE APPLICATIONS ADD PRIMARY KEY (ID)                                  
+        </sql>                                          
+        <dropColumn columnName="JDL_TMP1" tableName="APPLICATIONS"/>   
+        <dropColumn columnName="JDL_TMP2" tableName="APPLICATIONS"/>   
+        <dropColumn columnName="JDL_TMP3" tableName="APPLICATIONS"/>   
+    </changeSet>
+</databaseChangeLog>
+

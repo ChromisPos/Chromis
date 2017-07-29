@@ -1,0 +1,37 @@
+// Add a single coupon to the end of the ticket if a qualifying product
+// is present
+
+ArrayList LINES = new ArrayList();
+
+// START OF USER EDITABLE VARIABLES
+
+Double SPEND_AT_LEAST = 5.00;
+
+LINES.add( "" );
+LINES.add( "*********************************" );
+LINES.add( "* 10p off your next shop        *" );
+LINES.add( "*                               *" );
+LINES.add( "* Cannot be used with any       *" );
+LINES.add( "* other offer                   *" );
+LINES.add( "* Valid till 31st December 2016 *" );
+LINES.add( "*********************************" );
+
+
+// END OF USER EDITABLE VARIABLES
+
+//
+//
+// DO NOT EDIT THE CODE BELOW UNLESS YOU REALLY KNOW WHAT YOU ARE DOING
+//      
+
+    if( ticket.getTotal() < SPEND_AT_LEAST ) { 
+        // Remove existing coupon
+        support.RemoveCouponPromotion( ticket, promotion.getID() );
+    } else {        
+        if ( event.contentEquals( "promotion.changeline" ) ||
+             event.contentEquals( "promotion.addline" ) ) {
+            if( support.isProductInPromotion( ticket, effectedindex, promotion ) ) {
+                support.AddCoupon( ticket, promotion, LINES );
+            }
+        }
+    } 

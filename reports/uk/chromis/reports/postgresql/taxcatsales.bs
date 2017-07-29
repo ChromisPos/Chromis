@@ -1,0 +1,72 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.TaxCatSales");
+report.setReport("/uk/chromis/reports/postgresql/taxcatsales");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT " +
+		"CLOSEDCASH.HOST, " +
+		"CLOSEDCASH.MONEY, " +
+		"CLOSEDCASH.DATEEND, " +
+		"TAXES.NAME AS TAXNAME, CATEGORIES.NAME, " +
+		"SUM(TICKETLINES.UNITS) AS QTY, " +
+		"SUM(TICKETLINES.PRICE * TICKETLINES.UNITS) AS CATPRICE, " +
+		"SUM((TICKETLINES.PRICE * TAXES.RATE ) * TICKETLINES.UNITS) AS CATTAX, " +
+		"SUM((TICKETLINES.PRICE + TICKETLINES.PRICE * TAXES.RATE ) * TICKETLINES.UNITS) AS CATTOTAL " +
+		"FROM CLOSEDCASH, TAXES, TICKETLINES " +
+		"LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID " +		
+		"LEFT OUTER JOIN CATEGORIES ON PRODUCTS.CATEGORY = CATEGORIES.ID " +
+		"LEFT OUTER JOIN TICKETS ON TICKETS.ID = TICKETLINES.TICKET " +
+		"LEFT OUTER JOIN RECEIPTS ON RECEIPTS.ID = TICKETS.ID " +
+		"WHERE PRODUCTS.ISCATALOG = TRUE  AND CLOSEDCASH.MONEY = RECEIPTS.MONEY " +
+		"AND TICKETLINES.TAXID = TAXES.ID " +
+		"AND ?(QBF_FILTER) " +
+		"GROUP BY CLOSEDCASH.HOST, CLOSEDCASH.MONEY, CLOSEDCASH.DATEEND, TAXES.NAME, CATEGORIES.NAME " +
+		"ORDER BY TAXES.NAME, CATEGORIES.NAME");
+
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.SITEGUID");
+
+paramdates = new uk.chromis.pos.reports.JParamsDatesInterval();
+
+paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
+
+report.addQBFFilter(paramdates);
+
+report.addField("HOST", uk.chromis.data.loader.Datas.STRING);
+report.addField("MONEY", uk.chromis.data.loader.Datas.STRING);
+report.addField("DATEEND", uk.chromis.data.loader.Datas.TIMESTAMP);
+report.addField("TAXNAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("NAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("QTY", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("CATPRICE", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("CATTAX", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("CATTOTAL", uk.chromis.data.loader.Datas.DOUBLE);
+
+report;

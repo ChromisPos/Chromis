@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+   Chromis POS - The New Face of Open Source POS 
+   Copyright (c) (c) 2015-2016Chromis , previous uniCenta & Openbravo POS works   
+
+   This file is part of chromis oPOS
+
+   Chromis POS is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   Chromis POS is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<output>
+  <ticket>
+    <image>Printer.Ticket.Logo</image>
+        <line></line>
+        <line></line>
+        <line size="1">
+            <text align ="center" bold="true" length="42">Close Cash Report</text>
+        </line>
+        <line></line>
+        <line>
+           <text align ="left" bold="true" length="32">Payments Report</text>
+           <text align ="right" bold="true" length="10">Amount</text>
+        </line>
+        <line><text>------------------------------------------</text></line>
+        #foreach ($line in $payments.getPaymentLines())
+        <line>
+            <text align ="left" length="32">${line.printType()} ${line.printReason()}</text>
+            <text align ="right" length="10">${line.printValue()}</text>
+        </line>
+        #end
+        <line><text>------------------------------------------</text></line>
+        <line>
+            <text align ="left" length="32" bold="true">Total Sales</text>
+            <text align ="right" length="10" bold="true">${payments.printPaymentsTotal()}</text>
+        </line>
+        <line>
+            <text align ="left" length="22">Number of Payments:</text>
+            <text align ="right" length="10">${payments.printPayments()}</text>
+        </line>
+        <line></line>
+        <line>
+            <text align ="left" bold="true" length="32">Tax Analysis</text>
+            <text align ="right" bold="true" length="10">Amount</text>
+        </line>
+        <line><text>------------------------------------------</text></line>
+        #foreach ($line in $payments.getSaleLines())
+        <line>
+            <text align ="left" length="32">${line.printTaxName()}</text>
+            <text align ="right" length="10">${line.printTaxes()}</text>
+        </line>
+        #end
+        <line><text>------------------------------------------</text></line>
+        <line>
+            <text align ="left" length="32">Receipts:</text>
+            <text align ="right" length="10">${payments.printSales()}</text>
+        </line>
+        <line></line>
+        <line size="1">
+            <text align ="left" length="32" bold="true">SubTotal</text>
+            <text align ="right" length="10" bold="true">${payments.printSalesBase()}</text>
+        </line>
+        <line size="1">
+            <text align ="left" length="32" bold="true">Taxes</text>
+            <text align ="right" length="10" bold="true">${payments.printSalesTaxes()}</text>
+        </line>
+        <line size="1">
+            <text align ="left" length="32" bold="true">Totals</text>
+            <text align ="right" length="10" bold="true">${payments.printSalesTotal()}</text>
+        </line>
+        <line><text>------------------------------------------</text></line>
+        <line>
+            <text length="18">Terminal:</text>
+            <text>${payments.printHost()}</text>
+        </line>
+        <line>
+            <text length="18">Sequence:</text>
+            <text>${payments.printSequence()}</text>
+        </line>
+        <line>
+            <text length="18">Start Date:</text>
+            <text>${payments.printDateStart()}</text>
+        </line>
+        <line>
+            <text length="18">End Date:</text>
+            <text>${payments.printDateEnd()}</text>
+        </line>
+        <line>            
+        </line>
+        <line>
+            <text length="18">Hourly Sales:</text>
+        </line>
+        <line><text>------------------------------------------</text></line>
+        #foreach ($line in $hourlysales)
+        <line>            
+            <text align ="left" length="12">${line.getHourStr()}  </text>
+            <text> Sales: ${line.getSales()}</text>
+            <text align ="right" length="20"> Value: ${line.getHourTotal()}</text>
+        </line>
+        #end
+        <line><text>------------------------------------------</text></line>        
+    </ticket>
+</output>

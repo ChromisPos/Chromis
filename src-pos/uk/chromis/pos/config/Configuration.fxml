@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.ConfigurationController">  
+    <children>
+        <TabPane fx:id="tabPane" prefHeight="518.0" prefWidth="795.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="configureDatabase" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Database">                    
+                </Tab>
+                <Tab fx:id="configureGeneral" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="General">                    
+                </Tab>
+                <Tab fx:id="configureLocale" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Locale">                     
+                </Tab>
+                <Tab fx:id="configurePayment" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Payment Method">                    
+                </Tab>
+                <Tab fx:id="configurePeripheral" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Peripherals">                    
+                </Tab>
+                <Tab fx:id="configureSystem" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="System Option">
+                </Tab>
+                <Tab fx:id="configureTicket" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Ticket Setup">                   
+                </Tab>
+                <Tab fx:id="configureRestaurant" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Restaurant">
+                </Tab>
+                <Tab fx:id="configureSalesScreen" closable="false" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Sales Screen">
+                </Tab>
+                <Tab fx:id="configureSync" style="-fx-border-radius: 0 6 0 0, 0 5 0 0;" text="Sync Licence">                    
+                </Tab>
+            </tabs>
+        </TabPane>
+        <ButtonBar fx:id="btnBar" layoutX="428.0" layoutY="525.0" prefHeight="40.0" prefWidth="367.0">
+            <buttons>
+                <Button fx:id="btnRestore" mnemonicParsing="false" onAction="#restore" style="-fx-border-radius: 5 5 5 5, 5 5 5 5; -fx-background-radius: 16;" text="Restore" />
+                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#save" style="-fx-border-radius: 5 5 5 5, 5 5 5 5; -fx-background-radius: 16;" text="Save" />
+                <Button fx:id="btnExit" mnemonicParsing="false" onAction="#handleExit" style="-fx-border-radius: 5 5 5 5, 5 5 5 5; -fx-background-radius: 16;" text="Exit" />
+            </buttons>
+        </ButtonBar>
+    </children>
+</AnchorPane>

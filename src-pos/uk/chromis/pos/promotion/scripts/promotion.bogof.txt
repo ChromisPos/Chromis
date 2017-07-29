@@ -1,0 +1,12 @@
+// Buy one get one free
+//
+
+Boolean WHOLE_PRODUCTS_ONLY = true;
+
+//
+//
+// DO NOT EDIT THE CODE BELOW UNLESS YOU REALLY KNOW WHAT YOU ARE DOING
+//      
+
+    support.UpdateBuySomeGetSomeFreeSingleProduct(
+        ticket, productid, promotion, "  *" + promotion.getName(), 2d, 1d, WHOLE_PRODUCTS_ONLY  );

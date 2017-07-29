@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql, hypersql, hsqldb"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+    <property name="boolean.type" value="numeric(1)" dbms="oracle"/>
+
+    <property name="blob.type" value="blob" dbms="oracle, derby, hypersql, hsqldb"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+
+
+    <changeSet author="Chromis POS" id="Create New dbpermissions Table (NV)">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="DBPERMISSIONS"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="SECTION" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DISPLAYNAME" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>            
+            <column name="DESCRIPTION" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>                        
+    </changeSet>   
+         
+    <changeSet author="Chromis POS" id="Insert into Permissions Table (NV)">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DBPERMISSIONS</sqlCheck>
+        </preConditions>
+
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.sales.JPanelTicketSales"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname1"/>
+            <column name="DESCRIPTION" value="##label.description1"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.sales.JPanelTicketEdits"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname2"/>
+            <column name="DESCRIPTION" value="##label.description2"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.customers.CustomersPayment"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname3"/>
+            <column name="DESCRIPTION" value="##label.description3"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.panels.JPanelPayments"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname4"/>
+            <column name="DESCRIPTION" value="##label.description4"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="db.updatedatabase"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname5"/>
+            <column name="DESCRIPTION" value="##label.description5"/>
+        </insert>
+  
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.panels.JPanelCloseMoney"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname6"/>
+            <column name="DESCRIPTION" value="##label.description6"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="sales.EditLines"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname7"/>
+            <column name="DESCRIPTION" value="##label.description7"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="sales.EditTicket"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname8"/>
+            <column name="DESCRIPTION" value="##label.description8"/>
+        </insert>
+ 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="sales.RefundTicket"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname9"/>
+            <column name="DESCRIPTION" value="##label.description9"/>
+        </insert>
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="sales.PrintTicket"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname10"/>
+            <column name="DESCRIPTION" value="##label.description10"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="sales.Total"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname11"/>
+            <column name="DESCRIPTION" value="##label.description11"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="sales.ChangeTaxOptions"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname12"/>
+            <column name="DESCRIPTION" value="##label.description12"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.bank"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname13"/>
+            <column name="DESCRIPTION" value="##label.description13"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.cash"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname14"/>
+            <column name="DESCRIPTION" value="##label.description14"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.cheque"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname15"/>
+            <column name="DESCRIPTION" value="##label.description15"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.paper"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname16"/>
+            <column name="DESCRIPTION" value="##label.description16"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.magcard"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname17"/>
+            <column name="DESCRIPTION" value="##label.description17"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.free"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname18"/>
+            <column name="DESCRIPTION" value="##label.description18"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="payment.debt"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname19"/>
+            <column name="DESCRIPTION" value="##label.description19"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="refund.cash"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname20"/>
+            <column name="DESCRIPTION" value="##label.description20"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="refund.cheque"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname21"/>
+            <column name="DESCRIPTION" value="##label.description21"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="refund.paper"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname22"/>
+            <column name="DESCRIPTION" value="##label.description22"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="refund.magcard"/>
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname23"/>
+            <column name="DESCRIPTION" value="##label.description23"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="sales.PrintKitchen"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname24"/>
+            <column name="DESCRIPTION" value="##label.description24"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="button.totaldiscount"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname25"/>
+            <column name="DESCRIPTION" value="##label.description25"/>				
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="button.print"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname26"/>
+            <column name="DESCRIPTION" value="##label.description26"/>			
+        </insert>				
+				
+        <insert tableName="DBPERMISSIONS">				
+            <column name="CLASSNAME" value="button.opendrawer"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname27"/>
+            <column name="DESCRIPTION" value="##label.description27"/>
+        </insert>   
+ 
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="button.linediscount"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname28"/>
+            <column name="DESCRIPTION" value="##label.description28"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="button.sendorder"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname29"/>
+            <column name="DESCRIPTION" value="##label.description29"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="button.refundit"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname30"/>
+            <column name="DESCRIPTION" value="##label.description30"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="button.scharge"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname31"/>
+            <column name="DESCRIPTION" value="##label.description31"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.forms.MenuCustomers"/>
+            <column name="SECTION" value="##label.sectionadmin"/>
+            <column name="DISPLAYNAME" value="##label.displayname32"/>
+            <column name="DESCRIPTION" value="##label.description32"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.customers.CustomersPanel"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname33"/>
+            <column name="DESCRIPTION" value="##label.description33"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/customers.bs"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname34"/>
+            <column name="DESCRIPTION" value="##label.description34"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/customersb.bs"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname35"/>
+            <column name="DESCRIPTION" value="##label.description35"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/customersdebtors.bs"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname36"/>
+            <column name="DESCRIPTION" value="##label.description36"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/customersdiary.bs"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname37"/>
+            <column name="DESCRIPTION" value="##label.description37"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/customers_list.bs"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname38"/>
+            <column name="DESCRIPTION" value="##label.description38"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/salebycustomer.bs"/>
+            <column name="SECTION" value="##label.sectioncustomers"/>
+            <column name="DISPLAYNAME" value="##label.displayname39"/>
+            <column name="DESCRIPTION" value="##label.description39"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.forms.MenuStockManagement"/>
+            <column name="SECTION" value="##label.sectionadmin"/>
+            <column name="DISPLAYNAME" value="##label.displayname40"/>
+            <column name="DESCRIPTION" value="##label.description40"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.AttributesPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname41"/>
+            <column name="DESCRIPTION" value="##label.description41"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.AttributeValuesPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname42"/>
+            <column name="DESCRIPTION" value="##label.description42"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.AttributeSetsPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname43"/>
+            <column name="DESCRIPTION" value="##label.description43"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.AttributeUsePanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname44"/>
+            <column name="DESCRIPTION" value="##label.description44"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.AuxiliarPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname45"/>
+            <column name="DESCRIPTION" value="##label.description45"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.CategoriesPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname46"/>
+            <column name="DESCRIPTION" value="##label.description46"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.ProductsPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname47"/>
+            <column name="DESCRIPTION" value="##label.description47"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.ProductsWarehousePanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname48"/>
+            <column name="DESCRIPTION" value="##label.description48"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.StockDiaryPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname49"/>
+            <column name="DESCRIPTION" value="##label.description49"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.StockManagement"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname50"/>
+            <column name="DESCRIPTION" value="##label.description50"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.TaxCategoriesPanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname51"/>
+            <column name="DESCRIPTION" value="##label.description51"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.TaxCustCategoriesPanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname52"/>
+            <column name="DESCRIPTION" value="##label.description52"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.TaxPanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname53"/>
+            <column name="DESCRIPTION" value="##label.description53"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/barcodesheet.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname54"/>
+            <column name="DESCRIPTION" value="##label.description54"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventory.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname55"/>
+            <column name="DESCRIPTION" value="##label.description55"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventoryb.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname56"/>
+            <column name="DESCRIPTION" value="##label.description56"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventorybroken.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname57"/>
+            <column name="DESCRIPTION" value="##label.description57"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventorydiff.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname58"/>
+            <column name="DESCRIPTION" value="##label.description58"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventorydiffdetail.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname59"/>
+            <column name="DESCRIPTION" value="##label.description59"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventorylistdetail.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname60"/>
+            <column name="DESCRIPTION" value="##label.description60"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/productscatalog.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname61"/>
+            <column name="DESCRIPTION" value="##label.description61"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/products.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname62"/>
+            <column name="DESCRIPTION" value="##label.description62"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/productlabels.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname63"/>
+            <column name="DESCRIPTION" value="##label.description63"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/salecatalog.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname64"/>
+            <column name="DESCRIPTION" value="##label.description64"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/shelfedgelabels.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname65"/>
+            <column name="DESCRIPTION" value="##label.description65"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.forms.MenuSalesManagement"/>
+            <column name="SECTION" value="##label.sectionadmin"/>
+            <column name="DISPLAYNAME" value="##label.displayname66"/>
+            <column name="DESCRIPTION" value="##label.description66"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/cashflow.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname67"/>
+            <column name="DESCRIPTION" value="##label.description67"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/cashregisterlog.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname68"/>
+            <column name="DESCRIPTION" value="##label.description68"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/categorysales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname69"/>
+            <column name="DESCRIPTION" value="##label.description69"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/chartsales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname70"/>
+            <column name="DESCRIPTION" value="##label.description70"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/closedpos.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname71"/>
+            <column name="DESCRIPTION" value="##label.description71"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/closedpos_1.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname72"/>
+            <column name="DESCRIPTION" value="##label.description72"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/closedproducts.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname73"/>
+            <column name="DESCRIPTION" value="##label.description73"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/closedproducts_1.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname74"/>
+            <column name="DESCRIPTION" value="##label.description74"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/extendedcashregisterlog.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname75"/>
+            <column name="DESCRIPTION" value="##label.description75"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/extproducts.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname76"/>
+            <column name="DESCRIPTION" value="##label.description76"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/paymentreport.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname77"/>
+            <column name="DESCRIPTION" value="##label.description77"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/piesalescat.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname78"/>
+            <column name="DESCRIPTION" value="##label.description78"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/productsales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname79"/>
+            <column name="DESCRIPTION" value="##label.description79"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/productsalesprofit.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname80"/>
+            <column name="DESCRIPTION" value="##label.description80"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/saletaxes.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname81"/>
+            <column name="DESCRIPTION" value="##label.description81"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/taxcatsales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname82"/>
+            <column name="DESCRIPTION" value="##label.description82"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/taxes.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname83"/>
+            <column name="DESCRIPTION" value="##label.description83"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/timeseriesproduct.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname84"/>
+            <column name="DESCRIPTION" value="##label.description84"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/top10sales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname85"/>
+            <column name="DESCRIPTION" value="##label.description85"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/top10salesMySQL.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname86"/>
+            <column name="DESCRIPTION" value="##label.description86"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.forms.MenuMaintenance"/>
+            <column name="SECTION" value="##label.sectionadmin"/>
+            <column name="DISPLAYNAME" value="##label.displayname87"/>
+            <column name="DESCRIPTION" value="##label.description87"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.admin.PeoplePanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname88"/>
+            <column name="DESCRIPTION" value="##label.description88"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.admin.RolesPanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname89"/>
+            <column name="DESCRIPTION" value="##label.description89"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.admin.ResourcesPanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname90"/>
+            <column name="DESCRIPTION" value="##label.description90"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.LocationsPanel"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname91"/>
+            <column name="DESCRIPTION" value="##label.description91"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.mant.JPanelFloors"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname92"/>
+            <column name="DESCRIPTION" value="##label.description92"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.mant.JPanelPlaces"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname93"/>
+            <column name="DESCRIPTION" value="##label.description93"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/people.bs"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname94"/>
+            <column name="DESCRIPTION" value="##label.description94"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/usersales.bs"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname95"/>
+            <column name="DESCRIPTION" value="##label.description95"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.imports.JPanelCSV"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname96"/>
+            <column name="DESCRIPTION" value="##label.description96"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.imports.JPanelCSVImport"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname97"/>
+            <column name="DESCRIPTION" value="##label.description97"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.imports.JPanelCSVCleardb"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname98"/>
+            <column name="DESCRIPTION" value="##label.description98"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/badprice.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname99"/>
+            <column name="DESCRIPTION" value="##label.description99"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/invalidcategory.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname100"/>
+            <column name="DESCRIPTION" value="##label.description100"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/invaliddata.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname101"/>
+            <column name="DESCRIPTION" value="##label.description101"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/missingdata.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname102"/>
+            <column name="DESCRIPTION" value="##label.description102"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/newproducts.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname103"/>
+            <column name="DESCRIPTION" value="##label.description103"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/updatedprices.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname104"/>
+            <column name="DESCRIPTION" value="##label.description104"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.forms.MenuEmployees"/>
+            <column name="SECTION" value="##label.sectionadmin"/>
+            <column name="DISPLAYNAME" value="##label.displayname105"/>
+            <column name="DESCRIPTION" value="##label.description105"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.epm.BreaksPanel"/>
+            <column name="SECTION" value="##label.sectionpresence"/>
+            <column name="DISPLAYNAME" value="##label.displayname106"/>
+            <column name="DESCRIPTION" value="##label.description106"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.epm.LeavesPanel"/>
+            <column name="SECTION" value="##label.sectionpresence"/>
+            <column name="DISPLAYNAME" value="##label.displayname107"/>
+            <column name="DESCRIPTION" value="##label.description107"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.epm.JPanelEmployeePresence"/>
+            <column name="SECTION" value="##label.sectionsystem"/>
+            <column name="DISPLAYNAME" value="##label.displayname108"/>
+            <column name="DESCRIPTION" value="##label.description108"/>
+        </insert>						
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="Menu.ChangePassword"/>
+            <column name="SECTION" value="##label.sectionsystem"/>
+            <column name="DISPLAYNAME" value="##label.displayname109"/>
+            <column name="DESCRIPTION" value="##label.description109"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.panels.JPanelPrinter"/>
+            <column name="SECTION" value="##label.sectionsystem"/>
+            <column name="DISPLAYNAME" value="##label.displayname110"/>
+            <column name="DESCRIPTION" value="##label.description110"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.config.JPanelConfiguration"/>
+            <column name="SECTION" value="##label.sectionsystem"/>
+            <column name="DISPLAYNAME" value="##label.displayname111"/>
+            <column name="DESCRIPTION" value="##label.description111"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/dailypresencereport.bs"/>
+            <column name="SECTION" value="##label.sectionpresence"/>
+            <column name="DISPLAYNAME" value="##label.displayname112"/>
+            <column name="DESCRIPTION" value="##label.description112"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/dailyschedulereport.bs"/>
+            <column name="SECTION" value="##label.sectionpresence"/>
+            <column name="DISPLAYNAME" value="##label.displayname113"/>
+            <column name="DESCRIPTION" value="##label.description113"/>
+        </insert>		
+		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/performancereport.bs"/>
+            <column name="SECTION" value="##label.sectionpresence"/>
+            <column name="DISPLAYNAME" value="##label.displayname114"/>
+            <column name="DESCRIPTION" value="##label.description114"/>
+        </insert>
+        
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="kitchen.DeleteLine"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname115"/>
+            <column name="DESCRIPTION" value="##label.description115"/>
+        </insert>
+          
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.admin.RolesPanelNew"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname116"/>
+            <column name="DESCRIPTION" value="##label.description116"/>
+        </insert>             		        				                                     		        			                                               		           		        		
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Add Pack Products permissions (NV)"> 
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(0) FROM DBPERMISSIONS WHERE DISPLAYNAME='##label.displayname117'  </sqlCheck>
+        </preConditions>
+              
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventoryreorder.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname117"/>
+            <column name="DESCRIPTION" value="##label.description117"/>
+        </insert>
+        
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.ProductPacksPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname118"/>
+            <column name="DESCRIPTION" value="##label.description118"/>
+        </insert>		         
+    </changeSet>   
+    
+    <changeSet author="Chromis POS" id="Add StockChanges to permissions (NV)"> 
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description119'</sqlCheck>
+        </preConditions>   
+            
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.imports.StockChangesPanel"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname119"/>
+            <column name="DESCRIPTION" value="##label.description119"/>
+        </insert>
+        		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/stockchanges.bs"/>
+            <column name="SECTION" value="##label.sectiontools"/>
+            <column name="DISPLAYNAME" value="##label.displayname120"/>
+            <column name="DESCRIPTION" value="##label.description120"/>
+        </insert>		                 
+    </changeSet>    
+    
+    <changeSet author="Chromis POS" id="Add button.refundeditsale to permissions (NV)">  
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(0) FROM DBPERMISSIONS WHERE DISPLAYNAME='##label.displayname121'  </sqlCheck>
+        </preConditions>    
+         
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="button.refundeditsale"/>
+            <column name="SECTION" value="##label.sectionbuttons"/>
+            <column name="DISPLAYNAME" value="##label.displayname121"/>
+            <column name="DESCRIPTION" value="##label.description121"/>
+        </insert>
+    </changeSet>
+     
+    <changeSet author="Chromis POS" id="Add Promotions permissions (NV)">     
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description122'</sqlCheck>
+        </preConditions>   
+                                                                           
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.promotion.PromotionPanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname122"/>
+            <column name="DESCRIPTION" value="##label.description122"/>
+        </insert>
+        		
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="/uk/chromis/reports/promotions.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname123"/>
+            <column name="DESCRIPTION" value="##label.description123"/>
+        </insert> 
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Add PRODUCTS_KIT panel permissions (NV)">    
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description125'</sqlCheck>
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.inventory.RecipePanel"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname125"/>
+            <column name="DESCRIPTION" value="##label.description125"/>
+        </insert> 
+    </changeSet>          
+      
+    <changeSet author="Chromis POS" id="Add Reset pickup ID panel permissions (NV)">     
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DBPERMISSIONS WHERE CLASSNAME = 'uk.chromis.pos.sales.JPanelResetPickupId'</sqlCheck>
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.sales.JPanelResetPickupId"/>
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname126"/>
+            <column name="DESCRIPTION" value="##label.description126"/>
+        </insert> 
+    </changeSet>
+
+
+    <changeSet author="Chromis POS" id="Add Best Sellers Report (NV)">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description127'</sqlCheck>  
+        </preConditions>  
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/bestsellers.bs"/>  
+            <column name="SECTION" value="##label.sectionsales"/>  
+            <column name="DISPLAYNAME" value="##label.displayname127"/>  
+            <column name="DESCRIPTION" value="##label.description127"/>  
+        </insert>		  
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Add new custom payment (NV)">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description129'</sqlCheck>  
+        </preConditions>  
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="payment.custom"/>  
+            <column name="SECTION" value="##label.sectionpayments"/>
+            <column name="DISPLAYNAME" value="##label.displayname129"/>  
+            <column name="DESCRIPTION" value="##label.description129"/>  
+        </insert>
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="refund.custom"/>  
+            <column name="SECTION" value="##label.sectionpayments"/> 
+            <column name="DISPLAYNAME" value="##label.displayname130"/>  
+            <column name="DESCRIPTION" value="##label.description130"/>  
+        </insert> 		  
+    </changeSet>        
+              
+    <changeSet author="Chromis POS" id="Add synchronisation option (NV)">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description131'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.sync.JPanelManualSync"/>  
+            <column name="SECTION" value="##label.sectionsync"/>
+            <column name="DISPLAYNAME" value="##label.displayname131"/>  
+            <column name="DESCRIPTION" value="##label.description131"/>  
+        </insert> 
+        <insert tableName="DBPERMISSIONS">		
+            <column name="CLASSNAME" value="uk.chromis.pos.sync.JPanelSync"/>  
+            <column name="SECTION" value="##label.sectionsync"/>
+            <column name="DISPLAYNAME" value="##label.displayname132"/>  
+            <column name="DESCRIPTION" value="##label.description132"/>  
+        </insert>		  
+    </changeSet>     
+    
+    <changeSet author="Chromis POS" id="Add unlock tables option (NV)">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description133'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.sales.JPanelUnlockTables"/>  
+            <column name="SECTION" value="##label.sectionmaintenance"/>
+            <column name="DISPLAYNAME" value="##label.displayname133"/>  
+            <column name="DESCRIPTION" value="##label.description133"/>  
+        </insert> 		  
+    </changeSet> 
+    
+ 
+    <changeSet author="Chromis POS" id="drop top10salesMysql (NV)">   
+        <sql> DELETE FROM DBPERMISSIONS WHERE DISPLAYNAME ='##label.displayname86'</sql>           
+    </changeSet> 
+    
+    
+    
+    
+</databaseChangeLog>
+

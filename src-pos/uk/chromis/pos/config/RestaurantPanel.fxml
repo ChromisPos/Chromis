@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import uk.chromis.custom.controls.LabeledColourPicker?>
+<?import uk.chromis.custom.switches.ToggleSwitch?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.RestaurantPanelController">
+     <children>
+                                <Separator layoutX="175.0" layoutY="25.0" prefHeight="4.0" prefWidth="580.0" />
+                                <Label fx:id="sectionLabel" layoutX="51.0" layoutY="17.0" prefHeight="17.0" prefWidth="120.0" text="display">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Separator layoutX="17.0" layoutY="25.0" prefHeight="0.0" prefWidth="28.0" />
+      <ToggleSwitch fx:id="tsWaiterDetails" layoutX="400.0" layoutY="75.0" />
+      <ToggleSwitch fx:id="tsCustomerDetails" layoutX="400.0" layoutY="47.0" />
+      <ToggleSwitch fx:id="tsTransparent" layoutX="400.0" layoutY="135.0" />
+      <ToggleSwitch fx:id="tsTableRefresh" layoutX="400.0" layoutY="165.0" />
+      <ToggleSwitch fx:id="tsTableRelocation" layoutX="400.0" layoutY="195.0" />
+      <LabeledColourPicker fx:id="cpCustomerColour" layoutX="17.0" layoutY="40.0" prefHeight="25.0" />
+      <LabeledColourPicker fx:id="cpWaiterColour" layoutX="17.0" layoutY="70.0" />
+      <LabeledColourPicker fx:id="cpTableColour" layoutX="17.0" layoutY="100.0" />
+                            </children>
+</AnchorPane>

@@ -1,0 +1,55 @@
+// script.linediscount
+//
+//   Chromis POS - The New Face of Open Source POS 
+//   Copyright (c) (c) 2015-2016Chromis , previous uniCenta & Openbravo POS works   
+//
+//   This file is part of chromis oPOS
+//
+//   Chromis POS is free software: you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation, either version 3 of the License, or
+//   (at your option) any later version.
+//
+//   Chromis POS is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>.
+// **************************************************************************
+// This script applies UsersInput %Discount for the Item Line value
+// To use in the sales screen: Highlight the line you want to discount
+// Then Tap in the %Discount amount and touch the % button
+
+import uk.chromis.format.Formats;
+import uk.chromis.pos.ticket.TicketLineInfo;
+import uk.chromis.pos.ticket.TicketProductInfo;
+
+discountrate = 1 - (sales.getInputValue())/100;
+
+index = sales.getSelectedIndex();
+
+if (index >= 0) {
+    if (ticket.getTotal() > 0.0 && discountrate > 0.0) {
+        sdiscount = Formats.PERCENT.formatValue((1-discountrate));
+   
+            line = ticket.getLine(index);
+
+            if (line.canDiscount()){
+                    ticket.setLine(index,
+            new TicketLineInfo(
+                    line.getProductID(),
+                    line.getProductName() + " - " + sdiscount,
+                    line.getProductTaxCategoryID(),
+                    line.getMultiply(),
+                    (double)Math.rint(line.getPrice() * discountrate *100) /100d,
+                    line.getTaxInfo())); 
+                    line.setDiscounted("yes");
+      }
+    } else {
+         java.awt.Toolkit.getDefaultToolkit().beep();
+    }
+} else {
+    java.awt.Toolkit.getDefaultToolkit().beep();
+}

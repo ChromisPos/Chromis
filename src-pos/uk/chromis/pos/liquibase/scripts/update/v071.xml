@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+    
+    <!-- Ensures that all databases versions are the same ready for next stage of update process -->
+
+    <changeSet author="Chromis POS" id="V0.70 indicator"/>   
+       
+    <changeSet author="Chromis POS" id="Remove pre indicator">   
+        <sql>DELETE FROM DATABASECHANGELOG WHERE ID = 'New Database'</sql>
+    </changeSet>
+    
+    <changeSet author="Chromis POS" id="Add new version check value to App table">   
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="VERSIONINT" tableName="APPLICATIONS"/>
+            </not>
+        </preConditions>  
+        <addColumn tableName="APPLICATIONS">
+            <column name="VERSIONINT" type="int" defaultValueNumeric="20161015"/>                                                                     
+        </addColumn>  
+    </changeSet>
+
+
+
+
+    <changeSet author="Chromis POS" id="remove on update if set" dbms="mysql" >
+        <sql> ALTER TABLE CLOSEDCASH CHANGE `DATESTART` `DATESTART` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP</sql>               
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create new Tax rate and Tax amount colums in ticketlines">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="TAXRATE" tableName="TICKETLINES"/>
+            </not>
+        </preConditions>
+        
+        <addColumn tableName="TICKETLINES">           
+            <column name="TAXRATE" type="double precision" defaultValueNumeric="0.0" />   
+            <column name="TAXAMOUNT" type="double precision" defaultValueNumeric="0.0"/>                     
+        </addColumn> 
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create commission column in products table">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="COMMISSION" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+        
+        <addColumn tableName="PRODUCTS">           
+            <column name="COMMISSION" type="double precision" defaultValueNumeric="0.0" />   
+                              
+        </addColumn> 
+    </changeSet>          
+          
+    <changeSet author="Chromis POS" id="Create commision column in ticketlines table">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="COMMISSION" tableName="TICKETLINES"/>
+            </not>
+        </preConditions>
+        
+        <addColumn tableName="TICKETLINES">           
+            <column name="COMMISSION" type="double precision" defaultValueNumeric="0.0" />                                 
+        </addColumn> 
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create SITES table (tables.xml) if required (NV)" >    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="SITES"/>
+            </not>
+        </preConditions> 
+          
+        <createTable tableName="SITES">
+            <column name="GUID" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>             
+            <column name="NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>          
+            <column name="ADDRESS1" type="varchar(100)" />            
+            <column name="ADDRESS2" type="varchar(100)" />
+            <column name="CITY" type="varchar(50)" />
+            <column name="POSTCODE" type="varchar(50)" />                
+            <column name="TAXCODE" type="varchar(50)" />            
+            <column name="TELEPHONE" type="varchar(50)" />   
+            <column name="SITEACTIVE" type="${boolean.type}" defaultValueBoolean="true" >
+                <constraints nullable="false"/>
+            </column>                 
+            <column name="SITEURL" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SITEUSERNAME" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>      
+            <column name="SITEPASSWORD" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>  
+            <column name="DATATRANSFERED" type="${boolean.type}" defaultValueBoolean="false" >
+                <constraints nullable="false"/>
+            </column>    
+        </createTable>   
+        
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>     
+    </changeSet>           
+    
+    <changeSet author="Chromis POS" id="Create Stockadjust Table (MS)" dbms="mysql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="STOCKADJUST"/>
+            </not>
+        </preConditions>
+        
+        <createTable tableName="STOCKADJUST">
+            <column name="ID" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>                                  
+            <column name="PRODUCT" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>   
+            <column name="LOCATION" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>      
+            <column name="ATTRIBUTESETINSTANCE_ID" type="varchar(255)" />
+            <column name="UNITS" type="double precision" defaultValueNumeric="0.0"/>
+            <column name="PROCESSED" type="${boolean.type}" defaultValueBoolean="false" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="SITEPROCESSED" type="${boolean.type}" defaultValueBoolean="false" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="CHANGEDATE" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP" />
+            <column name="SITEGUID" type="varchar(50)" />
+            <column name="SFLAG" type="${boolean.type}" defaultValueBoolean="true" >
+                <constraints nullable="false"/>
+            </column>   
+        </createTable>  
+        
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>       
+    </changeSet>  
+            
+    <changeSet author="Chromis POS" id="Create crosssites Table (MS)" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="XSITELIST"/>
+            </not>
+        </preConditions>
+        
+        <createTable tableName="XSITELIST">
+            <column name="GUID" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>             
+            <column name="NAME" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>                            
+            <column name="SITEURL" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SITEUSERNAME" type="varchar(50)"/>     
+            <column name="SITEPASSWORD" type="varchar(150)"/>    
+        </createTable>   
+        
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>        
+    </changeSet> 
+                
+    <changeSet author="Chromis POS" id="Create csv profile atble (MS)" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="CSVPROFILES"/>
+            </not>
+        </preConditions>
+        
+        <createTable tableName="CSVPROFILES">
+            <column name="NAME" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>             
+            <column name="DETAILS" type="${blob.type}"/>
+        </createTable>   
+        
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>        
+    </changeSet>         
+    
+    
+    <changeSet author="Chromis POS" id="Create suppliers table (MS)" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="SUPPLIERS"/>
+            </not>
+        </preConditions>
+        
+        <createTable tableName="SUPPLIERS">
+            <column name="ID" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>                        
+            <column name="SUPPLIERNAME" type="varchar(50)"/>
+            <column name="ACCOUNTNUMBER" type="varchar(20)"/>
+            <column name="ADDRESS" type="varchar(50)"/>
+            <column name="ADDRESS2" type="varchar(50)"/>
+            <column name="CITY" type="varchar(50)"/>
+            <column name="POSTCODE" type="varchar(10)"/>
+            <column name="EMAIL" type="varchar(50)"/>
+            <column name="PHONE" type="varchar(20)"/>
+            <column name="CREDITLIMIT" type="double precision" defaultValueNumeric="0.0"/>
+            <column name="CREDITTERMS" type="varchar(75)"/>            
+            <column name="ACTIVE" type="${boolean.type}" defaultValueBoolean="true"/>
+            <column name="CONTACT" type="varchar(50)"/>
+            <column name="NOTES" type="varchar(255)"/>             
+            <column name="SFLAG" type="${boolean.type}" defaultValueBoolean="true"/>              
+            <column name="SITEGUID" type="varchar(50)" >
+                <constraints nullable="false" />            
+            </column>
+        </createTable>                
+       
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>           
+    </changeSet>     
+  
+    <changeSet author="Chromis POS" id="Add supplier column to Product table" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="SUPPLIER" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+        
+        <addColumn tableName="PRODUCTS">           
+            <column name="SUPPLIER" type="varchar(50)" />                                 
+        </addColumn>  
+    </changeSet>
+  
+    <changeSet author="Chromis POS" id="Create suppliers Index, Primary Key and Foreign Key to Product" >
+        <sql>ALTER TABLE SUPPLIERS ADD PRIMARY KEY (ID,SITEGUID)</sql> 
+        <sql>ALTER TABLE PRODUCTS ADD CONSTRAINT SUPPLIERS_FK_1 FOREIGN KEY (SUPPLIER,SITEGUID) REFERENCES SUPPLIERS(ID,SITEGUID)</sql>  
+    </changeSet> 
+              
+    <changeSet author="Chromis POS" id="Set suppliers siteguid default mysql" dbms="mysql" >
+        <customChange class="uk.chromis.pos.dbmanager.SetDefaultSiteGUID" >           
+            <param name="table" value="SUPPLIERS" /> 
+            <param name="dbtype" value="MySQL" /> 
+        </customChange>        
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Set suppliers siteguid default" dbms="derby, postgresql">
+        <customChange class="uk.chromis.pos.dbmanager.SetDefaultSiteGUID" >  
+            <param name="table" value="SUPPLIERS" />          
+            <param name="dbtype" value="Derby" /> 
+        </customChange>       
+    </changeSet> 
+       
+   
+    
+    <changeSet author="Chromis POS" id="Add script.CustomCodeProcessor">  
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM RESOURCES WHERE NAME = 'script.CustomBarcodeHandler'</sqlCheck>  
+        </preConditions>   
+  
+        <insert tableName="RESOURCES">  
+            <column name="ID" value="378100-cb1"/>  
+            <column name="NAME" value="script.CustomCodeProcessor"/>  
+            <column name="RESTYPE" valueNumeric="0"/>  
+            <column name="CONTENT" valueBlobResource="/uk/chromis/pos/templates/script.CustomCodeProcessor.bsh"/>  
+        </insert>  
+    </changeSet>   
+        
+    <changeSet author="Chromis POS" id="Create new button entry table">  
+        <preConditions onFail="MARK_RAN">  
+            <not>
+                <tableExists tableName="NEWBUTTON"/>  
+            </not>
+        </preConditions>   
+  
+        <createTable tableName="NEWBUTTON">
+            <column name="ENTRY" type="varchar(250)"/>                           
+        </createTable> 
+    </changeSet>            
+    
+    <changeSet author="Chromis POS" id="Add CustomCode Processor button">          
+        <sql> INSERT INTO NEWBUTTON (ENTRY) VALUES ('!!Custom scan code processor script')</sql>                                    
+        <sql> INSERT INTO NEWBUTTON (ENTRY) VALUES ('event key="script.CustomCodeProcessor" code="script.CustomCodeProcessor"')</sql>        
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Create current product sales"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/currentproductsales.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/bestsellers.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png" />
+            <column name="TITLE" value="Menu.CurrentSales" />   
+        </insert>                                          
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create product sales ean"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/closedproducts_ean.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/closedproducts_1.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png" />
+            <column name="TITLE" value="Menu.ClosedProductsEAN" />   
+        </insert>                                          
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create stock inventory by ean"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/inventoryb_ean.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/inventoryb.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png" />
+            <column name="TITLE" value="Menu.InventoryEAN" />   
+        </insert>                                          
+    </changeSet>
+    
+    <changeSet author="Chromis POS" id="Create sales commission report"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/commissionreport.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/bestsellers.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png" />
+            <column name="TITLE" value="Menu.Commission" />   
+        </insert>                                          
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create employee timesheet report"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/employeetimesheet.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/performancereport.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png" />
+            <column name="TITLE" value="Menu.EmployeeTimeSheet" />   
+        </insert>                                          
+    </changeSet>   
+       
+    <changeSet author="Chromis POS" id="Update admin permissions v0.58.1">   
+        <update tableName="ROLES">           
+            <column name="PERMISSIONS" valueBlobResource="/uk/chromis/pos/templates/Role.Administrator.xml"/>   
+            <where>ID='0'</where>         
+        </update> 
+    </changeSet>    
+       
+    <changeSet author="Chromis POS" id="Populate Sites tables with site details (New Database)"  >    
+        <customChange class="uk.chromis.pos.util.PopSitesTable" />                                       
+    </changeSet>   
+    
+    <changeSet author="Chromis POS" id="Add curent day sales report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description134'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/currentproductsales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname134"/>  
+            <column name="DESCRIPTION" value="##label.description134"/>  
+        </insert> 		  
+    </changeSet>     
+ 
+    <changeSet author="Chromis POS" id="Add sales commission report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description135'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/commissionreport.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname135"/>  
+            <column name="DESCRIPTION" value="##label.description135"/>  
+        </insert> 		  
+    </changeSet> 
+ 
+    <changeSet author="Chromis POS" id="Add supplier management permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description138'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.forms.MenuSuppliers"/>
+            <column name="SECTION" value="##label.sectionadmin"/>
+            <column name="DISPLAYNAME" value="##label.displayname138"/>
+            <column name="DESCRIPTION" value="##label.description138"/>  
+        </insert> 		  
+    </changeSet>
+ 
+    <changeSet author="Chromis POS" id="Grant access to suppliers menu">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE CLASSNAME = 'uk.chromis.pos.suppliers.SuppliersPanel'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="uk.chromis.pos.suppliers.SuppliersPanel"/>
+            <column name="SECTION" value="##label.sectionsuppliers"/>
+            <column name="DISPLAYNAME" value="##label.displayname139"/>
+            <column name="DESCRIPTION" value="##label.description139"/>  
+        </insert> 		  
+    </changeSet>
+  
+    <changeSet author="Chromis POS" id="Add Inverntory EAN (NV)">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description136' OR CLASSNAME = '/uk/chromis/reports/inventoryb_ean.bs'</sqlCheck>  
+        </preConditions>  
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/inventoryb_ean.bs"/>  
+            <column name="SECTION" value="##label.sectionstock"/>  
+            <column name="DISPLAYNAME" value="##label.displayname136"/>  
+            <column name="DESCRIPTION" value="##label.description136"/>  
+        </insert>		  
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Add Stock Value Report (NV)">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description137' </sqlCheck>  
+        </preConditions>  
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/stockvalue.bs"/>  
+            <column name="SECTION" value="##label.sectionstock"/>  
+            <column name="DISPLAYNAME" value="##label.displayname137"/>  
+            <column name="DESCRIPTION" value="##label.description137"/>  
+        </insert>		  
+    </changeSet> 
+ 
+    <changeSet author="Chromis POS" id="Add suppliers report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description140'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/suppliers.bs"/>
+            <column name="SECTION" value="##label.sectionsuppliers"/>
+            <column name="DISPLAYNAME" value="##label.displayname140"/>
+            <column name="DESCRIPTION" value="##label.description140"/>  
+        </insert> 		  
+    </changeSet>
+ 
+ 
+    <changeSet author="Chromis POS" id="Add supplier products report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description141'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/supplierproducts.bs"/>
+            <column name="SECTION" value="##label.sectionsuppliers"/>
+            <column name="DISPLAYNAME" value="##label.displayname141"/>
+            <column name="DESCRIPTION" value="##label.description141"/>  
+        </insert> 		  
+    </changeSet>
+
+         <changeSet author="Chromis POS" id="Add employee Timesheet report permissions">      
+            <preConditions onFail="MARK_RAN">  
+                <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description142'</sqlCheck>  
+            </preConditions> 
+            <insert tableName="DBPERMISSIONS">
+                <column name="CLASSNAME" value="/uk/chromis/reports/employeetimesheet.bs"/>
+                <column name="SECTION" value="##label.sectionpresence"/>
+                <column name="DISPLAYNAME" value="##label.displayname142"/>
+                <column name="DESCRIPTION" value="##label.description142"/>  
+            </insert> 		  
+        </changeSet>
+
+ 
+    <changeSet author="Chromis POS" id="Add employee closedproducts_ean report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE CLASSNAME = '/uk/chromis/reports/closedproducts_ean.bs'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/closedproducts_ean.bs"/>
+            <column name="SECTION" value="##label.sectionstock"/>
+            <column name="DISPLAYNAME" value="##label.displayname143"/>
+            <column name="DESCRIPTION" value="##label.description143"/>  
+        </insert> 		  
+    </changeSet>          
+   
+    <changeSet author="Chromis POS" id="Refactor default values ready for sync existing database (NV)"  >                         
+        <customChange class="uk.chromis.pos.liquibase.scripts.create.UpdateDefaults" />                                       
+    </changeSet>
+                            
+    <changeSet author="Chromis POS" id="change breaks-visible default">                
+        <addDefaultValue tableName="BREAKS"
+                         columnName="VISIBLE"
+                         columnDataType="boolean"
+                         defaultValueBoolean="true"/>        
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change customers-discount default">                
+        <addDefaultValue tableName="CUSTOMERS"
+                         columnName="DISCOUNT"
+                         columnDataType="double precision"
+                         defaultValueNumeric="0"/>        
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change products-iscatalog(m) default" dbms="mysql">                
+        <sql>ALTER TABLE PRODUCTS MODIFY ISCATALOG bit NOT NULL DEFAULT 1</sql>                    
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change products-iscatalog(d) default" dbms="derby">                
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISCATALOG NOT NULL</sql> 
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISCATALOG DEFAULT true</sql>               
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change products-iscatalog(p) default" dbms="postgresql">                
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISCATALOG SET NOT NULL</sql> 
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISCATALOG SET DEFAULT true </sql>               
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change products-ispack(m) default" dbms="mysql">                
+        <sql>ALTER TABLE PRODUCTS MODIFY ISPACK bit NOT NULL DEFAULT 0</sql>                    
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change products-ispack(d) default" dbms="derby">                
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISPACK NOT NULL</sql> 
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISPACK DEFAULT false</sql>               
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="change products-ispack(p) default" dbms="postgresql">                
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISPACK SET NOT NULL</sql> 
+        <sql>ALTER TABLE PRODUCTS ALTER COLUMN ISPACK SET DEFAULT false </sql>               
+    </changeSet>
+  
+    <changeSet author="Chromis POS" id="dropTable - hversions">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="HVERSIONS"/>
+        </preConditions>
+        
+        <dropTable tableName="HVERSIONS"/>
+    </changeSet>
+ 
+    <changeSet author="Chromis POS" id="Update to Multi Site v0.80">    
+        <update tableName="APPLICATIONS">
+            <column name="VERSION" value="0.80"/>   
+            <column name="VERSIONINT" valueNumeric="20170729"/>         
+        </update>  
+    </changeSet>   
+    
+    
+</databaseChangeLog>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import uk.chromis.custom.switches.ToggleSwitch?>
+
+<fx:root id="Pane" prefHeight="166.0" prefWidth="421.0" type="Pane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lbcMercantCode" layoutX="20.0" layoutY="15.0" prefHeight="25.0" prefWidth="100.0" text="Label" />
+      <Label fx:id="lblTerminal" layoutX="20.0" layoutY="45.0" prefHeight="25.0" prefWidth="100.0" text="Label" />
+      <Label fx:id="lblCommerceSign" layoutX="20.0" layoutY="75.0" prefHeight="25.0" prefWidth="100.0" text="Label" />
+      <TextField fx:id="txtCommerceCode" layoutX="136.0" layoutY="15.0" prefHeight="25.0" prefWidth="251.0" />
+      <TextField fx:id="txtCommerceTerminal" layoutX="136.0" layoutY="45.0" prefHeight="25.0" prefWidth="251.0" />
+      <ToggleSwitch fx:id="sha" layoutX="136.0" layoutY="115.0" prefHeight="18.0" prefWidth="62.0" />
+      <PasswordField fx:id="txtCommerceSign" layoutX="136.0" layoutY="75.0" prefHeight="25.0" prefWidth="251.0" />
+      <Label fx:id="lblSHA" layoutX="20.0" layoutY="113.0" prefHeight="25.0" prefWidth="100.0" text="Label" />
+   </children>
+</fx:root>

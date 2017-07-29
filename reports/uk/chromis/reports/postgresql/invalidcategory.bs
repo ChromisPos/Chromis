@@ -1,0 +1,44 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.InvalidCategory");
+report.setReport("/uk/chromis/reports/postgresql/invalidcategory");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT CSVIMPORT.REFERENCE, CSVIMPORT.CODE,"+
+        "CSVIMPORT.NAME, CSVIMPORT.ROWNUMBER, CSVIMPORT.CSVERROR,"+ 
+        "CSVIMPORT.CATEGORY FROM CSVIMPORT WHERE (CSVERROR = 'Bad category details')");
+
+
+
+report.addField("reference", uk.chromis.data.loader.Datas.STRING);
+report.addField("code", uk.chromis.data.loader.Datas.STRING);
+report.addField("name", uk.chromis.data.loader.Datas.STRING);
+report.addField("rownumber", uk.chromis.data.loader.Datas.STRING);
+report.addField("csverror", uk.chromis.data.loader.Datas.STRING);
+report.addField("category", uk.chromis.data.loader.Datas.STRING);
+
+report;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!-- 
+        Add database defaults after cleandb
+    -->
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+    
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+
+    
+    
+    <!--
+           Populate the new tables with any default data that is required          
+    -->                              
+          
+    <changeSet author="Chromis POS" id="Insert into BREAKS Table (New Database)"> 
+        <insert tableName="BREAKS">
+            <column name="ID" value="0"/>
+            <column name="NAME" value="Lunch Break"/>
+            <column name="VISIBLE" valueBoolean="true"/>
+        </insert>
+        <insert tableName="BREAKS">
+            <column name="ID" value="1"/>
+            <column name="NAME" value="Tea Break"/>
+            <column name="VISIBLE" valueBoolean="true"/>
+        </insert>
+        <insert tableName="BREAKS">
+            <column name="ID" value="2"/>
+            <column name="NAME" value="MID Break"/>
+            <column name="VISIBLE" valueBoolean="true"/>
+        </insert>
+    </changeSet>  
+                        
+</databaseChangeLog>
+

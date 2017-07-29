@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!-- 
+        This is the base liquibase xml for a blank database used by migrate routine
+    -->
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+ 
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+
+    <changeSet author="Chromis POS" id="Create TICKETSNUM Sequence (Migrate-cleandb function)" dbms="postgresql">
+        <sql>CREATE SEQUENCE TICKETSNUM START WITH 1</sql>
+        <sql>CREATE SEQUENCE TICKETSNUM_REFUND START WITH 1</sql>
+        <sql>CREATE SEQUENCE TICKETSNUM_PAYMENT START WITH 1</sql>
+        <sql>CREATE SEQUENCE PICKUP_NUMBER START WITH 1</sql>
+        <sql>CREATE SEQUENCE TICKETSNUM_INVOICE START WITH 1</sql> 
+    </changeSet>
+	
+    <changeSet author="Chromis POS" id="Create TICKETSNUM Sequence (Migrate-cleandb function)" dbms="derby">
+        <sql>CREATE TABLE TICKETSNUM (ID INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1));
+            INSERT INTO TICKETSNUM VALUES (DEFAULT)</sql>
+        <sql>CREATE TABLE TICKETSNUM_REFUND (ID INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1));
+            INSERT INTO TICKETSNUM_REFUND VALUES (DEFAULT)</sql>
+        <sql>CREATE TABLE TICKETSNUM_PAYMENT (ID INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1));
+            INSERT INTO TICKETSNUM_PAYMENT VALUES (DEFAULT)</sql>
+        <sql>CREATE TABLE PICKUP_NUMBER (ID INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1));
+            INSERT INTO PICKUP_NUMBER VALUES (DEFAULT)</sql>
+        <sql>CREATE TABLE TICKETSNUM_INVOICE (ID INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1));
+            INSERT INTO TICKETSNUM_INVOICE VALUES (DEFAULT)</sql>
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Create TICKETSNUM Sequence (Migrate-cleandb function)" dbms="mysql">
+        <sql>CREATE TABLE TICKETSNUM (ID INTEGER DEFAULT 0 NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            INSERT INTO TICKETSNUM VALUES(1)</sql>
+        <sql>CREATE TABLE TICKETSNUM_REFUND (ID INTEGER DEFAULT 0 NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            INSERT INTO TICKETSNUM_REFUND VALUES(1)</sql>	
+        <sql>CREATE TABLE TICKETSNUM_PAYMENT (ID INTEGER DEFAULT 0 NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            INSERT INTO TICKETSNUM_PAYMENT VALUES(1)</sql>
+        <sql>CREATE TABLE PICKUP_NUMBER (ID INTEGER DEFAULT 0 NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            INSERT INTO PICKUP_NUMBER VALUES(1)</sql>	
+        <sql>CREATE TABLE TICKETSNUM_INVOICE (ID INTEGER DEFAULT 0 NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+            INSERT INTO TICKETSNUM_INVOICE VALUES(1)</sql>			
+    </changeSet>
+                                 	 
+</databaseChangeLog>
+

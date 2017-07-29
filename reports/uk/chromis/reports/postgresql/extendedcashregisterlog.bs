@@ -1,0 +1,61 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.ExtendedCashRegisterLog");
+report.setReport("/uk/chromis/reports/postgresql/extendedcashregisterlog");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT " +
+                "TICKETS.TICKETID AS TICKET_NO, " +
+                "RECEIPTS.DATENEW AS TICKET_DATE, " +
+				"PAYMENTS.TOTAL AS MONEY, " +
+				"CUSTOMERS.NAME AS CUSTOMER, " +
+				"PAYMENTS.PAYMENT AS PAYMENT " +
+                "FROM RECEIPTS " +
+                "LEFT JOIN TICKETS ON RECEIPTS.ID = TICKETS.ID " +
+				"LEFT JOIN PAYMENTS ON RECEIPTS.ID = PAYMENTS.RECEIPT " +
+				"LEFT JOIN CUSTOMERS ON TICKETS.CUSTOMER = CUSTOMERS.ID " +
+                "WHERE ?(QBF_FILTER) " +
+                "ORDER BY RECEIPTS.DATENEW");
+
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.SITEGUID");
+
+paramdates = new uk.chromis.pos.reports.JParamsDatesInterval();
+
+paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());
+paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
+
+report.addQBFFilter(paramdates);
+
+report.addField("TICKET_NO", uk.chromis.data.loader.Datas.STRING);
+report.addField("TICKET_DATE", uk.chromis.data.loader.Datas.TIMESTAMP);
+report.addField("MONEY", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("CUSTOMER", uk.chromis.data.loader.Datas.STRING);
+report.addField("PAYMENT", uk.chromis.data.loader.Datas.STRING);
+
+return report;

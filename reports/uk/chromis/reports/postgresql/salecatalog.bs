@@ -1,0 +1,65 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.SaleCatalog");
+report.setReport("/uk/chromis/reports/postgresql/salecatalog");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence(
+"SELECT " +
+"  PRODUCTS.ID, " +
+"  PRODUCTS.REFERENCE, " +
+"  PRODUCTS.CODE, " +
+"  PRODUCTS.NAME, " +
+"  PRODUCTS.PRICESELL, " +
+"  PRODUCTS.IMAGE, " +
+"  TC.ID AS TAXCAT, " +
+"  CATEGORIES.NAME AS CATEGORYNAME " +
+"FROM " +
+"  PRODUCTS LEFT OUTER JOIN CATEGORIES ON " +
+"  PRODUCTS.CATEGORY = CATEGORIES.ID LEFT OUTER JOIN TAXCATEGORIES TC ON " +
+"  PRODUCTS.TAXCAT = TC.ID " +
+"WHERE PRODUCTS.ISCATALOG = TRUE AND ?(QBF_FILTER) " +
+"ORDER BY CATEGORIES.NAME, PRODUCTS.NAME");
+report.addParameter("PRODUCTS.NAME");
+report.addParameter("PRODUCTS.PRICEBUY");
+report.addParameter("PRODUCTS.PRICESELL");
+report.addParameter("PRODUCTS.CATEGORY");
+report.addParameter("PRODUCTS.CODE");
+report.addParameter("PRODUCTS.SITEGUID");
+
+report.addQBFFilter(new uk.chromis.pos.ticket.ProductFilterReport());
+
+report.addField("ID", uk.chromis.data.loader.Datas.STRING);
+report.addField("REFERENCE", uk.chromis.data.loader.Datas.STRING);
+report.addField("CODE", uk.chromis.data.loader.Datas.STRING);
+report.addField("NAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("PRICESELL", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("IMAGE", uk.chromis.data.loader.Datas.IMAGE);
+report.addField("TAXCAT", uk.chromis.data.loader.Datas.STRING);
+report.addField("CATEGORYNAME", uk.chromis.data.loader.Datas.STRING);
+
+report;
+

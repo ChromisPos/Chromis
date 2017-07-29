@@ -1,0 +1,21 @@
+// Discounts when making multiple purchases across a range of products
+// Set price for a number of items. i.e. 2 for £1, 3 for £4.50
+//
+
+// START OF USER EDITABLE VARIABLES
+
+// For every 'QTY_FOR_EVERY' products you buy, you get 'QTY_DISCOUNTED' at
+// PERCENT_DISCOUNT - cheapest products are discounted
+Double QTY_FOR_EVERY = 2.0;
+Double SET_PRICE = 1.0;
+Boolean WHOLE_PRODUCTS_ONLY = true;
+
+// END OF USER EDITABLE VARIABLES
+
+    support.UpdateFixedPriceGroup( ticket,
+                promotion, "  *" + promotion.getName(),
+                QTY_FOR_EVERY, SET_PRICE,
+                WHOLE_PRODUCTS_ONLY );
+
+
+

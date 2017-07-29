@@ -1,0 +1,95 @@
+// script.setPerson
+// Allows current Logged In User to another User account
+//
+//   Chromis POS - The New Face of Open Source POS 
+//   Copyright (c) (c) 2015-2016Chromis , previous uniCenta & Openbravo POS works   
+//
+//   This file is part of chromis oPOS
+//
+//   Chromis POS is free software: you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation, either version 3 of the License, or
+//   (at your option) any later version.
+//
+//   Chromis POS is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>.
+// **************************************************************************
+
+/***
+ * Sample Scan Code Processor script
+ *    Partial Sample of GS1 - 01 product barcode processing
+ * 
+ * Notes: 
+ * 
+ * - sCode holds scan code to be processed
+ * - returns new TicketLineInfo class with details of product 
+ *   when matching product is found with custom attributes such as expiry date.
+ *
+ * Following are sample scan codes that will work with this script :
+ *
+ * - scan code 0112345678123450 will bring up product with barcode 1234567812345 
+ * - scan code 011234567812345017171225 will bring up product
+ *     with barcode 1234567812345 and set attribute product.expiry="171225" 
+ * - scan code 011234567812345010A12345678 will bring up product
+ *     with barcode 1234567812345 and set attribute product.lot="A12345678"
+ *
+ */
+
+import uk.chromis.pos.ticket.ProductInfoExt;
+import uk.chromis.pos.ticket.TaxInfo;
+import uk.chromis.pos.ticket.TicketLineInfo;
+
+TicketLineInfo newLine;
+Properties attributes;
+ProductInfoExt oProduct = null;
+
+// Partial Sample of GS1 - 01 product processing
+if(sCode.startsWith("01")&&(sCode.length()>15)) {
+
+	String productCode = sCode.substring(2,15);
+	    
+	oProduct = dlSales.getProductInfoByCode(productCode);
+	if(oProduct==null)
+		return;
+	TaxInfo tax = taxeslogic.getTaxInfo(oProduct.getTaxCategoryID(), ticket.getCustomer());
+	attributes = oProduct.getProperties();
+	
+	// if product found search of other specs and note it on receipt
+	if(sCode.length()>16) {
+		String options = sCode.substring(16);
+		String attrib;
+		
+		while(options.length()>2) {
+			attrib="";
+			
+			bcode = options.substring(0,2);
+			switch(bcode) {
+				case "10":// Search for Lot#
+					attrib=options.substring(2,(options.length()>22)?22:options.length());
+					attributes.setProperty("product.lot",attrib);
+					options=options.substring(2+attrib.length());
+					break;
+				case "17":// Search for Expiry
+					attrib=options.substring(2,8);
+					attributes.setProperty("product.expiry",attrib);
+					options=options.substring(2+attrib.length());
+					break;
+				case "21":// Search for Serial#
+					attrib=options.substring(2,(options.length()>22)?22:options.length());
+					attributes.setProperty("product.serial",attrib);
+					options=options.substring(2+attrib.length());
+					break;
+				// and so on ...
+				default:
+			}
+			if(attrib.length()==0)
+				options="";
+		}
+	}
+	return new TicketLineInfo(oProduct,oProduct.getPriceSell(),tax,attributes);
+}
