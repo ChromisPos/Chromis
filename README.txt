@@ -1,3 +1,266 @@
+Always back up your existing database before upgrading to the latest version
+*********************************************************************************************************
+29th July
+v0.80
+
+Bugs found in beta resolved
+Started tidy up process of liquibase scripts responsible for database creation and upgrade
+
+Depending upon the size of your exixting database, the upgrade can take a while, as this upgrade recreats
+all the primary key, foreign keys and indexes
+
+New Git repository created for use from this release. Check source forge for links
+
+*********************************************************************************************************
+17th July 2017
+v0.72 beta
+
+Resolved issues reported from last beta
+
+Added hourly sales to close cash report
+Fixed create Clean database issue
+Update Liqibase scripts to support easier build and update routines
+
+*********************************************************************************************************
+24th June 2017
+v0.71 beta
+
+Fixed some bugs in dbmanager section
+Fixed some bugs in configuration panels
+Fixed issue causing configuration panel to throw error
+Fixed Issue with reports not working
+Fixed employee timesheet report
+Changes to sync code ready for release
+Preperations made ready for changes to liquibase & upgrade process
+Added fixes from  TJMChan
+Remove Administrator.bat - whilst further dev is done to it
+
+Bug #122 fixed - product order in new sales screen
+Bug #118 fixed sale profit report
+
+Started test on Mantis bug reporting, to enable more robust bug tracking (currently invitation only)
+
+*********************************************************************************************************
+10th June 2017
+v0.70 beta
+
+Implemented new layout screens - Wildfox Coder changes
+Implemented some custom javaFX controls, to reduce dev time
+Started the implementation of Javafx in to the application, the first stage is the configuration panels
+Properties files is now written in alpabetical order, making it easier to read if required.
+Phase 1 of the suppliers panel implemented
+Implemented new editor screen in the resources
+Implemented new db manager screen (javafx based)
+Removed migration tools - this will be come an external application
+
+*********************************************************************************************************
+18th December 2016
+v0.61.4 beta
+
+Simplified product search options from sales panel. removed unnecessary parameters like buy price, sell price
+Bug #87  fixed with the release of the cleaner search function above.
+Bug #109 fixed bug that caused the customer name to be removed if the reset option was used in customer chooser dialog.
+
+
+More refinement to primary and foreign keys for sync code
+
+Fixed issue with receipts where person logged in not being recorded.
+Added new report to allow the products sold to be viewed before the close cash is run.
+Added abilty to save CSV import profile, this saves the users from having to repeat the setup each time the same header 
+format is used.
+
+*********************************************************************************************************
+5th December 2016
+v0.61.2 beta
+
+More changes ready for Sync process.
+New Feature - if using sync user can now check stock at other stores
+Added update sync library v2.1.0
+
+
+New report directory structure.
+	Single reports_messages.properties file replaces multiple files
+	Reports folder contains folder for each supported database type, each contains reports designed to run
+	 against  that db engine
+	Report bs file changed
+		report.setReport("/uk/chromis/reports/mysql/newproducts") must point to the folder for the db engine
+		---------------------------------------------------------------------------------------------------- 
+		if you have custom reports these must be moved the the correct folder for the database type you are
+		using
+		----------------------------------------------------------------------------------------------------
+
+Fixed bug in closed cash where the close date is incorrect.
+Fixed issues with saleprofit report which was caused by ticket line multiple items
+Fixed issues with ean in reports, quick build filters	
+Fixed bug #106, this is caused by Oracles changes to MySQL 5.7.7 and above, removed all default options
+Changed leaves table to not allow data to be saved with blank dates, as part of bug #106 fix
+
+Added new columns to ticketlines table - taxrate & Taxamount, stores the tax details at time of creation
+Added Tony's code to allow new product to be added via stock diary.
+Added ability to allow disocunt onm all imported products using csv
+
+Set information dialog now always centre of application frame
+Set editline dialog now always centre of application frame
+Set product finder dialog now always centre of application frame
+Set attribute dialog now always centre of application frame
+	
+		
+
+*********************************************************************************************************
+19th October 2016
+
+Created new installer to resolve reports issues.
+Fixed database creation issue.
+Added Wildfox coders change for customer debt.
+*********************************************************************************************************
+10th October 2016
+Special Release
+This a special release with hot fix included as part of the install.
+*********************************************************************************************************
+29th June
+Release v0.58.5.3
+
+This is a replacement jar to fix a P1 issue, Bug # 75 
+Rename original file and replace wthe the file in 'HotFix Files' folder.
+*********************************************************************************************************
+26th June
+Release v0.58.5.2
+
+This is a replacement jar to fix a P1 issue, 'Table lock issue resolved' 
+Rename original file and replace wthe the file in 'HotFix Files' folder.
+
+*********************************************************************************************************
+16th June
+Release v0.58.5.1
+
+This is a replacement jar to fix a P1 issue, where a partial cash payment clears entire customers debt. 
+Rename original file and replace wthe the file in 'HotFix Files' folder.
+
+*********************************************************************************************************
+1st June 2016
+Release v0.58.5
+
+-Bug fix customer discount not saving to database
+
+*********************************************************************************************************
+31st May 2016
+Release v0.58.4
+
+-Fixed issue in productfinder (Search) now shows in stock for current till location
+-New Column added for sync process
+-Ability to print the original creator of a ticket if required (printOriginalUser())
+-New sync library added (1.06)
+-Removed line of debug code
+-Added Sync version to info box
+-Removed default shift out of table, not needed
+
+** Always backup previous version before upgrading to the latest version
+
+*********************************************************************************************************
+
+23rd May 2016
+Release v0.58.2-beta
+
+-Bug fix release to fix upgrade issue, when adding primary key to linerremoved table.
+-Service charge not adding to new build now fixed 
+
+*********************************************************************************************************
+15th May 2016
+Release v0.58.1
+
+Release to resolve upgrade bug reported with Derby database
+
+-Fixed bug reported with Derby upgrade
+-Table lock feature added for restaurant operation
+-Add cleandb script, missing from last release
+-Code changes ready for future work, with currency
+-Updated external library
+-Updated some template files
+-Fixed bug in custom barcodes cehcksums
+-Fixed bug in config panels
+
+*********************************************************************************************************
+2nd May 2016
+Release v0.58
+
+This is a full release and not a beta, All upgrades should be from a full version and not a previous beta version
+
+-New Migration Routine (current solution completely re written).
+-Create clean database, users can now create a clean database after testing, ready for production. 
+-Users can now restore any of the supplied resource (xml & txt files), should the menu.root get messed up for example
+-Liquibase script re written to allow easy control in the future.
+-Now only supports Derby, MySQL & PostgreSQL databases
+-Updates to sync function ready for release
+-updates to some external Libraries files - Sync menu is not enabled by default
+-Fixed bug in UPC baecode 1st checksum digit was read as part of the price
+
+- All fixes in previous beta included.
+
+*********************************************************************************************************
+25th April 2016
+Release v0.57.2-beta
+
+-Phase 1 of sync code added to core. 
+-Added maximize window on startup option
+-new payment type added
+-consolidate cash payments into single payment
+-fixed recipes issue
+
+
+*********************************************************************************************************
+17th April 2016
+Release:v0.57
+
+-Changed index to allow multiple products to have the same name, but they must still have unique reference and barcode.
+-Upgraded to Jasper reports from 6.1.1 to 6.2.1
+-Change to locale config for time and date, to allow the user to pick format to be used
+-Updated reports to use time & date format selected
+-Ability to run a repair script if required, by copying file to Chromis folder, prior to conversion or start up
+-Dropped support for oracle and HSQLdb
+
+bug #57 removed ifnull and added coalesce instead
+********************************************************************************************************
+10th April 2016
+Release:v0.57-beta
+
+
+This is a beta version. It is advised not to use in live until results are in from testing.
+It includes some of the features added to github. 
+
+
+Notes:
+Changes to the way the upgrade process works, to reduce the time it takes, with MySQL databases.
+Extra table added ready for sync function.
+Extra column added to large number of tables ready for sync function.
+Restructure of Liquibase changesets.
+New QBF filter, using miglayout used in some reports
+Added CasPDII scales support
+Fixes for kitchen screen supplied by N Deppe
+New version of customised Liquibase jar, fixes index checksum
+Modified Convert app
+Startup & upgrade error handling improved - modified from github code(JB)
+
+
+***********************************************************************************************************
+6th March 2016
+Release:v0.56.2
+
+Bug Fix release
+
+Close cash - Derby fixed
+Changes to convert routine to fix Openbravo bug
+Fixes to upgrade when user has deleted some default items
+Fixes to Datas file repairs report errors
+Fixes to permission messages
+
+
+***********************************************************************************************************
+1st March 2016
+
+Bug fix for recipe\kit products
+
+***********************************************************************************************************
+
 29th February 2016
 Release:v0.56
 
@@ -13,7 +276,6 @@ Added John B change to only load products after filter is applied
 Source code ability to add menu options without removing existing menu.
 Adding fixes from John B for promotions and 
 Added date of birth to customer records
-
 
 ***********************************************************************************************************
 2nd February 2016
