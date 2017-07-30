@@ -356,7 +356,7 @@ public class NewDBController implements Initializable {
                 break;
             case "MySQL":
                 dbURL.setText("jdbc:mysql://localhost:3306/chromispos");
-                dbDriverLibrary.setText(new File(new File(dirname), "lib/mysql-connector-java-5.1.26-bin.jar").getAbsolutePath());
+                dbDriverLibrary.setText(new File(new File(dirname), "lib/mysql-connector-java-5.1.42.jar").getAbsolutePath());
                 dbDriverClass.setText("com.mysql.jdbc.Driver");
                 break;
             case "PostgreSQL":
