@@ -86,7 +86,7 @@ import uk.chromis.pos.scale.DeviceScale;
 import uk.chromis.pos.scanpal2.DeviceScanner;
 import uk.chromis.pos.scanpal2.DeviceScannerFactory;
 import uk.chromis.pos.sync.DataLogicSync;
-import uk.chromis.pos.sync.Sync;
+//import uk.chromis.pos.sync.Sync;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.OSValidator;
 
@@ -997,7 +997,7 @@ public class JRootApp extends JPanel implements AppView {
         model.addRow(new Object[]{"Java Version", System.getProperty("java.version")});
         model.addRow(new Object[]{"Jar MD5", md5});
         model.addRow(new Object[]{"Operating System", System.getProperty("os.name")});
-        model.addRow(new Object[]{"Sync library", Sync.getVersion()});
+       // model.addRow(new Object[]{"Sync library", Sync.getVersion()});
         model.addRow(new Object[]{"Memory Used", ((runtime.totalMemory() - runtime.freeMemory()) / mb) + " MB"});
         model.addRow(new Object[]{"Total Memory Allocated", (runtime.totalMemory() / mb) + " MB"});
         model.addRow(new Object[]{"Max. Memory Available", (runtime.maxMemory() / mb) + " MB"});

@@ -69,7 +69,7 @@ public class UpdateTicketType {
 
         try {
             ClassLoader cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
-            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig2.getInstance2().getProperty("db.driver"), true, cloader).newInstance()));
+            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
             Class.forName(AppConfig.getInstance().getProperty("db.driver"));
             con = DriverManager.getConnection(db_url, db_user, db_password);
             stmt = (Statement) con.createStatement();
