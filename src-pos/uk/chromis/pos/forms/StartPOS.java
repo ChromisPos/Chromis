@@ -22,9 +22,14 @@
  */
 package uk.chromis.pos.forms;
 
+import java.io.File;
 import uk.chromis.pos.dbmanager.RunRepair;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.ServerSocket;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,11 +44,12 @@ import javax.swing.JFrame;
 import uk.chromis.pos.dbmanager.DbManager;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.DbUtils;
+import uk.chromis.pos.util.OSValidator;
 
 public class StartPOS {
 
     private static final Logger logger = Logger.getLogger("uk.chromis.pos.forms.StartPOS");
-    private static ServerSocket serverSocket;    
+    private static ServerSocket serverSocket;
     public static final int INIT_SUCCESS = 0;
     public static final int INIT_FAIL_CONFIG = 1;
     public static final int INIT_FAIL_EXIT = 2;
@@ -64,9 +70,59 @@ public class StartPOS {
     }
 
     public static void main(final String args[]) {
+
         if (!registerApp()) {
             System.out.println("Already Running");
             System.exit(0);
+        } else {
+            //If not already running check and change Icon set if required, 
+            String currentPath;
+            if (OSValidator.isMac()) {
+                try {
+                    currentPath = new File(StartPOS.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).toString();
+                    currentPath = currentPath.replaceAll("/changeiconset.jar", "");
+                } catch (URISyntaxException ex) {
+                    currentPath = "/Applications/chromispos";
+                }
+            } else {
+                currentPath = System.getProperty("user.dir");
+            }
+
+            File newIcons = null;
+            if (AppConfig.getInstance().getProperty("icon.colour") == null) {
+                newIcons = new File(currentPath + "/Icon sets/blue/images.jar");
+            } else {
+                newIcons = new File(currentPath + "/Icon sets/" + AppConfig.getInstance().getProperty("icon.colour") + "/images.jar");
+            }
+            // File icons = new File(currentPath + "/lib");
+            try {
+                URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+                Method m = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+                m.setAccessible(true);
+                m.invoke(urlClassLoader, newIcons.toURI().toURL());
+                String cp = System.getProperty("java.class.path");
+                if (cp != null) {
+                    cp += File.pathSeparatorChar + newIcons.getCanonicalPath();
+                } else {
+                    cp = newIcons.toURI().getPath();
+                }
+                System.setProperty("java.class.path", cp);
+            } catch (Exception ex) {                
+            }
+
+            /*
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException localInterruptedException) {
+            }
+           /*
+            if (AppConfig.getInstance().getProperty("icon.colour") != null) {
+                try {
+                   // FileUtils.copyFileToDirectory(newIcons, icons);
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            }*/
         }
 
         DbUtils.checkJava();
@@ -77,7 +133,6 @@ public class StartPOS {
         }
 
         startApp();
-
 
     }
 
