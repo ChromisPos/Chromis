@@ -92,39 +92,32 @@ public class Config extends Application {
     }
 
     public static void main(String[] args) {
-         String currentPath;
-            if (OSValidator.isMac()) {
-                try {
-                    currentPath = new File(StartPOS.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).toString();
-                    currentPath = currentPath.replaceAll("/changeiconset.jar", "");
-                } catch (URISyntaxException ex) {
-                    currentPath = "/Applications/chromispos";
-                }
-            } else {
-                currentPath = System.getProperty("user.dir");
-            }
+        String currentPath = null;
 
-            File newIcons = null;
-            if (AppConfig.getInstance().getProperty("icon.colour") == null) {
-                newIcons = new File(currentPath + "/Icon sets/blue/images.jar");
+        currentPath = System.getProperty("user.dir");
+        System.out.println("Current Directory : " + currentPath);
+
+        File newIcons = null;
+        if (AppConfig.getInstance().getProperty("icon.colour") == null || AppConfig.getInstance().getProperty("icon.colour").equals("")) {
+            newIcons = new File(currentPath + "/Icon sets/blue/images.jar");
+        } else {
+            newIcons = new File(currentPath + "/Icon sets/" + AppConfig.getInstance().getProperty("icon.colour") + "/images.jar");
+        }
+        // File icons = new File(currentPath + "/lib");
+        try {
+            URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+            Method m = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+            m.setAccessible(true);
+            m.invoke(urlClassLoader, newIcons.toURI().toURL());
+            String cp = System.getProperty("java.class.path");
+            if (cp != null) {
+                cp += File.pathSeparatorChar + newIcons.getCanonicalPath();
             } else {
-                newIcons = new File(currentPath + "/Icon sets/" + AppConfig.getInstance().getProperty("icon.colour") + "/images.jar");
+                cp = newIcons.toURI().getPath();
             }
-            // File icons = new File(currentPath + "/lib");
-            try {
-                URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
-                Method m = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
-                m.setAccessible(true);
-                m.invoke(urlClassLoader, newIcons.toURI().toURL());
-                String cp = System.getProperty("java.class.path");
-                if (cp != null) {
-                    cp += File.pathSeparatorChar + newIcons.getCanonicalPath();
-                } else {
-                    cp = newIcons.toURI().getPath();
-                }
-                System.setProperty("java.class.path", cp);
-            } catch (Exception ex) {                
-            }
+            System.setProperty("java.class.path", cp);
+        } catch (Exception ex) {
+        }
         launch(args);
     }
 
