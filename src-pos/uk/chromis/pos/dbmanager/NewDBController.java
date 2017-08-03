@@ -109,8 +109,8 @@ public class NewDBController implements Initializable {
         DbEngine.getItems().addAll("MySQL");
         DbEngine.getItems().addAll("PostgreSQL");
         DbEngine.setValue("Apache Derby Embedded");
-        dbURL.setText("jdbc:derby:C:\\Users\\John\\chromispos-database;create=true");
-        dbDriverLibrary.setText(new File(new File(dirname), "lib/derby.jar").getAbsolutePath());
+        dbURL.setText("jdbc:derby:" + new File(new File(System.getProperty("user.home")), AppLocal.APP_ID + "-database").getAbsolutePath() + ";create=true");
+        dbDriverLibrary.setText(new File(new File(dirname), "lib/derby-10.10.2.0.jar").getAbsolutePath());
         dbDriverClass.setText("org.apache.derby.jdbc.EmbeddedDriver");
         lblProgressMsg.setText("");
 

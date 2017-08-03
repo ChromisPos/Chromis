@@ -123,7 +123,7 @@ public class DatabasePanelController implements Initializable, BaseController {
             String dirname = System.getProperty("dirname.path");
             dirname = dirname == null ? "./" : dirname;
             if ("Apache Derby Embedded".equals(databaseDetails.getSelected())) {
-                dbDriverLib.setText(new File(new File(dirname), "lib/derby.jar").getAbsolutePath());
+                dbDriverLib.setText(new File(new File(dirname), "lib/derby-10.10.2.0.jar").getAbsolutePath());
                 dbDriverClass.setText("org.apache.derby.jdbc.EmbeddedDriver");
                 dbURL.setText("jdbc:derby:" + new File(new File(System.getProperty("user.home")), AppLocal.APP_ID + "-database").getAbsolutePath() + ";create=true");
                 dbUserName.setText("");
