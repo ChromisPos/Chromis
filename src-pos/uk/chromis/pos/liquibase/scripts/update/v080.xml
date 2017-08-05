@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+    
+  
+    <changeSet author="Chromis POS" id="Add hourly report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description144'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/hourlysales.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname144"/>
+            <column name="DESCRIPTION" value="##label.description144"/>  
+        </insert> 		  
+    </changeSet>
+
+    <changeSet author="Chromis POS" id="Create hourly reports entry"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/hourlysales.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/currentproductsales.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/sales.png" />
+            <column name="TITLE" value="Menu.Hourly" />   
+        </insert>                                          
+    </changeSet> 
+ 
+
+    <changeSet author="Chromis POS" id="Update to Chromis to v0.80">    
+        <update tableName="APPLICATIONS">
+            <column name="VERSION" value="0.80"/>   
+            <column name="VERSIONINT" valueNumeric="20170804"/>         
+        </update>  
+    </changeSet>   
+    
+    
+</databaseChangeLog>
+

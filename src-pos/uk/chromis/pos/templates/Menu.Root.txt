@@ -115,8 +115,7 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/chart.png", "Menu.TimeSeriesProduct", "/uk/chromis/reports/timeseriesproduct.bs");
         submenu.addPanel("/uk/chromis/images/chart.png", "Menu.Top10Sales", "/uk/chromis/reports/top10sales.bs");      
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SalesProfit", "/uk/chromis/reports/productsalesprofit.bs");
-        submenu.addPanel("/uk/chromis/images/chart.png", "Menu.ProductCategorySalesPieChart", "/uk/chromis/reports/piesalescat.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.DailySales", "/uk/chromis/reports/dailysalescount.bs");
+        submenu.addPanel("/uk/chromis/images/chart.png", "Menu.ProductCategorySalesPieChart", "/uk/chromis/reports/piesalescat.bs");      
  
 // MAINTAINENCE
     submenu = group.addSubmenu("/uk/chromis/images/maintain.png", "Menu.Maintenance", "uk.chromis.pos.forms.MenuMaintenance");

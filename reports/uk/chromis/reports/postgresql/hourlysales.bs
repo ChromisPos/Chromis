@@ -1,0 +1,44 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PostgreSQL Reports Version
+*/
+
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.Hourly");
+report.setReport("/uk/chromis/reports/postgresql/hourlysales");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT DATE(R.DATENEW), EXTRACT(HOUR FROM R.DATENEW), SUM(p.total) AS totals, count(*) "
+                        + "FROM PAYMENTS AS P "
+                        + "INNER JOIN RECEIPTS AS R ON P.RECEIPT = R.ID "
+                        + "WHERE EXTRACT(HOUR FROM R.DATENEW) BETWEEN 0 AND 23 AND R.MONEY IN (SELECT MONEY FROM CLOSEDCASH WHERE DATEEND IS NULL) "
+                        + "GROUP BY DATE(R.DATENEW), EXTRACT(HOUR FROM R.DATENEW) "
+                        + "ORDER BY DATE(R.DATENEW), EXTRACT(HOUR FROM R.DATENEW)");
+
+report.addField("SALESDATE", uk.chromis.data.loader.Datas.TIMESTAMP);
+report.addField("SALESHOUR", uk.chromis.data.loader.Datas.INT);
+report.addField("HOURTOTAL", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("HOURSALES", uk.chromis.data.loader.Datas.INT);
+
+return report;
