@@ -27,7 +27,6 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Paths;
@@ -39,8 +38,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import uk.chromis.pos.forms.AppConfig;
-import uk.chromis.pos.forms.StartPOS;
-import uk.chromis.pos.util.OSValidator;
 
 /**
  * FXML Controller class
