@@ -254,6 +254,10 @@ public class SyncFlag implements liquibase.change.custom.CustomTaskChange {
             pstmt = conn.prepareStatement(SQL);
             pstmt.executeUpdate();
             
+            SQL = "ALTER TABLE SUUPLIERS ADD COLUMN SFLAG BOOLEAN DEFAULT TRUE";
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.executeUpdate();
+            
             conn.close();
 
         } catch (SQLException ex) {

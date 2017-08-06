@@ -15,9 +15,10 @@
         <sql>ALTER TABLE XSITELIST ADD PRIMARY KEY (GUID)</sql>
         <sql>ALTER TABLE SITES ADD PRIMARY KEY (GUID)</sql>
         <sql>ALTER TABLE PRODUCTS ADD CONSTRAINT SUPPLIERS_FK_1 FOREIGN KEY (SUPPLIER,SITEGUID) REFERENCES SUPPLIERS(ID,SITEGUID)</sql>  
-        
-        
     </changeSet> 
+     
         
+           
+                 
 </databaseChangeLog>
 

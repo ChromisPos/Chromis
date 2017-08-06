@@ -24,9 +24,10 @@
     <include file="uk/chromis/pos/liquibase/common/setVersion.xml"/>
     <include file="uk/chromis/pos/liquibase/scripts/update/cleanKeysIndexes.xml"/>
     <include file="uk/chromis/pos/liquibase/scripts/create/addprimarykeys.xml"/>         
-    <include file="uk/chromis/pos/liquibase/scripts/update/v071.xml"/>
+    <include file="uk/chromis/pos/liquibase/scripts/update/v071.xml"/>    
     <include file="uk/chromis/pos/liquibase/scripts/create/addindexes.xml"/>
     <include file="uk/chromis/pos/liquibase/scripts/create/addforeignkeys.xml"/>
+    <include file="uk/chromis/pos/liquibase/scripts/update/v080.xml"/>   
     
 </databaseChangeLog>
 

@@ -13,7 +13,7 @@
     <include file="uk/chromis/pos/liquibase/scripts/create/addindexes.xml"/>
     <include file="uk/chromis/pos/liquibase/scripts/create/addforeignkeys.xml"/> 
     <include file="uk/chromis/pos/liquibase/scripts/cleandb/cleanentries.xml"/> 
-
+    <include file="uk/chromis/pos/liquibase/scripts/update/dbupdate.xml"/> 
         
 </databaseChangeLog>
 

@@ -54,7 +54,7 @@
         <sql>ALTER TABLE THIRDPARTIES ADD PRIMARY KEY (ID, SITEGUID)</sql>
         <sql>ALTER TABLE TICKETLINES ADD PRIMARY KEY (TICKET, LINE, SITEGUID)</sql>
         <sql>ALTER TABLE VOUCHERS ADD PRIMARY KEY (VOUCHER, SITEGUID)</sql>              
-        <sql>ALTER TABLE TICKETS ADD PRIMARY KEY (ID, SITEGUID)</sql>              
+        <sql>ALTER TABLE TICKETS ADD PRIMARY KEY (ID, SITEGUID)</sql>               
     </changeSet>                
    
    

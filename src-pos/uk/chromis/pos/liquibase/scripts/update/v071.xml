@@ -133,7 +133,7 @@
         
         <createTable tableName="STOCKADJUST">
             <column name="ID" type="varchar(50)">
-                <constraints primaryKey="true" nullable="false"/>
+                <constraints nullable="false"/>
             </column>                                  
             <column name="PRODUCT" type="varchar(100)">
                 <constraints nullable="false"/>
@@ -150,17 +150,39 @@
                 <constraints nullable="false"/>
             </column>
             <column name="CHANGEDATE" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP" />
-            <column name="SITEGUID" type="varchar(50)" />
+            <column name="SITEGUID" type="varchar(50)" />  
+                
             <column name="SFLAG" type="${boolean.type}" defaultValueBoolean="true" >
                 <constraints nullable="false"/>
             </column>   
-        </createTable>  
-        
+        </createTable>                
+         
         <modifySql dbms="mysql">
             <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
         </modifySql>       
     </changeSet>  
+ 
+    <changeSet author="Chromis POS" id="Set stockadjust siteguid default mysql" dbms="mysql" >
+        <customChange class="uk.chromis.pos.dbmanager.SetDefaultSiteGUID" >           
+            <param name="table" value="STOCKADJUST" /> 
+            <param name="dbtype" value="MySQL" /> 
+        </customChange>        
+    </changeSet> 
+ 
+    <changeSet author="Chromis POS" id="Create Stockadjusts primarykey (MS)" dbms="mysql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="STOCKADJUST"/>
+            </not>
+        </preConditions>
+        
+        <sql>ALTER TABLE STOCKADJUST ADD PRIMARY KEY (ID, SITEGUID)</sql> 
+        
+    </changeSet> 
             
+      
+                       
+                                             
     <changeSet author="Chromis POS" id="Create crosssites Table (MS)" >
         <preConditions onFail="MARK_RAN">
             <not>
@@ -254,7 +276,13 @@
         </addColumn>  
     </changeSet>
   
-    <changeSet author="Chromis POS" id="Create suppliers Index, Primary Key and Foreign Key to Product" >
+    <changeSet author="Chromis POS" id="check and suppliers Index, Primary Key and Foreign Key to Product" >
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="SUPPLIERS" />
+            </not>
+        </preConditions>
+        
         <sql>ALTER TABLE SUPPLIERS ADD PRIMARY KEY (ID,SITEGUID)</sql> 
         <sql>ALTER TABLE PRODUCTS ADD CONSTRAINT SUPPLIERS_FK_1 FOREIGN KEY (SUPPLIER,SITEGUID) REFERENCES SUPPLIERS(ID,SITEGUID)</sql>  
     </changeSet> 
@@ -277,7 +305,7 @@
     
     <changeSet author="Chromis POS" id="Add script.CustomCodeProcessor">  
         <preConditions onFail="MARK_RAN">  
-            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM RESOURCES WHERE NAME = 'script.CustomBarcodeHandler'</sqlCheck>  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM RESOURCES WHERE NAME = 'script.CustomCodeProcessor'</sqlCheck>  
         </preConditions>   
   
         <insert tableName="RESOURCES">  
@@ -300,7 +328,10 @@
         </createTable> 
     </changeSet>            
     
-    <changeSet author="Chromis POS" id="Add CustomCode Processor button">          
+    <changeSet author="Chromis POS" id="Add CustomCode Processor button">  
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM NEWBUTTON WHERE ENTRY = '!!Custom scan code processor script'</sqlCheck>  
+        </preConditions>                 
         <sql> INSERT INTO NEWBUTTON (ENTRY) VALUES ('!!Custom scan code processor script')</sql>                                    
         <sql> INSERT INTO NEWBUTTON (ENTRY) VALUES ('event key="script.CustomCodeProcessor" code="script.CustomCodeProcessor"')</sql>        
     </changeSet>
@@ -458,17 +489,17 @@
         </insert> 		  
     </changeSet>
 
-         <changeSet author="Chromis POS" id="Add employee Timesheet report permissions">      
-            <preConditions onFail="MARK_RAN">  
-                <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description142'</sqlCheck>  
-            </preConditions> 
-            <insert tableName="DBPERMISSIONS">
-                <column name="CLASSNAME" value="/uk/chromis/reports/employeetimesheet.bs"/>
-                <column name="SECTION" value="##label.sectionpresence"/>
-                <column name="DISPLAYNAME" value="##label.displayname142"/>
-                <column name="DESCRIPTION" value="##label.description142"/>  
-            </insert> 		  
-        </changeSet>
+    <changeSet author="Chromis POS" id="Add employee Timesheet report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE DESCRIPTION = '##label.description142'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/employeetimesheet.bs"/>
+            <column name="SECTION" value="##label.sectionpresence"/>
+            <column name="DISPLAYNAME" value="##label.displayname142"/>
+            <column name="DESCRIPTION" value="##label.description142"/>  
+        </insert> 		  
+    </changeSet>
 
  
     <changeSet author="Chromis POS" id="Add employee closedproducts_ean report permissions" dbms="mysql">      
@@ -537,9 +568,22 @@
         <dropTable tableName="HVERSIONS"/>
     </changeSet>
  
-    <changeSet author="Chromis POS" id="Update to Multi Site v0.80">    
+    <changeSet author="Chromis POS" id="Create table new lock columns in places table" >    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="LOCKED" tableName="PLACES"/>
+            </not>
+        </preConditions> 
+                       
+        <addColumn tableName="PLACES">            
+            <column name="LOCKED" type="${boolean.type}" defaultValueBoolean="false" /> 
+            <column name="OPENEDBY" type="varchar(50)" />             
+        </addColumn>                                               
+    </changeSet>
+  
+    <changeSet author="Chromis POS" id="Update to Multi Site v0.71">    
         <update tableName="APPLICATIONS">
-            <column name="VERSION" value="0.80"/>   
+            <column name="VERSION" value="0.71"/>   
             <column name="VERSIONINT" valueNumeric="20170729"/>         
         </update>  
     </changeSet>   

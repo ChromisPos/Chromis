@@ -26,7 +26,11 @@ package uk.chromis.pos.cleandb;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 import javax.imageio.ImageIO;
 import uk.chromis.basic.BasicException;
 import uk.chromis.pos.forms.AppConfig;
@@ -89,6 +93,35 @@ public class JFrmCreateClean extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(final String args[]) {
+     String currentPath = null;
+
+        currentPath = System.getProperty("user.dir");
+        System.out.println("Current Directory : " + currentPath);
+
+        File newIcons = null;
+        if (AppConfig.getInstance().getProperty("icon.colour") == null || AppConfig.getInstance().getProperty("icon.colour").equals("")) {
+            newIcons = new File(currentPath + "/Icon sets/blue/images.jar");
+        } else {
+            newIcons = new File(currentPath + "/Icon sets/" + AppConfig.getInstance().getProperty("icon.colour") + "/images.jar");
+        }
+        // File icons = new File(currentPath + "/lib");
+        try {
+            URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
+            Method m = URLClassLoader.class.getDeclaredMethod("addURL", new Class[]{URL.class});
+            m.setAccessible(true);
+            m.invoke(urlClassLoader, newIcons.toURI().toURL());
+            String cp = System.getProperty("java.class.path");
+            if (cp != null) {
+                cp += File.pathSeparatorChar + newIcons.getCanonicalPath();
+            } else {
+                cp = newIcons.toURI().getPath();
+            }
+            System.setProperty("java.class.path", cp);
+        } catch (Exception ex) {
+        }
+        
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
