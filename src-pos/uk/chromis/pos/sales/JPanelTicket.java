@@ -859,7 +859,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 if (m_oTicket.getTicketId() == 0) {
                     ticketID = "No Sale";
                 }
-
+                
                 dlSystem.execLineRemoved(
                         new Object[]{
                             UUID.randomUUID().toString(),
@@ -2974,7 +2974,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 JProductAttEdit attedit = JProductAttEdit.getAttributesEditor(this, m_App.getSession());
                 attedit.editAttributes(line.getProductAttSetId(), line.getProductAttSetInstId());
                 attedit.setLocationRelativeTo(this);
-                attedit.setVisible(true);
+                attedit.setVisible(true);                               
                 if (attedit.isOK()) {
                     // The user pressed OK
                     line.setProductAttSetInstId(attedit.getAttributeSetInst());
