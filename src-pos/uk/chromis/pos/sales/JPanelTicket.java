@@ -867,7 +867,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                             ticketID,
                             m_oTicket.getLine(i).getProductID(),
                             m_oTicket.getLine(i).getProductName(),
-                            m_oTicket.getLine(i).getMultiply()
+                            m_oTicket.getLine(i).getMultiply(),
+                            m_oTicket.getLine(i).getPrice()
                         });
 
                 if (m_oTicket.getLine(i).isProductCom()) {

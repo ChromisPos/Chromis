@@ -146,7 +146,7 @@ public class BarcodeImage {
      */
     public static Image getBarcode128(String value) {
         AbstractBarcodeBean barcode = new Code128Bean();
-        barcode.setMsgPosition(HumanReadablePlacement.HRP_NONE);
+        barcode.setMsgPosition(HumanReadablePlacement.HRP_BOTTOM);
         return getBarcode(value, barcode);
     }
 

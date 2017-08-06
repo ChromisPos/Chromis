@@ -227,9 +227,9 @@ public class DataLogicSystem extends BeanFactoryDataSingle {
             Datas.STRING}));
 
         m_lineremoved = new StaticSentence(s,
-                "INSERT INTO LINEREMOVED (ID,NAME, TICKETID, PRODUCTID, PRODUCTNAME, UNITS) "
-                + "VALUES (?, ?, ?, ?, ?, ?)",
-                new SerializerWriteBasic(new Datas[]{Datas.STRING, Datas.STRING, Datas.STRING, Datas.STRING, Datas.STRING, Datas.DOUBLE}));
+                "INSERT INTO LINEREMOVED (ID,NAME, TICKETID, PRODUCTID, PRODUCTNAME, UNITS, VALUE) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                new SerializerWriteBasic(new Datas[]{Datas.STRING, Datas.STRING, Datas.STRING, Datas.STRING, Datas.STRING, Datas.DOUBLE, Datas.DOUBLE}));
 
         m_locationfind = new StaticSentence(s, "SELECT NAME FROM LOCATIONS WHERE ID = ?", SerializerWriteString.INSTANCE, SerializerReadString.INSTANCE);
 

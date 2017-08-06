@@ -106,7 +106,7 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.TaxCatSales", "/uk/chromis/reports/taxcatsales.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ReportTaxes", "/uk/chromis/reports/taxes.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ItemsRemoved", "/uk/chromis/reports/itemsremoved.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ClosedProductsCat", "/uk/chromis/reports/closedproducts_ean.bs");
+        
 
 // SALES CHARTS
         submenu.addTitle("Menu.SalesManagement.Charts");

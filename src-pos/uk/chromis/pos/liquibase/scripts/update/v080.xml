@@ -38,7 +38,42 @@
         </insert>                                          
     </changeSet> 
  
-
+     <changeSet author="Chromis POS" id="Add removed lines report permissions">      
+        <preConditions onFail="MARK_RAN">  
+            <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE CLASSNAME = '/uk/chromis/reports/itemsremoved.bs'</sqlCheck>  
+        </preConditions> 
+        <insert tableName="DBPERMISSIONS">
+            <column name="CLASSNAME" value="/uk/chromis/reports/itemsremoved.bs"/>
+            <column name="SECTION" value="##label.sectionsales"/>
+            <column name="DISPLAYNAME" value="##label.displayname145"/>
+            <column name="DESCRIPTION" value="##label.description145"/>  
+        </insert> 		  
+    </changeSet>
+ 
+     <changeSet author="Chromis POS" id="Create removed lines reports entry"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="/uk/chromis/reports/itemsremoved.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/taxes.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/sales.png" />
+            <column name="TITLE" value="Menu.ItemsRemoved" />   
+        </insert>                                          
+    </changeSet>
+ 
+ 
+  <changeSet author="Chromis POS" id="Add new column into limeremoved table" >    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="VALUE" tableName="LINEREMOVED"/>
+            </not>
+        </preConditions> 
+                       
+        <addColumn tableName="LINEREMOVED">                       
+            <column name="VALUE" type="double precision" defaultValueNumeric="0.0"/>             
+        </addColumn>                                               
+    </changeSet>
+ 
+ 
+ 
     <changeSet author="Chromis POS" id="Update to Chromis to v0.80">    
         <update tableName="APPLICATIONS">
             <column name="VERSION" value="0.80"/>   

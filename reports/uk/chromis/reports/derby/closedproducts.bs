@@ -47,6 +47,9 @@ report.setSentence("SELECT " +
                         "GROUP BY CLOSEDCASH.HOST, CLOSEDCASH.MONEY, CLOSEDCASH.DATEEND, PRODUCTS.REFERENCE, PRODUCTS.NAME, PRODUCTS.PRICESELL+(PRODUCTS.PRICESELL*TAXES.RATE) " +
                         "ORDER BY PRODUCTS.NAME, CLOSEDCASH.HOST, CLOSEDCASH.DATEEND");
 
+
+
+
 paramdates = new uk.chromis.pos.ticket.ProductFilterReportWithDates();
 
 paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());

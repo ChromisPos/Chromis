@@ -79,19 +79,6 @@ public class DrawerOpenedGUID implements liquibase.change.custom.CustomTaskChang
         } catch (MalformedURLException | SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(SiteGUID.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*
-         -                 String SQL2 = "INSERT INTO LINEREMOVED (ID, REMOVEDDATE, NAME, TICKETID, PRODUCTID, PRODUCTNAME, UNITS) VALUES (?, ?, ?, ?, ?, ?, ?)";
- -                 pstmt = conn.prepareStatement(SQL2);
- -                 pstmt.setString(1, UUID.randomUUID().toString());
- -                 pstmt.setTimestamp(2, rs.getTimestamp("REMOVEDDATE"));
- -                 pstmt.setString(3, rs.getString("NAME"));
- -                 pstmt.setString(4, rs.getString("TICKETID"));
- -                 pstmt.setString(5, rs.getString("PRODUCTID"));
- -                 pstmt.setString(6, rs.getString("PRODUCTNAME"));
- -                 pstmt.setDouble(7, rs.getDouble("UNITS"));
- -                 pstmt.executeUpdate();
-
-         */
         try {
             Statement stmt = (Statement) conn.createStatement();
 

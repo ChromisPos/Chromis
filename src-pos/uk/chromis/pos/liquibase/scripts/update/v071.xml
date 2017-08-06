@@ -305,7 +305,7 @@
         <sql> INSERT INTO NEWBUTTON (ENTRY) VALUES ('event key="script.CustomCodeProcessor" code="script.CustomCodeProcessor"')</sql>        
     </changeSet>
 
-    <changeSet author="Chromis POS" id="Create current product sales"> 
+    <changeSet author="Chromis POS" id="Create current product sales" > 
         <insert tableName="MENUENTRIES"> 
             <column name="ENTRY" value="/uk/chromis/reports/currentproductsales.bs"/>   
             <column name="FOLLOWS" value="/uk/chromis/reports/bestsellers.bs"/>
@@ -314,7 +314,7 @@
         </insert>                                          
     </changeSet> 
     
-    <changeSet author="Chromis POS" id="Create product sales ean"> 
+    <changeSet author="Chromis POS" id="Create product sales ean" dbms="mysql"> 
         <insert tableName="MENUENTRIES"> 
             <column name="ENTRY" value="/uk/chromis/reports/closedproducts_ean.bs"/>   
             <column name="FOLLOWS" value="/uk/chromis/reports/closedproducts_1.bs"/>
@@ -471,7 +471,7 @@
         </changeSet>
 
  
-    <changeSet author="Chromis POS" id="Add employee closedproducts_ean report permissions">      
+    <changeSet author="Chromis POS" id="Add employee closedproducts_ean report permissions" dbms="mysql">      
         <preConditions onFail="MARK_RAN">  
             <sqlCheck expectedResult="0">SELECT COUNT(1) FROM DBPERMISSIONS WHERE CLASSNAME = '/uk/chromis/reports/closedproducts_ean.bs'</sqlCheck>  
         </preConditions> 

@@ -33,39 +33,37 @@ report.setSentence("SELECT " +
                         "CLOSEDCASH.MONEY, " +
                         "CLOSEDCASH.DATEEND, " +
                         "PRODUCTS.CODE, " +  
-                      "(SELECT CATEGORIES.NAME FROM CATEGORIES WHERE PRODUCTS.CATEGORY = CATEGORIES.ID), " +
+                        "(SELECT CATEGORIES.NAME FROM CATEGORIES WHERE PRODUCTS.CATEGORY = CATEGORIES.ID), " +
                         "PRODUCTS.NAME, " +
-                            "Sum(PRODUCTS.PRICESELL+(PRODUCTS.PRICESELL*TAXES.RATE)) AS PRICE, " +
-                            "Sum(TICKETLINES.UNITS) AS UNITS, " +
-                            "Sum((PRODUCTS.PRICESELL+PRODUCTS.PRICESELL*TAXES.RATE)*UNITS) AS VALUE, " +
-                            "Sum((PRODUCTS.PRICESELL+PRODUCTS.PRICESELL*TAXES.RATE)*TICKETLINES.UNITS-(TICKETLINES.PRICE+(TICKETLINES.PRICE*TAXES.RATE))*TICKETLINES.UNITS) AS DISCOUNT, " +
-                            "Sum((TICKETLINES.PRICE+(TICKETLINES.PRICE*TAXES.RATE))*TICKETLINES.UNITS) AS TOTAL " +
+                        "Sum(PRODUCTS.PRICESELL+(PRODUCTS.PRICESELL*TAXES.RATE)) AS PRICE, " +
+                        "Sum(TICKETLINES.UNITS) AS UNITS, " +
+                        "Sum((PRODUCTS.PRICESELL+PRODUCTS.PRICESELL*TAXES.RATE)*UNITS) AS VALUE, " +
+                        "Sum((PRODUCTS.PRICESELL+PRODUCTS.PRICESELL*TAXES.RATE)*TICKETLINES.UNITS-(TICKETLINES.PRICE+(TICKETLINES.PRICE*TAXES.RATE))*TICKETLINES.UNITS) AS DISCOUNT, " +
+                        "Sum((TICKETLINES.PRICE+(TICKETLINES.PRICE*TAXES.RATE))*TICKETLINES.UNITS) AS TOTAL " +
                         "FROM ((TICKETS INNER JOIN (TICKETLINES INNER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID) " +
-                            "ON TICKETS.ID = TICKETLINES.TICKET) INNER JOIN (RECEIPTS INNER JOIN CLOSEDCASH " +
-                            "ON RECEIPTS.MONEY = CLOSEDCASH.MONEY) ON TICKETS.ID = RECEIPTS.ID) INNER JOIN taxes ON TICKETLINES.TAXID = taxes.ID " +
+                        "ON TICKETS.ID = TICKETLINES.TICKET) INNER JOIN (RECEIPTS INNER JOIN CLOSEDCASH " +
+                        "ON RECEIPTS.MONEY = CLOSEDCASH.MONEY) ON TICKETS.ID = RECEIPTS.ID) INNER JOIN taxes ON TICKETLINES.TAXID = taxes.ID " +
                         "WHERE CLOSEDCASH.MONEY = RECEIPTS.MONEY AND RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND ?(QBF_FILTER) " +
                         "GROUP BY CLOSEDCASH.HOST, CLOSEDCASH.MONEY, CLOSEDCASH.DATEEND, PRODUCTS.CODE, PRODUCTS.NAME " +
                         "ORDER BY PRODUCTS.NAME, CLOSEDCASH.HOST, CLOSEDCASH.DATEEND");
                        
-
 report.addParameter("CLOSEDCASH.DATEEND");
 report.addParameter("CLOSEDCASH.DATEEND");
-
-paramdates = new uk.chromis.pos.reports.JParamsDatesInterval();
-
-paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());
-// JG - 8 Jan 14 paramdates.setEndDate(uk.chromis.beans.DateUtils.getToday());
-paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
-
-report.addQBFFilter(paramdates);
-
+report.addParameter("CLOSEDCASH.SITEGUID");
 report.addParameter("PRODUCTS.NAME");
 report.addParameter("PRODUCTS.PRICEBUY");
 report.addParameter("PRODUCTS.PRICESELL");
 report.addParameter("PRODUCTS.CATEGORY");
 report.addParameter("PRODUCTS.CODE");
+report.addParameter("PRODUCTS.SITEGUID");
 
-report.addQBFFilter(new uk.chromis.pos.ticket.ProductFilter());
+paramdates = new uk.chromis.pos.ticket.ProductFilterReportWithDates();
+paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());
+paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
+
+
+
+report.addQBFFilter(paramdates);
 
 report.addField("HOST", uk.chromis.data.loader.Datas.STRING);
 report.addField("MONEY", uk.chromis.data.loader.Datas.STRING);
@@ -78,6 +76,7 @@ report.addField("UNITS", uk.chromis.data.loader.Datas.DOUBLE);
 report.addField("VALUE", uk.chromis.data.loader.Datas.DOUBLE);
 report.addField("DISCOUNT", uk.chromis.data.loader.Datas.DOUBLE);
 report.addField("TOTAL", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("SITE", uk.chromis.data.loader.Datas.STRING);
 
 
 report;
