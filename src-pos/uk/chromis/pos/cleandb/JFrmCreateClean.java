@@ -27,16 +27,22 @@ import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import uk.chromis.basic.BasicException;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 import uk.chromis.pos.forms.AppProperties;
 import uk.chromis.pos.forms.JRootFrame;
+import uk.chromis.pos.forms.StartPOS;
 
 
 public class JFrmCreateClean extends javax.swing.JFrame {
@@ -96,7 +102,29 @@ public class JFrmCreateClean extends javax.swing.JFrame {
      String currentPath = null;
 
         currentPath = System.getProperty("user.dir");
-        System.out.println("Current Directory : " + currentPath);
+
+        //delet log files older than 50 days
+        File folder = new File(currentPath+"/cssStyles");
+        if (folder.exists()) {
+            File[] listFiles = folder.listFiles();            
+            long eligibleForDeletion = System.currentTimeMillis() - 432000000L;
+            for (File listFile : listFiles) {
+                if (listFile.getName().endsWith("log")
+                        && listFile.lastModified() < eligibleForDeletion) {
+                    if (!listFile.delete()) {
+                        System.out.println("Sorry Unable to Delete Files..");
+                    }
+                }
+            }
+        }
+
+        //send output to log files
+        try {
+            System.setOut(new PrintStream(new FileOutputStream(currentPath + "/Logs/Cleandb.log")));
+            System.setErr(new PrintStream(new FileOutputStream(currentPath + "/Logs/Cleandbserror.log")));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StartPOS.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         File newIcons = null;
         if (AppConfig.getInstance().getProperty("icon.colour") == null || AppConfig.getInstance().getProperty("icon.colour").equals("")) {
