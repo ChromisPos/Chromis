@@ -23,13 +23,20 @@
 package uk.chromis.pos.forms;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import uk.chromis.pos.dbmanager.RunRepair;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.ServerSocket;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,10 +48,13 @@ import org.pushingpixels.substance.api.SubstanceSkin;
 import uk.chromis.format.Formats;
 import uk.chromis.pos.ticket.TicketInfo;
 import javax.swing.JFrame;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.AgeFileFilter;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.lang.time.DateUtils;
 import uk.chromis.pos.dbmanager.DbManager;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.DbUtils;
-import uk.chromis.pos.util.OSValidator;
 
 public class StartPOS {
 
@@ -70,13 +80,40 @@ public class StartPOS {
     }
 
     public static void main(final String args[]) {
+       
         String currentPath = null;
+        currentPath = System.getProperty("user.dir");
         if (!registerApp()) {
             System.out.println("Already Running");
             System.exit(0);
         }
-        currentPath = System.getProperty("user.dir");
-        System.out.println("Current Directory : " + currentPath);
+
+        if (args.length != 0) {
+            if (!args[0].equalsIgnoreCase("/nodebug")) {                
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
+                //send output to log files
+                try {
+                    System.setErr(new PrintStream(new FileOutputStream(currentPath + "/Logs/" + simpleDateFormat.format(new Date()) + "Chromis.log")));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(StartPOS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }           
+        }
+
+        //delet log files older than 50 days
+        File folder = new File(currentPath + "/Logs");
+        if (folder.exists()) {
+            File[] listFiles = folder.listFiles();
+            long eligibleForDeletion = System.currentTimeMillis() - 432000000L;
+            for (File listFile : listFiles) {
+                if (listFile.getName().endsWith("log")
+                        && listFile.lastModified() < eligibleForDeletion) {
+                    if (!listFile.delete()) {
+                        System.out.println("Sorry Unable to Delete Files..");
+                    }
+                }
+            }
+        }
 
         File newIcons = null;
         if (AppConfig.getInstance().getProperty("icon.colour") == null || AppConfig.getInstance().getProperty("icon.colour").equals("")) {
