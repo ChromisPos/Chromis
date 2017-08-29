@@ -265,7 +265,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
         }
 
         // reset the selected to the first in the list
-       m_CategoryModel.setSelectedItem(null);
+        m_CategoryModel.setSelectedItem(null);
         taxcatmodel.setSelectedFirst();
 
         // Set the column delimiter
@@ -356,7 +356,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
             products = new CsvReader(new InputStreamReader(new FileInputStream(CSVFileName), "UTF-8"));
             products.setDelimiter(((String) jComboSeparator.getSelectedItem()).charAt(0));
             products.readHeaders();
-            
+
             // We need a minimum of 5 columns to map all required fields                            
             if (products.getHeaderCount() < 5) {
                 JOptionPane.showMessageDialog(null,
@@ -1047,6 +1047,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
         myprod[DataLogicSales.INDEX_PROMOTIONID] = null;
         myprod[DataLogicSales.INDEX_MANAGESTOCK] = true;
         myprod[DataLogicSales.INDEX_SITEGUID] = siteGuid;
+        myprod[DataLogicSales.INDEX_COMMISSION] = 0.0;
 
         try {
             if ("new".equals(pType)) {
@@ -2315,8 +2316,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
             Logger.getLogger(JPanelCSVImport.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-   
-       // jComboSeparator.setSelectedItem(profile.getSeparator());
+        // jComboSeparator.setSelectedItem(profile.getSeparator());
         jComboReference.setSelectedItem(profile.getReference());
         jComboBarcode.setSelectedItem(profile.getBarcode());
         jComboName.setSelectedItem(profile.getName());
@@ -2355,7 +2355,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
 
     private void jBtnSaveProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveProfileActionPerformed
 
-       // String p_separator = ((jComboSeparator.getSelectedItem() == null) ? null : jComboSeparator.getSelectedItem().toString());
+        // String p_separator = ((jComboSeparator.getSelectedItem() == null) ? null : jComboSeparator.getSelectedItem().toString());
         String p_reference = ((jComboReference.getSelectedItem() == null) ? null : jComboReference.getSelectedItem().toString());
         String p_barcode = ((jComboBarcode.getSelectedItem() == null) ? null : jComboBarcode.getSelectedItem().toString());
         String p_name = ((jComboName.getSelectedItem() == null) ? null : jComboName.getSelectedItem().toString());
@@ -2410,7 +2410,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
                 jCheckAllowDiscount.isSelected()
         );
 
-        if (jProfileName.getSelectedItem() == null ) {
+        if (jProfileName.getSelectedItem() == null) {
             String pName = (String) JOptionPane.showInputDialog(this,
                     "Profile name.", "",
                     JOptionPane.PLAIN_MESSAGE);
@@ -2469,7 +2469,7 @@ public class JPanelCSVImport extends JPanel implements JPanelView {
             jProfileName.setModel(m_ProfilesModel);
         } catch (BasicException ex) {
             Logger.getLogger(JPanelCSVImport.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
         jBtnDeleteProfile.setEnabled(false);
 
     }//GEN-LAST:event_jBtnDeleteProfileActionPerformed
