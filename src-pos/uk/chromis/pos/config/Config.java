@@ -23,13 +23,20 @@
 package uk.chromis.pos.config;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import javafx.scene.image.Image;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +45,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import uk.chromis.pos.forms.AppConfig;
+import uk.chromis.pos.forms.StartPOS;
 
 /**
  * FXML Controller class
@@ -90,9 +98,19 @@ public class Config extends Application {
 
     public static void main(String[] args) {
         String currentPath = null;
-
         currentPath = System.getProperty("user.dir");
-        System.out.println("Current Directory : " + currentPath);
+
+        if (args.length != 0) {
+            if (!args[0].equalsIgnoreCase("/nodebug")) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
+                //send output to log files
+                try {
+                    System.setErr(new PrintStream(new FileOutputStream(currentPath + "/Logs/" + simpleDateFormat.format(new Date()) + "Config.log")));
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(StartPOS.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
 
         File newIcons = null;
         if (AppConfig.getInstance().getProperty("icon.colour") == null || AppConfig.getInstance().getProperty("icon.colour").equals("")) {

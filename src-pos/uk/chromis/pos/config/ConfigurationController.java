@@ -112,25 +112,10 @@ public class ConfigurationController implements Initializable {
         tabPane.setStyle("-fx-border-color: black; -fx-border-width: 0px 0px 2px 0px");
         tabPane.setPrefSize(980, 590);
 
-        // anchor.setStyle("-fx-border-color: black; -fx-border-width: 2 2 2 2");
-        //anchor.setStyle("");
+       
         // remove sync licence tab if not required
         tabPane.getTabs().remove(configureSync);
-        // tabPane.getTabs().remove(configurePayment);
-        // set the button bar position
-        //   btnBar.setLayoutX(600);
-        //   btnBar.setLayoutY(595);
-        //Setup the tab titles from the locales file
-        //configureDatabase.setText(AppLocal.getIntString("message.DBDefault"));
-        //configureTicket.setText("7");
-        //configureGeneral.setText("2");
-        //configurePayment.setText("4");
-        //configurePeripheral.setText("5");
-        //configureRestaurant.setText("8");
-        //configureSystem.setText("6");
-        //configureLocale.setText("3");
-        //configureSync.setText("9");
-        //configureSalesScreen.setText("10");
+        
     }
 
     private Object getController(Tab tab, String fxml) {
