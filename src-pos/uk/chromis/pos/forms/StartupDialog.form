@@ -28,7 +28,7 @@
                       <Component id="jLabel2" min="-2" pref="132" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace pref="76" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,7 +50,7 @@
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/uk/chromis/images/chromis_main.png"/>
+          <Image iconType="3" name="/uk/chromis/fixedimages/chromis_main.png"/>
         </Property>
       </Properties>
     </Component>

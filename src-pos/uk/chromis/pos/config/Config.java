@@ -100,9 +100,9 @@ public class Config extends Application {
         String currentPath = null;
         currentPath = System.getProperty("user.dir");
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
         if (args.length != 0) {
-            if (!args[0].equalsIgnoreCase("/nodebug")) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
+            if (args[0].equalsIgnoreCase("/debug")) {
                 //send output to log files
                 try {
                     System.setErr(new PrintStream(new FileOutputStream(currentPath + "/Logs/" + simpleDateFormat.format(new Date()) + "Config.log")));
@@ -110,7 +110,7 @@ public class Config extends Application {
                     Logger.getLogger(StartPOS.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }
+        } 
 
         File newIcons = null;
         if (AppConfig.getInstance().getProperty("icon.colour") == null || AppConfig.getInstance().getProperty("icon.colour").equals("")) {

@@ -88,16 +88,16 @@ public class StartPOS {
             System.exit(0);
         }
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
         if (args.length != 0) {
-            if (!args[0].equalsIgnoreCase("/nodebug")) {                
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
+            if (args[0].equalsIgnoreCase("/debug")) {
                 //send output to log files
                 try {
                     System.setErr(new PrintStream(new FileOutputStream(currentPath + "/Logs/" + simpleDateFormat.format(new Date()) + "Chromis.log")));
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(StartPOS.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }           
+            }
         }
 
         //delet log files older than 50 days

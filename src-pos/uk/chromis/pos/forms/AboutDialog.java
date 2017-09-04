@@ -67,7 +67,7 @@ public class AboutDialog extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uk/chromis/images/chromis_main.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uk/chromis/fixedimages/chromis_main.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("www.chromis.co.uk");

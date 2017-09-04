@@ -91,7 +91,7 @@ public class JOpenWarningDlg extends JDialog {
         JPanel btnPanel = new JPanel();
 
         JLabel logoLabel = new JLabel();
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uk/chromis/images/chromis_main.png")));
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uk/chromis/fixedimages/chromis_main.png")));
         mainPanel.add(logoLabel, "wrap");
 
         dialogPanel.setBackground(Color.white);

@@ -1410,12 +1410,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
              */
         } else {
             m_sBarcode.append(cTrans);
-
-            if (cTrans == '\u007f') {
+            if (cTrans == '\u007f') {  //delete key               
                 stateToZero();
             } else if ((cTrans == '0') && (m_iNumberStatus == NUMBER_INPUTZERO)) {
-                m_jPrice.setText("0");
-                // } else if ((cTrans == '1' || cTrans == '2' || cTrans == '3' || cTrans == '4' || cTrans == '5' || cTrans == '6' || cTrans == '7' || cTrans == '8' || cTrans == '9') && (m_iNumberStatus == NUMBER_INPUTZERO)) {
+                m_jPrice.setText("0");              
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_INPUTZERO)) {
                 if (!priceWith00) {
                     m_jPrice.setText(Character.toString(cTrans));
@@ -1423,8 +1421,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     m_jPrice.setText(setTempjPrice(Character.toString(cTrans)));
                 }
                 m_iNumberStatus = NUMBER_INPUTINT;
-                //  m_iNumberStatusInput = NUMBERVALID;
-                //} else if ((cTrans == '0' || cTrans == '1' || cTrans == '2' || cTrans == '3' || cTrans == '4' || cTrans == '5' || cTrans == '6' || cTrans == '7' || cTrans == '8' || cTrans == '9') && (m_iNumberStatus == NUMBER_INPUTINT)) {
                 if (m_iNumberStatusInput != NUMBERINVALID) {
                     m_iNumberStatusInput = NUMBERVALID;
                 }
@@ -1455,8 +1451,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     m_jPrice.setText(m_jPrice.getText() + cTrans);
                 } else {
                     m_jPrice.setText(setTempjPrice(m_jPrice.getText() + cTrans));
-                }
-                // } else if ((cTrans == '1' || cTrans == '2' || cTrans == '3' || cTrans == '4' || cTrans == '5' || cTrans == '6' || cTrans == '7' || cTrans == '8' || cTrans == '9') && (m_iNumberStatus == NUMBER_INPUTZERODEC || m_iNumberStatus == NUMBER_INPUTDEC)) {
+                }               
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_INPUTZERODEC || m_iNumberStatus == NUMBER_INPUTDEC)) {
                 m_jPrice.setText(m_jPrice.getText() + cTrans);
                 m_iNumberStatus = NUMBER_INPUTDEC;
@@ -1469,13 +1464,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 m_jPor.setText("x");
                 m_iNumberStatus = NUMBER_PORZERO;
             } else if ((cTrans == '0') && (m_iNumberStatus == NUMBER_PORZERO)) {
-                m_jPor.setText("x0");
-                //} else if ((cTrans == '1' || cTrans == '2' || cTrans == '3' || cTrans == '4' || cTrans == '5' || cTrans == '6' || cTrans == '7' || cTrans == '8' || cTrans == '9') && (m_iNumberStatus == NUMBER_PORZERO)) {
+                m_jPor.setText("x0");                
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_PORZERO)) {
                 m_jPor.setText("x" + Character.toString(cTrans));
                 m_iNumberStatus = NUMBER_PORINT;
                 m_iNumberStatusPor = NUMBERVALID;
-                // } else if ((cTrans == '0' || cTrans == '1' || cTrans == '2' || cTrans == '3' || cTrans == '4' || cTrans == '5' || cTrans == '6' || cTrans == '7' || cTrans == '8' || cTrans == '9') && (m_iNumberStatus == NUMBER_PORINT)) {
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_PORINT)) {
                 m_jPor.setText(m_jPor.getText() + cTrans);
             } else if (cTrans == '.' && m_iNumberStatus == NUMBER_PORZERO && !priceWith00) {
@@ -1492,7 +1485,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 m_iNumberStatus = NUMBERVALID;
             } else if ((cTrans == '0') && (m_iNumberStatus == NUMBER_PORZERODEC || m_iNumberStatus == NUMBER_PORDEC)) {
                 m_jPor.setText(m_jPor.getText() + cTrans);
-                //} else if ((cTrans == '1' || cTrans == '2' || cTrans == '3' || cTrans == '4' || cTrans == '5' || cTrans == '6' || cTrans == '7' || cTrans == '8' || cTrans == '9')
             } else if (Character.isDigit(cTrans)
                     && (m_iNumberStatus == NUMBER_PORZERODEC || m_iNumberStatus == NUMBER_PORDEC)) {
                 m_jPor.setText(m_jPor.getText() + cTrans);
