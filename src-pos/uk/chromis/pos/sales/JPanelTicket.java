@@ -231,6 +231,42 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_ticketlines = new JTicketLines(dlSystem.getResourceAsXML("Ticket.Line"));
         m_jPanelCentral.add(m_ticketlines, java.awt.BorderLayout.CENTER);
 
+        //m_jImage.setMaxDimensions(size);
+             m_jImage.setVisible(false);
+        // m_jProductImage.setPreferredSize(new Dimension (50,50));
+     // m_jProductImage.setPreferredSize(new Dimension (50,50));
+        m_jContEntries.setPreferredSize(new Dimension(250, 385));
+     //  m_jContEntries.setMaxDimensions(new Dimension(250, 200));
+      //  m_jContEntries.setMaxDimensions(new Dimension(250, 200));
+        m_ticketlines.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int i = m_ticketlines.getSelectedIndex();
+                    if (i >= 0) {
+                        try {
+                            String sProduct = m_oTicket.getLine(i).getProductID();
+                            if (sProduct != null) {
+                                ProductInfoExt prod = JPanelTicket.this.dlSales.getProductInfo(sProduct, siteGuid);
+                                if (prod != null) {
+                                    if (prod.getImage() != null) {
+                                        m_jImage.setImage(prod.getImage());
+                                    } else {
+                                        m_jImage.setImage(null);
+                                    }
+                                } else {
+                                    m_jImage.setImage(null);
+                                }
+                            }
+                        } catch (BasicException ex) {
+                            Logger.getLogger(JPanelTicket.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        m_jImage.setImage(null);
+                    }
+                }
+            }
+        });
+
         m_TTP = new TicketParser(m_App.getDeviceTicket(), dlSystem);
 
         m_jbtnconfig = new JPanelButtons("Ticket.Buttons", this);
@@ -859,7 +895,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 if (m_oTicket.getTicketId() == 0) {
                     ticketID = "No Sale";
                 }
-                
+
                 dlSystem.execLineRemoved(
                         new Object[]{
                             UUID.randomUUID().toString(),
@@ -1413,7 +1449,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             if (cTrans == '\u007f') {  //delete key               
                 stateToZero();
             } else if ((cTrans == '0') && (m_iNumberStatus == NUMBER_INPUTZERO)) {
-                m_jPrice.setText("0");              
+                m_jPrice.setText("0");
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_INPUTZERO)) {
                 if (!priceWith00) {
                     m_jPrice.setText(Character.toString(cTrans));
@@ -1451,7 +1487,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     m_jPrice.setText(m_jPrice.getText() + cTrans);
                 } else {
                     m_jPrice.setText(setTempjPrice(m_jPrice.getText() + cTrans));
-                }               
+                }
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_INPUTZERODEC || m_iNumberStatus == NUMBER_INPUTDEC)) {
                 m_jPrice.setText(m_jPrice.getText() + cTrans);
                 m_iNumberStatus = NUMBER_INPUTDEC;
@@ -1464,7 +1500,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 m_jPor.setText("x");
                 m_iNumberStatus = NUMBER_PORZERO;
             } else if ((cTrans == '0') && (m_iNumberStatus == NUMBER_PORZERO)) {
-                m_jPor.setText("x0");                
+                m_jPor.setText("x0");
             } else if (Character.isDigit(cTrans) && (m_iNumberStatus == NUMBER_PORZERO)) {
                 m_jPor.setText("x" + Character.toString(cTrans));
                 m_iNumberStatus = NUMBER_PORINT;
@@ -2263,6 +2299,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jaddtax = new javax.swing.JToggleButton();
         m_jKeyFactory = new javax.swing.JTextField();
         m_jPanEntriesE = new javax.swing.JPanel();
+        m_jProductImage = new javax.swing.JPanel();
+        m_jImage = new uk.chromis.data.gui.JImageViewer();
         catcontainer = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 204, 153));
@@ -2570,7 +2608,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanTicket.add(jPanel5, java.awt.BorderLayout.LINE_END);
 
         m_jPanelCentral.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        m_jPanelCentral.setPreferredSize(new java.awt.Dimension(450, 240));
+        m_jPanelCentral.setMaximumSize(new java.awt.Dimension(450, 320));
+        m_jPanelCentral.setPreferredSize(new java.awt.Dimension(450, 320));
         m_jPanelCentral.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -2655,6 +2694,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanContainer.add(m_jPanTicket, java.awt.BorderLayout.CENTER);
 
         m_jContEntries.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        m_jContEntries.setMaximumSize(new java.awt.Dimension(250, 365));
+        m_jContEntries.setMinimumSize(new java.awt.Dimension(250, 365));
+        m_jContEntries.setPreferredSize(new java.awt.Dimension(250, 365));
         m_jContEntries.setLayout(new java.awt.BorderLayout());
 
         m_jPanEntries.setLayout(new javax.swing.BoxLayout(m_jPanEntries, javax.swing.BoxLayout.Y_AXIS));
@@ -2774,9 +2816,20 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanEntriesE.setLayout(new java.awt.BorderLayout());
         m_jContEntries.add(m_jPanEntriesE, java.awt.BorderLayout.LINE_END);
 
+        m_jProductImage.setMinimumSize(new java.awt.Dimension(50, 50));
+        m_jProductImage.setLayout(new java.awt.BorderLayout());
+        m_jContEntries.add(m_jProductImage, java.awt.BorderLayout.PAGE_END);
+
+        m_jImage.setMaxDimensions(new java.awt.Dimension(200, 130));
+        m_jImage.setMaximumSize(new java.awt.Dimension(200, 130));
+        m_jImage.setMinimumSize(new java.awt.Dimension(200, 130));
+        m_jImage.setPreferredSize(new java.awt.Dimension(200, 130));
+        m_jContEntries.add(m_jImage, java.awt.BorderLayout.CENTER);
+
         m_jPanContainer.add(m_jContEntries, java.awt.BorderLayout.LINE_END);
 
         catcontainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        catcontainer.setPreferredSize(new java.awt.Dimension(600, 10));
         catcontainer.setLayout(new java.awt.BorderLayout());
         m_jPanContainer.add(catcontainer, java.awt.BorderLayout.SOUTH);
 
@@ -2966,7 +3019,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 JProductAttEdit attedit = JProductAttEdit.getAttributesEditor(this, m_App.getSession());
                 attedit.editAttributes(line.getProductAttSetId(), line.getProductAttSetInstId());
                 attedit.setLocationRelativeTo(this);
-                attedit.setVisible(true);                               
+                attedit.setVisible(true);
                 if (attedit.isOK()) {
                     // The user pressed OK
                     line.setProductAttSetInstId(attedit.getAttributeSetInst());
@@ -3142,6 +3195,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JButton m_jDown;
     private javax.swing.JButton m_jEditLine;
     private javax.swing.JButton m_jEnter;
+    private uk.chromis.data.gui.JImageViewer m_jImage;
     private javax.swing.JTextField m_jKeyFactory;
     private javax.swing.JLabel m_jLblTotalEuros1;
     private javax.swing.JLabel m_jLblTotalEuros2;
@@ -3159,6 +3213,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JPanel m_jPanelScripts;
     private javax.swing.JLabel m_jPor;
     private javax.swing.JLabel m_jPrice;
+    private javax.swing.JPanel m_jProductImage;
     private javax.swing.JLabel m_jSubtotalEuros;
     private javax.swing.JComboBox m_jTax;
     private javax.swing.JLabel m_jTaxesEuros;
