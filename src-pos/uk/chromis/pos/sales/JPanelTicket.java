@@ -178,6 +178,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     public static Boolean autoLogoffAfterSales;
     public static Boolean autoLogoffToTables;
     public static Boolean autoLogoffAfterKitchen;
+    private Boolean statusBar;
+    private int adjust = 0;
 
     public JPanelTicket() {
         initComponents();
@@ -191,6 +193,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         autoLogoffAfterSales = AppConfig.getInstance().getBoolean("till.autologoffaftersale");
         autoLogoffToTables = AppConfig.getInstance().getBoolean("till.autologofftotables");
         autoLogoffAfterKitchen = AppConfig.getInstance().getBoolean("till.autologoffafterkitchen");
+        statusBar = AppConfig.getInstance().getBoolean("till.hideinfo");
 
         m_App = app;
 
@@ -231,13 +234,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_ticketlines = new JTicketLines(dlSystem.getResourceAsXML("Ticket.Line"));
         m_jPanelCentral.add(m_ticketlines, java.awt.BorderLayout.CENTER);
 
-        //m_jImage.setMaxDimensions(size);
-             m_jImage.setVisible(false);
-        // m_jProductImage.setPreferredSize(new Dimension (50,50));
-     // m_jProductImage.setPreferredSize(new Dimension (50,50));
-        m_jContEntries.setPreferredSize(new Dimension(250, 385));
-     //  m_jContEntries.setMaxDimensions(new Dimension(250, 200));
-      //  m_jContEntries.setMaxDimensions(new Dimension(250, 200));
         m_ticketlines.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
@@ -250,8 +246,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                                 if (prod != null) {
                                     if (prod.getImage() != null) {
                                         m_jImage.setImage(prod.getImage());
-                                    } else {
-                                        m_jImage.setImage(null);
                                     }
                                 } else {
                                     m_jImage.setImage(null);
@@ -272,12 +266,25 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jbtnconfig = new JPanelButtons("Ticket.Buttons", this);
         m_jButtonsExt.add(m_jbtnconfig);
 
-        catcontainer.add(getSouthComponent(), BorderLayout.CENTER);
+        southcomponent = getSouthComponent();
+        catcontainer.add(southcomponent, BorderLayout.CENTER);
+
+        m_jImage.setPreferredSize(new Dimension(0, 150));
+
+        if (AppConfig.getInstance().getBoolean("till.imagepanel")){
+             adjust = 150;
+        }else{
+             m_jImage.setVisible(false);
+             adjust = 0;
+        }
+        if (statusBar) {
+             southcomponent.setPreferredSize(new Dimension(0, 350 - adjust));
+        } else {
+            southcomponent.setPreferredSize(new Dimension(0, 300 - adjust));
+        }
 
         senttax = dlSales.getTaxList(dlSync.getSiteGuid());
-
         senttaxcategories = dlSales.getTaxCategoriesList(dlSync.getSiteGuid());
-
         taxcategoriesmodel = new ComboBoxValModel();
 
         stateToZero();
@@ -2299,7 +2306,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jaddtax = new javax.swing.JToggleButton();
         m_jKeyFactory = new javax.swing.JTextField();
         m_jPanEntriesE = new javax.swing.JPanel();
-        m_jProductImage = new javax.swing.JPanel();
         m_jImage = new uk.chromis.data.gui.JImageViewer();
         catcontainer = new javax.swing.JPanel();
 
@@ -2608,8 +2614,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanTicket.add(jPanel5, java.awt.BorderLayout.LINE_END);
 
         m_jPanelCentral.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        m_jPanelCentral.setMaximumSize(new java.awt.Dimension(450, 320));
-        m_jPanelCentral.setPreferredSize(new java.awt.Dimension(450, 320));
+        m_jPanelCentral.setPreferredSize(new java.awt.Dimension(450, 240));
         m_jPanelCentral.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setLayout(new java.awt.BorderLayout());
@@ -2694,9 +2699,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_jPanContainer.add(m_jPanTicket, java.awt.BorderLayout.CENTER);
 
         m_jContEntries.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        m_jContEntries.setMaximumSize(new java.awt.Dimension(250, 365));
-        m_jContEntries.setMinimumSize(new java.awt.Dimension(250, 365));
-        m_jContEntries.setPreferredSize(new java.awt.Dimension(250, 365));
         m_jContEntries.setLayout(new java.awt.BorderLayout());
 
         m_jPanEntries.setLayout(new javax.swing.BoxLayout(m_jPanEntries, javax.swing.BoxLayout.Y_AXIS));
@@ -2815,21 +2817,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         m_jPanEntriesE.setLayout(new java.awt.BorderLayout());
         m_jContEntries.add(m_jPanEntriesE, java.awt.BorderLayout.LINE_END);
-
-        m_jProductImage.setMinimumSize(new java.awt.Dimension(50, 50));
-        m_jProductImage.setLayout(new java.awt.BorderLayout());
-        m_jContEntries.add(m_jProductImage, java.awt.BorderLayout.PAGE_END);
-
-        m_jImage.setMaxDimensions(new java.awt.Dimension(200, 130));
-        m_jImage.setMaximumSize(new java.awt.Dimension(200, 130));
-        m_jImage.setMinimumSize(new java.awt.Dimension(200, 130));
-        m_jImage.setPreferredSize(new java.awt.Dimension(200, 130));
-        m_jContEntries.add(m_jImage, java.awt.BorderLayout.CENTER);
+        m_jContEntries.add(m_jImage, java.awt.BorderLayout.PAGE_END);
 
         m_jPanContainer.add(m_jContEntries, java.awt.BorderLayout.LINE_END);
 
         catcontainer.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        catcontainer.setPreferredSize(new java.awt.Dimension(600, 10));
         catcontainer.setLayout(new java.awt.BorderLayout());
         m_jPanContainer.add(catcontainer, java.awt.BorderLayout.SOUTH);
 
@@ -3213,7 +3205,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     private javax.swing.JPanel m_jPanelScripts;
     private javax.swing.JLabel m_jPor;
     private javax.swing.JLabel m_jPrice;
-    private javax.swing.JPanel m_jProductImage;
     private javax.swing.JLabel m_jSubtotalEuros;
     private javax.swing.JComboBox m_jTax;
     private javax.swing.JLabel m_jTaxesEuros;
