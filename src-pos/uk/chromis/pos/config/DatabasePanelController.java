@@ -111,7 +111,7 @@ public class DatabasePanelController implements Initializable, BaseController {
         dbURL.setWidthSizes(120.0, 400.0);
 
         dirty.bindBidirectional(dbUserName.dirty);
-        dbUserName.setLabel(AppLocal.getIntString("Label.DbURL"));
+        dbUserName.setLabel(AppLocal.getIntString("Label.DbUserName"));
         dbUserName.setWidthSizes(120.0, 170.0);
 
         dirty.bindBidirectional(dbPassword.dirty);
