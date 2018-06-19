@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+       
+    <changeSet author="Chromis POS" id="Add all primary keys prior to v0.7">      
+        <sql>ALTER TABLE APPLICATIONS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ATTRIBUTE ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ATTRIBUTEINSTANCE ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ATTRIBUTESET ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ATTRIBUTESETINSTANCE ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ATTRIBUTEUSE ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ATTRIBUTEVALUE ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE BREAKS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE CATEGORIES ADD PRIMARY KEY (ID, SITEGUID)</sql>        
+        <sql>ALTER TABLE CLOSEDCASH ADD PRIMARY KEY (MONEY, SITEGUID)</sql>
+        <sql>ALTER TABLE CSVIMPORT ADD PRIMARY KEY (ID)</sql>
+        <sql>ALTER TABLE CUSTOMERS ADD PRIMARY KEY (ID, SITEGUID)</sql>           
+        <sql>ALTER TABLE DBPERMISSIONS ADD PRIMARY KEY (CLASSNAME, SITEGUID)</sql>   
+        <sql>ALTER TABLE DRAWEROPENED ADD PRIMARY KEY (ID, SITEGUID)</sql>             
+        <sql>ALTER TABLE FLOORS ADD PRIMARY KEY (ID, SITEGUID)</sql>        
+        <sql>ALTER TABLE LEAVES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE LINEREMOVED ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE LOCATIONS ADD PRIMARY KEY (ID, SITEGUID)</sql>  
+        <sql>ALTER TABLE ORDERS ADD PRIMARY KEY (ID)</sql>
+        <sql>ALTER TABLE PAYMENTS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE PEOPLE ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE PLACES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE PRODUCTS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE PRODUCTS_COM ADD PRIMARY KEY (ID,PRODUCT,PRODUCT2, SITEGUID)</sql>
+        <sql>ALTER TABLE PRODUCTS_KIT ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE PROMOTIONS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE RECEIPTS ADD PRIMARY KEY (ID, SITEGUID)</sql>             
+        <sql>ALTER TABLE RESERVATION_CUSTOMERS ADD PRIMARY KEY (ID, SITEGUID)</sql> 
+        <sql>ALTER TABLE RESERVATIONS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE RESOURCES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE ROLES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE SHAREDTICKETS ADD PRIMARY KEY (ID)</sql>
+        <sql>ALTER TABLE SHIFT_BREAKS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE SITEGUID ADD PRIMARY KEY (GUID)</sql>        
+        <sql>ALTER TABLE SHIFTS ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE STOCKCHANGES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE STOCKDIARY ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE STOCKLEVEL ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE TAXCATEGORIES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE TAXCUSTCATEGORIES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE TAXES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE TAXLINES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE THIRDPARTIES ADD PRIMARY KEY (ID, SITEGUID)</sql>
+        <sql>ALTER TABLE TICKETLINES ADD PRIMARY KEY (TICKET, LINE, SITEGUID)</sql>
+        <sql>ALTER TABLE VOUCHERS ADD PRIMARY KEY (VOUCHER, SITEGUID)</sql>              
+        <sql>ALTER TABLE TICKETS ADD PRIMARY KEY (ID, SITEGUID)</sql>               
+    </changeSet>                
+   
+   
+    <changeSet author="Chromis POS" id="If MySQL disable safe updates before cleanup" dbms="mysql">        
+        <sql>SET SQL_SAFE_UPDATES=0</sql>
+    </changeSet>
+   
+    <changeSet author="Chromis POS" id="Remove any duplicate entries from DATABASECHANGELOG caused by missing primary key"  >                         
+        <customChange class="uk.chromis.pos.liquibase.scripts.create.RemoveDuplicates" />                                       
+    </changeSet>
+      
+  
+    <!--
+        <changeSet author="Chromis POS" id="remove duplicate changelog records - cleanup">        
+             <sql><![CDATA[DELETE t1 FROM databasechangelog t1 INNER JOIN databasechangelog t2  WHERE t1.ORDEREXECUTED < t2.ORDEREXECUTED AND t1.id = t2.id ]]></sql>
+        </changeSet>
+    -->
+   
+    <changeSet author="Chromis POS" id="check for primary key on liquibase table.">        
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="DATABASECHANGELOG"/>   
+            </not>         
+        </preConditions>  
+        <sql>ALTER TABLE DATABASECHANGELOG ADD PRIMARY KEY (ID)</sql>  
+    </changeSet>
+ 
+    
+    <changeSet author="Chromis POS" id="check for primary key on liquibase table lock">        
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="DATABASECHANGELOGLOCK"/>   
+            </not>         
+        </preConditions>           
+        <sql>ALTER TABLE DATABASECHANGELOGLOCK ADD PRIMARY KEY (ID)</sql> 
+    </changeSet>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      	 
+</databaseChangeLog>
+

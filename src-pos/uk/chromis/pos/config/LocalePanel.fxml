@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import uk.chromis.custom.controls.LabeledComboBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.LocalePanelController">
+     <children>
+                                <Label layoutX="419.0" layoutY="184.0" text="eg" />
+                                <Label layoutX="419.0" layoutY="214.0" text="eg" />
+                                <Label layoutX="419.0" layoutY="244.0" text="eg" />
+                                <TextField fx:id="txtDate" editable="false" focusTraversable="false" layoutX="441.0" layoutY="180.0" prefHeight="27.0" prefWidth="166.0" />
+                                <TextField fx:id="txtTime" editable="false" focusTraversable="false" layoutX="441.0" layoutY="210.0" prefHeight="27.0" prefWidth="166.0" />
+                                <TextField fx:id="txtDateTime" editable="false" focusTraversable="false" layoutX="441.0" layoutY="240.0" prefHeight="27.0" prefWidth="166.0" />
+                                <LabeledComboBox fx:id="lcbLocale" layoutX="17.0" layoutY="30.0" />
+                                <LabeledComboBox fx:id="lcbInteger" layoutX="17.0" layoutY="60.0" />
+                                <LabeledComboBox fx:id="lcbDouble" layoutX="17.0" layoutY="90.0" />
+                                <LabeledComboBox fx:id="lcbCurrency" layoutX="17.0" layoutY="120.0" />
+                                <LabeledComboBox fx:id="lcbPercent" layoutX="17.0" layoutY="150.0" />
+                                <LabeledComboBox fx:id="lcbDateTime" layoutX="17.0" layoutY="240.0" />
+                                <LabeledComboBox fx:id="lcbDate" layoutX="17.0" layoutY="180.0" />
+                                <LabeledComboBox fx:id="lcbTime" layoutX="17.0" layoutY="210.0" />
+                            </children>
+</AnchorPane>

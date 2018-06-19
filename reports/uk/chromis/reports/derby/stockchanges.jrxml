@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StockChanges" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a1f690a3-5977-4467-85f8-6b0bcd5b7210">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Hedyddserver"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[SELECT L.NAME AS LOCATION, C.USERNAME AS USERNAME, C.UPLOADTIME AS UPLOADTIME,
+ COALESCE(P.NAME, '***NEW PRODUCT') AS PRODUCT, P.REFERENCE AS REFERENCE,
+CASE C.CHANGETYPE
+    	WHEN 1 THEN 'Adjust'
+    	WHEN 2 THEN 'Change'
+    	WHEN 3 THEN 'Change'
+        WHEN 4 THEN 'New Value'
+        WHEN 5 THEN 'New Value'
+		WHEN 6 THEN 'New Record'
+    	ELSE 'Unknown'
+    END AS CHANGETYPE,
+ C.FIELD AS FIELD, C.TEXTVALUE AS TEXTVALUE,
+ CASE C.CHANGES_PROCESSED
+	WHEN 0 THEN 'ACCEPT'
+    WHEN 1 THEN 'REJECT'
+    WHEN 2 THEN 'PROCESSED'
+    ELSE 'Unknown'
+    END AS CHANGES_PROCESSED
+ FROM STOCKCHANGES C
+ LEFT JOIN PRODUCTS P ON C.PRODUCTID = P.ID
+ LEFT JOIN LOCATIONS L ON C.LOCATION = L.ID]]>
+	</queryString>
+	<field name="LOCATION" class="java.lang.String"/>
+	<field name="USERNAME" class="java.lang.String"/>
+	<field name="UPLOADTIME" class="java.util.Date"/>
+	<field name="PRODUCT" class="java.lang.String"/>
+	<field name="REFERENCE" class="java.lang.String"/>
+	<field name="CHANGETYPE" class="java.lang.String"/>
+	<field name="FIELD" class="java.lang.String"/>
+	<field name="TEXTVALUE" class="java.lang.String"/>
+	<field name="CHANGES_PROCESSED" class="java.lang.String"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{LOCATION}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="0" width="553" height="24" forecolor="#000000" uuid="58dcc1c6-1d3b-42b1-ab28-0ec976da8319"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LOCATION}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{USERNAME}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="4" width="460" height="20" uuid="cf9c2b3c-6127-4496-8523-a6d7c35267b5"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{USERNAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="REFERENCE">
+		<groupExpression><![CDATA[$F{REFERENCE}]]></groupExpression>
+	</group>
+	<group name="PRODUCT">
+		<groupExpression><![CDATA[$F{PRODUCT}]]></groupExpression>
+	</group>
+	<group name="Group3">
+		<groupExpression><![CDATA[$F{REFERENCE}]]></groupExpression>
+		<groupHeader>
+			<band height="17">
+				<textField>
+					<reportElement x="0" y="0" width="460" height="15" uuid="1bb1bd00-5414-407c-b75d-84967009f1d5"/>
+					<textFieldExpression><![CDATA[(($F{REFERENCE} == null) ? "" : ($F{REFERENCE} + " - ")) + $F{PRODUCT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="10" width="263" height="33" uuid="6f9c1004-6140-4588-9c4f-d75824835765"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Stock Changes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="117" y="46" width="157" height="22" uuid="8e16dabd-2e54-471b-9652-83e1d55379ec"/>
+				<text><![CDATA[Audit Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="330" y="0" width="225" height="69" uuid="9c257e0f-0b27-475f-80fc-393980e00823"/>
+				<imageExpression><![CDATA[uk.chromis.pos.util.ReportUtils.getReportLogo()]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="20" width="555" height="1" uuid="544e89f7-0fd1-4142-aa23-e335e3be7007"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="30" y="4" width="81" height="16" uuid="148327ae-9722-4924-910b-a91d4c3cad9b"/>
+				<text><![CDATA[UPLOAD TIME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="4" width="82" height="16" uuid="4c280342-7db5-47d9-aa32-165ed8e32397"/>
+				<text><![CDATA[CHANGE TYPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="4" width="78" height="16" uuid="fd589e80-d3e3-4d85-a09e-bc6c1eb76218"/>
+				<text><![CDATA[FIELD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="4" width="134" height="16" uuid="34a0761f-7592-482d-aded-3e16ffcb73c6"/>
+				<text><![CDATA[VALUE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="4" width="75" height="16" uuid="438ffc29-fe92-463e-b436-a0a1dae05002"/>
+				<text><![CDATA[PROCESSED]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="cb229859-ab9a-4aa3-afa2-84439642f4ee"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="30" y="0" width="90" height="15" uuid="6b94a6c7-8f8e-4d02-82ee-f877be54bffa"/>
+				<textFieldExpression><![CDATA[$F{UPLOADTIME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="82" height="15" uuid="2ba59ff2-715a-4a62-83ee-a3f76d367610"/>
+				<textFieldExpression><![CDATA[$F{CHANGETYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="78" height="15" uuid="e1432ec7-3f2b-4717-bb04-beec66462311"/>
+				<textFieldExpression><![CDATA[$F{FIELD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="0" width="160" height="15" uuid="826c8a52-4825-49c4-8379-b6337f85f127"/>
+				<textFieldExpression><![CDATA[$F{TEXTVALUE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="75" height="15" uuid="0e2a02c1-9b89-4796-ba93-ca4ec2e735b5"/>
+				<textFieldExpression><![CDATA[$F{CHANGES_PROCESSED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="401e0e59-de38-4dd2-8257-418cb489177c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="deb23d85-47bb-4de6-978e-113ff117188c"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="c6ce76ba-6e11-41e2-9415-72dc2eff001b"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="5a79d2a0-bcde-4ad5-adf0-c4eb2066f6dd"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.TIMESTAMP.formatValue(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

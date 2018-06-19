@@ -1,0 +1,65 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.Closing2");
+report.setReport("/uk/chromis/reports/postgresql/closedpos_1");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT " + 
+                    "CLOSEDCASH.HOST, " +
+                    "CLOSEDCASH.HOSTSEQUENCE, " +
+                    "CLOSEDCASH.MONEY, " +
+                    "CLOSEDCASH.DATESTART, " +
+                    "CLOSEDCASH.DATEEND, " +
+                    "PAYMENTS.PAYMENT, " +
+                    "SUM(PAYMENTS.TOTAL) AS TOTAL " +
+                    "FROM CLOSEDCASH, PAYMENTS, RECEIPTS " +
+                    "WHERE CLOSEDCASH.MONEY = RECEIPTS.MONEY AND PAYMENTS.RECEIPT = RECEIPTS.ID AND ?(QBF_FILTER) " +
+                    "GROUP BY CLOSEDCASH.HOST, CLOSEDCASH.HOSTSEQUENCE, CLOSEDCASH.MONEY, CLOSEDCASH.DATESTART, CLOSEDCASH.DATEEND, PAYMENTS.PAYMENT " +
+                    "ORDER BY CLOSEDCASH.HOST, CLOSEDCASH.HOSTSEQUENCE");
+
+report.addParameter("CLOSEDCASH.DATEEND");
+report.addParameter("CLOSEDCASH.DATEEND");
+report.addParameter("CLOSEDCASH.SITEGUID");
+
+paramdates = new uk.chromis.pos.reports.JParamsDatesInterval();
+
+paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());
+paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
+
+report.addQBFFilter(paramdates);
+
+report.addField("HOST", uk.chromis.data.loader.Datas.STRING);
+report.addField("HOSTSEQUENCE", uk.chromis.data.loader.Datas.INT);
+report.addField("MONEY", uk.chromis.data.loader.Datas.STRING);
+report.addField("DATEEND", uk.chromis.data.loader.Datas.TIMESTAMP);
+report.addField("DATESTART", uk.chromis.data.loader.Datas.TIMESTAMP);
+report.addField("PAYMENT", uk.chromis.data.loader.Datas.STRING);
+report.addField("TOTAL", uk.chromis.data.loader.Datas.DOUBLE);
+
+report;
+

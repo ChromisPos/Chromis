@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!-- 
+        Create primary keys for empty database
+    -->
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>    
+
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+    
+    <changeSet author="Chromis POS" id="Remove any duplicate2 entries from DATABASECHANGELOG caused by missing primary key"  >                         
+        <customChange class="uk.chromis.pos.liquibase.scripts.create.RemoveDuplicates" />                                       
+    </changeSet>
+    
+    
+    <!--
+   <changeSet author="Chromis POS" id="remove duplicate changelog records">
+          <sql><![CDATA[DELETE t1 FROM databasechangelog t1 INNER JOIN databasechangelog t2  WHERE t1.ORDEREXECUTED < t2.ORDEREXECUTED AND t1.id = t2.id ]]></sql>
+   </changeSet>
+    -->
+    <changeSet author="Chromis POS" id="Create Primary keys (new db - migrate function)">      
+        <sql>alter table applications add primary key (id)</sql>
+        <sql>alter table attribute add primary key (id)</sql>
+        <sql>alter table attributeinstance add primary key (id)</sql>
+        <sql>alter table attributeset add primary key (id)</sql>
+        <sql>alter table attributesetinstance add primary key (id)</sql>
+        <sql>alter table attributeuse add primary key (id)</sql>
+        <sql>alter table attributevalue add primary key (id)</sql>
+        <sql>alter table breaks add primary key (id)</sql>
+        <sql>alter table categories add primary key (id)</sql>        
+        <sql>alter table closedcash add primary key (money)</sql>
+        <sql>alter table csvimport add primary key (id)</sql>
+        <sql>alter table customers add primary key (id)</sql>           
+        <sql>alter table dbpermissions add primary key (classname)</sql>   
+        <sql>alter table draweropened add primary key (id)</sql>             
+        <sql>alter table floors add primary key (id)</sql>        
+        <sql>alter table leaves add primary key (id)</sql>
+        <sql>alter table lineremoved add primary key (id)</sql>
+        <sql>alter table locations add primary key (id)</sql>  
+        <sql>alter table orders add primary key (id)</sql>
+        <sql>alter table payments add primary key (id)</sql>
+        <sql>alter table people add primary key (id)</sql>
+        <sql>alter table places add primary key (id)</sql>
+        <sql>alter table products add primary key (id)</sql>
+        <sql>alter table products_com add primary key (id,product,product2)</sql>
+        <sql>alter table products_kit add primary key (id)</sql>
+        <sql>alter table promotions add primary key (id)</sql>
+        <sql>alter table receipts add primary key (id)</sql>             
+        <sql>alter table reservation_customers add primary key (id)</sql> 
+        <sql>alter table reservations add primary key (id)</sql>
+        <sql>alter table resources add primary key (id)</sql>
+        <sql>alter table roles add primary key (id)</sql>
+        <sql>alter table sharedtickets add primary key (id)</sql>
+        <sql>alter table shift_breaks add primary key (id)</sql>
+        <sql>alter table siteguid add primary key (guid)</sql>        
+        <sql>alter table shifts add primary key (id)</sql>
+        <sql>alter table stockchanges add primary key (id)</sql>
+        <sql>alter table stockdiary add primary key (id)</sql>
+        <sql>alter table stocklevel add primary key (id)</sql>
+        <sql>alter table taxcategories add primary key (id)</sql>
+        <sql>alter table taxcustcategories add primary key (id)</sql>
+        <sql>alter table taxes add primary key (id)</sql>
+        <sql>alter table taxlines add primary key (id)</sql>
+        <sql>alter table thirdparties add primary key (id)</sql>
+        <sql>alter table ticketlines add primary key (ticket, line)</sql>
+        <sql>alter table vouchers add primary key (voucher)</sql>              
+        <sql>alter table tickets add primary key (id)</sql>               
+        <sql>alter table databasechangelog add primary key (id)</sql>      
+    </changeSet>                
+                                                                                                                                                                   	 
+</databaseChangeLog>
+

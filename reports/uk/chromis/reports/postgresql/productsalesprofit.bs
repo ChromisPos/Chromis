@@ -1,0 +1,81 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.SalesProfit");
+report.setReport("/uk/chromis/reports/postgresql/productsalesprofit");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT PRODUCTS.REFERENCE, " +
+                        "PRODUCTS.NAME, " +
+                        "PRODUCTS.PRICEBUY, " +
+                        "PRODUCTS.PRICESELL, " +
+                        "SUM(TICKETLINES.UNITS) AS SOLD_UNITS, " +
+                        "SUM(TICKETLINES.UNITS * PRODUCTS.PRICEBUY) AS COST_VALUE, " +
+                        "SUM(TICKETLINES.UNITS * PRODUCTS.PRICESELL) AS EXPECTED_SALES_VALUE, " +
+                        "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS ACTUAL_SALES_VALUE, " +
+                        "SUM(TICKETLINES.UNITS * PRODUCTS.PRICESELL) - SUM(TICKETLINES.UNITS * PRODUCTS.PRICEBUY) AS EXPECTED_PROFIT, " +
+                        "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) - SUM(TICKETLINES.UNITS * PRODUCTS.PRICEBUY) AS ACTUAL_PROFIT " +
+  "FROM (TICKETLINES TICKETLINES " +
+       "INNER JOIN RECEIPTS RECEIPTS " +
+           "ON (TICKETLINES.TICKET = RECEIPTS.ID)) " +
+       "LEFT OUTER JOIN PRODUCTS PRODUCTS " +
+          "ON (TICKETLINES.PRODUCT = PRODUCTS.ID) " +
+    "WHERE ?(QBF_FILTER) " +
+    "GROUP BY TICKETLINES.PRODUCT, " +
+    "PRODUCTS.REFERENCE, " +
+    "PRODUCTS.NAME, " +
+    "PRODUCTS.PRICEBUY, " +
+    "PRODUCTS.PRICESELL " +
+    "ORDER BY PRODUCTS.REFERENCE ASC");
+
+
+
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.SITEGUID");
+
+paramdates = new uk.chromis.pos.reports.JParamsDatesInterval();
+
+paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());
+paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
+
+report.addQBFFilter(paramdates);
+
+report.addField("REFERENCE", uk.chromis.data.loader.Datas.STRING);
+report.addField("NAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("PRICEBUY", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("PRICESELL", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("SOLD_UNITS", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("COST_VALUE", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("EXPECTED_SALES_VALUE", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("ACTUAL_SALES_VALUE", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("EXPECTED_PROFIT", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("ACTUAL_PROFIT", uk.chromis.data.loader.Datas.DOUBLE);
+
+
+report;

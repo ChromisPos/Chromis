@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+      
+    <changeSet author="Chromis POS" id="Add new columns into products table" >    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="DEFAULTPTR" tableName="PRODUCTS"/>
+            </not>
+        </preConditions> 
+                       
+        <addColumn tableName="PRODUCTS">                       
+            <column name="DEFAULTPTR" type="varchar(40)" defaultValue="2"/> 
+            <column name="REMOTEDISPLAY" type="${boolean.type}" defaultValueBoolean="false" /> 
+            <column name="DEFAULTSCREEN" type="varchar(5)" defaultValue="0" />             
+            <column name="PREPTIME" type="int" defaultValueNumeric="0"/> 
+            <column name="AVERAGECOST" type="decimal(12,3)" defaultValueNumeric="0.00"/>
+            <column name="PTROVERRIDE" type="${boolean.type}" defaultValueBoolean="false" />            
+        </addColumn>                                               
+    </changeSet>  
+     
+      
+    <changeSet author="Chromis POS" id="Convert to stored permissions format" >
+        <customChange class="uk.chromis.pos.liquibase.scripts.update.NewPermissions" />   
+    </changeSet>
+      
+    
+    <changeSet author="Chromis POS" id="Update send order script" >
+        <update tableName="RESOURCES">                                   
+            <column name="CONTENT" valueBlobResource="/uk/chromis/pos/templates/script.SendOrder.txt"/>
+            <where>NAME = 'script.SendOrder' </where>
+        </update>       
+    </changeSet> 
+ 
+    <changeSet author="Chromis POS" id="UpdatePrinter.Kitchen.xml" >
+        <update tableName="RESOURCES">                                   
+            <column name="CONTENT" valueBlobResource="/uk/chromis/pos/templates/Printer.TicketKitchen.xml"/>
+            <where>NAME = 'Printer.TicketKitchen' </where>
+        </update>       
+    </changeSet> 
+  
+    <changeSet author="Chromis POS" id="Update stock check add" >
+        <update tableName="RESOURCES">                                   
+            <column name="CONTENT" valueBlobResource="/uk/chromis/pos/templates/script.StockCurrentAdd.txt"/>
+            <where>NAME = 'script.StockCurrentAdd' </where>
+        </update>       
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Update stock check set" >
+        <update tableName="RESOURCES">                                   
+            <column name="CONTENT" valueBlobResource="/uk/chromis/pos/templates/script.StockCurrentSet.txt"/>
+            <where>NAME = 'script.StockCurrentSet' </where>
+        </update>       
+    </changeSet>   
+  
+    <changeSet author="Chromis POS" id="Dynamic menu entries table (db V1.0)">
+        <createTable tableName="add_newmenuentry">
+            <column name="entry" type="varchar(255)" />
+            <column name="follows" type="varchar(255)" />
+            <column name="graphic" type="varchar(255)" />
+            <column name="title" type="varchar(255)" />                
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>
+    </changeSet>                                                                                                 
+    
+    <changeSet author="Chromis POS" id="Dynamic new button entry table">    
+        <createTable tableName="add_newbutton">
+            <column name="entry" type="varchar(250)"/>                           
+        </createTable> 
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>
+    </changeSet> 
+  
+    <changeSet author="Chromis POS" id="remove old menuentries">    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="menuentries"/>
+            </not>
+        </preConditions> 
+        <dropTable tableName="menuentries"/>
+    </changeSet> 
+  
+
+    <changeSet author="Chromis POS" id="remove newbutton">    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="newbutton"/>
+            </not>
+        </preConditions> 
+        <dropTable tableName="newbutton"/>
+    </changeSet> 
+  
+    <changeSet author="Chromis POS" id="Update to Chromis to v0.94">    
+        <update tableName="APPLICATIONS">
+            <column name="VERSION" value="0.94"/>   
+            <column name="VERSIONINT" valueNumeric="20180609"/>         
+        </update>  
+    </changeSet>      
+    
+</databaseChangeLog>
+

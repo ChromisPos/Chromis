@@ -1,0 +1,127 @@
+/*******************************************************************************
+ *                                                                             *
+ * This css will control the colours use for the configuration screen          *
+ *                                                                             *
+ ******************************************************************************/
+
+/*
+.root {
+    -fx-background-color: #4d4d4d;
+    -fx-text-fill: #b4b4b4;      
+}
+
+.root .anchor-pane {
+    -fx-background-color: #414141;
+    -fx-text-fill: #b4b4b4;
+    -fx-border-color: #565656;
+}
+
+.root .tab-pane {
+    -fx-background-color: #4d4d4d;
+    -fx-text-fill: #b4b4b4;  
+}
+
+.root .tab-pane .tab-header-background {
+    -fx-background-color: #4d4d4d;     
+}
+
+.root .combo-box-base{
+    -fx-background-color: #414141; 
+    -fx-text-fill: #b4b4b4; 
+    -fx-border-color: #808080;    
+}
+
+.root .combo-box-base:hover{
+    -fx-background-color:  #b4b4b4; 
+    -fx-text-fill: #414141;
+    -fx-border-color: #808080;
+}
+
+.root .combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background: #b4b4b4;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: #414141;
+}
+
+
+.root .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: #b4b4b4;
+    -fx-text-fill: #414141;
+}
+
+
+.root .combo-box .cell{
+    -fx-background-color: #414141; 
+    -fx-text-fill: #b4b4b4; 
+    -fx-border-color: #808080;    
+}
+
+.root .radio-button{   
+    -fx-text-fill: #b4b4b4;    
+}
+
+.root .tab {
+    -fx-background-color: #4d4d4d;
+    -fx-text-fill: #b4b4b4; 
+    -fx-border-color: #808080;     
+}
+
+.root .tab:selected {
+    -fx-background-color: #919191;
+    -fx-border-color: #616161;    
+    -fx-border-radius:  0 6 0 0, 0 5 0 0;
+}
+
+.root .tab-label{
+    -fx-text-fill: #000000;
+}
+
+.root .button {
+    -fx-background-color: #414141;
+    -fx-text-fill: #b4b4b4;
+    -fx-border-color: #808080;
+}
+
+.root .text-field {
+    -fx-background-color: #414141;
+    -fx-text-fill: #b4b4b4;
+    -fx-border-color: #808080;
+}
+
+.root .webview {
+    -fx-background-color: #414141;
+    -fx-text-fill: #b4b4b4;  
+}
+
+
+.root .label {   
+    -fx-text-fill: #b4b4b4;    
+}
+
+
+
+
+.root .toggle-switch{
+    -thumb-move-animation-time: 100;
+    -fx-size: 10px
+}
+
+
+.root .toggle-switch .thumb {
+     -fx-body-color: #E3DEDB;     
+}
+
+.root .toggle-switch:selected .thumb-area{
+    -fx-background-radius: 1em;
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)),#008820;
+    -fx-background-insets: 0, 1;
+}
+
+.root .toggle-switch .thumb-area{
+    -fx-background-radius: 1em;
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -20%), derive(-fx-text-box-border, -30%)),#a3a3a3;
+    -fx-background-insets: 0, 1;
+}
+*/
+
+

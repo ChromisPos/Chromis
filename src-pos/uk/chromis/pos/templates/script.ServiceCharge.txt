@@ -1,0 +1,52 @@
+//  script.ServiceCharge
+//
+//   Chromis POS - The New Face of Open Source POS 
+//   Copyright (c) (c) 2015-2017 Chromis , previous uniCenta & Openbravo POS works   
+//
+//   This file is part of chromis oPOS
+//
+//   Chromis POS is free software: you can redistribute it and/or modify
+//   it under the terms of the GNU General Public License as published by
+//   the Free Software Foundation, either version 3 of the License, or
+//   (at your option) any later version.
+//
+//   Chromis POS is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//   GNU General Public License for more details.
+//
+//   You should have received a copy of the GNU General Public License
+//   along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>.
+// **************************************************************************
+// 2017-05-30 Updated by TJMChan.
+//  This script runs automatically each time a product is changed
+//  and should now be linked with ticket.change hook
+
+import uk.chromis.pos.ticket.ProductInfoExt;
+import uk.chromis.pos.ticket.TicketLineInfo;
+import uk.chromis.pos.forms.AppConfig;
+import uk.chromis.pos.ticket.TaxInfo;
+
+if (AppConfig.getInstance ().getBoolean("till.SCOnOff") && (ticket.getNoSC().equals("0"))) {
+
+        // check the receipt for a service and remove it if it exists
+        for (int i = 0; i < ticket.getLinesCount(); i++) {
+            line = ticket.getLine(i);
+            if (line.getProductID().equals("sc999-001")) {
+                ticket.removeLine(i);
+            }
+        }
+
+        // Get the service charge rate
+        SCRate = 0;
+        SCRate = AppConfig.getInstance().getDouble("till.SCRate") / 100;
+
+        // test if total > 0 and check if service charge is for restaurant mode only
+        if ((ticket.getSubTotal() > 0.0) &&
+                (!AppConfig.getInstance().getBoolean("till.SCRestaurant") || 
+                (AppConfig.getInstance().getProperty("machine.ticketsbag")).equals("restaurant"))) {
+            ProductInfoExt oProduct = dlSales.getProductInfoByCode("sc999-001");
+            TaxInfo tax = taxeslogic.getTaxInfo(oProduct.getTaxCategoryID());
+            ticket.insertLine(ticket.getLinesCount(), new TicketLineInfo("sc999-001", oProduct.getName(), 1.0, ticket.getSubTotal() * SCRate, oProduct.getTaxCategoryID(), tax));
+	}
+}

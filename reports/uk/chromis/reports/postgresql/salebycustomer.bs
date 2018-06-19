@@ -1,0 +1,68 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.SalesByCustomer");
+report.setReport("/uk/chromis/reports/postgresql/salebycustomer");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT " +
+                "CUSTOMERS.NAME AS CNAME, " +
+                "RECEIPTS.DATENEW, " +
+                "TICKETS.TICKETID, " +
+                "PRODUCTS.NAME AS PNAME, " +                
+                "TICKETS.TICKETTYPE, " +
+                "SUM(TICKETLINES.UNITS) AS UNITS, " +
+                "SUM(TICKETLINES.UNITS * TICKETLINES.PRICE) AS TOTAL " +
+                "FROM RECEIPTS, CUSTOMERS, TICKETS, TICKETLINES LEFT OUTER JOIN PRODUCTS ON TICKETLINES.PRODUCT = PRODUCTS.ID " +
+                "WHERE CUSTOMERS.ID = TICKETS.CUSTOMER AND TICKETLINES.PRODUCT = PRODUCTS.ID AND RECEIPTS.ID = TICKETS.ID AND TICKETS.ID = TICKETLINES.TICKET AND ?(QBF_FILTER) " +
+                "GROUP BY CUSTOMERS.NAME, RECEIPTS.DATENEW, TICKETS.TICKETID, PRODUCTS.NAME, TICKETS.TICKETTYPE " +
+                "ORDER BY CUSTOMERS.NAME, PRODUCTS.NAME, RECEIPTS.DATENEW");
+
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.DATENEW");
+report.addParameter("RECEIPTS.SITEGUID");
+
+paramdates = new uk.chromis.pos.reports.JParamsDatesInterval();
+
+paramdates.setStartDate(uk.chromis.beans.DateUtils.getToday());
+paramdates.setEndDate(uk.chromis.beans.DateUtils.getTodayMinutes());
+
+report.addQBFFilter(paramdates);
+
+report.addParameter("CUSTOMERS.ID");
+report.addParameter("CUSTOMERS.NAME");
+report.addParameter("CUSTOMERS.SITEGUID");
+report.addQBFFilter(new uk.chromis.pos.reports.JParamsCustomer());
+
+report.addField("CNAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("DATENEW", uk.chromis.data.loader.Datas.TIMESTAMP);
+report.addField("TICKETID", uk.chromis.data.loader.Datas.STRING);
+report.addField("PNAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("TICKETTYPE", uk.chromis.data.loader.Datas.INT);
+report.addField("UNITS", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("TOTAL", uk.chromis.data.loader.Datas.DOUBLE);
+
+report;

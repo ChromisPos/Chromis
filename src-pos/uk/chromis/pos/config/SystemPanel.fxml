@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import uk.chromis.custom.controls.LabeledTextField?>
+<?import uk.chromis.custom.switches.ToggleSwitch?>
+
+<AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.SystemPanelController">
+   <children>
+      <Separator layoutX="168.0" layoutY="159.0" prefHeight="4.0" prefWidth="580.0" />
+      <Label fx:id="general" layoutX="43.0" layoutY="153.0" prefHeight="17.0" prefWidth="120.0" text="Start Up Screen">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="10.0" layoutY="160.0" prefHeight="0.0" prefWidth="28.0" />
+      <Separator layoutX="172.0" layoutY="20.0" prefHeight="4.0" prefWidth="580.0" />
+      <Label fx:id="autologoffpanel" layoutX="47.0" layoutY="14.0" prefHeight="17.0" prefWidth="120.0" text="Start Up Screen">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="21.0" prefHeight="0.0" prefWidth="28.0" />
+      <ToggleSwitch fx:id="enableAutoLogoff" layoutX="16.0" layoutY="37.0" />
+      <ToggleSwitch fx:id="inactivityTimer" layoutX="69.0" layoutY="60.0" />
+      <ToggleSwitch fx:id="autologoffAfterSale" layoutX="69.0" layoutY="85.0" />
+      <ToggleSwitch fx:id="autoLogoffAfterKitchen" layoutX="69.0" layoutY="110.0" />
+      <ToggleSwitch fx:id="autoLogoffToTables" layoutX="411.0" layoutY="86.0" />
+      <ToggleSwitch fx:id="autoLogoffAfterPrint" layoutX="411.0" layoutY="110.0" />
+      <LabeledTextField fx:id="autoLogoffTime" layoutX="408.0" layoutY="60.0" />
+      <ToggleSwitch fx:id="marineOpt" layoutX="16.0" layoutY="180.0" />
+      <ToggleSwitch fx:id="textOverlay" layoutX="16.0" layoutY="205.0" />
+      <ToggleSwitch fx:id="taxIncluded" layoutX="266.0" layoutY="180.0" />
+      <ToggleSwitch fx:id="consolidate" layoutX="516.0" layoutY="180.0" />
+      <ToggleSwitch fx:id="price00" layoutX="266.0" layoutY="205.0" />
+      <ToggleSwitch fx:id="disableDefaultProduct" layoutX="516.0" layoutY="205.0" />
+      <ToggleSwitch fx:id="closeCashbtn" layoutX="16.0" layoutY="230.0" />
+      <ToggleSwitch fx:id="moveAMountBoxToTop" layoutX="266.0" layoutY="230.0" />
+      <ToggleSwitch fx:id="changeSalesScreen" layoutX="516.0" layoutY="230.0" />
+      <ToggleSwitch fx:id="updatedbprice" layoutX="16.0" layoutY="255.0" />
+      <ToggleSwitch fx:id="categoiesBynumber" layoutX="266.0" layoutY="255.0" />
+      <ToggleSwitch fx:id="longNames" layoutX="516.0" layoutY="255.0" />
+      <ToggleSwitch fx:id="customSounds" layoutX="16.0" layoutY="280.0" />
+      <ToggleSwitch fx:id="maxChangeEnable" layoutX="16.0" layoutY="305.0" />
+      <LabeledTextField fx:id="maxChange" layoutX="266.0" layoutY="305.0" />
+      <Spinner fx:id="tableDays" layoutX="17.0" layoutY="352.0" prefHeight="25.0" prefWidth="52.0" />
+      <Label fx:id="retainLabel" layoutX="78.0" layoutY="352.0" prefHeight="25.0" prefWidth="361.0" text="Label" />
+   </children>
+</AnchorPane>

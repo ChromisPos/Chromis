@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="b6424d93-98fe-45be-825a-7353f68ad063">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT REFERENCE, NAME, CODE, PRICEBUY, PRICESELL, PREVIOUSBUY, PREVIOUSSELL FROM CSVIMPORT
+WHERE CSVERROR ='Updated Price Details']]>
+	</queryString>
+	<field name="reference" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="code" class="java.lang.String"/>
+	<field name="pricebuy" class="java.lang.Double"/>
+	<field name="pricesell" class="java.lang.Double"/>
+	<field name="previousbuy" class="java.lang.Double"/>
+	<field name="previoussell" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-1" mode="Transparent" x="0" y="0" width="260" height="30" forecolor="#33CCFF" backcolor="#FFFFFF" uuid="508503af-ea88-434b-82a0-147710d41656"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.title}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="dd/MM/yyyy h.mm a" isBlankWhenNull="false">
+				<reportElement key="textField" x="400" y="15" width="135" height="15" uuid="dce36333-5b10-495a-a4c8-2a62db97b268"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.TIMESTAMP.formatValue(new Date())]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-10" mode="Opaque" x="400" y="0" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="5023337f-1e04-47c2-b39f-163c1be3f108"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.printed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-19" mode="Opaque" x="0" y="33" width="50" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="62c2371d-b8fb-4fa6-b183-e589be8ea1e8"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.period}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-6" mode="Transparent" x="160" y="33" width="10" height="15" uuid="d1088ec3-d77e-493a-8f7d-f9ef352424ca"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[-
+]]></text>
+			</staticText>
+			<rectangle radius="5">
+				<reportElement key="rectangle-1" mode="Opaque" x="0" y="50" width="535" height="2" forecolor="#33CCFF" backcolor="#33CCFF" uuid="358d3407-efa3-41c4-9254-e0bc9cead02b"/>
+				<graphicElement fill="Solid">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="53" height="15" uuid="bd60b64a-3977-4f14-8175-5ef4bcd5d774"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="0" width="147" height="15" uuid="494a3a46-541d-4453-8f5a-ca776316a13d"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="0" width="83" height="15" uuid="f86f88f1-47b8-4c15-a1a8-1a812dbd6519"/>
+				<textElement markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.barcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="52" height="15" uuid="5b3dca2f-885c-4c0e-b76c-bdf1aeae41e4"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.pricebuy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="0" width="52" height="15" uuid="8783f25f-6af9-404c-97c5-0a9c60aaffa8"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.previoussell}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="15" width="535" height="1" uuid="4f0fc632-07fc-491c-82f2-8d6818f544c2"/>
+			</line>
+			<textField>
+				<reportElement x="327" y="0" width="52" height="15" uuid="2680eccd-113b-4394-a98f-aad871539b82"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.previousbuy}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="0" width="52" height="15" uuid="aede4faf-3c0a-4894-9a96-a1957b065563"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.pricesell}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="53" y="0" width="83" height="13" uuid="64167c4c-deb0-4f3a-8f59-05db47511dbf"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="0" width="52" height="13" uuid="831a60be-5eed-4338-85fb-d8bdd47e2eaf"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.CURRENCY.formatValue($F{previousbuy})]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="431" y="0" width="52" height="13" uuid="bc5b865b-ee5c-450a-9f14-cce8a4b69c97"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.CURRENCY.formatValue($F{previoussell})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="53" height="13" uuid="5c5e8580-3131-4d18-9eaa-60ef444b9713"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="0" width="191" height="13" uuid="d6c9871f-60c1-4f20-b064-894563202ae9"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="0" width="52" height="13" uuid="329b01f6-84bc-42d8-b5a2-273b08d381b9"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.CURRENCY.formatValue($F{pricebuy})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="0" width="52" height="13" uuid="08d8031f-669b-4c85-9fe0-030d85d4dfce"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.CURRENCY.formatValue($F{pricesell})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<staticText>
+				<reportElement key="staticText-7" mode="Opaque" x="504" y="10" width="10" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="ecc95564-2429-464b-9c2b-e91e3e03466c"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-16" mode="Opaque" x="484" y="10" width="20" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="d2407c00-57ff-4a39-9716-41cdfeb84f21"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="15" uuid="ff15f5e9-9258-47ce-9241-69ce35c80c2b"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[rpt:updatedprices]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-17" mode="Opaque" x="514" y="10" width="20" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="0c1114d5-5304-41b3-b8d5-beb3da9e8a02"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,25 @@
+// Discounts when making multiple purchases across a range of products
+// Cheapest products are discounted
+//
+
+// START OF USER EDITABLE VARIABLES
+
+Double QTY_FOR_EVERY = 3.0;
+Double QTY_FREE = 1.0;
+Boolean WHOLE_PRODUCTS_ONLY = true;
+
+// END OF USER EDITABLE VARIABLES
+
+//
+//
+// DO NOT EDIT THE CODE BELOW UNLESS YOU REALLY KNOW WHAT YOU ARE DOING
+//      
+
+    support.UpdateBuySomeGetSomeGroup( ticket,  promotion,
+                "  *" + promotion.getName(),
+                QTY_FOR_EVERY, QTY_FREE,
+                WHOLE_PRODUCTS_ONLY );
+
+
+
+

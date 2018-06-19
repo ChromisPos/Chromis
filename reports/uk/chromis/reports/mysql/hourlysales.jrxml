@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hourlysales" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="5991775c-dc31-4afc-83bf-3fa056254f7c">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="ARG" class="java.lang.Object" isForPrompting="false"/>
+	<field name="SALESDATE" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SALESHOUR" class="java.lang.Integer"/>
+	<field name="HOURTOTAL" class="java.lang.Double"/>
+	<field name="HOURSALES" class="java.lang.Integer"/>
+	<variable name="TOTAL" class="java.lang.Double" resetType="Group" resetGroup="bydate" calculation="Sum">
+		<variableExpression><![CDATA[$F{HOURTOTAL}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0.0)]]></initialValueExpression>
+	</variable>
+	<variable name="SALES" class="java.lang.Integer" resetType="Group" resetGroup="bydate" calculation="Sum">
+		<variableExpression><![CDATA[$F{HOURSALES}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="bydate">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField>
+					<reportElement x="0" y="1" width="120" height="18" forecolor="#0000FF" uuid="641ace97-ba63-41fb-864b-bfed8d6cb21e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[uk.chromis.format.Formats.DATE.formatValue($F{SALESDATE})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="20" width="120" height="14" uuid="283346b3-ed63-453f-bc45-6c360917349c"/>
+					<textFieldExpression><![CDATA[$R{label.timeperiod}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="270" y="19" width="100" height="16" uuid="25200810-c1bd-4b22-b963-83fb95114b19"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$R{label.salesvalue}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="430" y="20" width="100" height="16" uuid="56e5e4fe-65e4-47b3-83c0-d015e15d0f1c"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$R{label.salesnumber}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="36" width="535" height="3" uuid="528c22fb-1dae-4609-8f42-9f01a400a6d4"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="28">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<line>
+					<reportElement key="line-5" mode="Opaque" x="0" y="4" width="535" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="beda899b-ddf5-47ff-bdd9-b71ff2798883">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<graphicElement fill="Solid">
+						<pen lineWidth="0.25" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-30" mode="Opaque" x="260" y="9" width="110" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="2f7de931-f621-486e-8c11-eb1129eccb89"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+						<font fontName="SansSerif" size="11" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[uk.chromis.format.Formats.CURRENCY.formatValue($V{TOTAL})]]></textFieldExpression>
+				</textField>
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField-5" mode="Opaque" x="430" y="10" width="100" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="2a6d0baa-62c2-430f-a2aa-2fa9a4fa555f">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+						<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[uk.chromis.format.Formats.INT.formatValue($V{SALES})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-18" mode="Transparent" x="0" y="0" width="359" height="30" forecolor="#33CCFF" backcolor="#FFFFFF" uuid="64d16860-5a4c-41dd-aad7-05d11541ba50"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{title.hourlysales}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-19" mode="Opaque" x="400" y="0" width="135" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="593acbcc-e425-4cdd-9fee-8002c041320f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$R{label.printed}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="400" y="15" width="135" height="15" uuid="d0a9d71e-9ef9-4c7a-bb43-e022a8769f0b"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.TIMESTAMP.formatValue(new Date())]]></textFieldExpression>
+			</textField>
+			<rectangle radius="5">
+				<reportElement key="rectangle-1" mode="Opaque" x="0" y="38" width="535" height="2" forecolor="#33CCFF" backcolor="#33CCFF" uuid="cce7e4ce-72c7-4696-ab9e-acd2cdfc3832"/>
+				<graphicElement fill="Solid">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="270" y="0" width="100" height="15" uuid="416019d0-e57b-41d6-adb6-996a38e046f2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.CURRENCY.formatValue($F{HOURTOTAL})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="100" height="15" uuid="04a10db4-d3ac-42a0-916f-1d09dd8ebba0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[uk.chromis.format.Formats.INT.formatValue($F{HOURSALES})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="170" height="15" uuid="2c979319-c4a2-4c66-9679-b999c9132bdd">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[($F{SALESHOUR}<10 ? "0":"") 
++$F{SALESHOUR}.toString() + ":00  -  " 
++($F{SALESHOUR}<10 ? "0":"") + $F{SALESHOUR}.toString() + ":59"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-16" mode="Opaque" x="485" y="10" width="20" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="e7f00588-00cd-4fed-992e-5866b19dfdb1"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField-17" mode="Opaque" x="515" y="10" width="20" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="c9160011-73d7-49ec-9c17-540028940244"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-7" mode="Opaque" x="505" y="10" width="10" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="56659c12-7e84-44f1-b32e-8f7ba73cdd98"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None">
+					<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<line>
+				<reportElement key="line-5" mode="Opaque" x="0" y="4" width="535" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="3aee6978-6f70-4d9c-b173-590dfafecc7b">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<graphicElement fill="Solid">
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="15" uuid="69ae7a2f-34c1-44d4-8a6a-964ebf249c57"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[rpt:hourly sales]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="30" splitType="Stretch"/>
+	</summary>
+</jasperReport>

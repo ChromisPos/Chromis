@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>    
+
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+    
+    <!-- ***************************************************************************************** -->
+    <!--                Update Administrator permissions if required                               -->
+    <!-- ***************************************************************************************** -->    
+    <changeSet author="Chromis POS" id="Update admin permissions v0.57.1beta4">   
+        <update tableName="ROLES">           
+            <column name="PERMISSIONS" valueBlobResource="/uk/chromis/pos/templates/Role.Administrator.xml"/>   
+            <where>ID='0'</where>         
+        </update> 
+    </changeSet>    
+        
+    <!-- ***************************************************************************************** -->
+    <!--                Must be updated below to reflect current version                           -->
+    <!-- ***************************************************************************************** -->
+    <changeSet author="Chromis POS" id="Update to 0.58.5.7a">    
+        <update tableName="APPLICATIONS">
+            <column name="VERSION" value="0.58.5.7a"/>   
+            <column name="VERSIONINT" valueNumeric="20161020"/>     
+        </update>  
+    </changeSet>
+    
+</databaseChangeLog>
+

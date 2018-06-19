@@ -1,0 +1,24 @@
+// Discounts when making multiple purchases across a range of products
+// Cheapest products are discounted
+//
+
+// START OF USER EDITABLE VARIABLES
+
+// For every 'QTY_FOR_EVERY' products you buy, you get 'QTY_DISCOUNTED' at
+// PERCENT_DISCOUNT - cheapest products are discounted
+Double QTY_FOR_EVERY = 12.0;
+Double QTY_DISCOUNTED = 2.0;
+Double PERCENT_DISCOUNT = 25.0;
+Boolean WHOLE_PRODUCTS_ONLY = true;
+
+// END OF USER EDITABLE VARIABLES
+
+//
+//
+// DO NOT EDIT THE CODE BELOW UNLESS YOU REALLY KNOW WHAT YOU ARE DOING
+//      
+ 
+    support.UpdateMutibuyGroup( ticket,
+                promotion, "  *" + promotion.getName(),
+                QTY_FOR_EVERY, QTY_DISCOUNTED, PERCENT_DISCOUNT,
+                WHOLE_PRODUCTS_ONLY );

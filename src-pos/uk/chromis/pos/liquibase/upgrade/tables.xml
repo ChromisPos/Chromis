@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+    
+    <!-- This xml is used for any new tables or columns that need to be added as part of the upgrade -->
+    
+    <changeSet author="Chromis POS" id="Create table lock columns in places table" >    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="LOCKED" tableName="PLACES"/>
+            </not>
+        </preConditions> 
+                       
+        <addColumn tableName="PLACES">            
+            <column name="LOCKED" type="${boolean.type}" defaultValueBoolean="false" /> 
+            <column name="OPENEDBY" type="varchar(50)" />             
+        </addColumn>                                               
+    </changeSet>
+        
+   <changeSet author="Chromis POS" id="Create SFLAG colunmn in tables (NV)"  >    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="APPLICATIONS" columnName="SFLAG"/>
+            </not>
+        </preConditions>                      
+        <customChange class="uk.chromis.pos.util.SyncFlag" />                                       
+    </changeSet>
+    
+</databaseChangeLog>
+

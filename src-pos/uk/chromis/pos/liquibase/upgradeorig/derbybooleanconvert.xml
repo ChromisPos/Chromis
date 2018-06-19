@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+       
+    <!-- Need to enure that all columns are present before attempting to refactor for deriby
+    Once refactored all columns will be added with new format
+    DO NOT MOVE OR ADD TO THIS SECTION -->
+    <changeSet author="Chromis POS" id="Add PrintkB if not found" dbms="postgresql, hypersql, hsqldb">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="PRINTKB" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="PRODUCTS">
+            <column name="PRINTKB" type="${boolean.type}" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>                                                   
+        </addColumn>                     
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Add PrintkB if not found m" dbms="mysql, oracle">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="PRINTKB" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="PRODUCTS">
+            <column name="PRINTKB" type="${boolean.type}" defaultValueNumeric="1" >
+                <constraints nullable="false"/>
+            </column>                                                   
+        </addColumn>                     
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Add PrintkB if not found d" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="PRINTKB" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="PRODUCTS">
+            <column name="PRINTKB" type="SMALLINT" defaultValueNumeric="1" >
+                <constraints nullable="false"/>
+            </column>                                                   
+        </addColumn>                     
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Add SENDSTATUS if not found" dbms="postgresql, hypersql, hsqldb">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="SENDSTATUS" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="PRODUCTS">
+            <column name="SENDSTATUS" type="${boolean.type}" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>                                                   
+        </addColumn>                     
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Add SENDSTATUS if not found m" dbms="mysql, oracle">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="SENDSTATUS" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="PRODUCTS">
+            <column name="SENDSTATUS" type="${boolean.type}" defaultValueNumeric="1" >
+                <constraints nullable="false"/>
+            </column>                                                   
+        </addColumn>                     
+    </changeSet> 
+
+    <changeSet author="Chromis POS" id="Add SENDSTATUS if not found d" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="SENDSTATUS" tableName="PRODUCTS"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="PRODUCTS">
+            <column name="SENDSTATUS" type="SMALLINT" defaultValueNumeric="1" >
+                <constraints nullable="false"/>
+            </column>                                                   
+        </addColumn>                     
+    </changeSet>
+    <!-- End of refactoring preperation -->
+    <!-- ***************************************************************************************** -->
+    <!-- ***************************************************************************************** -->
+    <!-- ***************************************************************************************** -->
+    <!-- ***************************************************************************************** -->    
+    <!-- Refactors derby database to use update driver for boolean 
+    Any columns that used boolean 'int' will be converted to use true/false.
+    DO NOT CHANGE THIS SECTION -->    
+    <changeSet author="Chromis POS" id="Refactor People table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>  
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="VISIBLE"
+            tableName="PEOPLE"/>
+  
+        <addColumn tableName="PEOPLE">
+            <column name="VISIBLE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PEOPLE SET VISIBLE='TRUE' WHERE JDL_TMP=1;
+            UPDATE PEOPLE SET VISIBLE='FALSE' WHERE JDL_TMP=0
+        </sql>
+        
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PEOPLE"/>
+    </changeSet>  
+    
+    <changeSet author="Chromis POS" id="Refactor Breaks table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions> 
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="VISIBLE"
+            tableName="BREAKS"/>
+  
+        <addColumn tableName="BREAKS">
+            <column name="VISIBLE" type="boolean"/>
+        </addColumn>
+        
+        <sql>
+            UPDATE BREAKS SET VISIBLE='TRUE' WHERE JDL_TMP=1;
+            UPDATE BREAKS SET VISIBLE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="BREAKS"/>
+    </changeSet>            
+      
+    <changeSet author="Chromis POS" id="Refactor CUSTOMER table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions> 
+    
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="VISIBLE"
+            tableName="CUSTOMERS"/>
+  
+        <addColumn tableName="CUSTOMERS">
+            <column name="VISIBLE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE CUSTOMERS SET VISIBLE='TRUE' WHERE JDL_TMP=1;
+            UPDATE CUSTOMERS SET VISIBLE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="CUSTOMERS"/>
+    </changeSet>      
+        
+    <changeSet author="Chromis POS" id="Refactor Moorers table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>        
+
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="POWER"
+            tableName="MOORERS"/>
+  
+        <addColumn tableName="MOORERS">
+            <column name="POWER" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE MOORERS SET POWER='TRUE' WHERE JDL_TMP=1;
+            UPDATE MOORERS SET POWER='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="MOORERS"/>
+    </changeSet>      
+        
+    <changeSet author="Chromis POS" id="Refactor Places table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>   
+
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="TABLEMOVED"
+            tableName="PLACES"/>
+  
+        <addColumn tableName="PLACES">
+            <column name="TABLEMOVED" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PLACES SET TABLEMOVED='TRUE' WHERE JDL_TMP=1;
+            UPDATE PLACES SET TABLEMOVED='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PLACES"/>
+    </changeSet>        
+        
+    <changeSet author="Chromis POS" id="Refactor Catergories table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>    
+
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="CATSHOWNAME"
+            tableName="CATEGORIES"/>
+  
+        <addColumn tableName="CATEGORIES">
+            <column name="CATSHOWNAME" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE CATEGORIES SET CATSHOWNAME='TRUE' WHERE JDL_TMP=1;
+            UPDATE CATEGORIES SET CATSHOWNAME='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="CATEGORIES"/>
+    </changeSet>         
+        
+    <changeSet author="Chromis POS" id="Refactor Taxes table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>     
+
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="RATECASCADE"
+            tableName="TAXES"/>
+  
+        <addColumn tableName="TAXES">
+            <column name="RATECASCADE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE TAXES SET RATECASCADE='TRUE' WHERE JDL_TMP=1;
+            UPDATE TAXES SET RATECASCADE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="TAXES"/>
+    </changeSet>         
+        
+    <changeSet author="Chromis POS" id="Refactor Reservations table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>    
+
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISDONE"
+            tableName="RESERVATIONS"/>
+  
+        <addColumn tableName="RESERVATIONS">
+            <column name="ISDONE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE RESERVATIONS SET ISDONE='TRUE' WHERE JDL_TMP=1;
+            UPDATE RESERVATIONS SET ISDONE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="RESERVATIONS"/>
+    </changeSet>         
+        
+    
+    <changeSet author="Chromis POS" id="Refactor Products table" dbms="derby">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">SELECT COUNT(*) FROM DATABASECHANGELOG WHERE ID='derby10.10.20'</sqlCheck>  
+        </preConditions>  
+
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISCOM"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ISCOM" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ISCOM='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ISCOM='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISSCALE"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ISSCALE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ISSCALE='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ISSCALE='FALSE' WHERE JDL_TMP=0    
+        </sql>                    
+        
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISKITCHEN"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ISKITCHEN" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ISKITCHEN='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ISKITCHEN='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>        
+  
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="PRINTKB"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="PRINTKB" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET PRINTKB='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET PRINTKB='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>      
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="SENDSTATUS"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="SENDSTATUS" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET SENDSTATUS='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET SENDSTATUS='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>       
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISSERVICE"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ISSERVICE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ISSERVICE='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ISSERVICE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>        
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISVERPATRIB"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ISVERPATRIB" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ISVERPATRIB='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ISVERPATRIB='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>        
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ISVPRICE"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ISVPRICE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ISVPRICE='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ISVPRICE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>       
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="WARRANTY"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="WARRANTY" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET WARRANTY='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET WARRANTY='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>        
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="CANDISCOUNT"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="CANDISCOUNT" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET CANDISCOUNT='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET CANDISCOUNT='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>         
+        
+        <renameColumn 
+            newColumnName="JDL_TMP"
+            oldColumnName="ALWAYSAVAILABLE"
+            tableName="PRODUCTS"/>
+  
+        <addColumn tableName="PRODUCTS">
+            <column name="ALWAYSAVAILABLE" type="boolean"/>
+        </addColumn>
+        <sql>
+            UPDATE PRODUCTS SET ALWAYSAVAILABLE='TRUE' WHERE JDL_TMP=1;
+            UPDATE PRODUCTS SET ALWAYSAVAILABLE='FALSE' WHERE JDL_TMP=0    
+        </sql>  
+              
+        <dropColumn 
+            columnName="JDL_TMP"
+            tableName="PRODUCTS"/>         
+
+        <sql>
+            INSERT INTO DATABASECHANGELOG (ID, AUTHOR, FILENAME, DATEEXECUTED, ORDEREXECUTED, EXECTYPE, MD5SUM, DESCRIPTION, LIQUIBASE) 
+            VALUES (
+            'derby10.10.20',
+            'Chromis POS', 
+            'uk/chromis/pos/liquibase/udpdatecreatedb.xml', 
+            '2015-10-23 22:43:33.487',
+            0,
+            'EXECUTED',
+            '7:d41d8cd98f00b204e9800998ecf8427e',
+            'empty',                       
+            '3.5.0-Chromis Mod')                
+        </sql>
+    </changeSet>      
+    <!-- End of  Derby refactoring -->  
+</databaseChangeLog>
+

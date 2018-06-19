@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="uk.chromis.pos.config.SalesScreenPanelController">
+    <children>
+                                <Pane fx:id="paneImage1" layoutX="375.0" layoutY="15.0" prefHeight="221.0" prefWidth="302.0" style="-fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20;">
+                                    <children>
+                                        <RadioButton fx:id="rbtnLayout1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="screenLayout" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <ImageView fx:id="image1" fitHeight="198.0" fitWidth="250.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="paneImage3" layoutX="375.0" layoutY="245.0" prefHeight="221.0" prefWidth="302.0" style="-fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20;">
+                                    <children>
+                                        <RadioButton fx:id="rbtnLayout3" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" toggleGroup="$screenLayout" />
+                                        <ImageView fx:id="image3" fitHeight="198.0" fitWidth="250.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="paneImage2" layoutX="25.0" layoutY="245.0" prefHeight="221.0" prefWidth="302.0" style="-fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20;">
+                                    <children>
+                                        <RadioButton fx:id="rbtnLayout2" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" toggleGroup="$screenLayout" />
+                                        <ImageView fx:id="image2" fitHeight="198.0" fitWidth="250.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    </children>
+                                </Pane>
+                                <Pane fx:id="paneImage0" layoutX="25.0" layoutY="15.0" prefHeight="221.0" prefWidth="302.0" style="-fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20;">
+                                    <children>
+                                        <RadioButton fx:id="rbtnLayout0" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" toggleGroup="$screenLayout" />
+                                        <ImageView fx:id="image0" fitHeight="198.0" fitWidth="250.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    </children>
+                                </Pane>
+                            </children> 
+</AnchorPane>

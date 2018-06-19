@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+        
+    <changeSet author="ChromisPos" id="Change commission default">              
+        <addNotNullConstraint 
+            columnDataType="double precision"           
+            columnName="COMMISSION"                  
+            tableName="PRODUCTS"/>
+        
+        <addDefaultValue 
+            tableName="PRODUCTS" 
+            columnName="COMMISSION"
+            defaultValueNumeric="0.00"/>                                         
+    </changeSet>  
+  
+  <changeSet author="Chromis POS" id="Update to Chromis to v0.81">    
+        <update tableName="APPLICATIONS">
+            <column name="VERSION" value="0.81"/>   
+            <column name="VERSIONINT" valueNumeric="20170829"/>         
+        </update>  
+    </changeSet>   
+    
+    
+</databaseChangeLog>
+

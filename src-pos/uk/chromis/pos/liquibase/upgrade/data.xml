@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+    
+
+    <!-- This xml is used for any data or changes that needs to be added as part of the upgrade -->
+    
+    <!-- ***************************************************************************************** -->
+    <!--                         Update menu if required                                           -->
+    <!-- This section is used to allow dynamic update of menu.root with losing customised entries  -->
+    <!-- ***************************************************************************************** -->         
+    <!-- Remember to always change the ID details as well -->       
+    <changeSet author="Chromis POS" id="Create Dynamic table entries v0.58.1"> 
+        <insert tableName="MENUENTRIES"> 
+            <column name="ENTRY" value="uk.chromis.pos.sales.JPanelUnlockTables"/>   
+            <column name="FOLLOWS" value="uk.chromis.pos.sales.JPanelResetPickupId"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reload.png" />
+            <column name="TITLE" value="Menu.Unlocktables" />   
+        </insert>                                          
+    </changeSet> 
+    
+    <!-- ***************************************************************************************** -->
+    <!--                Update Administrator permissions if required                               -->
+    <!-- ***************************************************************************************** -->    
+    <changeSet author="Chromis POS" id="Update admin permissiosn v0.58.1">   
+        <update tableName="ROLES">           
+            <column name="PERMISSIONS" valueBlobResource="/uk/chromis/pos/templates/Role.Administrator.xml"/>   
+            <where>ID='0'</where>         
+        </update> 
+    </changeSet>
+ 
+    <!-- ***************************************************************************************** -->
+    <!--                Add new version value to prevent older code updating db details            -->
+    <!-- ***************************************************************************************** -->    
+    <changeSet author="Chromis POS" id="Add new version check value to Applications table">   
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists columnName="VERSIONINT" tableName="APPLICATIONS"/>
+            </not>
+        </preConditions>  
+        <addColumn tableName="APPLICATIONS">
+            <column name="VERSIONINT" type="int" defaultValueNumeric="20161015"/>                                                                     
+        </addColumn>  
+    </changeSet>
+          
+</databaseChangeLog>
+

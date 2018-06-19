@@ -1,0 +1,75 @@
+/*
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c)2015-2016
+**    http://www.chromis.co.uk
+**
+**    This file is part of Chromis POS Version V0.60.2 beta
+**
+**    Chromis POS is free software: you can redistribute it and/or modify
+**    it under the terms of the GNU General Public License as published by
+**    the Free Software Foundation, either version 3 of the License, or
+**    (at your option) any later version.
+**
+**    Chromis POS is distributed in the hope that it will be useful,
+**    but WITHOUT ANY WARRANTY; without even the implied warranty of
+**    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**    GNU General Public License for more details.
+**
+**    You should have received a copy of the GNU General Public License
+**    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
+**
+**    PosgreSQL Reports Version
+*/
+
+
+report = new uk.chromis.pos.reports.PanelReportBean();
+
+report.setTitleKey("Menu.InventoryBroken");
+report.setReport("/uk/chromis/reports/postgresql/inventoryb");
+report.setResourceBundle("uk/chromis/reports/report_messages");
+
+report.setSentence("SELECT " +
+                "STOCKCURRENT.LOCATION AS LOCATIONID, " +
+                "LOCATIONS.NAME AS LOCATIONNAME, " +
+                "PRODUCTS.REFERENCE, " +
+                "PRODUCTS.NAME AS NAME, " +
+                "PRODUCTS.CATEGORY, " +
+                "CATEGORIES.NAME AS CATEGORYNAME, " +
+                "SUM(STOCKCURRENT.UNITS) AS UNITS, " +
+                "COALESCE(STOCKLEVEL.STOCKSECURITY, 0) AS STOCKSECURITY, " +
+                "COALESCE(STOCKLEVEL.STOCKMAXIMUM, 0) AS STOCKMAXIMUM " +
+                "FROM STOCKCURRENT " +
+                "JOIN LOCATIONS ON STOCKCURRENT.LOCATION = LOCATIONS.ID " +
+                "JOIN PRODUCTS ON STOCKCURRENT.PRODUCT = PRODUCTS.ID " +
+                "JOIN CATEGORIES ON PRODUCTS.CATEGORY = CATEGORIES.ID  " +
+                "LEFT OUTER JOIN STOCKLEVEL ON STOCKCURRENT.LOCATION = STOCKLEVEL.LOCATION AND STOCKCURRENT.PRODUCT = STOCKLEVEL.PRODUCT " +
+                "WHERE ?(QBF_FILTER) " +
+                "GROUP BY STOCKCURRENT.LOCATION, LOCATIONS.NAME, PRODUCTS.REFERENCE, PRODUCTS.NAME, PRODUCTS.CATEGORY, CATEGORIES.NAME, STOCKLEVEL.STOCKSECURITY, STOCKLEVEL.STOCKMAXIMUM " +
+                "HAVING STOCKLEVEL.STOCKSECURITY IS NOT NULL AND STOCKLEVEL.STOCKSECURITY >= SUM(STOCKCURRENT.UNITS) " +
+                "ORDER BY CATEGORIES.NAME, PRODUCTS.NAME, STOCKCURRENT.LOCATION");
+
+report.addParameter("PRODUCTS.NAME");
+report.addParameter("PRODUCTS.PRICEBUY");
+report.addParameter("PRODUCTS.PRICESELL");
+report.addParameter("PRODUCTS.CATEGORY");
+report.addParameter("PRODUCTS.CODE");
+report.addParameter("PRODUCTS.ISCATALOG"); 
+report.addParameter("STOCKCURRENT.LOCATION");
+report.addParameter("UNITS");
+report.addParameter("LOCATIONS.SITEGUID");
+
+
+report.addQBFFilter(new uk.chromis.pos.ticket.ProductFilterReportWithCat(true, false));
+
+report.addField("LOCATIONID", uk.chromis.data.loader.Datas.STRING);
+report.addField("LOCATIONNAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("REFERENCE", uk.chromis.data.loader.Datas.STRING);
+report.addField("NAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("CATEGORY", uk.chromis.data.loader.Datas.STRING);
+report.addField("CATEGORYNAME", uk.chromis.data.loader.Datas.STRING);
+report.addField("UNITS", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("STOCKSECURITY", uk.chromis.data.loader.Datas.DOUBLE);
+report.addField("STOCKMAXIMUM", uk.chromis.data.loader.Datas.DOUBLE);
+
+report;
+
