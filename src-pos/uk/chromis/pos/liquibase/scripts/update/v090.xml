@@ -18,7 +18,7 @@
     <property name="blob.type" value="mediumblob" dbms="mysql"/>
      
       
-    <changeSet author="Chromis POS" id="Add new columns into products table" >    
+    <changeSet author="Chromis POS" id="Add new columns into products table v0.94" >    
         <preConditions onFail="MARK_RAN">
             <not>
                 <columnExists columnName="DEFAULTPTR" tableName="PRODUCTS"/>
@@ -69,27 +69,7 @@
         </update>       
     </changeSet>   
   
-    <changeSet author="Chromis POS" id="Dynamic menu entries table (db V1.0)">
-        <createTable tableName="add_newmenuentry">
-            <column name="entry" type="varchar(255)" />
-            <column name="follows" type="varchar(255)" />
-            <column name="graphic" type="varchar(255)" />
-            <column name="title" type="varchar(255)" />                
-        </createTable>
-        <modifySql dbms="mysql">
-            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
-        </modifySql>
-    </changeSet>                                                                                                 
-    
-    <changeSet author="Chromis POS" id="Dynamic new button entry table">    
-        <createTable tableName="add_newbutton">
-            <column name="entry" type="varchar(250)"/>                           
-        </createTable> 
-        <modifySql dbms="mysql">
-            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
-        </modifySql>
-    </changeSet> 
-  
+                                                                                                
     <changeSet author="Chromis POS" id="remove old menuentries">    
         <preConditions onFail="MARK_RAN">
             <not>
@@ -108,6 +88,47 @@
         </preConditions> 
         <dropTable tableName="newbutton"/>
     </changeSet> 
+  
+    <changeSet author="Chromis POS" id="Dynamic add_newmenuentry table (db V1.0)">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="add_newmenuentry"/>
+            </not>
+        </preConditions>   
+
+        <createTable tableName="add_newmenuentry">
+            <column name="entry" type="varchar(255)" />
+            <column name="follows" type="varchar(255)" />
+            <column name="graphic" type="varchar(255)" />
+            <column name="title" type="varchar(255)" />                
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>
+    </changeSet>                                                                                                 
+    
+    <changeSet author="Chromis POS" id="Dynamic add_newbutton entry table">    
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="add_newbutton"/>
+            </not>
+        </preConditions>   
+
+
+        <createTable tableName="add_newbutton">
+            <column name="entry" type="varchar(250)"/>                           
+        </createTable> 
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>
+    </changeSet> 
+  
+
+  
+  
+  
+  
+  
   
     <changeSet author="Chromis POS" id="Update to Chromis to v0.94">    
         <update tableName="APPLICATIONS">

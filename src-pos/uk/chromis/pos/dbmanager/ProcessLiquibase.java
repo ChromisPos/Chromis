@@ -98,12 +98,14 @@ public class ProcessLiquibase {
                     }
                 }
             } catch (SQLException ex) {
+                System.out.println("systemudate.xml");
             }
 // Ensure there are no liquibase locks
             try {
                 stmt2 = con.prepareStatement("drop table databasechangeloglock");
                 stmt2.executeUpdate();
             } catch (SQLException ex) {
+                System.out.println("databasechangeloglock");
             }
 
             Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(DriverManager.getConnection(db_url, db_user, db_password)));
@@ -117,6 +119,7 @@ public class ProcessLiquibase {
             Logger.getLogger(ProcessLiquibase.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } catch (LiquibaseException ex) {
+            System.out.println(ex);
             return false;
         } finally {
             if (con != null) {
