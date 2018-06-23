@@ -133,29 +133,29 @@ public class DbManager {
 
     private void updateDB() {
         connectTest.setVisible(false);
-        
+
         int dbVersion;
         if (!sDBVersion.equals(AppLocal.APP_VERSION)) {
             try {
                 // Ready for future release, this will prevent upgrade running against older version
                 // if (AppLocal.APP_VERSIONINT > readDataBaseIntVersion()) {
-                
+
                 dbVersion =m_dlSystem.getVerisonInt();
             } catch (BasicException ex) {
                 dbVersion = 1;
-                
+
             }
 
             if (AppLocal.APP_VERSIONINT > dbVersion){
-            UpdateDB updb = new UpdateDB();
-            updb.setVersion(readDataBaseVersion());
-            SwingUtilities.invokeLater(() -> updb.initSwingComponents());
-            while (updb.isWorking()) {
-                try {
-                    TimeUnit.SECONDS.sleep(1); // wait for 1 second and test again
-                } catch (InterruptedException ex) {
+                UpdateDB updb = new UpdateDB();
+                updb.setVersion(readDataBaseVersion());
+                SwingUtilities.invokeLater(() -> updb.initSwingComponents());
+                while (updb.isWorking()) {
+                    try {
+                        TimeUnit.SECONDS.sleep(1); // wait for 1 second and test again
+                    } catch (InterruptedException ex) {
+                    }
                 }
-            }
             }
         }
     }

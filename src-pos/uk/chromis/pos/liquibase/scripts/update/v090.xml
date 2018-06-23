@@ -130,10 +130,10 @@
   
   
   
-    <changeSet author="Chromis POS" id="Update to Chromis to v0.94">    
+    <changeSet author="Chromis POS" id="Update to Chromis to v0.94.1">    
         <update tableName="APPLICATIONS">
-            <column name="VERSION" value="0.94"/>   
-            <column name="VERSIONINT" valueNumeric="20180609"/>         
+            <column name="VERSION" value="0.94.1"/>   
+            <column name="VERSIONINT" valueNumeric="20180620"/>         
         </update>  
     </changeSet>      
     
