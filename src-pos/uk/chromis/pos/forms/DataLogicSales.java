@@ -1248,6 +1248,15 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                     }
                 }
                 );
+                
+                new PreparedSentence(DataLogicSales.this.s, "INSERT INTO ADDI (ID, TICKETID, DATENEW, SUBTOTAL) VALUES (?, ?, ?, ?)", SerializerWriteParams.INSTANCE).exec(new DataParams() {
+                    public void writeValues() throws BasicException {
+                        setString(1, ticket.getId());
+                        setInt(2, Integer.valueOf(ticket.getTicketId()));
+                        setTimestamp(3, ticket.getDate());
+                        setDouble(4, Double.valueOf(ticket.getSubTotal()));
+                    }
+                });
 
                 // new ticket
                 new PreparedSentence(s, "INSERT INTO TICKETS (ID, TICKETTYPE, TICKETID, PERSON, CUSTOMER) VALUES (?, ?, ?, ?, ?)", SerializerWriteParams.INSTANCE
