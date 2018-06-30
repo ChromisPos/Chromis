@@ -47,8 +47,8 @@ import java.util.logging.Logger;
 public class AppConfig implements AppProperties {
 
     private static AppConfig instance = null;
-    private final Properties m_propsconfig;
-    private final File configFile;
+    private Properties m_propsconfig;
+    private File configFile;
     private static final Logger logger = Logger.getLogger("uk.chromis.pos.forms.AppConfig");
     private DataLogicSystem dlSystem;
 
@@ -65,6 +65,20 @@ public class AppConfig implements AppProperties {
         }
     }
 
+    public AppConfig(String[] paramArrayOfString) {
+        if (paramArrayOfString.length == 0) {
+            init(getDefaultConfig());
+        } else {
+            init(new File(paramArrayOfString[0]));
+        }
+    }
+
+    private void init(File paramFile) {
+        this.configFile = paramFile;
+        m_propsconfig = new Properties();
+        logger.info("Reading configuration file: " + paramFile.getAbsolutePath());
+    }
+    
     protected AppConfig(File configFile) {
         this.configFile = configFile;
         m_propsconfig = new Properties();
