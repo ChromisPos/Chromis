@@ -52,6 +52,10 @@ public class TicketTaxInfo {
         return taxtotal;
     }
     
+    public String printABSTax() {
+        return Formats.CURRENCY.formatValue(Double.valueOf(getTax() * -1.0D));
+    }
+    
     public double getTotal() {         
         return subtotal + taxtotal;
     }
