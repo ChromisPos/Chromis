@@ -709,6 +709,12 @@ public final class TicketInfo implements SerializableRead, Externalizable {
     public String printDate() {
         return Formats.TIMESTAMP.formatValue(m_dDate);
     }
+    
+    public String printSRMDate() {
+        SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat("yyMMddHHmmss");
+        String str = localSimpleDateFormat.format(this.m_dDate);
+        return str;
+    }
 
     public String printUser() {
         return m_User == null ? "" : m_User.getName();
@@ -752,6 +758,18 @@ public final class TicketInfo implements SerializableRead, Externalizable {
 
     public String printTotal() {
         return Formats.CURRENCY.formatValue(getTotal());
+    }
+    
+    public String printABSSubTotal() {
+        return Formats.CURRENCY.formatValue(new Double(getSubTotal() * -1.0D));
+    }
+
+    public String printABSTax() {
+        return Formats.CURRENCY.formatValue(new Double(getTax() * -1.0D));
+    }
+
+    public String printABSTotal() {
+        return Formats.CURRENCY.formatValue(new Double(getTotal() * -1.0D));
     }
 
     public String printTotalPaid() {
