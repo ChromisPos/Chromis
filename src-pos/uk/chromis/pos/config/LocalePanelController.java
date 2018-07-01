@@ -133,11 +133,11 @@ public class LocalePanelController implements Initializable, BaseController {
         );
 
         ObservableList<String> currency = FXCollections.observableArrayList(
-                DEFAULT_VALUE, "\u00A4 #0.00", "'$' #,##0.00"
+                DEFAULT_VALUE, "\u00A4 #0.00", "'$' #,##0.00", "#0.00"
         );
 
         ObservableList<String> doubles = FXCollections.observableArrayList(
-                DEFAULT_VALUE, "#0.0", "#,##0.#"
+                DEFAULT_VALUE, "#0.0", "#,##0.#", "#0.00"
         );
 
         ObservableList<String> percent = FXCollections.observableArrayList(
