@@ -153,7 +153,7 @@ public class DatabasePanelController implements Initializable, BaseController {
 
         // create the message tab info
         WebEngine webEngine = webViewMessage.getEngine();
-        loadStyle(webEngine);
+        //loadStyle(webEngine);
         webViewMessage.getEngine().loadContent(AppLocal.getIntString("message.DBDefault"));
     }
 
