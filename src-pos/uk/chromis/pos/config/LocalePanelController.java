@@ -133,7 +133,7 @@ public class LocalePanelController implements Initializable, BaseController {
         );
 
         ObservableList<String> currency = FXCollections.observableArrayList(
-                DEFAULT_VALUE, "\u00A4 #0.00", "'$' #,##0.00", "#0.00"
+                DEFAULT_VALUE, "\u00A4 #0.00", "'$' #,##0.00", "###0.00"
         );
 
         ObservableList<String> doubles = FXCollections.observableArrayList(
@@ -153,7 +153,7 @@ public class LocalePanelController implements Initializable, BaseController {
 
         lcbDouble.setLabel(AppLocal.getIntString("label.double"));
         lcbDouble.setWidthSizes(120.0, 250.0);
-        lcbDouble.addItemList(integers);
+        lcbDouble.addItemList(doubles);
 
         lcbCurrency.setLabel(AppLocal.getIntString("label.currency"));
         lcbCurrency.setWidthSizes(120.0, 250.0);
