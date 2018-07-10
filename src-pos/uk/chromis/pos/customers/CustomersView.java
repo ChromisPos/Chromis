@@ -19,9 +19,7 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
-
+ */
 package uk.chromis.pos.customers;
 
 import java.awt.Component;
@@ -232,7 +230,7 @@ public final class CustomersView extends javax.swing.JPanel implements EditorRec
         txtDiscount.setText(null);
         txtCurdebt.setText(null);
         txtCurdate.setText(null);
-        m_jVisible.setSelected(false);
+        m_jVisible.setSelected(true);
         jcard.setText(null);
         txtFirstName.setText(null);
         txtLastName.setText(null);
@@ -428,6 +426,13 @@ public final class CustomersView extends javax.swing.JPanel implements EditorRec
 
     @Override
     public Object createValue() throws BasicException {
+        System.out.println("create");
+
+        if (m_jSearchkey.getText() == null || m_jSearchkey.getText().trim().length() == 0) {            
+            JOptionPane.showMessageDialog(null, "Blank or null search keys are allowed.", "Invalid Search Key " , JOptionPane.INFORMATION_MESSAGE);
+            return null;
+        }
+
         Object[] customer = new Object[27];
         customer[0] = m_oId == null ? UUID.randomUUID().toString() : m_oId;
         customer[1] = m_jTaxID.getText();
