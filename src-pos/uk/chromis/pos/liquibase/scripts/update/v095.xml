@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+
+
+    <property name="boolean.type" value="boolean" dbms="derby, postgresql"/>
+    <property name="boolean.type" value="bit" dbms="mysql"/>
+   
+    <property name="blob.type" value="blob" dbms="derby"/>
+    <property name="blob.type" value="bytea" dbms="postgresql"/>
+    <property name="blob.type" value="mediumblob" dbms="mysql"/>
+     
+      
+    <changeSet author="Chromis POS" id="Create Supplier table entries v0.95"> 
+        <insert tableName="add_newmenuentry"> 
+            <column name="ENTRY" value="uk.chromis.pos.suppliers.SuppliersPanel"/>   
+            <column name="FOLLOWS" value="uk.chromis.pos.inventory.RecipePanel"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/users.png"/>
+            <column name="TITLE" value="Menu.Suppliers" />   
+        </insert>                                          
+    </changeSet> 
+  
+    <changeSet author="Chromis POS" id="Create Supplier report entries v0.95"> 
+        <insert tableName="add_newmenuentry"> 
+            <column name="ENTRY" value="/uk/chromis/reports/suppliers.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/barcodesheet.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png"/>
+            <column name="TITLE" value="Menu.SuppliersReport" />   
+        </insert>                                          
+    </changeSet> 
+    
+    <changeSet author="Chromis POS" id="Create Supplier product list entries v0.95"> 
+        <insert tableName="add_newmenuentry"> 
+            <column name="ENTRY" value="/uk/chromis/reports/supplierproducts.bs"/>   
+            <column name="FOLLOWS" value="/uk/chromis/reports/suppliers.bs"/>
+            <column name="GRAPHIC" value="/uk/chromis/images/reports.png"/>
+            <column name="TITLE" value="Menu.SupplierProducts" />   
+        </insert>                                          
+    </changeSet> 
+      
+    
+   <changeSet author="Chromis POS" id="Change dob column type in customer record" dbms="mysql"> 
+        <modifyDataType 
+            columnName="dob"
+            newDataType="datetime"
+            tableName="customers"/>                                                
+    </changeSet>       
+          
+    <changeSet author="Chromis POS" id="Dynamic remove_menuentry table (db V1.0)">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="remove_menuentry"/>
+            </not>
+        </preConditions>   
+
+        <createTable tableName="remove_menuentry">
+            <column name="entry" type="varchar(255)" />               
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>
+    </changeSet>             
+                            
+    <changeSet author="Chromis POS" id="Update to Chromis to v0.94.2">    
+        <update tableName="APPLICATIONS">
+            <column name="VERSION" value="0.94.1"/>   
+            <column name="VERSIONINT" valueNumeric="20180620"/>         
+        </update>  
+    </changeSet>      
+    
+</databaseChangeLog>
+

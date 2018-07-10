@@ -14,5 +14,6 @@
     <include file="uk/chromis/pos/liquibase/scripts/update/v080.xml"/>
     <include file="uk/chromis/pos/liquibase/scripts/update/v081.xml"/>
     <include file="uk/chromis/pos/liquibase/scripts/update/v090.xml"/>
+     <include file="uk/chromis/pos/liquibase/scripts/update/v095.xml"/>
 </databaseChangeLog>
 
