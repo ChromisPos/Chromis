@@ -786,7 +786,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             } else {
 
                 // if this a refund do not apply discount otherwise apply customer discount
-                if (m_oTicket.getTicketType().getId() != 1) { 
+                if (m_oTicket.getTicketType().getId() != 1) {
                     if (oLine.canDiscount() && m_oTicket.getDiscount() > 0.0) {
                         oLine.setPrice(oLine.getPrice() - (oLine.getPrice() * m_oTicket.getDiscount()));
                     }
@@ -1241,7 +1241,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                      * ******************************************************************************
                      */
 // Are we passing a customer card these cards start with 'c'                
-                } else if (sCode.startsWith("c")) {
+                } else if (sCode.startsWith("c") || sCode.startsWith("C") ) {
                     try {
                         CustomerInfoExt newcustomer = dlSales.findCustomerExt(sCode);
                         if (newcustomer == null) {
@@ -2088,8 +2088,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     }
 
     public void updatePromotions(String eventkey, int effectedIndex, String productID) {
+        int dc = Boolean.parseBoolean(AppConfig.getInstance().getProperty("display.consolidated")) ? 1 : 0;
+        effectedIndex = effectedIndex -dc;
         try {
-            int selectedIndex = m_ticketlines.getSelectedIndex();
+            int selectedIndex = m_ticketlines.getSelectedIndex();            
             if (selectedIndex >= m_oTicket.getLinesCount()) {
                 // Selection is at the end of the list so we restore it to there afterwards
                 selectedIndex = 9999;
