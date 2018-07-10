@@ -122,14 +122,7 @@
             <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
         </modifySql>
     </changeSet> 
-  
-
-  
-  
-  
-  
-  
-  
+   
     <changeSet author="Chromis POS" id="Update to Chromis to v0.94.1">    
         <update tableName="APPLICATIONS">
             <column name="VERSION" value="0.94.1"/>   
