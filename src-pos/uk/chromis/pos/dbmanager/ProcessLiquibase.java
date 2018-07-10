@@ -133,6 +133,7 @@ public class ProcessLiquibase {
         }
         insertMenuEntry(db_user, db_url, db_password);  //insert in to menu.root
         insertNewButtons(db_user, db_url, db_password); //insert in to ticket.buttons
+        removeMenuEntry(db_user, db_url, db_password);  //insert in to menu.root
         return true;
     }
 
@@ -174,6 +175,63 @@ public class ProcessLiquibase {
             }
             SQL = "delete from add_newmenuentry ";
             PreparedStatement stmt2 = con.prepareStatement(SQL);
+            stmt2.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProcessLiquibase.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    private static void removeMenuEntry(String db_user, String db_url, String db_password) {
+        try {
+            Connection con = DriverManager.getConnection(db_url, db_user, db_password);
+            String decodedData = "";
+            Statement stmt = (Statement) con.createStatement();
+            // get the menu from the resources table
+            String SQL = "select * from resources where name='Menu.Root'";
+            ResultSet rs = stmt.executeQuery(SQL);
+            while (rs.next()) {
+                byte[] bytesData = rs.getBytes("content");
+                decodedData = new String(bytesData);
+            }
+
+            String[] lines = decodedData.split(System.getProperty("line.separator"));
+
+            // get the date from the menu entries table
+            SQL = "select * from remove_menuentry ";
+            rs = stmt.executeQuery(SQL);
+            StringBuilder sb = new StringBuilder();
+            int numberOfLines = lines.length;
+            // while we have some entries lets process them
+            while (rs.next()) {
+                for (int i = 0; i < numberOfLines; i++) {
+                    if (lines[i].contains("\"" + rs.getString("entry") + "\"")) {
+                        lines[i] = "";
+                    }
+                    sb.append(lines[i]);
+                    sb.append("\n");
+                }
+            }
+            for (int i = 0; i < numberOfLines; i++) {
+                if (lines[i].length() != 0) {
+                    sb.append(lines[i]);
+                    sb.append("\n");
+                }
+            }
+            byte[] bytesData = sb.toString().getBytes();
+            String SQL2 = "update resources set content = ? where name = 'Menu.Root' ";
+            PreparedStatement stmt2 = con.prepareStatement(SQL2);
+            stmt2.setBytes(1, bytesData);
+            stmt2.executeUpdate();
+
+            SQL = "delete from remove_menuentry ";
+            stmt2 = con.prepareStatement(SQL);
             stmt2.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProcessLiquibase.class.getName()).log(Level.SEVERE, null, ex);
