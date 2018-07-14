@@ -19,8 +19,7 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
+ */
 package uk.chromis.pos.inventory;
 
 import uk.chromis.basic.BasicException;
@@ -83,7 +82,7 @@ public class StockManagement extends JPanel implements JPanelView {
     private static final int ACTIVE = 1;
     private static final int DECIMAL = 2;
     private final String user;
-    private DataLogicSync dlSync;  
+    private DataLogicSync dlSync;
     private String siteGuid;
 
     public StockManagement(AppView app) {
@@ -231,7 +230,7 @@ public class StockManagement extends JPanel implements JPanelView {
 
     private void incProductByCode(String sCode) {
         incProductByCode(sCode, 1.0);
-        
+
     }
 
     private void incProductByCode(String sCode, double dQuantity) {
@@ -387,8 +386,12 @@ public class StockManagement extends JPanel implements JPanelView {
                 rec.getReason().samesignum(inv.getMultiply()),
                 inv.getPrice(),
                 rec.getUser(),
-                rec.getSiteGuid()
-
+                rec.getSiteGuid(),
+                null,
+                null,
+                null,
+                null,
+                Double.toString(m_dlSales.findProductStock(rec.getLocation().getID(), inv.getProductID(), inv.getProductAttSetInstId(), rec.getSiteGuid()))
             });
         }
 
