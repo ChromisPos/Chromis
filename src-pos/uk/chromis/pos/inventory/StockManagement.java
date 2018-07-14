@@ -394,8 +394,6 @@ public class StockManagement extends JPanel implements JPanelView {
                 Double.toString(m_dlSales.findProductStock(rec.getLocation().getID(), inv.getProductID(), inv.getProductAttSetInstId(), rec.getSiteGuid()))
             });
         }
-
-        // si se ha grabado se imprime, si no, no.
         printTicket(rec);
     }
 

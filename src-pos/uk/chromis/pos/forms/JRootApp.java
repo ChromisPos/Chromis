@@ -304,7 +304,7 @@ public class JRootApp extends JPanel implements AppView {
                     String newTextCode = new Scanner(new File(newText), "UTF-8").useDelimiter("\\A").next();
                     jLabel1.setText(newTextCode);
                 } catch (Exception e) {
-                    System.out.println("wewewe");
+                    System.out.println("");
                 }
 
                 jLabel1.setAlignmentX(0.5F);
@@ -442,43 +442,46 @@ public class JRootApp extends JPanel implements AppView {
      * @throws BeanFactoryException
      */
     @Override
-    public Object getBean(String beanfactory) throws BeanFactoryException {
-        // For backwards compatibility
-        beanfactory = mapNewClass(beanfactory);
-        BeanFactory bf = m_aBeanFactories.get(beanfactory);
-        if (bf == null) {
-            // testing scripts
-            if (beanfactory.startsWith("/")) {
-                //Change the report string to use the database version
-                beanfactory = beanfactory.replace("/uk/chromis/reports/", "/uk/chromis/reports/" + m_dlSystem.getDBVersion().toLowerCase() + "/");
-                bf = new BeanFactoryScript(beanfactory);
-            } else {
-                try {
-                    Class bfclass = Class.forName(beanfactory);
-
-                    if (BeanFactory.class
-                            .isAssignableFrom(bfclass)) {
-                        bf = (BeanFactory) bfclass.newInstance();
-                    } else {
-                        // the old construction for beans...
-                        Constructor constMyView = bfclass.getConstructor(new Class[]{AppView.class
-                        });
-                        Object bean = constMyView.newInstance(new Object[]{this});
-                        bf = new BeanFactoryObj(bean);
-                    }
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException e) {
-                    throw new BeanFactoryException(e);
-                }
-            }
-            // cache the factory
-            m_aBeanFactories.put(beanfactory, bf);
-            // Initialize if it is a BeanFactoryApp
-            if (bf instanceof BeanFactoryApp) {
-                ((BeanFactoryApp) bf).init(this);
-            }
+    public Object getBean(String beanfactory) throws BeanFactoryException
+  {
+    beanfactory = mapNewClass(beanfactory);
+    BeanFactory bf = (BeanFactory)this.m_aBeanFactories.get(beanfactory);
+    if (bf == null)
+    {
+      if (beanfactory.startsWith("/"))
+      {
+        beanfactory = beanfactory.replace("/uk/chromis/reports/", "/uk/chromis/reports/" + this.m_dlSystem.getDBVersion().toLowerCase() + "/");
+        bf = new BeanFactoryScript(beanfactory);
+      }
+      else
+      {
+        try
+        {
+          Class bfclass = Class.forName(beanfactory);
+          if (BeanFactory.class.isAssignableFrom(bfclass))
+          {
+            bf = (BeanFactory)bfclass.newInstance();
+          }
+          else
+          {
+            Constructor constMyView = bfclass.getConstructor(new Class[] { AppView.class });
+            
+            Object bean = constMyView.newInstance(new Object[] { this });
+            bf = new BeanFactoryObj(bean);
+          }
         }
-        return bf.getBean();
+        catch (ClassNotFoundException|InstantiationException|IllegalAccessException|NoSuchMethodException|SecurityException|IllegalArgumentException|InvocationTargetException e)
+        {
+          throw new BeanFactoryException(e);
+        }
+      }
+      this.m_aBeanFactories.put(beanfactory, bf);
+      if ((bf instanceof BeanFactoryApp)) {
+        ((BeanFactoryApp)bf).init(this);
+      }
     }
+    return bf.getBean();
+  }
 
     private static String mapNewClass(String classname) {
         String newclass = m_oldclasses.get(classname);

@@ -23,26 +23,19 @@
 
 package uk.chromis.pos.forms;
 
-import org.apache.commons.lang.SerializationUtils;
 import java.io.IOException;
-import java.io.StringReader;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import uk.chromis.basic.BasicException;
-import uk.chromis.data.loader.LocalRes;
 import uk.chromis.pos.sync.DataLogicSync;
 import uk.chromis.pos.ticket.UserInfo;
 import uk.chromis.pos.util.Hashcypher;
