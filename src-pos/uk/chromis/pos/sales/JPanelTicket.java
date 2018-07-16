@@ -1897,7 +1897,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 script.put("pickupid", getPickupString(ticket));
                 script.put("ticketpanel", this);
                 script.put("printers", setRemoteUnits(ticket));
-
                 refreshTicket();
 
                 m_TTP.printTicket(script.eval(sresource).toString(), ticket);

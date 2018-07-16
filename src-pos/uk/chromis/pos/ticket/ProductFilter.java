@@ -58,7 +58,7 @@ public class ProductFilter extends javax.swing.JPanel implements ReportEditorCre
         initComponents();
     }
 
-    public ProductFilter() throws BasicException {
+    public ProductFilter(){
         initComponents();
     }
 

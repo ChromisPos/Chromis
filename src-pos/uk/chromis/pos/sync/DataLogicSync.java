@@ -141,6 +141,7 @@ public class DataLogicSync extends BeanFactoryDataSingle {
     }
 
     public Boolean isCentral() {
+        System.out.println("the central guid : " + getCentralGuid());
         return (getCentralGuid().equals(getSiteGuid()));
     }
 

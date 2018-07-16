@@ -26,8 +26,14 @@ package uk.chromis.pos.inventory;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import uk.chromis.basic.BasicException;
+import uk.chromis.data.loader.Datas;
+import uk.chromis.data.loader.PreparedSentence;
+import uk.chromis.data.loader.SerializerWriteBasic;
+import uk.chromis.data.loader.SerializerWriteBasicExt;
 import uk.chromis.data.user.EditorListener;
 import uk.chromis.data.user.EditorRecord;
 import uk.chromis.data.user.ListProviderCreator;
@@ -60,29 +66,30 @@ public class ProductsPanel extends JPanelTable2 implements EditorListener {
 
     @Override
     protected void init() {
+ 
         m_dlSales = (DataLogicSales) app.getBean("uk.chromis.pos.forms.DataLogicSales");
 
         dlSync = (DataLogicSync) app.getBean("uk.chromis.pos.sync.DataLogicSync");
 
         dlSuppliers = (DataLogicSuppliers) app.getBean("uk.chromis.pos.suppliers.DataLogicSuppliers");
         
-        String localGuid = dlSync.getSiteGuid();
-
-        jproductfilterws = new ProductFilterWithSite(dlSync.isCentral());
-        jproductfilterws.m_jLocation.addActionListener(new ReloadActionListener());
-        jproductfilterws.init(app);
-
-            
         
-        lpr = new ListProviderCreator(m_dlSales.getProductCatQBF(), jproductfilterws);
-        row = m_dlSales.getProductsRow();
+        jproductfilterws = new ProductFilterWithSite(dlSync.isCentral());
+        //jproductfilterws = new ProductFilterWithSite(true);
+        jproductfilterws.init(app);
+        jproductfilterws.addActionListener(new ReloadActionListener());
 
+
+        lpr = new ListProviderCreator(m_dlSales.getProductCatQBF(), jproductfilterws);
+       
+        row = m_dlSales.getProductsRow();
+        
         spr = new SaveProvider(
                 m_dlSales.getProductCatUpdate(),
                 m_dlSales.getProductCatInsert(),
                 m_dlSales.getProductCatDelete());
 
-        jeditor = new ProductsEditor(m_dlSales, dirty, localGuid);
+        jeditor = new ProductsEditor(m_dlSales, dirty, dlSync.getSiteGuid());
 
         if (AppConfig.getInstance().getBoolean("display.longnames")) {
             setListWidth(300);

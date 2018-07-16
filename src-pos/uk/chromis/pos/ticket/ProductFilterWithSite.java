@@ -41,6 +41,7 @@ import uk.chromis.format.Formats;
 import uk.chromis.pos.forms.AppLocal;
 import uk.chromis.pos.forms.AppView;
 import uk.chromis.pos.forms.DataLogicSales;
+import uk.chromis.pos.inventory.ProductsPanel;
 import uk.chromis.pos.reports.ReportEditorCreator;
 import uk.chromis.pos.sync.DataLogicSync;
 
@@ -61,7 +62,8 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
 
     public ProductFilterWithSite(Boolean isCentral) {
         initComponents();
-        jSites.setVisible(isCentral);
+        jSites.setVisible(true); // Workaround to always see the sites panel
+        //jSites.setVisible(isCentral);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
         dlSync = (DataLogicSync) app.getBean("uk.chromis.pos.sync.DataLogicSync");
         
         m_sentSites = dlSync.getSitesList();
-                
+        
         m_sentcat = dlSales.getCategoriesList(dlSync.getSiteGuid());
         m_CategoryModel = new ComboBoxValModel();
 
@@ -103,7 +105,6 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
             m_LocationsModel.setSelectedFirst();
         }
         m_jLocation.setModel(m_LocationsModel);
-
     }
 
     protected void addFirst(List a) {
@@ -122,7 +123,11 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
             Logger.getLogger(ProductFilterWithSite.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void addActionListener(ActionListener l) {
+        m_jLocation.addActionListener(l);
+    }
+    
     @Override
     public SerializerWrite getSerializerWrite() {
         return new SerializerWriteBasic(
@@ -165,7 +170,6 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
         @Override
         public void actionPerformed(ActionEvent e) {
             siteGuid = (String) m_LocationsModel.getSelectedKey();
-
             try {
                 m_sentcat = dlSales.getCategoriesList(siteGuid);
                 catlist = m_sentcat.list();
@@ -217,6 +221,11 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
         jLabel8.setText(AppLocal.getIntString("label.sitename")); // NOI18N
 
         m_jLocation.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        m_jLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_jLocationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jSitesLayout = new javax.swing.GroupLayout(jSites);
         jSites.setLayout(jSitesLayout);
@@ -225,7 +234,7 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
             .addGroup(jSitesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jSitesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jSitesLayout.createSequentialGroup()
                     .addContainerGap()
@@ -236,7 +245,7 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
             jSitesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSitesLayout.createSequentialGroup()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
+                .addGap(0, 70, Short.MAX_VALUE))
             .addGroup(jSitesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jSitesLayout.createSequentialGroup()
                     .addGap(33, 33, 33)
@@ -369,13 +378,12 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
             jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMainPanelLayout.createSequentialGroup()
                 .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jMainPanelLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(jSites, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jMainPanelLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jByform, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSites, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jByform, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(1, 1, 1))
         );
 
@@ -392,6 +400,10 @@ public class ProductFilterWithSite extends javax.swing.JPanel implements ReportE
                 .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void m_jLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jLocationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_m_jLocationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -89,8 +89,7 @@ public class ProductsWarehousePanel extends JPanelTable2 {
                 + "WHERE P.SITEGUID = ? "
                 + "ORDER BY P.NAME",
                 new SerializerWriteBasicExt(new Datas[]{Datas.STRING, Datas.STRING}, new int[]{0, 0, 1}),
-                new WarehouseSerializerRead()
-        ),
+                new WarehouseSerializerRead()),
                 m_paramsSites);
 
         SentenceExec updatesent = new SentenceExecTransaction(app.getSession()) {

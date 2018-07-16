@@ -41,6 +41,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import uk.chromis.pos.sync.DataLogicSync;
 
@@ -1473,21 +1474,22 @@ public class DataLogicSales extends BeanFactoryDataSingle {
      *
      * @return
      */
-    public final SentenceList getProductCatQBF() {
-        return new StaticSentence(s, new QBFBuilder(
+    public final SentenceList getProductCatQBF() {  
+        QBFBuilder qbfb = new QBFBuilder(
                 "SELECT "
                 + getSelectFieldList()
-                + " FROM PRODUCTS P "
-                + " WHERE ?(QBF_FILTER) "
-                + " ORDER BY P.REFERENCE",
-                new String[]{
-                    "P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE", "P.SITEGUID"}, false), new SerializerWriteBasic(new Datas[]{
+                + "FROM PRODUCTS P "
+                + "WHERE ?(QBF_FILTER) "
+                + "ORDER BY P.REFERENCE",
+                new String[]{"P.NAME", "P.PRICEBUY", "P.PRICESELL", "P.CATEGORY", "P.CODE", "P.SITEGUID"});
+        SentenceList sl = new StaticSentence(s, qbfb, new SerializerWriteBasic(new Datas[]{
             Datas.OBJECT, Datas.STRING,
             Datas.OBJECT, Datas.DOUBLE,
             Datas.OBJECT, Datas.DOUBLE,
             Datas.OBJECT, Datas.STRING,
             Datas.OBJECT, Datas.STRING,
             Datas.OBJECT, Datas.STRING}), productsRow.getSerializerRead());
+        return sl;
     }
 
     /**

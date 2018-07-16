@@ -26,6 +26,8 @@ package uk.chromis.pos.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
@@ -94,7 +96,6 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
 
             // init browsable editable data
             bd = new BrowsableEditableData(getListProvider(), getSaveProvider(), getEditor(), dirty);
-
             // Add the filter panel
             Component c = getFilter();
             if (c != null) {
@@ -117,9 +118,8 @@ public abstract class JPanelTable extends JPanel implements JPanelView, BeanFact
                     nl.setPreferredSize(new java.awt.Dimension(m_ListWidth, 2));
                 }
 
-                if (cr != null) {
-                    nl.setCellRenderer(cr);
-                }
+                nl.setCellRenderer(cr);
+                
                 container.add(nl, java.awt.BorderLayout.LINE_START);
             }
 

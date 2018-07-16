@@ -32,6 +32,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import uk.chromis.pos.forms.AppView;
+import com.openbravo.util.pos.ScriptletUtil;
 
 /**
  *
@@ -71,7 +72,8 @@ class ScriptEngineVelocity implements ScriptEngine {
                 throw new ScriptException("Cannot initialize Velocity Engine", e);
             } 
         }
-         c = new VelocityContext();      
+         c = new VelocityContext();   
+         this.put("scriptletutil", new ScriptletUtil()); 
     }
     
     @Override
