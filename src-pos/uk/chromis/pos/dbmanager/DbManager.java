@@ -140,13 +140,13 @@ public class DbManager {
                 // Ready for future release, this will prevent upgrade running against older version
                 // if (AppLocal.APP_VERSIONINT > readDataBaseIntVersion()) {
 
-                dbVersion =m_dlSystem.getVerisonInt();
+                dbVersion = m_dlSystem.getVerisonInt();
             } catch (BasicException ex) {
                 dbVersion = 1;
 
             }
 
-            if (AppLocal.APP_VERSIONINT > dbVersion){
+            if (AppLocal.APP_VERSIONINT > dbVersion) {
                 UpdateDB updb = new UpdateDB();
                 updb.setVersion(readDataBaseVersion());
                 SwingUtilities.invokeLater(() -> updb.initSwingComponents());
@@ -199,11 +199,20 @@ public class DbManager {
         }
         if (connection == null) {
         } else {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
             connectTest.setVisible(false);
             return true;
         }
         try {
             connection.close();
+            try {
+                 TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+            }
+
             connectTest.setVisible(false);
             return true;
         } catch (Exception e) {

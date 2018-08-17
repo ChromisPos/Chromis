@@ -20,6 +20,7 @@
    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
+
 <output>
   <ticket>
     <image>Printer.Ticket.Logo</image>
@@ -28,6 +29,9 @@
         <line size="1">
             <text align ="center" bold="true" length="42">Close Cash Report</text>
         </line>
+	   <line><text align="left" length="15">Ticket ID:</text><text>${ticket.getNextTicketIndex()}</text></line>
+
+        
         <line></line>
         <line>
            <text align ="left" bold="true" length="32">Payments Report</text>

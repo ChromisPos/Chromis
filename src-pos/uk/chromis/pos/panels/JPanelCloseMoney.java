@@ -54,6 +54,7 @@ import uk.chromis.pos.forms.AppUser;
 import uk.chromis.pos.forms.AppView;
 import uk.chromis.pos.forms.BeanFactoryApp;
 import uk.chromis.pos.forms.BeanFactoryException;
+import uk.chromis.pos.forms.DataLogicSales;
 import uk.chromis.pos.forms.DataLogicSystem;
 import uk.chromis.pos.forms.JPanelView;
 import uk.chromis.pos.printer.TicketParser;
@@ -71,6 +72,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
 
     private AppView m_App;
     private DataLogicSystem m_dlSystem;
+    private DataLogicSales m_dlSales;
     private DataLogicSync m_dlSync;
     private PaymentsModel m_PaymentsToClose = null;
     private TicketParser m_TTP;
@@ -103,6 +105,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
 
         m_App = app;
         m_dlSystem = (DataLogicSystem) m_App.getBean("uk.chromis.pos.forms.DataLogicSystem");
+        m_dlSales = (DataLogicSales) m_App.getBean("uk.chromis.pos.forms.DataLogicSales");
         m_dlSync = (DataLogicSync) m_App.getBean("uk.chromis.pos.sync.DataLogicSync");
         m_TTP = new TicketParser(m_App.getDeviceTicket(), m_dlSystem);
 
@@ -273,17 +276,15 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
         }
         m_jNoCashSales.setText(result.toString());
 
-        
         // read the hourly sales
-            if ("PostgreSQL".equals(sdbmanager)) {
-               hSales = m_dlSystem.getHourlySalesPostgreSQL(m_App.getActiveCashIndex());
-            } else if ("Derby".equals(sdbmanager)) {
-                hSales = m_dlSystem.getHourlySalesDerby(m_App.getActiveCashIndex());
-            } else {
-              hSales = m_dlSystem.getHourlySalesMySQL(m_App.getActiveCashIndex());
-            }
+        if ("PostgreSQL".equals(sdbmanager)) {
+            hSales = m_dlSystem.getHourlySalesPostgreSQL(m_App.getActiveCashIndex());
+        } else if ("Derby".equals(sdbmanager)) {
+            hSales = m_dlSystem.getHourlySalesDerby(m_App.getActiveCashIndex());
+        } else {
+            hSales = m_dlSystem.getHourlySalesMySQL(m_App.getActiveCashIndex());
+        }
 
-        
     }
 
     private void printPayments(String report) {
@@ -298,6 +299,7 @@ public class JPanelCloseMoney extends JPanel implements JPanelView, BeanFactoryA
                 script.put("payments", m_PaymentsToClose);
                 script.put("nosales", result.toString());
                 script.put("hourlysales", hSales);
+                script.put("ticket",m_dlSales);
                 m_TTP.printTicket(script.eval(sresource).toString());
             } catch (ScriptException | TicketPrinterException e) {
                 MessageInf msg = new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotprintticket"), e);
