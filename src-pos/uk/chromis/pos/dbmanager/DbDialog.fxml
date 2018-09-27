@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="299.0" prefWidth="687.0" style="-fx-border-color: #0000FF; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.dbmanager.DbDialogController">
+    <children>
+        <Label fx:id="dbConnectivity" layoutX="12.0" layoutY="12.0" prefHeight="17.0" prefWidth="331.0" text="Database Connectivity">
+            <font>
+                <Font name="Lucida Sans Demibold" size="12.0" />
+            </font>
+        </Label>      
+       
+        <TextField fx:id="dbDriverLibrary" layoutX="149.0" layoutY="65.0" maxHeight="22.0" minHeight="22.0" prefHeight="22.0" prefWidth="442.0">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </TextField>
+        <Label fx:id="lblDBLibrary" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="13.0" layoutY="66.0" prefHeight="20.0" prefWidth="130.0" text="Driver Library :" textAlignment="RIGHT">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <TextField fx:id="dbDriverClass" layoutX="149.0" layoutY="91.0" maxHeight="22.0" minHeight="22.0" prefHeight="22.0" prefWidth="442.0" text="com.mysql.jdbc.Driver">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </TextField>
+        <Label fx:id="lblDBClass" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="13.0" layoutY="92.0" prefHeight="20.0" prefWidth="130.0" text="Driver Class :" textAlignment="RIGHT">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <TextField fx:id="dbServer" layoutX="149.0" layoutY="117.0" maxHeight="22.0" minHeight="22.0" pickOnBounds="false" prefHeight="22.0" prefWidth="149.0" promptText="server name or IP">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </TextField>     
+        <CheckBox fx:id="dbVersion" layoutX="307.0" layoutY="119.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="175.0" selected="true" text="MySql Version &gt; 5.5.45">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </CheckBox>
+        <TextField fx:id="dbPort" layoutX="149.0" layoutY="143.0" maxHeight="22.0" minHeight="22.0" pickOnBounds="false" prefHeight="22.0" prefWidth="63.0" text="3306">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </TextField>
+        <Label fx:id="lblDBName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="11.0" layoutY="170.0" prefHeight="20.0" prefWidth="130.0" text="Database Name :" textAlignment="RIGHT">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <TextField fx:id="dbDatabase" layoutX="149.0" layoutY="169.0" maxHeight="22.0" minHeight="22.0" pickOnBounds="false" prefHeight="22.0" prefWidth="175.0" promptText="Database name">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </TextField>
+        <Label fx:id="lblDBServer" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="11.0" layoutY="118.0" prefHeight="20.0" prefWidth="130.0" text="Server :" textAlignment="RIGHT">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblDBUsername" alignment="CENTER_RIGHT" layoutX="11.0" layoutY="196.0" minHeight="20.0" prefHeight="20.0" prefWidth="130.0" text=" Username :">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <TextField fx:id="dbUserName" layoutX="149.0" layoutY="195.0" maxHeight="22.0" minHeight="22.0" prefHeight="22.0" prefWidth="175.0" promptText="username">
+         <font>
+            <Font name="Lucida Sans Regular" size="12.0" />
+         </font></TextField>
+        <Label fx:id="lblDBPassword" alignment="CENTER_RIGHT" layoutX="11.0" layoutY="223.0" minHeight="20.0" prefHeight="20.0" prefWidth="130.0" text=" Password :">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <PasswordField fx:id="dbPassword" layoutX="149.0" layoutY="221.0" maxHeight="22.0" minHeight="22.0" prefHeight="22.0" prefWidth="175.0" promptText="password">
+         <font>
+            <Font name="Lucida Sans Regular" size="12.0" />
+         </font></PasswordField>
+        <Button fx:id="btnSelectFile" layoutX="602.0" layoutY="64.0" mnemonicParsing="false" onAction="#selectFile" prefHeight="25.0" prefWidth="46.0" style="-fx-border-radius: 10 10 10 10, 10 10 10 10; -fx-background-radius: 16;" />                              
+        <Button fx:id="btnCreate" layoutX="460.0" layoutY="194.0" mnemonicParsing="false" onAction="#createNewDB" prefHeight="25.0" prefWidth="137.0" style="-fx-border-radius: 10; -fx-background-radius: 55;" text="Create DB">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Button>   
+        <Button id="btn" fx:id="btnSaveConfig" layoutX="460.0" layoutY="167.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="137.0" style="-fx-border-radius: 10; -fx-background-radius: 55;" text="Save Config">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Button>
+        <Label fx:id="lblDBPort" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="11.0" layoutY="144.0" prefHeight="20.0" prefWidth="130.0" text="Port :" textAlignment="RIGHT">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <Button fx:id="btnExit" layoutX="460.0" layoutY="221.0" mnemonicParsing="false" onAction="#handleExitClick" prefHeight="25.0" prefWidth="137.0" style="-fx-border-radius: 10; -fx-background-radius: 55;" text="Exit">
+         <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Button>
+        <ProgressBar fx:id="pb" layoutX="54.0" layoutY="257.0" prefHeight="25.0" prefWidth="586.0" progress="0.0" />
+        <Label fx:id="lblProgressMsg" alignment="CENTER" layoutX="55.0" layoutY="261.0" prefHeight="17.0" prefWidth="586.0" text="Connecting to database .." textAlignment="CENTER">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblDBEngine" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="13.0" layoutY="40.0" prefHeight="20.0" prefWidth="130.0" text="Database Engine :" textAlignment="RIGHT">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </Label>
+        <RadioButton fx:id="mySQL" layoutX="151.0" layoutY="44.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="87.0" text="MySQL">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </RadioButton>
+        <RadioButton fx:id="postgreSQL" layoutX="246.0" layoutY="44.0" mnemonicParsing="false" text="PostgreSQL">
+            <font>
+                <Font name="Lucida Sans Regular" size="12.0" />
+            </font>
+        </RadioButton>
+      <RadioButton fx:id="derby" layoutX="344.0" layoutY="44.0" mnemonicParsing="false" text="Derby" />
+      <Button id="btn" fx:id="btnTestDB" layoutX="460.0" layoutY="140.0" mnemonicParsing="false" onAction="#doConnectionTest" prefHeight="25.0" prefWidth="137.0" style="-fx-border-radius: 10; -fx-background-radius: 55;" text="Test Connection">
+         <font>
+            <Font name="Lucida Sans Regular" size="12.0" />
+         </font>
+      </Button>        
+    </children>
+</AnchorPane>

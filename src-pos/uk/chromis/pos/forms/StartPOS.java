@@ -45,7 +45,7 @@ import org.pushingpixels.substance.api.SubstanceSkin;
 import uk.chromis.format.Formats;
 import uk.chromis.pos.ticket.TicketInfo;
 import javax.swing.JFrame;
-import uk.chromis.pos.dbmanager.DbManager;
+import uk.chromis.pos.dbmanager.DatabaseManager;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.DbUtils;
 
@@ -53,10 +53,6 @@ public class StartPOS {
 
     private static final Logger logger = Logger.getLogger("uk.chromis.pos.forms.StartPOS");
     private static ServerSocket serverSocket;
-    public static final int INIT_SUCCESS = 0;
-    public static final int INIT_FAIL_CONFIG = 1;
-    public static final int INIT_FAIL_EXIT = 2;
-    public static final int INIT_FAIL_RETRY = 3;
 
     private StartPOS() {
     }
@@ -138,11 +134,9 @@ public class StartPOS {
 
         DbUtils.checkJava();
 
-        DbManager manager = new DbManager(false);
+        DatabaseManager dbMan = new DatabaseManager();
 
-        if (!manager.DBChecks()) {
-            System.exit(0);
-        }
+        dbMan.checkDatabase();
 
         startApp();
 
@@ -155,7 +149,7 @@ public class StartPOS {
             AltEncrypter cypher = new AltEncrypter("cypherkey" + AppConfig.getInstance().getProperty("db.user"));
             db_password = cypher.decrypt(db_password.substring(6));
         }
-        RunRepair.Process(AppConfig.getInstance().getProperty("db.user"), AppConfig.getInstance().getProperty("db.URL"), db_password);
+      //  RunRepair.Process(AppConfig.getInstance().getProperty("db.user"), AppConfig.getInstance().getProperty("db.URL"), db_password);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

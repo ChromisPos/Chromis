@@ -26,12 +26,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.Locale;
 import java.util.logging.Logger;
-import javax.swing.SwingUtilities;
 import uk.chromis.format.Formats;
-import uk.chromis.pos.dbmanager.DbManager;
-import uk.chromis.pos.dbmanager.NewDB;
+import uk.chromis.pos.dbmanager.DatabaseManager;
 import uk.chromis.pos.dbmanager.RunRepair;
-import uk.chromis.pos.dbmanager.UpdateDB;
 import uk.chromis.pos.ticket.TicketInfo;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.DbUtils;
@@ -61,10 +58,9 @@ public class StartAdmin {
 
         DbUtils.checkJava();
 
-        DbManager manager = new DbManager(false);
-        if (!manager.DBChecks()) {
-            System.exit(0);
-        }
+        DatabaseManager dbMan = new DatabaseManager();
+
+        dbMan.checkDatabase();
 
         startApp();
 
@@ -77,7 +73,8 @@ public class StartAdmin {
             AltEncrypter cypher = new AltEncrypter("cypherkey" + AppConfig.getInstance().getProperty("db.user"));
             db_password = cypher.decrypt(db_password.substring(6));
         }
-        RunRepair.Process(AppConfig.getInstance().getProperty("db.user"), AppConfig.getInstance().getProperty("db.URL"), db_password);
+
+       // RunRepair.Process(AppConfig.getInstance().getProperty("db.user"), AppConfig.getInstance().getProperty("db.URL"), db_password);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

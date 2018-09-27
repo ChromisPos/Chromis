@@ -23,41 +23,32 @@
 
 package uk.chromis.pos.dbmanager;
 
-import uk.chromis.pos.forms.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class RunRepair {
 
-    public static void Process(String db_user, String db_url, String db_password) {        
+    public static void Process(Connection con) {        
         String s; // = new String();
-        StringBuilder sb = new StringBuilder();
-        Connection con = null;
+        StringBuilder sb = new StringBuilder();        
         FileReader fr;
         File file;
 
         try {
-            file = new File(System.getProperty("user.home") + "/repair.sql");
+            file = new File(System.getProperty("user.dir") + "/repair.sql");
             fr = new FileReader(file);
         } catch (FileNotFoundException ex) {
             return;
         }
 
         try {
-            ClassLoader cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
-            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
-            Class.forName(AppConfig.getInstance().getProperty("db.driver"));
-            con = DriverManager.getConnection(db_url, db_user, db_password);
+
             Statement stmt = (Statement) con.createStatement();
 
             BufferedReader br = new BufferedReader(fr);
@@ -75,7 +66,7 @@ public class RunRepair {
                 }
             }
             file.delete();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException | IOException e) {
+        } catch (SQLException | IOException e) {
             System.out.println("*** Error : " + e.toString());
             System.out.println("*** ");
             System.out.println("*** Error : ");

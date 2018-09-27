@@ -184,7 +184,7 @@ public class AppConfig implements AppProperties {
     }
 
     private void loadDefault() {
-
+/*
         String dirname = System.getProperty("dirname.path");
         dirname = dirname == null ? "./" : dirname;
 
@@ -193,7 +193,7 @@ public class AppConfig implements AppProperties {
         m_propsconfig.setProperty("db.URL", "jdbc:derby:" + new File(new File(System.getProperty("user.home")), AppLocal.APP_ID + "-database").getAbsolutePath() + ";create=true");
         m_propsconfig.setProperty("db.user", "");
         m_propsconfig.setProperty("db.password", "");
-
+*/
         /**
          *
          * Default component settings
