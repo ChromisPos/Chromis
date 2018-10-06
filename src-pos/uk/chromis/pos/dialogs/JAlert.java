@@ -73,7 +73,7 @@ public class JAlert extends JDialog {
     private JLabel iconLabel;
 
     private int width = 350;
-    private int height = 180;
+    private int height = 150;
 
     private JButton btnCancel;
     private JButton btnOK;
@@ -189,13 +189,13 @@ public class JAlert extends JDialog {
         });
 
         //Create the main panel layout
-        panel = new JPanel(new MigLayout("", "[]", "[]0[][]"));
+        panel = new JPanel(new MigLayout("insets 5 4 0 5", "[]", "[]0[][]"));
         panel.setPreferredSize(new Dimension(width, height));
 
         //Create sub panels and populate main panel
-        headerPanel = new JPanel(new MigLayout("", "[230][50]", "[]"));
+        headerPanel = new JPanel(new MigLayout("insets 5 4 0 5", "[230][50]", "[]"));
         headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, Color.decode("#bcbcb7")));
-        contextPanel = new JPanel(new MigLayout("", "[]", "[]"));
+        contextPanel = new JPanel(new MigLayout("insets 5 4 0 5", "[]", "[]"));
 
         panel.add(headerPanel, "wrap, gapx 0, growx, pushx");
         panel.add(contextPanel, "wrap, growx, pushx");
