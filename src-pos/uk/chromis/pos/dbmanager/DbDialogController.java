@@ -152,7 +152,7 @@ public class DbDialogController implements Initializable {
             dirty.setDirty(true);
         });
         dbDriverClass.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            dbUser.setDbClass(dbDriverLibrary.getText());
+            dbUser.setDbClass(dbDriverClass.getText());
             dirty.setDirty(true);
         });
         dbServer.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
