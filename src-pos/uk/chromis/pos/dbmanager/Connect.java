@@ -26,6 +26,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
+import uk.chromis.pos.dialogs.JAlert;
 import uk.chromis.pos.forms.AppLocal;
 
 /**
@@ -48,8 +52,16 @@ public class Connect extends JFrame {
     private JPanel connectPanel;
     private GroupLayout layout;
     private JLabel lblWaiting;
+    private Font dejaVuSans;
 
     public Connect() {
+        dejaVuSans = null;
+        try {
+            InputStream istream = JAlert.class.getResourceAsStream("/uk/chromis/fonts/DejaVuSansCondensed.ttf");
+            dejaVuSans = Font.createFont(Font.TRUETYPE_FONT, istream);
+        } catch (FontFormatException | IOException e) {
+            System.err.println(e.getMessage());
+        }
         createPanel();
         setUndecorated(true);
         setSize(275, 65);
@@ -91,15 +103,19 @@ public class Connect extends JFrame {
     }
 
     private void createPanel() {
-        MigLayout layout = new MigLayout("", "");
+        MigLayout layout = new MigLayout("insets 5 5 0 10", "");
         connectPanel = new JPanel(layout);
-        connectPanel.setPreferredSize(new Dimension(275, 65));
+        connectPanel.setPreferredSize(new Dimension(275, 60));
         connectPanel.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLUE));
         JLabel logoLabel = new JLabel();
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uk/chromis/fixedimages/spinning.gif")));
         connectPanel.add(logoLabel);
         lblWaiting = new JLabel();
-        lblWaiting.setFont(new Font("Arial", 1, 14));
+        if (dejaVuSans == null) {
+            lblWaiting.setFont(new Font("Arial", 1, 14));
+        } else {
+            lblWaiting.setFont(dejaVuSans.deriveFont(Font.BOLD, 13));
+        }
         lblWaiting.setText(AppLocal.getIntString("Message.connectingToDatabase"));
         lblWaiting.setHorizontalAlignment(SwingConstants.RIGHT);
         connectPanel.add(lblWaiting, "gapx 10");
