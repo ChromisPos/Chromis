@@ -164,7 +164,7 @@ public class DatabaseManager {
             alert.setHeaderText(AppLocal.getIntString("Message.connectionFailed"));
             alert.setContextText(AppLocal.getIntString("Message.unableToConnect"));
             alert.setYesNoButtons();
-            alert.reSize(400, 200);
+            alert.reSize(380, 180);
             alert.setVisible(true);
             connect.showPanel(false);
             connect.dispose();;
