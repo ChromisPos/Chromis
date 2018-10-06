@@ -279,6 +279,17 @@ public class DbDialogController implements Initializable {
 
     //Save the latest version of the properties file
     public boolean saveConfig() {
+        //set dbuser to correct values
+        dbUser.setDatabaseName(dbDatabase.getText());
+        dbUser.setDbClass(dbDriverClass.getText());
+        dbUser.setUserName(dbUserName.getText());
+        dbUser.setServerName(dbServer.getText());
+        dbUser.setServerPort(dbPort.getText());
+        dbUser.setUseSSL(dbVersion.isSelected());
+        dbUser.setDbLibrary(dbDriverLibrary.getText());
+        dbUser.setUserPassword(dbPassword.getText());
+        dbUser.setDbEngine(dbEngine);
+
         if (dbUser.save()) {
             JAlert jAlert = new JAlert(1);
             jAlert.setTitle(AppLocal.getIntString("Alert.configurationTitle"));
@@ -394,8 +405,8 @@ public class DbDialogController implements Initializable {
                     pb.setProgress(0);
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle(AppLocal.getIntString("Alert.configurationTitle"));
-                    alertDialog(2, AppLocal.getIntString("Message.titleConnectionTest"), 
-                            AppLocal.getIntString("Message.connectionFailed"), 
+                    alertDialog(2, AppLocal.getIntString("Message.titleConnectionTest"),
+                            AppLocal.getIntString("Message.connectionFailed"),
                             result[1].toString());
                     lblProgressMsg.setText(AppLocal.getIntString("Message.connectionUnsuccessful"));
                     lblProgressMsg.setTextFill(Color.web("#FF0000"));
@@ -424,7 +435,7 @@ public class DbDialogController implements Initializable {
         return new Task() {
             @Override
             protected Void call() throws Exception {
-                result = DbUtils.connectionTest(dbUser);                
+                result = DbUtils.connectionTest(dbUser);
                 if (dbDialog) {
                     doTest.cancel(true);
                 }
