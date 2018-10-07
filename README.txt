@@ -1,3 +1,15 @@
+27th September
+v 0.95.1 build 1809-27
+
+New lib files added ready for new logging process.
+Changed Connecting to database dialog box
+Started to prepare new locale to standardise the format across all of the objects
+New class DbUser added used for database connections, ready for changes to properties file
+No changes made to database schema 
+New JAlert class extends JDialog, to make alerting more like native FX version, currently only used by database manager
+
+
+*********************************************************************************************************
 14th June
 v0.94 
 

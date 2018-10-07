@@ -262,7 +262,6 @@ public final class SuppliersEditor extends JPanel implements EditorRecord {
         jLabel27 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSupplierName = new javax.swing.JLabel();
-        m_SupplierName = new javax.swing.JTextField();
         jSupplierAccount = new javax.swing.JLabel();
         m_SupplierAccount = new javax.swing.JTextField();
         jSupplierAddr1 = new javax.swing.JLabel();
@@ -287,6 +286,7 @@ public final class SuppliersEditor extends JPanel implements EditorRecord {
         m_SupplierTerms = new javax.swing.JTextField();
         jSupplierCredit = new javax.swing.JLabel();
         m_SupplierActive = new eu.hansolo.custom.SteelCheckBox();
+        m_SupplierName = new javax.swing.JTextField();
 
         jLabel24.setText("jLabel24");
 
@@ -300,13 +300,6 @@ public final class SuppliersEditor extends JPanel implements EditorRecord {
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("pos_messages"); // NOI18N
         jSupplierName.setText(bundle.getString("label.suppliername")); // NOI18N
         add(jSupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 100, 20));
-
-        m_SupplierName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_SupplierNameActionPerformed(evt);
-            }
-        });
-        add(m_SupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 250, -1));
 
         jSupplierAccount.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jSupplierAccount.setText(bundle.getString("label.supplieraccount")); // NOI18N
@@ -382,15 +375,12 @@ public final class SuppliersEditor extends JPanel implements EditorRecord {
             }
         });
         add(m_SupplierActive, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 40, 30));
+        add(m_SupplierName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 250, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_SupplierActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_SupplierActiveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_m_SupplierActiveActionPerformed
-
-    private void m_SupplierNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_SupplierNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_SupplierNameActionPerformed
 
     private void m_SupplierAddr2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_SupplierAddr2ActionPerformed
         // TODO add your handling code here:
