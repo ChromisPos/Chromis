@@ -194,8 +194,9 @@ public class TicketPanelController implements Initializable, BaseController {
             x++;
         }
 
-        receipt += "1";
-        ticketExample.setText(receiptPrefix.getText() + receipt);
+        receipt += "1";   
+        ticketExample.setText((receiptPrefix.getText()== null?"":receiptPrefix.getText()) + receipt);
+        
         receiptPrinterOff.setSelected(AppConfig.getInstance().getBoolean("till.receiptprintoff"));
         String SCCheck = (AppConfig.getInstance().getProperty("till.SCRate"));
         if (SCCheck == null || SCCheck.equals("")) {
