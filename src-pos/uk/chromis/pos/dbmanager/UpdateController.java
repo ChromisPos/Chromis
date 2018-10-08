@@ -211,17 +211,21 @@ public class UpdateController implements Initializable {
                     sb.append(rs.getString("title"));
                     sb.append("\", \"");
                     sb.append(rs.getString("entry"));
+                    System.out.println(rs.getString("follows"));
+                    System.out.println(sb.toString());
                     decodedData = decodedData.replaceAll(rs.getString("follows"), sb.toString());
                     byte[] bytesData = decodedData.getBytes();
                     String SQL2 = "update resources set content = ? where name = 'Menu.Root' ";
                     PreparedStatement stmt2 = connection.prepareStatement(SQL2);
                     stmt2.setBytes(1, bytesData);
                     stmt2.executeUpdate();
+                    connection.commit();
                 }
             }
             SQL = "delete from add_newmenuentry ";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             pstmt.executeUpdate();
+            connection.commit();
         } catch (SQLException ex) {
             dbUpdate = false;
             //  Logger.getLogger(UpdateController.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,10 +271,12 @@ public class UpdateController implements Initializable {
             PreparedStatement stmt2 = connection.prepareStatement(SQL2);
             stmt2.setBytes(1, bytesData);
             stmt2.executeUpdate();
+            connection.commit();
 
             SQL = "delete from remove_menuentry ";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             pstmt.executeUpdate();
+            connection.commit();
         } catch (SQLException ex) {
             dbUpdate = false;
             // Logger.getLogger(UpdateController.class.getName()).log(Level.SEVERE, null, ex);
@@ -314,11 +320,13 @@ public class UpdateController implements Initializable {
                     PreparedStatement stmt2 = connection.prepareStatement(SQL2);
                     stmt2.setBytes(1, bytesData);
                     stmt2.executeUpdate();
+                    connection.commit();
                 }
             }
             SQL = "delete from add_newbutton ";
             PreparedStatement pstmt = connection.prepareStatement(SQL);
             pstmt.executeUpdate();
+            connection.commit();
         } catch (SQLException ex) {
             dbUpdate = false;
             //  Logger.getLogger(UpdateController.class.getName()).log(Level.SEVERE, null, ex);
