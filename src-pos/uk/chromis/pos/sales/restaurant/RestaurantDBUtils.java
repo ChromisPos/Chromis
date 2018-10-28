@@ -460,7 +460,7 @@ public class RestaurantDBUtils {
             new StaticSentence(m_s, "UPDATE PLACES SET LOCKED = true, OPENEDBY = ? WHERE TICKETID = ?", new SerializerWriteBasic(new Datas[]{
                 Datas.STRING,
                 Datas.STRING
-            })).exec(tableID, user);
+            })).exec(user, tableID);
         } catch (BasicException e) {
             System.out.println("clear lock error");
         }
