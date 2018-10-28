@@ -70,8 +70,7 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
         JLabel lbl = new JLabel();
         lbl.setText(AppLocal.getIntString("label.pleasewait"));
         add(lbl);
-        
-        
+
         //  fxContainer.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT));
         add(fxContainer, BorderLayout.CENTER);
         Platform.runLater(new Runnable() {
@@ -173,6 +172,7 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
             .addGap(0, 800, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

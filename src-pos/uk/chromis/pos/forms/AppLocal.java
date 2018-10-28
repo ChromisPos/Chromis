@@ -19,20 +19,26 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
+ */
 package uk.chromis.pos.forms;
 
 import uk.chromis.beans.LocaleResources;
 
 public class AppLocal {
 
+    /*
     public static final String APP_NAME = "Chromis POS";
     public static final String APP_ID = "chromispos";
-    public static final String APP_VERSION = "0.95.1 build 1809-28";
-    public static final int APP_VERSIONINT = 201800928;
+    public static final String APP_VERSION = "0.951 build 1808-14";
+    public static final int APP_VERSIONINT = 20180815;
     public static final String APP_DEMO = "";
-   
+     */
+    public static final String APP_NAME = "Chromis POS";
+    public static final String APP_ID = "chromispos";
+    public static final String APP_VERSION = "0.95.1 build 1810-27";
+    public static final int APP_VERSIONINT = 20181027;
+    public static final String APP_DEMO = "";
+
     private static final LocaleResources m_resources;
     public static String LIST_BY_RIGHTS = "";
 

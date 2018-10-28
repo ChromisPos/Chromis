@@ -216,7 +216,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         return attributes.getProperty("displayno");
     }
 
-    public String getDefaultPrinter() {
+    public String getDefaultPrinter() {        
         return attributes.getProperty("kitchen.printer");
     }
 

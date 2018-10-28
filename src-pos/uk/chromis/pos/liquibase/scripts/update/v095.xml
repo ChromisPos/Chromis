@@ -18,7 +18,7 @@
     <property name="blob.type" value="mediumblob" dbms="mysql"/>
      
       
-    <changeSet author="Chromis POS" id="Create Supplier table entries v0.952"> 
+    <changeSet author="Chromis POS" id="Create Supplier table entries v0.95"> 
         <insert tableName="add_newmenuentry"> 
             <column name="ENTRY" value="uk.chromis.pos.suppliers.SuppliersPanel"/>   
             <column name="FOLLOWS" value="uk.chromis.pos.inventory.RecipePanel"/>
@@ -68,10 +68,10 @@
         </modifySql>
     </changeSet>             
                             
-    <changeSet author="Chromis POS" id="Update to Chromis to v0.95.1 build 1809-28">    
+    <changeSet author="Chromis POS" id="Update to Chromis version to v0.95.1 build 1810-27">    
         <update tableName="APPLICATIONS">
-            <column name="VERSION" value="0.95.1 build 1809-28"/>   
-            <column name="VERSIONINT" valueNumeric="20180928"/>         
+            <column name="VERSION" value="0.95.1 build 1810-27"/>   
+            <column name="VERSIONINT" valueNumeric="20181027"/>         
         </update>  
     </changeSet>      
     

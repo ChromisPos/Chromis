@@ -58,7 +58,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
     public DeviceConfig scale;
     public ScannerConfig scanner;
     public LabeledComboBox reportPrinter;
-    public LabeledComboBox overridePrinter;
+  //  public LabeledComboBox overridePrinter;
 
     public BooleanProperty dirty = new SimpleBooleanProperty();
     private PrintService[] printServices;
@@ -186,11 +186,11 @@ public class PeripheralPanelController implements Initializable, BaseController 
         dirty.bindBidirectional(reportPrinter.dirty);
         reportPrinter.addItemList(systemprinters);
         reportPrinter.setLabel(AppLocal.getIntString("label.reportsprinter"));
-
+/*
         dirty.bindBidirectional(overridePrinter.dirty);
         overridePrinter.addItemList(overridePtrs);
         overridePrinter.setLabel("Override Printer");
-
+*/
         dirty.bindBidirectional(scale.dirty);
         scale.setDeviceParameters(scales, ports);
         scale.setLabelText("deviceLabel", AppLocal.getIntString("label.scale"));
@@ -224,11 +224,13 @@ public class PeripheralPanelController implements Initializable, BaseController 
         printer4.setPrinter(AppConfig.getInstance().getProperty("machine.printer.4"));
         printer5.setPrinter(AppConfig.getInstance().getProperty("machine.printer.5"));
         printer6.setPrinter(AppConfig.getInstance().getProperty("machine.printer.6"));
+  /*
         if (AppConfig.getInstance().getProperty("machine.overrideprinter") == null) {
             overridePrinter.setSelected("Printer 2");
         } else {
             overridePrinter.setSelected(AppConfig.getInstance().getProperty("machine.overrideprinter"));
         }
+*/
         customerDisplay.setDisplay(AppConfig.getInstance().getProperty("machine.display"), false);
         customerDisplay.setDisplay(AppConfig.getInstance().getProperty("machine.display"), AppConfig.getInstance().getBoolean("machine.customerdisplay"));
         reportPrinter.setSelected(AppConfig.getInstance().getProperty("machine.printername"));
@@ -251,7 +253,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
         AppConfig.getInstance().setProperty("machine.display", customerDisplay.getDisplayParams());
         AppConfig.getInstance().setBoolean("machine.customerdisplay", customerDisplay.isToggleSelected());
         AppConfig.getInstance().setProperty("machine.printername", comboValue(reportPrinter.getSelected()));
-        AppConfig.getInstance().setProperty("machine.overrideprinter", comboValue(overridePrinter.getSelected()));
+      //  AppConfig.getInstance().setProperty("machine.overrideprinter", comboValue(overridePrinter.getSelected()));
 
         dirty.setValue(false);
     }

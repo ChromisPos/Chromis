@@ -63,7 +63,6 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/stockdiary.png", "Menu.StockDiary", "uk.chromis.pos.inventory.StockDiaryPanel");
         submenu.addPanel("/uk/chromis/images/stockmaint.png", "Menu.StockMovement", "uk.chromis.pos.inventory.StockManagement");
         submenu.addPanel("/uk/chromis/images/stockmaint.png", "Menu.ProductPacks", "uk.chromis.pos.inventory.ProductPacksPanel");        
-//      submenu.addPanel("/uk/chromis/images/img.promo.png", "Menu.Promotions", "uk.chromis.pos.promotion.PromotionPanel"); 
         submenu.addPanel("/uk/chromis/images/img.discount.png", "Menu.Promotions", "uk.chromis.pos.promotion.PromotionPanel");
         submenu.addPanel("/uk/chromis/images/auxiliary.png", "Menu.Recipe", "uk.chromis.pos.inventory.RecipePanel");       
 
@@ -104,7 +103,6 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.BestSellers", "/uk/chromis/reports/bestsellers.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.Commission", "/uk/chromis/reports/commissionreport.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CurrentSales", "/uk/chromis/reports/currentproductsales.bs"); 
-
 //      submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ExtendedByProducts", "/uk/chromis/reports/extproducts.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SaleTaxes", "/uk/chromis/reports/saletaxes.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.TaxCatSales", "/uk/chromis/reports/taxcatsales.bs");

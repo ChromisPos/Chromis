@@ -1241,7 +1241,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                      * ******************************************************************************
                      */
 // Are we passing a customer card these cards start with 'c'                
-                } else if (sCode.startsWith("c") || sCode.startsWith("C") ) {
+                } else if (sCode.startsWith("c") || sCode.startsWith("C")) {
                     try {
                         CustomerInfoExt newcustomer = dlSales.findCustomerExt(sCode);
                         if (newcustomer == null) {
@@ -1896,7 +1896,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 script.put("warranty", warrantyPrint);
                 script.put("pickupid", getPickupString(ticket));
                 script.put("ticketpanel", this);
-                script.put("printers", setRemoteUnits(ticket));
+                //Removed until resolved
+                // script.put("printers", setRemoteUnits(ticket));
 
                 refreshTicket();
 
@@ -2089,9 +2090,9 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     public void updatePromotions(String eventkey, int effectedIndex, String productID) {
         int dc = Boolean.parseBoolean(AppConfig.getInstance().getProperty("display.consolidated")) ? 1 : 0;
-        effectedIndex = effectedIndex -dc;
+        effectedIndex = effectedIndex - dc;
         try {
-            int selectedIndex = m_ticketlines.getSelectedIndex();            
+            int selectedIndex = m_ticketlines.getSelectedIndex();
             if (selectedIndex >= m_oTicket.getLinesCount()) {
                 // Selection is at the end of the list so we restore it to there afterwards
                 selectedIndex = 9999;

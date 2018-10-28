@@ -34,6 +34,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
+import uk.chromis.custom.controls.LabeledColourPicker;
 import uk.chromis.custom.controls.LabeledTextField;
 import uk.chromis.custom.switches.ToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
@@ -94,13 +95,28 @@ public class SystemPanelController implements Initializable, BaseController {
     @FXML
     private Spinner tableDays;
     @FXML
+    private Spinner ticketLineSize;
+    @FXML
     private Label retainLabel;
+    @FXML
+    private Label ticketLinesLabel;
     @FXML
     private Label autologoffpanel;
     @FXML
     private Label general;
+    @FXML
+    private Label ticketLines;
+    @FXML
+    private Label colouredLineMessage;
+    @FXML
+    private LabeledColourPicker normalMessage;
+    @FXML
+    private LabeledColourPicker waitingMessage;
+    @FXML
+    private LabeledColourPicker sentMessage;
 
     private String tableRetain;
+    private String ticketLine;
 
     protected BooleanProperty dirty = new SimpleBooleanProperty();
 
@@ -152,13 +168,18 @@ public class SystemPanelController implements Initializable, BaseController {
         maxChange.setText("50.00");
 
         maxChangeEnable.selectedProperty().addListener((arg, oldVal, newVal) -> maxChange.setDisable(!maxChangeEnable.isSelected()));
-        
+
         retainLabel.setText(AppLocal.getIntString("label.cleardrawertable"));
         IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(7, 90, 7);
         tableDays.setValueFactory(valueFactory);
 
+        ticketLinesLabel.setText(AppLocal.getIntString("label.ticketlinesize"));
+        IntegerSpinnerValueFactory ticketLineFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(28, 100, 7);
+        ticketLineSize.setValueFactory(ticketLineFactory);
+
         load();
 
+        ticketLineSize.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
         tableDays.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
 
     }
@@ -203,7 +224,7 @@ public class SystemPanelController implements Initializable, BaseController {
         longNames.setSelected(AppConfig.getInstance().getBoolean("display.longnames"));
         customSounds.setSelected(AppConfig.getInstance().getBoolean("till.customsounds"));
         maxChange.setDisable(!maxChangeEnable.isSelected());
-        
+
         tableRetain = (AppConfig.getInstance().getProperty("dbtable.retaindays"));
 
         if (tableRetain == null || "".equals(tableRetain)) {
@@ -212,6 +233,12 @@ public class SystemPanelController implements Initializable, BaseController {
             tableDays.getValueFactory().setValue(Integer.parseInt(tableRetain));
         }
 
+        ticketLine = (AppConfig.getInstance().getProperty("sales.linesize"));
+        if (ticketLine == null || "".equals(ticketLine)) {
+            ticketLineSize.getValueFactory().setValue(40);
+        } else {
+            ticketLineSize.getValueFactory().setValue(Integer.parseInt(ticketLine));
+        }
         dirty.setValue(false);
     }
 
@@ -241,6 +268,7 @@ public class SystemPanelController implements Initializable, BaseController {
         AppConfig.getInstance().setBoolean("till.enablechangelimit", maxChangeEnable.isSelected());
         AppConfig.getInstance().setBoolean("display.longnames", longNames.isSelected());
         AppConfig.getInstance().setBoolean("till.customsounds", customSounds.isSelected());
+        AppConfig.getInstance().setProperty("sales.linesize", ticketLineSize.getValue().toString());
 
         dirty.setValue(false);
     }

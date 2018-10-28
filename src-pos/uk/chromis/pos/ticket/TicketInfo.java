@@ -429,7 +429,15 @@ public final class TicketInfo implements SerializableRead, Externalizable {
             return m_Customer.getId();
         }
     }
-  
+
+    public Boolean hasCustomer() {
+        if (m_Customer == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     public String getTransactionID() {
         return (getPayments().size() > 0)
                 ? (getPayments().get(getPayments().size() - 1)).getTransactionID()

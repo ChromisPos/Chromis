@@ -1,3 +1,16 @@
+27th October
+v 0.95.1 build 1810-27
+
+Removed printer override while changing the main logic
+Add the ability to change height of ticketlines in sales panel
+Update db routines
+Change db manager routines including new image for connect test
+Resolved issue with menu.root entries
+Update pos_messages with new messages as required
+Added new locale to conbfiguration
+
+
+*********************************************************************************************************
 27th September
 v 0.95.1 build 1809-27
 

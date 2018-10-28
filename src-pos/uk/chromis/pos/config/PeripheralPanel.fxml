@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.AnchorPane?>
-<?import uk.chromis.custom.controls.DeviceConfig?>
-<?import uk.chromis.custom.controls.DisplayConfig?>
-<?import uk.chromis.custom.controls.LabeledComboBox?>
-<?import uk.chromis.custom.controls.PrinterConfig?>
-<?import uk.chromis.custom.controls.ScannerConfig?>
+<?import uk.chromis.custom.controls.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.PeripheralPanelController">
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.PeripheralPanelController">
     <children>
         <DisplayConfig fx:id="customerDisplay" layoutX="17.0" layoutY="10.0" />
         <PrinterConfig fx:id="printer1" layoutX="17.0" layoutY="40.0" />
@@ -17,8 +14,9 @@
         <PrinterConfig fx:id="printer5" layoutX="17.0" layoutY="160.0" />
         <PrinterConfig fx:id="printer6" layoutX="17.0" layoutY="190.0" />
         <DeviceConfig fx:id="scale" layoutX="17.0" layoutY="220.0" />
-        <ScannerConfig fx:id="scanner" layoutX="17.0" layoutY="250.0" />
+        <ScannerConfig fx:id="scanner" layoutX="17.0" layoutY="250.0" />        
         <LabeledComboBox fx:id="reportPrinter" layoutX="17.0" layoutY="280.0" />
-        <LabeledComboBox fx:id="overridePrinter" layoutX="17.0" layoutY="320.0" />
+      <!--  <LabeledComboBox fx:id="overridePrinter" layoutX="17.0" layoutY="320.0" />-->
+
     </children>
 </AnchorPane>

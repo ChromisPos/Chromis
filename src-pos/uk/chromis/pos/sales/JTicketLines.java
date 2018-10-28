@@ -54,6 +54,7 @@ import uk.chromis.pos.scripting.ScriptException;
 import uk.chromis.pos.scripting.ScriptFactory;
 import uk.chromis.pos.ticket.TicketLineInfo;
 import uk.chromis.data.loader.SessionFactory;
+import uk.chromis.pos.forms.AppConfig;
 
 /**
  *
@@ -111,16 +112,22 @@ public class JTicketLines extends javax.swing.JPanel {
         m_jTicketTable.getTableHeader().setReorderingAllowed(false);
         m_jTicketTable.setDefaultRenderer(Object.class, new TicketCellRenderer(acolumns));
 
-        m_jTicketTable.setRowHeight(40);
+        String ticketLine = (AppConfig.getInstance().getProperty("sales.linesize"));
+        if (ticketLine == null || "".equals(ticketLine)) {
+            m_jTicketTable.setRowHeight(40);
+        } else {
+            m_jTicketTable.setRowHeight(Integer.parseInt(ticketLine));
+        }
+
+      //  m_jTicketTable.setRowHeight(30);
         m_jTicketTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // reseteo la tabla...
         m_jTableModel.clear();
 
-      
         //test if external closed source library has been download from web if not use internal functions.
-        try {  
-            os = new OrderSent(SessionFactory.getInstance().getSession().getConnection(), m_jTicketTable);  
+        try {
+            os = new OrderSent(SessionFactory.getInstance().getSession().getConnection(), m_jTicketTable);
             ext = os.EXTERNAL;
         } catch (SQLException e) {
             ext = false;
