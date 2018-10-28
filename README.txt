@@ -9,6 +9,7 @@ Resolved issue with menu.root entries
 Update pos_messages with new messages as required
 Added new locale to configuration
 Fixed ticket split bug
+bug #167 opened table fixed
 
 
 *********************************************************************************************************
