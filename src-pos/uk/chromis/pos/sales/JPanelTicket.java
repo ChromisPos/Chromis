@@ -652,7 +652,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         m_promotionSupport.clearPromotionCache();
 
-        if (m_oTicket == null) {
+        if (m_oTicket == null) {            
             btnSplit.setEnabled(false);
             m_jTicketId.setText(null);
             m_ticketlines.clearTicketLines();
@@ -672,8 +672,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             }
 
         } else {
-            btnSplit.setEnabled(false);
-            btnSplit.setEnabled(m_App.getAppUserView().getUser().hasPermission("sales.Total") && (m_oTicket.getArticlesCount()) > 1);
+            btnSplit.setEnabled((m_App.getAppUserView().getUser().hasPermission("sales.Total") && (m_oTicket.getArticlesCount()) > 1));
             if (m_oTicket.getTicketType().equals(TicketType.REFUND)) {
                 //Make disable Search and Edit Buttons
                 m_jNumberKey.justEquals();
@@ -879,7 +878,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             // read resource ticket.change and execute
             executeEvent(m_oTicket, m_oTicketExt, "ticket.change");
         }
-
+        refreshTicket();
     }
 
     private void removeTicketLine(int i) {
@@ -1896,8 +1895,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 script.put("warranty", warrantyPrint);
                 script.put("pickupid", getPickupString(ticket));
                 script.put("ticketpanel", this);
-                //Removed until resolved
-                // script.put("printers", setRemoteUnits(ticket));
+				//Removed until logic has been redone
+               // script.put("printers", setRemoteUnits(ticket));
 
                 refreshTicket();
 
