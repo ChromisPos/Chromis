@@ -492,10 +492,7 @@ public final class StockDiaryEditorWithSites extends javax.swing.JPanel implemen
                     Double dStock = m_dlSales.findProductStock(
                             (String) m_LocationsModel.getSelectedKey(),
                             productid, attsetid, siteGuid);
-                    unitsinstock = Formats.DOUBLE.formatValue(dStock);
-
-                    System.out.println("Stock = " + unitsinstock);
-                    
+                    unitsinstock = Formats.DOUBLE.formatValue(dStock);                   
                     buyprice = prod.getPriceBuy();
                     sellprice = prod.getPriceSell();
 
