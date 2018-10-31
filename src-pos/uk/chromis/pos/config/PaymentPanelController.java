@@ -94,7 +94,7 @@ public class PaymentPanelController implements Initializable, BaseController {
         initPayments("external", new ConfigPaymentPanelEmpty());
         paymentGateway.setSelected("Not defined");
         
-        
+        load();
     }
 
     private void initPayments(String name, PaymentConfiguration pc) {
