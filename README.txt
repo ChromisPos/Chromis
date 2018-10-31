@@ -1,4 +1,10 @@
-27th October
+31th October
+v 0.95.1 build 1810-31
+
+Recoded Peripheral Configuration panel due to custom control bug
+
+
+*********************************************************************************************************27th October
 v 0.95.1 build 1810-27
 
 Removed printer override while changing the main logic
