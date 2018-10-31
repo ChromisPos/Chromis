@@ -189,6 +189,18 @@ public class DatabaseManager {
         sDbVersion = readDataBaseVersion();
         int dbVersion;
 
+        if (sDbVersion == null) {
+            fxPanel.setScene(createDbDialog());
+            uframe.setVisible(true);
+            connect.showPanel(false);
+            connect.dispose();
+            //use countdownlatch to halt program flow
+            try {
+                waitForUpdate.await();
+            } catch (InterruptedException ex) {
+            }
+        } 
+        
         if (!sDbVersion.equals(AppLocal.APP_VERSION)) {
             try {
                 // Ready for future release, this will prevent upgrade running against older version
@@ -209,6 +221,7 @@ public class DatabaseManager {
                 }
             }
         }
+
         connect.showPanel(false);
         connect.dispose();
         return;
