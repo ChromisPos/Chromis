@@ -652,7 +652,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
         m_promotionSupport.clearPromotionCache();
 
-        if (m_oTicket == null) {            
+        if (m_oTicket == null) {
             btnSplit.setEnabled(false);
             m_jTicketId.setText(null);
             m_ticketlines.clearTicketLines();
@@ -1704,7 +1704,17 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                             }
                         }
                         m_ticketsbag.deleteTicket();
-                        if ((!("restaurant".equals(AppConfig.getInstance().getProperty("machine.ticketsbag"))) && autoLogoffEnabled && autoLogoffAfterSales)) {
+
+                        System.out.println(!("restaurant".equals(AppConfig.getInstance().getProperty("machine.ticketsbag"))));
+
+                        if ((!("restaurant".equals(AppConfig.getInstance().getProperty("machine.ticketsbag")))
+                                && autoLogoffEnabled
+                                && autoLogoffAfterSales)) {
+                            ((JRootApp) m_App).closeAppView();
+                        } else if (("restaurant".equals(AppConfig.getInstance().getProperty("machine.ticketsbag")))
+                                && autoLogoffEnabled
+                                && autoLogoffAfterSales
+                                && !autoLogoffToTables) {
                             ((JRootApp) m_App).closeAppView();
                         }
                     } else {
@@ -1895,8 +1905,8 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 script.put("warranty", warrantyPrint);
                 script.put("pickupid", getPickupString(ticket));
                 script.put("ticketpanel", this);
-				//Removed until logic has been redone
-               // script.put("printers", setRemoteUnits(ticket));
+                //Removed until logic has been redone
+                // script.put("printers", setRemoteUnits(ticket));
 
                 refreshTicket();
 
