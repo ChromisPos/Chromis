@@ -257,8 +257,6 @@ public class DatabasePanelController implements Initializable, BaseController {
 
     @Override
     public void save() {
-        
-        System.out.println("Engine " +comboValue(databaseDetails.getSelected()));
         AppConfig.getInstance().setProperty("db.engine", comboValue(databaseDetails.getSelected()));
         AppConfig.getInstance().setProperty("db.driverlib", dbDriverLib.getText());
         AppConfig.getInstance().setProperty("db.driver", dbDriverClass.getText());
