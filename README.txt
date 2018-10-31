@@ -1,4 +1,4 @@
-31th October
+31st October
 v 0.95.1 build 1810-31
 
 Recoded Peripheral Configuration panel due to custom control bug
