@@ -68,10 +68,10 @@
         </modifySql>
     </changeSet>             
                             
-    <changeSet author="Chromis POS" id="Update to Chromis version to v0.95.1 build 1810-27">    
+    <changeSet author="Chromis POS" id="Update to Chromis version to v0.95.1 build 1810-31">    
         <update tableName="APPLICATIONS">
-            <column name="VERSION" value="0.95.1 build 1810-27"/>   
-            <column name="VERSIONINT" valueNumeric="20181027"/>         
+            <column name="VERSION" value="0.95.1 build 1810-31"/>   
+            <column name="VERSIONINT" valueNumeric="20181031"/>         
         </update>  
     </changeSet>      
     
