@@ -323,8 +323,6 @@ public class GeneralPanelController implements Initializable, BaseController {
         AppConfig.getInstance().setProperty("start.logo", startUpLogo.getText());
         AppConfig.getInstance().setProperty("start.text", startUpText.getText());
         AppConfig.getInstance().setProperty("icon.colour", strIconColour);
-        
-        System.out.println(tsFooter.isSelected());
         dirty.setValue(false);
     }
 
