@@ -426,7 +426,6 @@ public final class CustomersView extends javax.swing.JPanel implements EditorRec
 
     @Override
     public Object createValue() throws BasicException {
-        System.out.println("create");
 
         if (m_jSearchkey.getText() == null || m_jSearchkey.getText().trim().length() == 0) {            
             JOptionPane.showMessageDialog(null, "Blank or null search keys are allowed.", "Invalid Search Key " , JOptionPane.INFORMATION_MESSAGE);
