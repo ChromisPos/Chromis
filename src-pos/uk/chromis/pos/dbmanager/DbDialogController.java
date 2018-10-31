@@ -476,7 +476,7 @@ public class DbDialogController implements Initializable {
             protected Object call() throws Exception {
                 dbBuilt = true;
                 try {
-                    String changelog = "uk/chromis/pos/liquibase/scripts/create/createdb.xml";
+                    String changelog = "uk/chromis/pos/liquibase/scripts/create/chromis.xml";
                     Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
                     Liquibase liquibase = new Liquibase(changelog, new ClassLoaderResourceAccessor(), database);
                     liquibase.update("implement");
