@@ -118,7 +118,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
     public static int INDEX_DEFAULTPTR = FIELD_COUNT++;
     public static int INDEX_REMOTEDISPLAY = FIELD_COUNT++;
     public static int INDEX_DEFAULTSCREEN = FIELD_COUNT++;
-    public static int INDEX_PTROVERRIDE = FIELD_COUNT++;    
+    public static int INDEX_PTROVERRIDE = FIELD_COUNT++;
     public static int INDEX_SITEGUID = FIELD_COUNT++;
 
     /**
@@ -273,7 +273,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 + "P.SITEGUID ";
         return sel;
     }
-  
+
     /**
      *
      * @param s
@@ -531,7 +531,6 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 ProductInfoExt.getSerializerRead()).list(category, siteGuid);
     }
 
-    
     public List<ProductInfoExt> getProductCatalogNormal(String category, String siteGuid) throws BasicException {
         return new PreparedSentence(s, "SELECT "
                 + getSelectFieldList()
@@ -541,7 +540,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 new SerializerWriteBasicExt(new Datas[]{Datas.OBJECT, Datas.STRING, Datas.OBJECT, Datas.STRING}, new int[]{1, 0}),
                 ProductInfoExt.getSerializerRead()).list(category, siteGuid);
     }
-    
+
     /**
      *
      * @param category
@@ -1275,22 +1274,38 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                         //     List<ProductsRecipeInfo> kit = getProductsKit(l.getProductID());
                         //     if (kit.size() == 0) {
                         // update the stock
+                        int reason = 0;
+                        if (l.getMultiply() > 0.0 && l.getRefundQty() == 0.00) {
+                            reason = (int) MovementReason.OUT_SALE.getKey();
+                        } else {
+                            reason = (int) MovementReason.IN_REFUND.getKey();
+                        }
+
+                        double amount = 0.00;
+                        if (l.getRefundQty() < 1.00) {
+                            amount = -l.getMultiply();            
+                        } else {
+                            amount = l.getRefundQty();
+                        }
+                        
+                        //Code to resolve refundit issue
+                        if (ticket.getTicketType().toString().equals("REFUND" )) {
+                            reason = 2;
+                            amount = l.getMultiply();
+                        }                        
+                        
                         getStockDiaryInsert().exec(new Object[]{
                             UUID.randomUUID().toString(),
                             ticket.getDate(),
-                            l.getMultiply() > 0.0 && l.getRefundQty() == 0.00
-                            ? MovementReason.OUT_SALE.getKey()
-                            : MovementReason.IN_REFUND.getKey(),
+                            reason,
                             location,
                             l.getProductID(),
                             l.getProductAttSetInstId(),
-                            l.getRefundQty() < 1.00
-                            ? -l.getMultiply()
-                            : l.getRefundQty(),
+                            amount,
                             l.getPrice(),
                             ticket.getUser().getName(),
                             m_dlSync.getSiteGuid(),
-                            null, null, null, null, null, null, null, null, null
+                            ticket.getTicketType(), null, null, null, null, null, null, null, null
                         });
                     }
                 }
@@ -1512,7 +1527,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                                     INDEX_ALWAYSAVAILABLE, INDEX_DISCOUNTED, INDEX_CANDISCOUNT,
                                     INDEX_ISPACK, INDEX_PACKQUANTITY, INDEX_PACKPRODUCT,
                                     INDEX_PROMOTIONID, INDEX_MANAGESTOCK, INDEX_SUPPLIER, INDEX_DEFAULTPTR,
-                                    INDEX_REMOTEDISPLAY, INDEX_DEFAULTSCREEN, 
+                                    INDEX_REMOTEDISPLAY, INDEX_DEFAULTSCREEN,
                                     INDEX_PTROVERRIDE, INDEX_SITEGUID})).exec(params);
                 new PreparedSentence(s, "INSERT INTO STOCKCURRENT (LOCATION, PRODUCT, UNITS, SITEGUID) VALUES ('0', ?, 0.0, ?)",
                         new SerializerWriteBasicExt(productsRow.getDatas(), new int[]{INDEX_ID, INDEX_SITEGUID})).exec(params);
@@ -1631,7 +1646,7 @@ public class DataLogicSales extends BeanFactoryDataSingle {
                 }
 
                 int as = adjustStock(adjustParams);
-               
+
                 if (!isCentral) {
                     //if delivery record adjust average price and price if required
                     if ((Integer) paramsArray[2] == 1) {
