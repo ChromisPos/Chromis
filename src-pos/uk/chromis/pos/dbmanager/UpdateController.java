@@ -211,8 +211,6 @@ public class UpdateController implements Initializable {
                     sb.append(rs.getString("title"));
                     sb.append("\", \"");
                     sb.append(rs.getString("entry"));
-                    System.out.println(rs.getString("follows"));
-                    System.out.println(sb.toString());
                     decodedData = decodedData.replaceAll(rs.getString("follows"), sb.toString());
                     byte[] bytesData = decodedData.getBytes();
                     String SQL2 = "update resources set content = ? where name = 'Menu.Root' ";
