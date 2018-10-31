@@ -95,11 +95,7 @@ public class UpdateController implements Initializable {
     }
 
     public void handleExitClick() {
-        if (dbUpdate) {
-            DatabaseManager.waitForUpdate.countDown();
-        } else {
-            System.exit(0);
-        }
+        System.exit(0);
     }
 
     private void alertDialog(int alert, String title, String headerText, String contentText) {
@@ -126,7 +122,7 @@ public class UpdateController implements Initializable {
         worker = updatedb(connection);
         new Thread(worker).start();
 
-        worker.setOnCancelled(e -> {
+        worker.setOnSucceeded(e -> {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -175,7 +171,7 @@ public class UpdateController implements Initializable {
                     insertNewButtons(connection);
                 }
 
-                worker.cancel(true);
+                //worker.cancel(true);
                 return null;
             }
         ;
