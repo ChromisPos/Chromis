@@ -2,6 +2,9 @@
 v 0.95.1 build 1810-31
 
 Recoded Peripheral Configuration panel due to custom control bug
+Resolved issue creating new database 
+bug #164 fixed - refundit is placing back in stock
+bug #170 fixed - payment gateway keeps resetting
 
 
 *********************************************************************************************************27th October
