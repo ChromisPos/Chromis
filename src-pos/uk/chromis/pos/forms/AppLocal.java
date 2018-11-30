@@ -35,8 +35,8 @@ public class AppLocal {
      */
     public static final String APP_NAME = "Chromis POS";
     public static final String APP_ID = "chromispos";
-    public static final String APP_VERSION = "0.95.1 build 1810-31";
-    public static final int APP_VERSIONINT = 20181031;
+    public static final String APP_VERSION = "0.95.1 build 1811-30";
+    public static final int APP_VERSIONINT = 20181130;
     public static final String APP_DEMO = "";
 
     private static final LocaleResources m_resources;

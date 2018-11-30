@@ -102,7 +102,6 @@ public class JPanelButtons extends javax.swing.JPanel {
                 logger.log(Level.WARNING, LocalRes.getIntString("exception.iofile"), eIO);
             }
         }
-
     }
 
     /**
@@ -160,7 +159,7 @@ public class JPanelButtons extends javax.swing.JPanel {
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-            switch (qName) {
+            switch (qName) {                
                 case "button":
                     // The button title text
                     String titlekey = attributes.getValue("titlekey");

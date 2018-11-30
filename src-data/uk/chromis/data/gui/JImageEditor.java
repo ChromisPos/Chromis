@@ -79,7 +79,7 @@ public class JImageEditor extends javax.swing.JPanel {
         // Enable drag & drop image support
         this.setTransferHandler(createTransferHandler());
     }
-
+   
     private TransferHandler createTransferHandler() {
         return new TransferHandler() {
             @Override
