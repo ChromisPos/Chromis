@@ -1127,7 +1127,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
              * Start of barcode handling routine
              * ******************************************************************
              */
-            if (m_sBarcode.length() > 0) {
+            if (m_sBarcode.length() > 0) {;
                 String sCode = m_sBarcode.toString();
                 /**
                  * *****************************************************************************
