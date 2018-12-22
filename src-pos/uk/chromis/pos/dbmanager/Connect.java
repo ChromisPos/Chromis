@@ -48,20 +48,11 @@ import uk.chromis.pos.forms.AppLocal;
  */
 public class Connect extends JFrame {
 
-    //  private final JFrame frame;
     private JPanel connectPanel;
     private GroupLayout layout;
     private JLabel lblWaiting;
-    private Font dejaVuSans;
 
     public Connect() {
-        dejaVuSans = null;
-        try {
-            InputStream istream = JAlert.class.getResourceAsStream("/uk/chromis/fonts/DejaVuSansCondensed.ttf");
-            dejaVuSans = Font.createFont(Font.TRUETYPE_FONT, istream);
-        } catch (FontFormatException | IOException e) {
-            System.err.println(e.getMessage());
-        }
         createPanel();
         setUndecorated(true);
         setSize(275, 65);
@@ -73,19 +64,6 @@ public class Connect extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    /* 
-    public Connect() {
-        createPanel();
-        frame = new JFrame();
-        frame.setUndecorated(true);
-        frame.add(connectPanel, BorderLayout.CENTER);
-        frame.setSize(275, 65);
-        frame.setLocationRelativeTo(null);
-        frame.setUndecorated(true);
-        frame.setResizable(false);
-        frame.setAlwaysOnTop(true);
-    }
-     */
     public void showPanel(Boolean visible) {
         setVisible(visible);
         if (visible) {
@@ -111,12 +89,7 @@ public class Connect extends JFrame {
         logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/uk/chromis/fixedimages/spinning.gif")));
         connectPanel.add(logoLabel);
         lblWaiting = new JLabel();
-        if (dejaVuSans == null) {
-            lblWaiting.setFont(new Font("Arial", 1, 14));
-        } else {
-            lblWaiting.setFont(dejaVuSans.deriveFont(Font.BOLD, 13));
-        }
-        lblWaiting.setText(AppLocal.getIntString("Message.connectingToDatabase"));
+//        lblWaiting.setFont(new Font("Arial", 1, 14));
         lblWaiting.setHorizontalAlignment(SwingConstants.RIGHT);
         connectPanel.add(lblWaiting, "gapx 10");
     }
