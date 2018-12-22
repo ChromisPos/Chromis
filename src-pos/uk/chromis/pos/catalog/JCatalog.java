@@ -590,7 +590,7 @@ public class JCatalog extends JPanel implements ListSelectionListener, CatalogSe
 
         int i = m_jListCategories.getSelectionModel().getMaxSelectionIndex();
         if (i < 0) {
-            i = 0; 
+            i = 0;
         } else {
             i++;
             if (i >= m_jListCategories.getModel().getSize()) {
@@ -608,7 +608,7 @@ public class JCatalog extends JPanel implements ListSelectionListener, CatalogSe
 
         int i = m_jListCategories.getSelectionModel().getMinSelectionIndex();
         if (i < 0) {
-            i = m_jListCategories.getModel().getSize() - 1; 
+            i = m_jListCategories.getModel().getSize() - 1;
         } else {
             i--;
             if (i < 0) {
