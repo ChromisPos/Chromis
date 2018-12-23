@@ -25,6 +25,7 @@ package uk.chromis.pos.util;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -119,6 +120,9 @@ public class ThumbNailBuilder {
                 
         // The text        
         JLabel label = new JLabel();
+        Font font = label.getFont();
+        Font plainFont = new Font(font.getFontName(), Font.PLAIN,font.getSize());
+        label.setFont(plainFont);
         label.setOpaque(false);
         label.setText(text);
         //label.setText("<html><center>Line1<br>Line2");
