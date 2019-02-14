@@ -23,8 +23,6 @@
 // *** Reports marked "//" for use only with MySQL, HSQLDB, PostgreSQL, Oracle databases ***
 // *** Then enable in Administration>Resources>Roles>Administrator/Manager ***
 
-
-// MAIN
 group = menu.addGroup("Menu.Main");
         group.addPanel("/uk/chromis/images/sale.png", "Menu.Ticket", "uk.chromis.pos.sales.JPanelTicketSales");
         group.addPanel("/uk/chromis/images/saleedit.png", "Menu.TicketEdit", "uk.chromis.pos.sales.JPanelTicketEdits");
@@ -32,16 +30,12 @@ group = menu.addGroup("Menu.Main");
         group.addPanel("/uk/chromis/images/payments.png", "Menu.Payments", "uk.chromis.pos.panels.JPanelPayments");
         group.addPanel("/uk/chromis/images/calculator.png", "Menu.CloseTPV", "uk.chromis.pos.panels.JPanelCloseMoney");
 
-
-// ADMINISTRATION
-// CUSTOMERS 
 group = menu.addGroup("Menu.Backoffice");
         submenu = group.addSubmenu("/uk/chromis/images/customer.png", "Menu.Customers", "uk.chromis.pos.forms.MenuCustomers");
         submenu.addTitle("Menu.Customers");
         submenu.addPanel("/uk/chromis/images/customer.png", "Menu.CustomersManagement", "uk.chromis.pos.customers.CustomersPanel");
 
-// CUSTOMER REPORTS
-   submenu.addTitle("Menu.Customers.Reports");
+    submenu.addTitle("Menu.Customers.Reports");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CustomersReport", "/uk/chromis/reports/customers.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CustomersBReport", "/uk/chromis/reports/customersb.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CustomersDebtors", "/uk/chromis/reports/customersdebtors.bs");
@@ -50,8 +44,7 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SalesByCustomer", "/uk/chromis/reports/salebycustomer.bs");
         submenu = group.addSubmenu("/uk/chromis/images/products.png", "Menu.StockManagement", "uk.chromis.pos.forms.MenuStockManagement");
     
-// STOCK MAINTENANCE REPORTS
-   submenu.addTitle("Menu.StockManagement.Edit");
+    submenu.addTitle("Menu.StockManagement.Edit");
         submenu.addPanel("/uk/chromis/images/products.png", "Menu.Products", "uk.chromis.pos.inventory.ProductsPanel");
         submenu.addPanel("/uk/chromis/images/location.png", "Menu.ProductsWarehouse", "uk.chromis.pos.inventory.ProductsWarehousePanel");
         submenu.addPanel("/uk/chromis/images/auxiliary.png", "Menu.Auxiliar", "uk.chromis.pos.inventory.AuxiliarPanel");
@@ -61,19 +54,17 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/attributes.png", "Menu.AttributeSets", "uk.chromis.pos.inventory.AttributeSetsPanel");
         submenu.addPanel("/uk/chromis/images/attributes.png", "Menu.AttributeUse", "uk.chromis.pos.inventory.AttributeUsePanel");         
         submenu.addPanel("/uk/chromis/images/stockdiary.png", "Menu.StockDiary", "uk.chromis.pos.inventory.StockDiaryPanel");
-        submenu.addPanel("/uk/chromis/images/stockmaint.png", "Menu.StockMovement", "uk.chromis.pos.inventory.StockManagement");
-        submenu.addPanel("/uk/chromis/images/stockmaint.png", "Menu.ProductPacks", "uk.chromis.pos.inventory.ProductPacksPanel");        
-        submenu.addPanel("/uk/chromis/images/img.discount.png", "Menu.Promotions", "uk.chromis.pos.promotion.PromotionPanel");
-        submenu.addPanel("/uk/chromis/images/auxiliary.png", "Menu.Recipe", "uk.chromis.pos.inventory.RecipePanel");       
+        submenu.addPanel("/uk/chromis/images/stockmaint.png", "Menu.StockMovement", "uk.chromis.pos.inventory.StockManagement");        
+        submenu.addPanel("/uk/chromis/images/img.discount.png", "Menu.Promotions", "uk.chromis.pos.promotion.PromotionPanel"); 
+        submenu.addPanel("/uk/chromis/images/auxiliary.png", "Menu.Recipe", "uk.chromis.pos.inventory.RecipePanel");
+        submenu.addPanel("/uk/chromis/images/users.png", "Menu.Suppliers", "uk.chromis.pos.suppliers.SuppliersPanel");       
 
-// STOCK  REPORTS
     submenu.addTitle("Menu.StockManagement.Reports");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.BarcodeSheet", "/uk/chromis/reports/barcodesheet.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SuppliersReport", "/uk/chromis/reports/suppliers.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SupplierProducts", "/uk/chromis/reports/supplierproducts.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.Inventory", "/uk/chromis/reports/inventory.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.Inventory2", "/uk/chromis/reports/inventoryb.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.InventoryEAN", "/uk/chromis/reports/inventoryb_ean.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.InventoryBroken", "/uk/chromis/reports/inventorybroken.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.InventoryDiff", "/uk/chromis/reports/inventorydiff.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.InventoryDiffDetail", "/uk/chromis/reports/inventorydiffdetail.bs");
@@ -86,11 +77,8 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ShelfEdgeLabels", "/uk/chromis/reports/shelfedgelabels.bs");
  // TODO JDB       submenu.addPanel("/uk/chromis/images/reports.png", "Menu.PromotionsReport", "/uk/chromis/reports/promotions.bs");
         submenu = group.addSubmenu("/uk/chromis/images/sales.png", "Menu.SalesManagement", "uk.chromis.pos.forms.MenuSalesManagement");
-        submenu.addPanel("/uk/chromis/images/auxiliary.png", "Menu.Recipe", "uk.chromis.pos.inventory.RecipePanel");
-        submenu.addPanel("/uk/chromis/images/users.png", "Menu.Suppliers", "uk.chromis.pos.suppliers.SuppliersPanel"); 
 
-// SALES REPORTS
-       submenu.addTitle("Menu.SalesManagement.Reports");
+    submenu.addTitle("Menu.SalesManagement.Reports");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.Closing", "/uk/chromis/reports/closedpos.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.Closing1", "/uk/chromis/reports/closedpos_1.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CashRegisterLog", "/uk/chromis/reports/cashregisterlog.bs");
@@ -98,28 +86,22 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CashFlow", "/uk/chromis/reports/cashflow.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.PaymentReport", "/uk/chromis/reports/paymentreport.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CategorySales", "/uk/chromis/reports/categorysales.bs");
+        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CategorySalesByUser", "/uk/chromis/reports/categorysalesbyuser.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ClosedProducts", "/uk/chromis/reports/closedproducts.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ClosedProducts1", "/uk/chromis/reports/closedproducts_1.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.BestSellers", "/uk/chromis/reports/bestsellers.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.Commission", "/uk/chromis/reports/commissionreport.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.CurrentSales", "/uk/chromis/reports/currentproductsales.bs"); 
-//      submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ExtendedByProducts", "/uk/chromis/reports/extproducts.bs");
+        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.BestSellers", "/uk/chromis/reports/bestsellers.bs"); 
+        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ExtendedByProducts", "/uk/chromis/reports/extproducts.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SaleTaxes", "/uk/chromis/reports/saletaxes.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.TaxCatSales", "/uk/chromis/reports/taxcatsales.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ReportTaxes", "/uk/chromis/reports/taxes.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.ItemsRemoved", "/uk/chromis/reports/itemsremoved.bs");
-        
-
-// SALES CHARTS
         submenu.addTitle("Menu.SalesManagement.Charts");
         submenu.addPanel("/uk/chromis/images/chart.png", "Menu.ProductSales", "/uk/chromis/reports/productsales.bs");
         submenu.addPanel("/uk/chromis/images/chart.png", "Menu.SalesChart", "/uk/chromis/reports/chartsales.bs");
         submenu.addPanel("/uk/chromis/images/chart.png", "Menu.TimeSeriesProduct", "/uk/chromis/reports/timeseriesproduct.bs");
         submenu.addPanel("/uk/chromis/images/chart.png", "Menu.Top10Sales", "/uk/chromis/reports/top10sales.bs");      
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.SalesProfit", "/uk/chromis/reports/productsalesprofit.bs");
-        submenu.addPanel("/uk/chromis/images/chart.png", "Menu.ProductCategorySalesPieChart", "/uk/chromis/reports/piesalescat.bs");      
- 
-// MAINTAINENCE
+        submenu.addPanel("/uk/chromis/images/chart.png", "Menu.ProductCategorySalesPieChart", "/uk/chromis/reports/piesalescat.bs");
+    
     submenu = group.addSubmenu("/uk/chromis/images/maintain.png", "Menu.Maintenance", "uk.chromis.pos.forms.MenuMaintenance");
     submenu.addTitle("Menu.Maintenance.POS");        
         submenu.addPanel("/uk/chromis/images/user.png", "Menu.Users", "uk.chromis.pos.admin.PeoplePanel");
@@ -132,14 +114,13 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/floors.png", "Menu.Floors", "uk.chromis.pos.mant.JPanelFloors");
         submenu.addPanel("/uk/chromis/images/tables.png", "Menu.Tables", "uk.chromis.pos.mant.JPanelPlaces");
         submenu.addPanel("/uk/chromis/images/reload.png",  "Menu.Resetpickup", "uk.chromis.pos.sales.JPanelResetPickupId");
-        submenu.addPanel("/uk/chromis/images/reload.png", "Menu.Unlocktables", "uk.chromis.pos.sales.JPanelUnlockTables");
+        submenu.addPanel("/uk/chromis/images/reload.png",  "Menu.Unlocktables", "uk.chromis.pos.sales.JPanelUnlockTables");
 
-// MAINTAINENCE REPORTS
     submenu.addTitle("Menu.Maintenance.Reports");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.UsersReport", "/uk/chromis/reports/people.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.UserSells", "/uk/chromis/reports/usersales.bs");
 
-// PRESENCE MANAGEMENT
+
     submenu = group.addSubmenu("/uk/chromis/images/users.png", "Menu.PresenceManagement", "uk.chromis.pos.forms.MenuEmployees");
     submenu.addTitle("Menu.PresenceManagement");
         submenu.addPanel("/uk/chromis/images/coffee.png", "Menu.Breaks", "uk.chromis.pos.epm.BreaksPanel");
@@ -148,12 +129,9 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.DailyPresenceReport", "/uk/chromis/reports/dailypresencereport.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.DailyScheduleReport", "/uk/chromis/reports/dailyschedulereport.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.PerformanceReport", "/uk/chromis/reports/performancereport.bs");
-        submenu.addPanel("/uk/chromis/images/reports.png", "Menu.EmployeeTimeSheet", "/uk/chromis/reports/employeetimesheet.bs");
 
 
-// UTILITIES
-// TOOLS
-// IMPORT
+ 
     group = menu.addGroup("Menu.Utilities");
         submenu = group.addSubmenu("/uk/chromis/images/utilities.png", "Menu.Tools", "uk.chromis.pos.imports.JPanelCSV");	
         submenu.addTitle("Menu.Import");
@@ -161,7 +139,6 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/database.png", "Menu.CSVReset", "uk.chromis.pos.imports.JPanelCSVCleardb");
         submenu.addPanel("/uk/chromis/images/import.png", "Menu.StockChanges", "uk.chromis.pos.imports.StockChangesPanel");
 
-// IMPORT REPORTS
         submenu.addTitle("Menu.Import.Reports");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.UpdatedPrices", "/uk/chromis/reports/updatedprices.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.NewProducts", "/uk/chromis/reports/newproducts.bs");
@@ -169,18 +146,18 @@ group = menu.addGroup("Menu.Backoffice");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.InvalidData", "/uk/chromis/reports/invaliddata.bs");
         submenu.addPanel("/uk/chromis/images/reports.png", "Menu.StockChangesReport", "/uk/chromis/reports/stockchanges.bs");
 
-// SYNCRONISATION  
-  group = menu.addGroup("Menu.Sync");
+
+
+    group = menu.addGroup("Menu.Sync");
        submenu = group.addSubmenu("/uk/chromis/images/database.png",  "Menu.Sync", "uk.chromis.pos.sync.JPanelSync");
        submenu.addTitle("Menu.Sync");
        submenu.addPanel("/uk/chromis/images/database.png",  "Menu.DatabaseSync", "uk.chromis.pos.sync.JPanelManualSync");
 
-// SYSTEM
     group = menu.addGroup("Menu.System");
-    group.addPanel("/uk/chromis/images/timer.png", "Menu.CheckInCheckOut", "uk.chromis.pos.epm.JPanelEmployeePresence");
     group.addChangePasswordAction();
     group.addPanel("/uk/chromis/images/configuration.png", "Menu.Configuration", "uk.chromis.pos.config.JPanelConfiguration");
     group.addPanel("/uk/chromis/images/printer.png", "Menu.Printer", "uk.chromis.pos.panels.JPanelPrinter");
+    group.addPanel("/uk/chromis/images/timer.png", "Menu.CheckInCheckOut", "uk.chromis.pos.epm.JPanelEmployeePresence");
 
 
 

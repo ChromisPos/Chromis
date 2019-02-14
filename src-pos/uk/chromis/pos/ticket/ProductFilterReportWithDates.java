@@ -93,11 +93,9 @@ public class ProductFilterReportWithDates extends javax.swing.JPanel implements 
         paramdates.jSites.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("now " + paramdates.m_LocationsModel.getSelectedText());
                 siteGuid = paramdates.m_LocationsModel.getSelectedKey().toString();
                 m_sentcat = dlSales.getCategoriesList(siteGuid);
 
-                System.out.println("Key : " + paramdates.m_LocationsModel.getSelectedKey());
                 try {
                     activate();
                 } catch (BasicException ex) {

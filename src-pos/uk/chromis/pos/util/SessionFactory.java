@@ -50,6 +50,7 @@ public class SessionFactory {
         }
     }
 
+    //Create thread safe instance of the session factory
     public static SessionFactory getInstance() {
         if (INSTANCE == null) {
             synchronized (SessionFactory.class) {

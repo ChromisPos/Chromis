@@ -119,7 +119,6 @@ public class JTicketLines extends javax.swing.JPanel {
             m_jTicketTable.setRowHeight(Integer.parseInt(ticketLine));
         }
 
-      //  m_jTicketTable.setRowHeight(30);
         m_jTicketTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         // reseteo la tabla...

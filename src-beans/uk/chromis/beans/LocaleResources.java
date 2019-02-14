@@ -35,13 +35,10 @@ import java.util.ResourceBundle;
  */
 public class LocaleResources {
   
-    private List<ResourceBundle> m_resources;
-//    private ClassLoader m_localeloader;
-    
+    private List<ResourceBundle> m_resources;    
     /** Creates a new instance of LocaleResources */
     public LocaleResources() {
-        m_resources = new LinkedList<>();              
-       
+        m_resources = new LinkedList<>();                     
     }
 
     

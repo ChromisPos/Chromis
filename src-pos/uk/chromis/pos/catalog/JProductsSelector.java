@@ -40,18 +40,14 @@ import uk.chromis.beans.JFlowPanel;
 public class JProductsSelector extends javax.swing.JPanel {
     
     private JFlowPanel flowpanel;
-    
-    /** Creates new form JProductsSelector */
-    public JProductsSelector() {
+   public JProductsSelector() {
         initComponents();
 
         flowpanel = new JFlowPanel();
         
         add(flowpanel, BorderLayout.CENTER);
     }
-    
-    //public void addProduct(Image img, String name, ActionListener al) {
-        
+       
     /**
      *
      * @param img

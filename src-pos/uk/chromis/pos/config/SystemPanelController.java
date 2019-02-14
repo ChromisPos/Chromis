@@ -26,8 +26,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -95,9 +93,13 @@ public class SystemPanelController implements Initializable, BaseController {
     @FXML
     private Spinner tableDays;
     @FXML
+    private Spinner removedLineDays;
+    @FXML
     private Spinner ticketLineSize;
     @FXML
     private Label retainLabel;
+    @FXML
+    private Label removedLinesLabel;
     @FXML
     private Label ticketLinesLabel;
     @FXML
@@ -116,6 +118,7 @@ public class SystemPanelController implements Initializable, BaseController {
     private LabeledColourPicker sentMessage;
 
     private String tableRetain;
+    private String lineRemovedRetain;
     private String ticketLine;
 
     protected BooleanProperty dirty = new SimpleBooleanProperty();
@@ -177,6 +180,10 @@ public class SystemPanelController implements Initializable, BaseController {
         IntegerSpinnerValueFactory ticketLineFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(28, 100, 7);
         ticketLineSize.setValueFactory(ticketLineFactory);
 
+        removedLinesLabel.setText(AppLocal.getIntString("label.removedlinedays"));
+        IntegerSpinnerValueFactory lineRemovedFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(7, 60, 14);
+        removedLineDays.setValueFactory(lineRemovedFactory);
+              
         load();
 
         ticketLineSize.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
@@ -226,13 +233,19 @@ public class SystemPanelController implements Initializable, BaseController {
         maxChange.setDisable(!maxChangeEnable.isSelected());
 
         tableRetain = (AppConfig.getInstance().getProperty("dbtable.retaindays"));
-
         if (tableRetain == null || "".equals(tableRetain)) {
             tableDays.getValueFactory().setValue(7);
         } else {
             tableDays.getValueFactory().setValue(Integer.parseInt(tableRetain));
         }
 
+        lineRemovedRetain = (AppConfig.getInstance().getProperty("dbtable.lineremoveddays"));
+        if (lineRemovedRetain == null || "".equals(removedLineDays)) {
+            removedLineDays.getValueFactory().setValue(14);
+        } else {
+            removedLineDays.getValueFactory().setValue(Integer.parseInt(lineRemovedRetain));
+        }
+        
         ticketLine = (AppConfig.getInstance().getProperty("sales.linesize"));
         if (ticketLine == null || "".equals(ticketLine)) {
             ticketLineSize.getValueFactory().setValue(40);
@@ -269,6 +282,7 @@ public class SystemPanelController implements Initializable, BaseController {
         AppConfig.getInstance().setBoolean("display.longnames", longNames.isSelected());
         AppConfig.getInstance().setBoolean("till.customsounds", customSounds.isSelected());
         AppConfig.getInstance().setProperty("sales.linesize", ticketLineSize.getValue().toString());
+        AppConfig.getInstance().setProperty("dbtable.lineremoveddays", removedLineDays.getValue().toString());
 
         dirty.setValue(false);
     }

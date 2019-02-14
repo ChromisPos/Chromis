@@ -1705,8 +1705,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                         }
                         m_ticketsbag.deleteTicket();
 
-                        System.out.println(!("restaurant".equals(AppConfig.getInstance().getProperty("machine.ticketsbag"))));
-
                         if ((!("restaurant".equals(AppConfig.getInstance().getProperty("machine.ticketsbag")))
                                 && autoLogoffEnabled
                                 && autoLogoffAfterSales)) {
@@ -1905,8 +1903,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 script.put("warranty", warrantyPrint);
                 script.put("pickupid", getPickupString(ticket));
                 script.put("ticketpanel", this);
-                //Removed until logic has been redone
-                // script.put("printers", setRemoteUnits(ticket));
+                script.put("printers", setRemoteUnits(ticket));
 
                 refreshTicket();
 
@@ -1921,6 +1918,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     private Set<String> setRemoteUnits(TicketInfo ticket) {
         Set<String> ptrs = new HashSet<String>();
+        /*
         for (TicketLineInfo t : ticket.getLines()) {
             if (t.isProductKitchen()) {
                 if (t.getPtrOverride()) {
@@ -1937,6 +1935,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                 }
             }
         }
+         */
         for (TicketLineInfo t : ticket.getLines()) {
             if (t.isProductKitchen()) {
                 ptrs.add(t.getDefaultPrinter());
@@ -1998,11 +1997,11 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     }
 
     public void kitchenOrderScreen() {
-        kitchenOrderScreen(kitchenOrderId(), 1, true);
+        kitchenOrderScreen(kitchenOrderId(), 1, false);
     }
 
     public void kitchenOrderScreen(String id) {
-        kitchenOrderScreen(id, 1, true);
+        kitchenOrderScreen(id, 1, false);
     }
 
     public void kitchenOrderScreen(Integer display, String ticketid) {
@@ -2011,6 +2010,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
 
     public void kitchenOrderScreen(Integer display) {
         kitchenOrderScreen(kitchenOrderId(), display, false);
+    }
+
+    public void kitchenOrderScreen(Integer display, Boolean primary) {
+        kitchenOrderScreen(kitchenOrderId(), display, primary);
     }
 
     public String kitchenOrderId() {
@@ -2038,11 +2041,13 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         for (int i = 0; i < m_oTicket.getLinesCount(); i++) {
             if ("No".equals(m_oTicket.getLine(i).getProperty("sendstatus"))) {
                 if (m_oTicket.getLine(i).isProductDisplay()) {
-                    display = (m_oTicket.getLine(i).getProperty("displayno").equals("") || m_oTicket.getLine(i).getProperty("displayno") == null) ? 1 : Integer.parseInt(m_oTicket.getLine(i).getProperty("displayno"));
+                    if (!primary) {
+                        display = (m_oTicket.getLine(i).getProperty("displayno").equals("") || m_oTicket.getLine(i).getProperty("displayno") == null) ? 1 : Integer.parseInt(m_oTicket.getLine(i).getProperty("displayno"));
+                    }
                     try {
                         // If this is a component item, use the display number for the parent item 
                         if (m_oTicket.getLine(i).isProductCom()) {
-                            if (lastDisplay != null) {
+                            if (lastDisplay != null && !primary) {
                                 display = lastDisplay;
                             }
                             if (m_oTicket.getLine(i).isProductDisplay()) {
@@ -2233,11 +2238,15 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         }
 
         public void kitchenOrderScreen() {
-            JPanelTicket.this.kitchenOrderScreen(kitchenOrderId(), 1, true);
+            JPanelTicket.this.kitchenOrderScreen(kitchenOrderId(), 1, false);
         }
 
         public void kitchenOrderScreen(String id) {
-            JPanelTicket.this.kitchenOrderScreen(id, 1, true);
+            JPanelTicket.this.kitchenOrderScreen(id, 1, false);
+        }
+
+        public void kitchenOrderScreen(Integer display, Boolean primary) {
+            JPanelTicket.this.kitchenOrderScreen(kitchenOrderId(), display, primary);
         }
 
         public void printTicket(String sresourcename) {

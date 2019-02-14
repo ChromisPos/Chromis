@@ -19,8 +19,7 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
+ */
 package uk.chromis.pos.forms;
 
 import java.awt.BorderLayout;
@@ -44,14 +43,12 @@ public class JRootFrame extends javax.swing.JFrame implements AppMessage {
 
     private JRootApp m_rootapp;
     private AppProperties m_props;
-
     private OSValidator m_OS;
 
     /**
      * Creates new form JRootFrame
      */
     public JRootFrame() {
-
         initComponents();
     }
 
@@ -60,13 +57,12 @@ public class JRootFrame extends javax.swing.JFrame implements AppMessage {
      * @param props
      */
     public void initFrame(AppProperties props) {
-
         m_OS = new OSValidator();
         m_props = props;
         m_rootapp = new JRootApp();
         int result = m_rootapp.initApp(m_props);
         if (result == m_rootapp.INIT_SUCCESS) {
-            if ("true".equals(AppConfig.getInstance().getProperty("machine.uniqueinstance"))) {                
+            if ("true".equals(AppConfig.getInstance().getProperty("machine.uniqueinstance"))) {
                 try {
                     m_instmanager = new InstanceManager(this);
                 } catch (RemoteException | AlreadyBoundException e) {
@@ -80,8 +76,8 @@ public class JRootFrame extends javax.swing.JFrame implements AppMessage {
             setTitle(AppLocal.APP_NAME + " - V" + AppLocal.APP_VERSION + AppLocal.APP_DEMO);
             pack();
             setLocationRelativeTo(null);
-           // this.setResizable(false);
-            setVisible(true);
+            // this.setResizable(false);         
+           setVisible(true);
         } else {
         }
 
@@ -89,9 +85,9 @@ public class JRootFrame extends javax.swing.JFrame implements AppMessage {
         if (result == m_rootapp.INIT_FAIL_CONFIG) {           
             new JFrmConfig(props).setVisible(true); // Show the configuration window.
         }
-        */
+         */
     }
-
+  
     /**
      *
      * @throws RemoteException

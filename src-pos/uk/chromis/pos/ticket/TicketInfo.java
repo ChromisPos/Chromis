@@ -492,7 +492,6 @@ public final class TicketInfo implements SerializableRead, Externalizable {
     }
 
     public void removeCoupon(String id) {
-
         if (id == null) {
             // Remove all coupons
             m_CouponLines.clear();

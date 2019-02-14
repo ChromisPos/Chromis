@@ -19,9 +19,7 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
-
+ */
 package uk.chromis.pos.sales.shared;
 
 import java.awt.Color;
@@ -30,6 +28,7 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,12 +46,14 @@ import uk.chromis.pos.util.AutoLogoff;
 public class JTicketsBagSharedList extends javax.swing.JDialog {
 
     private String m_sDialogTicket;
+    private Frame fParent;
 
     /**
      * Creates new form JTicketsBagSharedList
      */
     private JTicketsBagSharedList(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        fParent = parent;
     }
 
     /**
@@ -98,10 +99,10 @@ public class JTicketsBagSharedList extends javax.swing.JDialog {
         mydialog.setUndecorated(true);
 
         mydialog.initComponents();
-     
+
         mydialog.jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(35, 35));
         mydialog.jScrollPane1.getHorizontalScrollBar().setPreferredSize(new Dimension(25, 25));
-
+        
         AutoLogoff.getInstance().setActiveFrame(mydialog);
         return mydialog;
     }

@@ -25,26 +25,19 @@ package uk.chromis.pos.forms;
 import uk.chromis.beans.LocaleResources;
 
 public class AppLocal {
-
-    /*
+ 
     public static final String APP_NAME = "Chromis POS";
     public static final String APP_ID = "chromispos";
-    public static final String APP_VERSION = "0.951 build 1808-14";
-    public static final int APP_VERSIONINT = 20180815;
+    public static final String APP_VERSION = "0.95.3 build 1902-01";
+    public static final int APP_VERSIONINT = 20190201;
     public static final String APP_DEMO = "";
-     */
-    public static final String APP_NAME = "Chromis POS";
-    public static final String APP_ID = "chromispos";
-    public static final String APP_VERSION = "0.95.1 build 1811-30";
-    public static final int APP_VERSIONINT = 20181130;
-    public static final String APP_DEMO = "";
-
+   
     private static final LocaleResources m_resources;
     public static String LIST_BY_RIGHTS = "";
 
     static {
         m_resources = new LocaleResources();
-        m_resources.addBundleName("epos_messages");
+      //  m_resources.addBundleName("epos_messages");
         m_resources.addBundleName("pos_messages");
         m_resources.addBundleName("erp_messages");
         m_resources.addBundleName("permissions_messages");

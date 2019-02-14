@@ -599,6 +599,20 @@ public class DataLogicSystem extends BeanFactoryDataSingle {
         } catch (BasicException ex) {
         }
     }
+    
+    
+        public final void cleanLineRemoveTable() {
+        String sql;
+        sql = "DELETE FROM LINEREMOVED WHERE {fn TIMESTAMPDIFF(SQL_TSI_MINUTE, REMOVEDDATE, CURRENT_TIMESTAMP)} > "
+                + AppConfig.getInstance().getProperty("dbtable.lineremoveddays");
+        if ("PostgreSQL".equals(m_dbVersion)) {
+            sql = "DELETE FROM LINEREMOVED WHERE REMOVEDDATE < (NOW() - INTERVAL '" + AppConfig.getInstance().getProperty("dbtable.lineremoveddays") + "' DAY)";
+        }
+        try {
+            new PreparedSentence(s, sql, null).exec();
+        } catch (BasicException ex) {
+        }
+    }
     // This is used by CSVimport to detect what type of product insert we are looking at, or what error occured
 
     /**

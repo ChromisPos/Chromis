@@ -89,6 +89,7 @@ public class JPrincipalApp extends javax.swing.JPanel implements AppUserView {
      */
     public JPrincipalApp(JRootApp appview, AppUser appuser) {
 
+        
         m_appview = appview;
         m_appuser = appuser;
 

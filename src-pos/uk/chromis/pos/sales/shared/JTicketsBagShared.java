@@ -22,7 +22,8 @@
  */
 package uk.chromis.pos.sales.shared;
 
-import java.io.File;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +33,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import uk.chromis.basic.BasicException;
 import uk.chromis.data.gui.MessageInf;
-import uk.chromis.pos.admin.DataLogicAdmin;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 import uk.chromis.pos.forms.AppView;
@@ -318,16 +318,14 @@ public class JTicketsBagShared extends JTicketsBag {
                     } else {
                         l = dlReceipts.getSharedTicketList();
                     }
-
                     JTicketsBagSharedList listDialog = JTicketsBagSharedList.newJDialog(JTicketsBagShared.this);
+
                     String id = listDialog.showTicketsList(l);
 
                     if (id != null) {
                         saveCurrentTicket();
                         m_sCurrentTicket = id;
                         setActiveTicket(id);
-                        // m_jTicketId.setText()
-
                     }
                 } catch (BasicException e) {
                     new MessageInf(e).show(JTicketsBagShared.this);

@@ -54,11 +54,12 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
     private DataLogicSystem dlSystem;
     private final Map<String, JPaymentInterface> payments = new HashMap<>();
     private String m_sTransactionID;
+    private Frame caller;
 
     protected JPaymentSelect(java.awt.Frame parent, boolean modal, ComponentOrientation o) {
         super(parent, modal);
         initComponents();
-
+        caller = parent;
         this.applyComponentOrientation(o);
 
         getRootPane().setDefaultButton(m_jButtonOK);
@@ -68,7 +69,7 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
     protected JPaymentSelect(java.awt.Dialog parent, boolean modal, ComponentOrientation o) {
         super(parent, modal);
         initComponents();
-
+        
         this.applyComponentOrientation(o);
     }
 
@@ -115,8 +116,9 @@ public abstract class JPaymentSelect extends javax.swing.JDialog
             printState();
             Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
             Dimension thisDim = this.getSize();
-            int x = (screenDim.width - thisDim.width) / 2;
-            int y = (screenDim.height - thisDim.height) / 2;
+           
+            int x = (caller.getX() + (caller.getWidth() - thisDim.width) / 2);
+            int y = (caller.getY() + (caller.getHeight() - thisDim.height) / 2);
             this.setLocation(x, y);
 
             setVisible(true);

@@ -35,6 +35,7 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -125,7 +126,6 @@ public class ThumbNailBuilder {
         label.setFont(plainFont);
         label.setOpaque(false);
         label.setText(text);
-        //label.setText("<html><center>Line1<br>Line2");
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);            
         Dimension d = label.getPreferredSize();
@@ -135,11 +135,6 @@ public class ThumbNailBuilder {
         Color c1 = new Color(0xff, 0xff, 0xff, 0x40);
         Color c2 = new Color(0xff, 0xff, 0xff, 0xd0);
 
-//        Point2D center = new Point2D.Float(imgtext.getWidth() / 2, label.getHeight());
-//        float radius = imgtext.getWidth() / 3;
-//        float[] dist = {0.1f, 1.0f};
-//        Color[] colors = {c2, c1};        
-//        Paint gpaint = new RadialGradientPaint(center, radius, dist, colors);
         Paint gpaint = new GradientPaint(new Point(0,0), c1, new Point(label.getWidth() / 2, 0), c2, true);
         
         g2d.drawImage(img, 0, 0, null);

@@ -80,9 +80,7 @@ public class JAlert extends JDialog {
     private JButton btnExit;
     private JButton btnYes;
     private JButton btnNo;
- //   private Font headerFont;
- //   private Font contextFont;
-  //  private Font dejaVuSans;
+
 
     public JAlert(int type) {
         super(new JFrame(), "");
@@ -128,29 +126,6 @@ public class JAlert extends JDialog {
             dispose();
         });
 
-        //Build the fonts to be used using DeJaVu is file is found otherwise use Dialog
-       // dejaVuSans = null;
-       // try {
-       //     InputStream istream = JAlert.class.getResourceAsStream("/uk/chromis/fonts/DejaVuSansCondensed.ttf");
-       //     dejaVuSans = Font.createFont(Font.TRUETYPE_FONT, istream);
-      //      headerFont = dejaVuSans.deriveFont(Font.PLAIN, 13);
-       //     contextFont = dejaVuSans.deriveFont(Font.PLAIN, 9);
-       // } catch (FontFormatException | IOException e) {
-       //     System.err.println(e.getMessage());
-      //      headerFont = null;
-      //  }
-      //  if (headerFont == null) {
-      //      headerFont = new Font("Dialog", Font.PLAIN, 14);
-     //   }
-     //   contextFont = new Font("Dialog", Font.PLAIN, 12);
-    //    java.util.Enumeration keys = UIManager.getDefaults().keys();
-    //    while (keys.hasMoreElements()) {
-   //         Object key = keys.nextElement();
-   //         Object value = UIManager.get(key);
-   //         if (value != null && value instanceof javax.swing.plaf.FontUIResource) {
-   //             UIManager.put(key, headerFont);
-   //         }
-   //     }
 
         //Set the dialog defaults - icon and button set
         try {
@@ -211,12 +186,8 @@ public class JAlert extends JDialog {
         headerTextArea.setFocusable(false);
         headerTextArea.setOpaque(false);
         headerTextArea.setRequestFocusEnabled(false);
-     //   if (headerFont.getFontName().equals("Dialog.plain")) {
-     //       headerPanel.add(headerTextArea, "gapx 0, height 38:38:38, growx, pushx");
-     //   } else {
-            headerPanel.add(headerTextArea, "gapx 0,  height 35:35:35, growx, pushx");
-     //   }
-      //  headerTextArea.setFont(headerFont);
+        headerPanel.add(headerTextArea, "gapx 0, height 35:35:35, growx, pushx");
+
 
         //Add the icon
         iconLabel = new JLabel();
@@ -233,7 +204,6 @@ public class JAlert extends JDialog {
         contextArea.setFocusable(false);
         contextArea.setOpaque(false);
         contextArea.setRequestFocusEnabled(false);
-      //  contextArea.setFont(contextFont);
         contextPanel.add(contextArea, "gapx 3, wrap");
 
         //Set the dialogbox to always be on top
@@ -271,13 +241,6 @@ public class JAlert extends JDialog {
         pack();
     }
 
- //   public void setHeaderFont(Font headerFont) {
- //       this.headerFont = headerFont;
- //   }
-
- //   public void setContextFont(Font contextFont) {
- //       this.contextFont = contextFont;
- //   }
 
     public void setYesNoButtons() {
         btnPanel.removeAll();

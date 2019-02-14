@@ -32,11 +32,10 @@ public class CustomerInfoGlobal {
     private CustomerInfoExt customerInfoExt;
     private BrowsableEditableData editableData;
 
-    //Singleton class
+
     private CustomerInfoGlobal() {
     }
 
-    //Singleton constructor
 
     /**
      *

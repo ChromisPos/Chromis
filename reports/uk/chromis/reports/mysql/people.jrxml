@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-07-14T19:55:56 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="people" columnCount="2" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="267" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="c2ad9846-b43d-4d03-aec0-b6548e854bb0">
 	<property name="ireport.scriptlethandling" value="0"/>
 	<property name="ireport.encoding" value="UTF-8"/>
@@ -120,7 +118,7 @@
 				<textFieldExpression><![CDATA[$F{NAME}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame">
-				<reportElement key="image-1" x="18" y="15" width="63" height="65" uuid="8e52a9ee-a5c2-4c66-b4c9-f0480c0fd78e"/>
+				<reportElement key="image-1" x="18" y="15" width="63" height="63" uuid="8e52a9ee-a5c2-4c66-b4c9-f0480c0fd78e"/>
 				<box>
 					<topPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>

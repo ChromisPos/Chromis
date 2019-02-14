@@ -223,7 +223,7 @@ public class OrderCustomerList extends JPanel implements TicketSelector {
                     String text = "<html><center>" + username.trim() + "<br/>" + orderId.trim() + "</center></html>";
 
                     ImageIcon icon = new ImageIcon(tnbbutton.getThumbNailText(image, text));
-//                    flowTab.addButton(icon, new SelectedCustomerAction(ticket.getId()));
+
                 }
                 LOGGER.log(Level.INFO, "Time of finished loadCustomerOrders {0}", (System.currentTimeMillis() - time));
             }

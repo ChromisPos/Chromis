@@ -83,7 +83,7 @@ public class RolesPanel extends JPanelTable2 {
                 new RolesPanel.RolesSerializerRead()
         ),
                 m_paramsSite);
-
+       
         SentenceExec updatesent = new SentenceExecTransaction(app.getSession()) {
             @Override
             public int execInTransaction(Object params) throws BasicException {

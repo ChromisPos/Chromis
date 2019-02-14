@@ -26,6 +26,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import uk.chromis.basic.BasicException;
 import uk.chromis.data.loader.DataRead;
@@ -55,6 +60,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
     private Double taxRate;
     private Double taxAmount;
     private Double commission;
+    private List<TicketTaxInfo> taxes;
 
     public TicketLineInfo(String productid, double dMultiply, double dPrice, TaxInfo tax, Properties props) {
         init(productid, null, dMultiply, dPrice, tax, props, 0.0, 0.0);
@@ -216,7 +222,7 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
         return attributes.getProperty("displayno");
     }
 
-    public String getDefaultPrinter() {        
+    public String getDefaultPrinter() {
         return attributes.getProperty("kitchen.printer");
     }
 
@@ -486,7 +492,16 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
     }
 
     public double getTax() {
-        return price * multiply * getTaxRate();
+        /*
+        taxes = getTaxes();
+        double sum = 0.0;
+        for (TicketTaxInfo tax : taxes) {
+            sum += tax.getTax(); // Taxes are already rounded...
+        }
+        return sum;
+        
+        */
+          return price * multiply * getTaxRate();
     }
 
     public double getValue() {
@@ -595,4 +610,12 @@ public class TicketLineInfo implements SerializableWrite, SerializableRead, Seri
 
     void incMultiply() {
     }
+
+    public List<TicketTaxInfo> getTaxes() {
+        return taxes;
+    }
+    
+    
+
+    
 }

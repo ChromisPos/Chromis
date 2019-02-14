@@ -154,6 +154,7 @@ public class JRootApp extends JPanel implements AppView {
      * Creates new form JRootApp
      */
     public JRootApp() {
+              
         // get some default settings 
         db_user = (AppConfig.getInstance().getProperty("db.user"));
         db_url = (AppConfig.getInstance().getProperty("db.URL"));
@@ -205,6 +206,9 @@ public class JRootApp extends JPanel implements AppView {
         // Clear the cash drawer table as required, by setting
         m_dlSystem.cleanCashDrawerTable();
 
+        // Clear line reomoved table
+        m_dlSystem.cleanLineRemoveTable();
+        
         m_propsdb = m_dlSystem.getResourceAsProperties(AppConfig.getInstance().getHost() + "/properties");
         if (!m_dlSync.isCentral()) {
             try {
@@ -897,7 +901,6 @@ public class JRootApp extends JPanel implements AppView {
     }//GEN-LAST:event_m_jCloseActionPerformed
 
     private void m_txtKeysKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_m_txtKeysKeyTyped
-
         if (evt.getModifiers() != 0) {
             String keys = evt.getKeyModifiersText(evt.getModifiers()) + "+" + evt.getKeyChar();
             if ((keys.equals("Alt+Shift+P")) || (keys.equals("Alt+Shift+p"))) {
@@ -919,7 +922,7 @@ public class JRootApp extends JPanel implements AppView {
                 DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
                 Class.forName(AppConfig.getInstance().getProperty("db.driver"));
                 con = DriverManager.getConnection(db_url, db_user, db_password);
-                PreparedStatement stmt = con.prepareStatement("INSERT INTO PEOPLE (ID, NAME, ROLE, VISIBLE) VALUES ('99', 'SuperAdminUser', '0', true)");
+                PreparedStatement stmt = con.prepareStatement("INSERT INTO PEOPLE (ID, NAME, ROLE, VISIBLE) VALUES ('99', 'SuperAdminUser', (select id from roles where name = 'Administrator role'), true)");
                 stmt.executeUpdate();
                 user = m_dlSystem.getsuperuser();
 

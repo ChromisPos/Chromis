@@ -22,7 +22,7 @@
 
 boolean kitchen = false;
 boolean display = false;
-
+Systemout.println("start");
 if ( ! ticket.getTicketType().toString().equals("REFUND") ) { 
 for(int i= 0; i < ticket.getLinesCount(); i++){
 	line = ticket.getLine(i);

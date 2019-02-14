@@ -1,3 +1,20 @@
+14th February
+v 0.95.3 build 1902-01
+
+Added days for removedlines data
+Added function for ticketline size, this is point size of the rows in the sales panel
+Added new column in taxes, taxcategories & taxcustcategories  tables ready for future use
+Added new column into dbpermissions table ready for future release
+Added new sale report category sales by user
+Set payment panel always be centre of sales panel
+Added blob reader to allow all of the txt and script files to extracted
+bug #177 fixed, kicthen printing
+bug #177 fixed credit card payment default
+Added ability so send same order to multiple kitchen screens
+Fixed font issue on product buttons plain\bold not displayed correctly
+
+
+*********************************************************************************************************
 31st October
 v 0.95.1 build 1810-31
 
@@ -7,7 +24,8 @@ bug #164 fixed - refundit is placing back in stock
 bug #170 fixed - payment gateway keeps resetting
 
 
-*********************************************************************************************************27th October
+*********************************************************************************************************
+27th October
 v 0.95.1 build 1810-27
 
 Removed printer override while changing the main logic

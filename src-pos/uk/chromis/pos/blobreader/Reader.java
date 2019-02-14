@@ -41,9 +41,7 @@ public class Reader {
 
                 if (rs.getString("NAME").indexOf('/') == -1){
                 InputStream in = blob.getBinaryStream();
-                
-                System.out.println(System.getProperty("user.home") + "/ChromisFiles/" + rs.getString("NAME"));
-                OutputStream out = new FileOutputStream(System.getProperty("user.home") + "/ChromisFiles/" + rs.getString("NAME"));
+                OutputStream out = new FileOutputStream(System.getProperty("user.home") + "/ChromisFiles/" + rs.getString("name"));
                 byte[] buff = new byte[4096];  // how much of the blob to read/write at a time
                 int len = 0;
 

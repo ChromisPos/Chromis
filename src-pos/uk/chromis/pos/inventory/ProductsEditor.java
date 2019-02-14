@@ -80,7 +80,9 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
 
     public ProductsEditor(DataLogicSales dlSales, DirtyManager dirty, String localGuid) {
         initComponents();
-
+        
+        m_jPtrOverride.setVisible(false);
+        m_jPtrOverride.setSelected(false);
         dlSuppliers = new DataLogicSuppliers();
         dlSuppliers.init(SessionFactory.getInstance().getSession());
 
@@ -1309,11 +1311,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jCommission.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         m_jCommission.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         m_jCommission.setText("0");
-        m_jCommission.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_jCommissionActionPerformed(evt);
-            }
-        });
         mGeneral.add(m_jCommission);
         m_jCommission.setBounds(130, 250, 80, 25);
 
@@ -1329,11 +1326,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel11.setBounds(10, 350, 120, 20);
 
         m_jSuppliers.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        m_jSuppliers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_jSuppliersActionPerformed(evt);
-            }
-        });
         mGeneral.add(m_jSuppliers);
         m_jSuppliers.setBounds(130, 350, 410, 30);
 
@@ -1455,11 +1447,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         m_jDiscounted.setBounds(20, 190, 200, 30);
 
         m_jVprice.setText(bundle.getString("label.variableprice")); // NOI18N
-        m_jVprice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_jVpriceActionPerformed(evt);
-            }
-        });
         mStock.add(m_jVprice);
         m_jVprice.setBounds(20, 130, 200, 30);
 
@@ -1514,11 +1501,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
         jLabel15.setBounds(10, 270, 250, 20);
 
         m_jPtrOverride.setText(bundle.getString("label.ptroverride")); // NOI18N
-        m_jPtrOverride.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m_jPtrOverrideActionPerformed(evt);
-            }
-        });
         mStock.add(m_jPtrOverride);
         m_jPtrOverride.setBounds(420, 290, 190, 30);
 
@@ -1719,22 +1701,6 @@ public final class ProductsEditor extends JPanel implements EditorRecord {
             m_jPackProduct.setSelectedItem(selectIndex);
         }
     }//GEN-LAST:event_m_jPackQuantityFocusLost
-
-    private void m_jCommissionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jCommissionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_jCommissionActionPerformed
-
-    private void m_jSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jSuppliersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_jSuppliersActionPerformed
-
-    private void m_jVpriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jVpriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_jVpriceActionPerformed
-
-    private void m_jPtrOverrideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jPtrOverrideActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_m_jPtrOverrideActionPerformed
 
     private void m_jKitchenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_jKitchenActionPerformed
         m_jPtrOverride.setEnabled(m_jKitchen.isSelected());

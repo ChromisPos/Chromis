@@ -45,7 +45,7 @@ import org.pushingpixels.substance.api.SubstanceSkin;
 import uk.chromis.format.Formats;
 import uk.chromis.pos.ticket.TicketInfo;
 import javax.swing.JFrame;
-import uk.chromis.pos.dbmanager.DatabaseManager;
+import uk.chromis.pos.dbmanager.DbManager;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.DbUtils;
 
@@ -53,6 +53,7 @@ public class StartPOS {
 
     private static final Logger logger = Logger.getLogger("uk.chromis.pos.forms.StartPOS");
     private static ServerSocket serverSocket;
+    private static Boolean allowMulti = false;
 
     private StartPOS() {
     }
@@ -60,7 +61,7 @@ public class StartPOS {
     public static boolean registerApp() {
         // prevent multiple instances running on same machine, Socket is never used in app
         try {
-            serverSocket = new ServerSocket(65326);
+            serverSocket = new ServerSocket(65327);
         } catch (IOException ex) {
             return false;
         }
@@ -70,11 +71,21 @@ public class StartPOS {
 
     public static void main(final String args[]) {
 
+        if (args.length != 0) {
+            for (String s : args) {
+                if (s.startsWith("-allowmulti")) {
+                    allowMulti = true;
+                }
+            }
+        }
+
         String currentPath = null;
         currentPath = System.getProperty("user.dir");
-        if (!registerApp()) {
-            System.out.println("Already Running");
-            System.exit(0);
+        if (!allowMulti) {
+            if (!registerApp()) {
+                System.out.println("Already Running");
+                System.exit(0);
+            }
         }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMdd-HHmm-");
@@ -134,12 +145,17 @@ public class StartPOS {
 
         DbUtils.checkJava();
 
+       
+        DbManager manager = new DbManager(false);
+        if (!manager.DBChecks()) {
+            System.exit(0);
+        }
+         /*
         DatabaseManager dbMan = new DatabaseManager();
-
-        dbMan.checkDatabase();
-
-        startApp();
-
+        dbMan.checkDatabase();        
+        */
+         
+         startApp();
     }
 
     public static void startApp() {
@@ -149,7 +165,7 @@ public class StartPOS {
             AltEncrypter cypher = new AltEncrypter("cypherkey" + AppConfig.getInstance().getProperty("db.user"));
             db_password = cypher.decrypt(db_password.substring(6));
         }
-      //  RunRepair.Process(AppConfig.getInstance().getProperty("db.user"), AppConfig.getInstance().getProperty("db.URL"), db_password);
+        //  RunRepair.Process(AppConfig.getInstance().getProperty("db.user"), AppConfig.getInstance().getProperty("db.URL"), db_password);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

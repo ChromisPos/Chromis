@@ -22,7 +22,6 @@
 */
 package uk.chromis.pos.admin;
 
-import uk.chromis.basic.BasicException;
 import uk.chromis.data.loader.DataRead;
 import uk.chromis.data.loader.IKeyed;
 import uk.chromis.data.loader.SerializerRead;

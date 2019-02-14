@@ -27,7 +27,6 @@ import java.net.ServerSocket;
 import java.util.Locale;
 import java.util.logging.Logger;
 import uk.chromis.format.Formats;
-import uk.chromis.pos.dbmanager.DatabaseManager;
 import uk.chromis.pos.dbmanager.RunRepair;
 import uk.chromis.pos.ticket.TicketInfo;
 import uk.chromis.pos.util.AltEncrypter;
@@ -56,12 +55,12 @@ public class StartAdmin {
             System.exit(0);
         }
 
+        
+        /*
         DbUtils.checkJava();
-
         DatabaseManager dbMan = new DatabaseManager();
-
         dbMan.checkDatabase();
-
+        */
         startApp();
 
     }
