@@ -3,11 +3,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import uk.chromis.custom.controls.LabeledComboBox?>
-<?import uk.chromis.custom.switches.ToggleSwitch?>
+<?import  uk.chromis.custom.controls.LabeledToggleSwitch?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.PaymentPanelController">
    <children>
-      <ToggleSwitch fx:id="paymentTest" layoutX="404.0" layoutY="60.0" />
+      <LabeledToggleSwitch fx:id="paymentTest" layoutX="404.0" layoutY="60.0" />
       <LabeledComboBox fx:id="cardReader" layoutX="15.0" layoutY="25.0" prefWidth="377.0" />
       <LabeledComboBox fx:id="paymentGateway" layoutX="15.0" layoutY="55.0" prefWidth="377.0" />
       <Pane fx:id="providerPane" layoutY="95.0" prefHeight="200.0" prefWidth="457.0" />

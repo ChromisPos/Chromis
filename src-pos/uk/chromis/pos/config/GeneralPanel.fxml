@@ -11,9 +11,9 @@
 <?import javafx.scene.text.Font?>
 <?import uk.chromis.custom.controls.LabeledComboBox?>
 <?import uk.chromis.custom.controls.LabeledTextField?>
-<?import uk.chromis.custom.switches.ToggleSwitch?>
+<?import uk.chromis.custom.controls.LabeledToggleSwitch?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.GeneralPanelController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.GeneralPanelController">
     <children>
         <Separator layoutX="175.0" layoutY="204.0" prefHeight="4.0" prefWidth="580.0" />
         <Label fx:id="lblStartUpPanel" layoutX="50.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" text="Start Up Screen">
@@ -85,7 +85,7 @@
         <LabeledComboBox fx:id="skin" layoutX="17.0" layoutY="60.0" />
         <LabeledComboBox fx:id="screenType" layoutX="17.0" layoutY="90.0" />
         <LabeledComboBox fx:id="salesType" layoutX="17.0" layoutY="120.0" />
-        <ToggleSwitch fx:id="tsFooter" layoutX="150.0" layoutY="157.0" />
+        <LabeledToggleSwitch fx:id="tsFooter" layoutX="128.0" layoutY="157.0" />
         <LabeledTextField fx:id="startUpLogo" layoutX="17.0" layoutY="217.0" />
         <LabeledTextField fx:id="startUpText" layoutX="17.0" layoutY="257.0" />
       <RadioButton fx:id="clear" disable="true" layoutX="509.0" layoutY="325.0" mnemonicParsing="false" prefHeight="3.0" prefWidth="21.0" toggleGroup="$iconColour" visible="false" />                                            

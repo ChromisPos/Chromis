@@ -34,12 +34,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+
 import uk.chromis.custom.controls.LabeledComboBox;
-import uk.chromis.custom.switches.ToggleSwitch;
+import uk.chromis.custom.controls.LabeledToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 import uk.chromis.pos.payment.ConfigPaymentPanelEmpty;
-import uk.chromis.pos.payment.ConfigPaymentPanelGeneric;
 import uk.chromis.pos.payment.PaymentConfiguration;
 
 public class PaymentPanelController implements Initializable, BaseController {
@@ -51,7 +51,7 @@ public class PaymentPanelController implements Initializable, BaseController {
     @FXML
     private LabeledComboBox paymentGateway;
     @FXML
-    private ToggleSwitch paymentTest;
+    private LabeledToggleSwitch paymentTest;
 
     private final Map<String, PaymentConfiguration> paymentsName = new HashMap<>();
     private PaymentConfiguration pc;
@@ -76,7 +76,7 @@ public class PaymentPanelController implements Initializable, BaseController {
         paymentGateway.setItemWidth("label", 110.00);
         paymentGateway.setItemWidth("comboBox", 250.00);
 
-        paymentTest.setSwitchLabel(AppLocal.getIntString("label.paymenttestmode"));
+        paymentTest.setText(AppLocal.getIntString("label.paymenttestmode"));
 
         paymentGateway.getComboBox().getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
             pc = paymentsName.get(comboValue(paymentGateway.getSelected()));

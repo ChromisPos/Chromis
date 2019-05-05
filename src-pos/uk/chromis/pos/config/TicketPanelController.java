@@ -38,8 +38,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javax.swing.SpinnerNumberModel;
 import uk.chromis.custom.controls.LabeledTextField;
+import uk.chromis.custom.controls.LabeledToggleSwitch;
 import uk.chromis.custom.controls.TitledSeparator;
-import uk.chromis.custom.switches.ToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 
@@ -71,17 +71,17 @@ public class TicketPanelController implements Initializable, BaseController {
     private Label ticketExample;
 
     @FXML
-    private ToggleSwitch receiptPrinterOff;
+    private LabeledToggleSwitch receiptPrinterOff;
     @FXML
-    private ToggleSwitch serviceChargeOff;
+    private LabeledToggleSwitch serviceChargeOff;
     @FXML
-    private ToggleSwitch SCRestaurant;
+    private LabeledToggleSwitch SCRestaurant;
     @FXML
-    private ToggleSwitch layawayId;
+    private LabeledToggleSwitch layawayId;
     @FXML
-    private ToggleSwitch createOnOrderOnly;
+    private LabeledToggleSwitch createOnOrderOnly;
     @FXML
-    private ToggleSwitch layawayPopup;
+    private LabeledToggleSwitch layawayPopup;
 
     @FXML
     private LabeledTextField textSCRate;
@@ -116,20 +116,27 @@ public class TicketPanelController implements Initializable, BaseController {
         receiptPrefix.setLabelWidth(250);
         receiptPrefix.setTextWidth(200);
 
-        receiptPrinterOff.setSwitchLabel(AppLocal.getIntString("label.receiptprint"));
-        serviceChargeOff.setSwitchLabel(AppLocal.getIntString("label.SCOnOff"));
-        SCRestaurant.setSwitchLabel(AppLocal.getIntString("label.SCRestaurant"));
+        receiptPrinterOff.setLabelWidth(160.0);
+        receiptPrinterOff.setText(AppLocal.getIntString("label.receiptprint"));
+        serviceChargeOff.setLabelWidth(175.0);
+        serviceChargeOff.setText(AppLocal.getIntString("label.SCOnOff"));
+        SCRestaurant.setLabelWidth(175.0);
+        SCRestaurant.setText(AppLocal.getIntString("label.SCRestaurant"));
+
         textSCRate.setLabel(AppLocal.getIntString("label.SCRate"));
         textSCRate.setLabelWidth(200);
         textSCRate.setTextWidth(50);
 
-        layawayId.setSwitchLabel(AppLocal.getIntString("label.layaway"));
-        createOnOrderOnly.setSwitchLabel(AppLocal.getIntString("label.createonorder"));
-        layawayPopup.setSwitchLabel(AppLocal.getIntString("label.layawaypopup"));
+        layawayId.setLabelWidth(225.0);
+        layawayId.setText(AppLocal.getIntString("label.layaway"));
+        createOnOrderOnly.setLabelWidth(250.0);
+        createOnOrderOnly.setText(AppLocal.getIntString("label.createonorder"));
+        layawayPopup.setLabelWidth(225.0);
+        layawayPopup.setText(AppLocal.getIntString("label.layawaypopup"));
 
         updateServiceCharge();
 
-        serviceChargeOff.selectedProperty().addListener(new ChangeListener<Boolean>() {
+        serviceChargeOff.switchedOn.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 updateServiceCharge();

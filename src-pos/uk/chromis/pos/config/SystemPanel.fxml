@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import uk.chromis.custom.controls.LabeledColourPicker?>
 <?import uk.chromis.custom.controls.LabeledTextField?>
-<?import uk.chromis.custom.switches.ToggleSwitch?>
+<?import uk.chromis.custom.controls.LabeledToggleSwitch?>
 
 <AnchorPane id="AnchorPane" prefHeight="497.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.SystemPanelController">
    <children>
@@ -25,27 +25,27 @@
          </font>
       </Label>
       <Separator layoutX="14.0" layoutY="21.0" prefHeight="0.0" prefWidth="28.0" />
-      <ToggleSwitch fx:id="enableAutoLogoff" layoutX="16.0" layoutY="37.0" />
-      <ToggleSwitch fx:id="inactivityTimer" layoutX="69.0" layoutY="60.0" />
-      <ToggleSwitch fx:id="autologoffAfterSale" layoutX="69.0" layoutY="85.0" />
-      <ToggleSwitch fx:id="autoLogoffAfterKitchen" layoutX="69.0" layoutY="110.0" />
-      <ToggleSwitch fx:id="autoLogoffToTables" layoutX="411.0" layoutY="86.0" />
-      <ToggleSwitch fx:id="autoLogoffAfterPrint" layoutX="411.0" layoutY="110.0" />
+      <LabeledToggleSwitch fx:id="enableAutoLogoff" layoutX="16.0" layoutY="37.0" />
+      <LabeledToggleSwitch fx:id="inactivityTimer" layoutX="69.0" layoutY="60.0" />
+      <LabeledToggleSwitch fx:id="autologoffAfterSale" layoutX="69.0" layoutY="85.0" />
+      <LabeledToggleSwitch fx:id="autoLogoffAfterKitchen" layoutX="69.0" layoutY="110.0" />
+      <LabeledToggleSwitch fx:id="autoLogoffToTables" layoutX="411.0" layoutY="86.0" />
+      <LabeledToggleSwitch fx:id="autoLogoffAfterPrint" layoutX="411.0" layoutY="110.0" />
       <LabeledTextField fx:id="autoLogoffTime" layoutX="408.0" layoutY="60.0" />
-      <ToggleSwitch fx:id="marineOpt" layoutX="16.0" layoutY="160.0" />
-      <ToggleSwitch fx:id="textOverlay" layoutX="16.0" layoutY="185.0" />
-      <ToggleSwitch fx:id="taxIncluded" layoutX="266.0" layoutY="160.0" />
-      <ToggleSwitch fx:id="consolidate" layoutX="516.0" layoutY="160.0" />
-      <ToggleSwitch fx:id="price00" layoutX="266.0" layoutY="185.0" />
-      <ToggleSwitch fx:id="disableDefaultProduct" layoutX="516.0" layoutY="185.0" />
-      <ToggleSwitch fx:id="closeCashbtn" layoutX="16.0" layoutY="210.0" />
-      <ToggleSwitch fx:id="moveAMountBoxToTop" layoutX="266.0" layoutY="210.0" />
-      <ToggleSwitch fx:id="changeSalesScreen" layoutX="516.0" layoutY="210.0" />
-      <ToggleSwitch fx:id="updatedbprice" layoutX="16.0" layoutY="235.0" />
-      <ToggleSwitch fx:id="categoiesBynumber" layoutX="266.0" layoutY="235.0" />
-      <ToggleSwitch fx:id="longNames" layoutX="516.0" layoutY="235.0" />
-      <ToggleSwitch fx:id="customSounds" layoutX="16.0" layoutY="260.0" />
-      <ToggleSwitch fx:id="maxChangeEnable" layoutX="16.0" layoutY="285.0" />
+      <LabeledToggleSwitch fx:id="marineOpt" layoutX="16.0" layoutY="160.0" />
+      <LabeledToggleSwitch fx:id="textOverlay" layoutX="16.0" layoutY="185.0" />
+      <LabeledToggleSwitch fx:id="taxIncluded" layoutX="266.0" layoutY="160.0" />
+      <LabeledToggleSwitch fx:id="consolidate" layoutX="516.0" layoutY="160.0" />
+      <LabeledToggleSwitch fx:id="price00" layoutX="266.0" layoutY="185.0" />
+      <LabeledToggleSwitch fx:id="disableDefaultProduct" layoutX="516.0" layoutY="185.0" />
+      <LabeledToggleSwitch fx:id="closeCashbtn" layoutX="16.0" layoutY="210.0" />
+      <LabeledToggleSwitch fx:id="moveAMountBoxToTop" layoutX="266.0" layoutY="210.0" />
+      <LabeledToggleSwitch fx:id="changeSalesScreen" layoutX="516.0" layoutY="210.0" />
+      <LabeledToggleSwitch fx:id="updatedbprice" layoutX="16.0" layoutY="235.0" />
+      <LabeledToggleSwitch fx:id="categoiesBynumber" layoutX="266.0" layoutY="235.0" />
+      <LabeledToggleSwitch fx:id="longNames" layoutX="516.0" layoutY="235.0" />
+      <LabeledToggleSwitch fx:id="customSounds" layoutX="16.0" layoutY="260.0" />
+      <LabeledToggleSwitch fx:id="maxChangeEnable" layoutX="16.0" layoutY="285.0" />
       <LabeledTextField fx:id="maxChange" layoutX="266.0" layoutY="285.0" />
       <Spinner fx:id="tableDays" layoutX="17.0" layoutY="319.0" prefHeight="25.0" prefWidth="52.0" />
       <Label fx:id="retainLabel" layoutX="78.0" layoutY="320.0" prefHeight="25.0" prefWidth="360.0" text="Label" />

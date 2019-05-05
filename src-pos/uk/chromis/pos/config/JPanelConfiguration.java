@@ -62,7 +62,6 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
     private static JFXPanel fxContainer;
 
     public JPanelConfiguration(AppView app) {
-
         m_App = app;
         m_props = m_App.getProperties();
         fxContainer = new JFXPanel();
@@ -71,7 +70,6 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
         lbl.setText(AppLocal.getIntString("label.pleasewait"));
         add(lbl);
 
-        //  fxContainer.setPreferredSize(new Dimension(JFXPANEL_WIDTH_INT, JFXPANEL_HEIGHT_INT));
         add(fxContainer, BorderLayout.CENTER);
         Platform.runLater(new Runnable() {
             @Override
@@ -140,13 +138,20 @@ public class JPanelConfiguration extends JPanel implements JPanelView {
                     JMessageDialog.showMessage(this, new MessageInf(MessageInf.SGN_WARNING, AppLocal.getIntString("message.cannotsaveconfig"), e));
                 }
                 return true;
-            } else {
+            } else if (res == JOptionPane.NO_OPTION) {
+                controller.setDirty(false);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        controller.restore();
+                    }
+                });
                 return res == JOptionPane.NO_OPTION;
+            } else {
+                return false;
             }
-        } else {
-            return true;
         }
-
+        return true;
     }
 
     /**

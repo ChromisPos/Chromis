@@ -32,7 +32,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import uk.chromis.custom.controls.LabeledColourPicker;
-import uk.chromis.custom.switches.ToggleSwitch;
+import uk.chromis.custom.controls.LabeledToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 
@@ -44,15 +44,15 @@ import uk.chromis.pos.forms.AppLocal;
 public class RestaurantPanelController implements Initializable, BaseController {
 
     @FXML
-    private ToggleSwitch tsCustomerDetails;
+    private LabeledToggleSwitch tsCustomerDetails;
     @FXML
-    private ToggleSwitch tsWaiterDetails;
+    private LabeledToggleSwitch tsWaiterDetails;
     @FXML
-    private ToggleSwitch tsTransparent;
+    private LabeledToggleSwitch tsTransparent;
     @FXML
-    private ToggleSwitch tsTableRefresh;
+    private LabeledToggleSwitch tsTableRefresh;
     @FXML
-    private ToggleSwitch tsTableRelocation;
+    private LabeledToggleSwitch tsTableRelocation;
 
     @FXML
     private Label sectionLabel;
@@ -82,11 +82,17 @@ public class RestaurantPanelController implements Initializable, BaseController 
 
         sectionLabel.setText(AppLocal.getIntString("label.tabledisplayoptions"));
 
+        tsCustomerDetails.setLabelWidth(225.0);
         tsCustomerDetails.setText(AppLocal.getIntString("label.tableshowcustomerdetails"));
+        tsWaiterDetails.setLabelWidth(225.0);
         tsWaiterDetails.setText(AppLocal.getIntString("label.tableshowwaiterdetails"));
+        tsTransparent.setLabelWidth(225.0);
         tsTransparent.setText(AppLocal.getIntString("label.tablebuttons"));
+        tsTableRefresh.setLabelWidth(225.0);
         tsTableRefresh.setText(AppLocal.getIntString("label.autorefresh"));
+        tsTableRelocation.setLabelWidth(225.0);
         tsTableRelocation.setText(AppLocal.getIntString("label.enabletablepositions"));
+       
 
         cpCustomerColour.setText(AppLocal.getIntString("label.textcolourcustomer"));
         cpCustomerColour.setLabelWidth(250.0);

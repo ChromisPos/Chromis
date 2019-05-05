@@ -5,19 +5,19 @@
 <?import uk.chromis.custom.controls.DeviceConfig?>
 <?import uk.chromis.custom.controls.LabeledComboBox?>
 <?import uk.chromis.custom.controls.LabeledTextField?>
+<?import uk.chromis.custom.controls.LabeledToggleSwitch?>
 <?import uk.chromis.custom.controls.ScannerConfig?>
-<?import uk.chromis.custom.switches.ToggleSwitch?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.PeripheralPanelController">
     <children>
              
         <LabeledComboBox fx:id="customerDisplay" layoutX="17.0" layoutY="10.0" />
-        <ToggleSwitch fx:id="customerDisplayToggle" layoutX="340.0" layoutY="15.0" prefHeight="18.0" prefWidth="158.0" />
+        <LabeledToggleSwitch fx:id="customerDisplayToggle" layoutX="340.0" layoutY="15.0" prefHeight="18.0" prefWidth="213.0" />
         <LabeledComboBox fx:id="customerDisplayPort" layoutX="509.0" layoutY="11.0" prefWidth="220.0" />
        
         <LabeledComboBox fx:id="printer" layoutX="17.0" layoutY="40.0" />
         <ComboBox fx:id="printerList" layoutX="344.0" layoutY="40.0" prefHeight="25.0" prefWidth="200.0" />
-        <ToggleSwitch fx:id="receiptToggle" layoutX="556.0" layoutY="42.0" />
+        <LabeledToggleSwitch fx:id="receiptToggle" layoutX="556.0" layoutY="42.0" />
         <LabeledTextField fx:id="oposDrawer" layoutX="544.0" layoutY="40.0" prefWidth="158.0" />
         <LabeledTextField fx:id="oposPrinter" layoutX="340.0" layoutY="40.0" prefWidth="158.0" />
         <LabeledComboBox fx:id="printerMode" layoutX="344.0" layoutY="40.0" prefWidth="158.0" />
@@ -25,7 +25,7 @@
 
         <LabeledComboBox fx:id="printer2" layoutX="17.0" layoutY="70.0" />
         <ComboBox fx:id="printerList2" layoutX="344.0" layoutY="70.0" prefHeight="25.0" prefWidth="200.0" />
-        <ToggleSwitch fx:id="receiptToggle2" layoutX="556.0" layoutY="72.0" />
+        <LabeledToggleSwitch fx:id="receiptToggle2" layoutX="556.0" layoutY="72.0" />
         <LabeledTextField fx:id="oposDrawer2" layoutX="544.0" layoutY="70.0" prefWidth="158.0" />
         <LabeledTextField fx:id="oposPrinter2" layoutX="340.0" layoutY="70.0" prefWidth="158.0" />
         <LabeledComboBox fx:id="printerMode2" layoutX="344.0" layoutY="70.0" prefWidth="158.0" />
@@ -33,7 +33,7 @@
         
         <LabeledComboBox fx:id="printer3" layoutX="17.0" layoutY="100.0" />
         <ComboBox fx:id="printerList3" layoutX="344.0" layoutY="100.0" prefHeight="25.0" prefWidth="200.0" />
-        <ToggleSwitch fx:id="receiptToggle3" layoutX="556.0" layoutY="102.0" />
+        <LabeledToggleSwitch fx:id="receiptToggle3" layoutX="556.0" layoutY="102.0" />
         <LabeledTextField fx:id="oposDrawer3" layoutX="544.0" layoutY="100.0" prefWidth="158.0" />
         <LabeledTextField fx:id="oposPrinter3" layoutX="340.0" layoutY="100.0" prefWidth="158.0" />
         <LabeledComboBox fx:id="printerMode3" layoutX="344.0" layoutY="100.0" prefWidth="158.0" />
@@ -41,7 +41,7 @@
     
         <LabeledComboBox fx:id="printer4" layoutX="17.0" layoutY="130.0" />
         <ComboBox fx:id="printerList4" layoutX="344.0" layoutY="130.0" prefHeight="25.0" prefWidth="200.0" />
-        <ToggleSwitch fx:id="receiptToggle4" layoutX="556.0" layoutY="132.0" />
+        <LabeledToggleSwitch fx:id="receiptToggle4" layoutX="556.0" layoutY="132.0" />
         <LabeledTextField fx:id="oposDrawer4" layoutX="544.0" layoutY="130.0" prefWidth="158.0" />
         <LabeledTextField fx:id="oposPrinter4" layoutX="340.0" layoutY="130.0" prefWidth="158.0" />
         <LabeledComboBox fx:id="printerMode4" layoutX="344.0" layoutY="130.0" prefWidth="158.0" />
@@ -49,7 +49,7 @@
         
         <LabeledComboBox fx:id="printer5" layoutX="17.0" layoutY="160.0" />
         <ComboBox fx:id="printerList5" layoutX="344.0" layoutY="160.0" prefHeight="25.0" prefWidth="200.0" />
-        <ToggleSwitch fx:id="receiptToggle5" layoutX="556.0" layoutY="162.0" />
+        <LabeledToggleSwitch fx:id="receiptToggle5" layoutX="556.0" layoutY="162.0" />
         <LabeledTextField fx:id="oposDrawer5" layoutX="544.0" layoutY="160.0" prefWidth="158.0" />
         <LabeledTextField fx:id="oposPrinter5" layoutX="340.0" layoutY="160.0" prefWidth="158.0" />
         <LabeledComboBox fx:id="printerMode5" layoutX="344.0" layoutY="160.0" prefWidth="158.0" />
@@ -57,7 +57,7 @@
         
         <LabeledComboBox fx:id="printer6" layoutX="17.0" layoutY="190.0" />
         <ComboBox fx:id="printerList6" layoutX="344.0" layoutY="190.0" prefHeight="25.0" prefWidth="200.0" />
-        <ToggleSwitch fx:id="receiptToggle6" layoutX="556.0" layoutY="192.0" />
+        <LabeledToggleSwitch fx:id="receiptToggle6" layoutX="556.0" layoutY="192.0" />
         <LabeledTextField fx:id="oposDrawer6" layoutX="544.0" layoutY="190.0" prefWidth="158.0" />
         <LabeledTextField fx:id="oposPrinter6" layoutX="340.0" layoutY="190.0" prefWidth="158.0" />
         <LabeledComboBox fx:id="printerMode6" layoutX="344.0" layoutY="190.0" prefWidth="158.0" />

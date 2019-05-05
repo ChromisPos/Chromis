@@ -32,62 +32,58 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
+
 import uk.chromis.custom.controls.LabeledColourPicker;
 import uk.chromis.custom.controls.LabeledTextField;
-import uk.chromis.custom.switches.ToggleSwitch;
+import uk.chromis.custom.controls.LabeledToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 
-/**
- * FXML Controller class
- *
- * @author John
- */
 public class SystemPanelController implements Initializable, BaseController {
 
     @FXML
-    private ToggleSwitch enableAutoLogoff;
+    private LabeledToggleSwitch enableAutoLogoff;
     @FXML
-    private ToggleSwitch inactivityTimer;
+    private LabeledToggleSwitch inactivityTimer;
     @FXML
-    private ToggleSwitch autologoffAfterSale;
+    private LabeledToggleSwitch autologoffAfterSale;
     @FXML
-    private ToggleSwitch autoLogoffAfterKitchen;
+    private LabeledToggleSwitch autoLogoffAfterKitchen;
     @FXML
-    private ToggleSwitch autoLogoffToTables;
+    private LabeledToggleSwitch autoLogoffToTables;
     @FXML
     private LabeledTextField autoLogoffTime;
     @FXML
-    private ToggleSwitch autoLogoffAfterPrint;
+    private LabeledToggleSwitch autoLogoffAfterPrint;
 
     @FXML
-    private ToggleSwitch marineOpt;
+    private LabeledToggleSwitch marineOpt;
     @FXML
-    private ToggleSwitch taxIncluded;
+    private LabeledToggleSwitch taxIncluded;
     @FXML
-    private ToggleSwitch consolidate;
+    private LabeledToggleSwitch consolidate;
     @FXML
-    private ToggleSwitch textOverlay;
+    private LabeledToggleSwitch textOverlay;
     @FXML
-    private ToggleSwitch price00;
+    private LabeledToggleSwitch price00;
     @FXML
-    private ToggleSwitch disableDefaultProduct;
+    private LabeledToggleSwitch disableDefaultProduct;
     @FXML
-    private ToggleSwitch closeCashbtn;
+    private LabeledToggleSwitch closeCashbtn;
     @FXML
-    private ToggleSwitch moveAMountBoxToTop;
+    private LabeledToggleSwitch moveAMountBoxToTop;
     @FXML
-    private ToggleSwitch changeSalesScreen;
+    private LabeledToggleSwitch changeSalesScreen;
     @FXML
-    private ToggleSwitch updatedbprice;
+    private LabeledToggleSwitch updatedbprice;
     @FXML
-    private ToggleSwitch categoiesBynumber;
+    private LabeledToggleSwitch categoiesBynumber;
     @FXML
-    private ToggleSwitch longNames;
+    private LabeledToggleSwitch longNames;
     @FXML
-    private ToggleSwitch customSounds;
+    private LabeledToggleSwitch customSounds;
     @FXML
-    private ToggleSwitch maxChangeEnable;
+    private LabeledToggleSwitch maxChangeEnable;
     @FXML
     private LabeledTextField maxChange;
     @FXML
@@ -128,13 +124,41 @@ public class SystemPanelController implements Initializable, BaseController {
         autologoffpanel.setText(AppLocal.getIntString("label.autologoffpanel"));
         general.setText(AppLocal.getIntString("label.general"));
 
-        enableAutoLogoff.setSwitchLabel(AppLocal.getIntString("label.autologonoff"));
+        dirty.bindBidirectional(enableAutoLogoff.dirty);
+        dirty.bindBidirectional(inactivityTimer.dirty);
+        dirty.bindBidirectional(autologoffAfterSale.dirty);
+        dirty.bindBidirectional(autoLogoffAfterKitchen.dirty);
+        dirty.bindBidirectional(autoLogoffAfterPrint.dirty);
+        dirty.bindBidirectional(autoLogoffTime.dirty);
+        dirty.bindBidirectional(marineOpt.dirty);
+        dirty.bindBidirectional(taxIncluded.dirty);
+        dirty.bindBidirectional(consolidate.dirty);
+        dirty.bindBidirectional(textOverlay.dirty);
+        dirty.bindBidirectional(price00.dirty);
+        dirty.bindBidirectional(closeCashbtn.dirty);
+        dirty.bindBidirectional(moveAMountBoxToTop.dirty);
+        dirty.bindBidirectional(changeSalesScreen.dirty);
+        dirty.bindBidirectional(updatedbprice.dirty);
+        dirty.bindBidirectional(longNames.dirty);
+        dirty.bindBidirectional(customSounds.dirty);
+        dirty.bindBidirectional(maxChange.dirty);
+        ticketLineSize.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
+        tableDays.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
+
+        enableAutoLogoff.setLabelWidth(225.0);
+        enableAutoLogoff.setText(AppLocal.getIntString("label.autologonoff"));
+        inactivityTimer.setLabelWidth(225.0);
         inactivityTimer.setText(AppLocal.getIntString("label.inactivity"));
+        autologoffAfterSale.setLabelWidth(225.0);
         autologoffAfterSale.setText(AppLocal.getIntString("label.autologoff"));
+        autoLogoffAfterKitchen.setLabelWidth(225.0);
         autoLogoffAfterKitchen.setText(AppLocal.getIntString("label.logoffaftersendtokitchen"));
+        autoLogoffToTables.setLabelWidth(225.0);
         autoLogoffToTables.setText(AppLocal.getIntString("label.autologoffrestaurant"));
+        autoLogoffAfterPrint.setLabelWidth(225.0);
         autoLogoffAfterPrint.setText(AppLocal.getIntString("label.logoffafterprinting"));
         autoLogoffAfterPrint.setVisible(false);
+        autoLogoffTime.setLabelWidth(225.0);
         autoLogoffTime.setLabel(AppLocal.getIntString("label.autologoffzero"));
         autoLogoffTime.setTextWidth(50);
         autoLogoffTime.setText("100");
@@ -147,68 +171,83 @@ public class SystemPanelController implements Initializable, BaseController {
         autoLogoffAfterKitchen.setSelected(AppConfig.getInstance().getBoolean("till.autologoffafterkitchen"));
         autoLogoffAfterPrint.setSelected(AppConfig.getInstance().getBoolean("till.autologoffafterprint"));
 
-        enableAutoLogoff.selectedProperty().addListener((arg, oldVal, newVal) -> updateAutoLogoff());
+        enableAutoLogoff.switchedOn.addListener((arg, oldVal, newVal) -> updateAutoLogoff());
 
         updateAutoLogoff();
 
-        marineOpt.setSwitchLabel(AppLocal.getIntString("label.marine"));
-        taxIncluded.setSwitchLabel(AppLocal.getIntString("label.taxincluded"));
-        consolidate.setSwitchLabel(AppLocal.getIntString("Label.ConsolidatedScreen"));
-        textOverlay.setSwitchLabel(AppLocal.getIntString("label.currencybutton"));
-        price00.setSwitchLabel(AppLocal.getIntString("label.pricewith00"));
-        disableDefaultProduct.setSwitchLabel(AppLocal.getIntString("label.default"));
-        closeCashbtn.setSwitchLabel(AppLocal.getIntString("message.systemclosecash"));
-        moveAMountBoxToTop.setSwitchLabel(AppLocal.getIntString("label.inputamount"));
-        changeSalesScreen.setSwitchLabel(AppLocal.getIntString("Label.ChangesSalesScreen"));
-        updatedbprice.setSwitchLabel(AppLocal.getIntString("label.updatepricefromedit"));
-        categoiesBynumber.setSwitchLabel(AppLocal.getIntString("label.categoryorder"));
-        longNames.setSwitchLabel(AppLocal.getIntString("label.allowlongnames"));
-        customSounds.setSwitchLabel(AppLocal.getIntString("label.customerrorsounds"));
-        maxChangeEnable.setSwitchLabel(AppLocal.getIntString("message.enablechange"));
+        marineOpt.setText(AppLocal.getIntString("label.marine"));
+        taxIncluded.setLabelWidth(175.0);
+        taxIncluded.setText(AppLocal.getIntString("label.taxincluded"));
+        consolidate.setLabelWidth(175.0);
+        consolidate.setText(AppLocal.getIntString("Label.ConsolidatedScreen"));
+        textOverlay.setLabelWidth(175.0);
+        textOverlay.setText(AppLocal.getIntString("label.currencybutton"));
+        price00.setLabelWidth(175.0);
+        price00.setText(AppLocal.getIntString("label.pricewith00"));
+        disableDefaultProduct.setLabelWidth(175.0);
+        disableDefaultProduct.setText(AppLocal.getIntString("label.default"));
+        closeCashbtn.setLabelWidth(175.0);
+        closeCashbtn.setText(AppLocal.getIntString("message.systemclosecash"));
+        moveAMountBoxToTop.setLabelWidth(175.0);
+        moveAMountBoxToTop.setText(AppLocal.getIntString("label.inputamount"));
+        changeSalesScreen.setLabelWidth(175.0);
+        changeSalesScreen.setText(AppLocal.getIntString("Label.ChangesSalesScreen"));
+        updatedbprice.setLabelWidth(175.0);
+        updatedbprice.setText(AppLocal.getIntString("label.updatepricefromedit"));
+        categoiesBynumber.setLabelWidth(175.0);
+        categoiesBynumber.setText(AppLocal.getIntString("label.categoryorder"));
+        longNames.setLabelWidth(175.0);
+        longNames.setText(AppLocal.getIntString("label.allowlongnames"));
+        customSounds.setLabelWidth(175.0);
+        customSounds.setText(AppLocal.getIntString("label.customerrorsounds"));
+        maxChangeEnable.setLabelWidth(175.0);
+        maxChangeEnable.setText(AppLocal.getIntString("message.enablechange"));
 
         maxChange.setLabel(AppLocal.getIntString("label.maxchange"));
         maxChange.setTextWidth(75);
         maxChange.setText("50.00");
 
-        maxChangeEnable.selectedProperty().addListener((arg, oldVal, newVal) -> maxChange.setDisable(!maxChangeEnable.isSelected()));
+        maxChangeEnable.dirty.addListener((arg, oldVal, newVal) -> maxChange.setDisable(!maxChangeEnable.isSelected()));
 
         retainLabel.setText(AppLocal.getIntString("label.cleardrawertable"));
         IntegerSpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(7, 90, 7);
         tableDays.setValueFactory(valueFactory);
+        valueFactory.valueProperty().addListener((obs, oldValue, newValue)
+                -> dirty.setValue(true));
 
         ticketLinesLabel.setText(AppLocal.getIntString("label.ticketlinesize"));
         IntegerSpinnerValueFactory ticketLineFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(28, 100, 7);
         ticketLineSize.setValueFactory(ticketLineFactory);
+        ticketLineFactory.valueProperty().addListener((obs, oldValue, newValue)
+                -> dirty.setValue(true));
 
         removedLinesLabel.setText(AppLocal.getIntString("label.removedlinedays"));
         IntegerSpinnerValueFactory lineRemovedFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(7, 60, 14);
         removedLineDays.setValueFactory(lineRemovedFactory);
-              
-        load();
+        lineRemovedFactory.valueProperty().addListener((obs, oldValue, newValue)
+                -> dirty.setValue(true));
 
-        ticketLineSize.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
-        tableDays.valueProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
+        load();
 
     }
 
     private void updateAutoLogoff() {
         if (enableAutoLogoff.isSelected()) {
-            autoLogoffToTables.setDisable(false);
+            autoLogoffToTables.setSwitchDisable(false);
             autoLogoffTime.setDisable(false);
             autoLogoffTime.setDisable(false);
-            autoLogoffAfterKitchen.setDisable(false);
-            autoLogoffAfterPrint.setDisable(false);
-            inactivityTimer.setDisable(false);
-            autologoffAfterSale.setDisable(false);
-
+            autoLogoffAfterKitchen.setSwitchDisable(false);
+            autoLogoffAfterPrint.setSwitchDisable(false);
+            inactivityTimer.setSwitchDisable(false);
+            autologoffAfterSale.setSwitchDisable(false);
         } else {
-            autoLogoffToTables.setDisable(true);
+            autoLogoffToTables.setSwitchDisable(true);
             autoLogoffTime.setDisable(true);
             autoLogoffTime.setDisable(true);
-            autoLogoffAfterKitchen.setDisable(true);
-            autoLogoffAfterPrint.setDisable(true);
-            inactivityTimer.setDisable(true);
-            autologoffAfterSale.setDisable(true);
+            autoLogoffAfterKitchen.setSwitchDisable(true);
+            autoLogoffAfterPrint.setSwitchDisable(true);
+            inactivityTimer.setSwitchDisable(true);
+            autologoffAfterSale.setSwitchDisable(true);
         }
     }
 
@@ -245,13 +284,17 @@ public class SystemPanelController implements Initializable, BaseController {
         } else {
             removedLineDays.getValueFactory().setValue(Integer.parseInt(lineRemovedRetain));
         }
-        
+
         ticketLine = (AppConfig.getInstance().getProperty("sales.linesize"));
         if (ticketLine == null || "".equals(ticketLine)) {
             ticketLineSize.getValueFactory().setValue(40);
         } else {
             ticketLineSize.getValueFactory().setValue(Integer.parseInt(ticketLine));
         }
+		
+		enableAutoLogoff.switchedOn.addListener((arg, oldVal, newVal) -> updateAutoLogoff());
+        updateAutoLogoff();
+		
         dirty.setValue(false);
     }
 

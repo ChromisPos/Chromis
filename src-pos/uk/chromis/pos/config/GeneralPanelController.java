@@ -46,7 +46,7 @@ import org.pushingpixels.substance.api.SubstanceLookAndFeel;
 import org.pushingpixels.substance.api.skin.SkinInfo;
 import uk.chromis.custom.controls.LabeledComboBox;
 import uk.chromis.custom.controls.LabeledTextField;
-import uk.chromis.custom.switches.ToggleSwitch;
+import uk.chromis.custom.controls.LabeledToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 
@@ -56,7 +56,7 @@ import uk.chromis.pos.forms.AppLocal;
  * @author John
  */
 public class GeneralPanelController implements Initializable, BaseController {
-
+    
     @FXML
     private LabeledTextField machineName;
     @FXML
@@ -69,7 +69,7 @@ public class GeneralPanelController implements Initializable, BaseController {
     private LabeledTextField startUpText;
     @FXML
     private LabeledTextField startUpLogo;
-
+    
     @FXML
     private ToggleGroup iconColour;
     @FXML
@@ -86,7 +86,7 @@ public class GeneralPanelController implements Initializable, BaseController {
     private RadioButton rbtnRoyalBlue;
     @FXML
     private RadioButton clear;
-
+    
     @FXML
     private Button btnLogo;
     @FXML
@@ -95,7 +95,7 @@ public class GeneralPanelController implements Initializable, BaseController {
     private Button btnClearText;
     @FXML
     private Button btnClearLogo;
-
+    
     @FXML
     private Pane paneRed;
     @FXML
@@ -108,7 +108,7 @@ public class GeneralPanelController implements Initializable, BaseController {
     private Pane paneGreen;
     @FXML
     private Pane paneRoyalBlue;
-
+    
     @FXML
     private ImageView imgRed;
     @FXML
@@ -121,15 +121,15 @@ public class GeneralPanelController implements Initializable, BaseController {
     private ImageView imgBlack;
     @FXML
     private ImageView imgRoyalBlue;
-
+    
     @FXML
-    private ToggleSwitch tsFooter;
-
+    private LabeledToggleSwitch tsFooter;
+    
     private String strIconColour;
     private Image image;
-
+    
     private LinkedHashMap<String, LAFInfo> lafskins = new LinkedHashMap();
-
+    
     public BooleanProperty dirty = new SimpleBooleanProperty(false);
 
     /**
@@ -137,12 +137,12 @@ public class GeneralPanelController implements Initializable, BaseController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         dirty.bindBidirectional(machineName.dirty);
         machineName.setText(AppLocal.getIntString("Label.MachineName"));
         machineName.setWidthSizes(120.0, 250.0);
         machineName.setText(AppConfig.getInstance().getProperty("machine.hostname"));
-
+        
         ObservableList<String> skinNames = FXCollections.observableArrayList();
         UIManager.LookAndFeelInfo[] lafs = UIManager.getInstalledLookAndFeels();
         for (UIManager.LookAndFeelInfo laf : lafs) {
@@ -154,36 +154,38 @@ public class GeneralPanelController implements Initializable, BaseController {
             skinNames.add(skin.getDisplayName());
             lafskins.put(skin.getDisplayName(), new LAFInfo(skin.getDisplayName(), skin.getClassName()));
         }
-
+        
         dirty.bindBidirectional(skin.dirty);
         skin.setLabel(AppLocal.getIntString("label.looknfeel"));
         skin.setWidthSizes(120.0, 250.0);
         skin.addItemList(skinNames);
-
+        
         dirty.bindBidirectional(screenType.dirty);
         ObservableList<String> machineScreens = FXCollections.observableArrayList("window", "windowmaximised", "fullscreen");
         screenType.setWidthSizes(120.0, 250.0);
         screenType.setLabel(AppLocal.getIntString("Label.MachineScreen"));
         screenType.addItemList(machineScreens);
-
+        
         dirty.bindBidirectional(salesType.dirty);
         ObservableList<String> ticketBags = FXCollections.observableArrayList("simple", "standard", "restaurant");
         salesType.setWidthSizes(120.0, 250.0);
         salesType.setLabel(AppLocal.getIntString("Label.Ticketsbag"));
         salesType.addItemList(ticketBags);
-
+        
         dirty.bindBidirectional(tsFooter.dirty);
+        tsFooter.setLayoutX(145);
+        tsFooter.setLabelWidth(125.0);
         tsFooter.setText(AppLocal.getIntString("label.Infopanel"));
         tsFooter.setSelected(AppConfig.getInstance().getBoolean("till.hideinfo"));
-
+        
         dirty.bindBidirectional(startUpLogo.dirty);
         startUpLogo.setLabel(AppLocal.getIntString("label.startuplogo"));
         startUpLogo.setWidthSizes(120.0, 400.0);
-
+        
         dirty.bindBidirectional(startUpText.dirty);
         startUpText.setLabel(AppLocal.getIntString("label.startuptext"));
         startUpText.setWidthSizes(120.0, 400.0);
-
+        
         image = new Image(getClass().getResourceAsStream("/uk/chromis/images/fileopen.png"));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(18);
@@ -191,10 +193,10 @@ public class GeneralPanelController implements Initializable, BaseController {
         ImageView imageView2 = new ImageView(image);
         imageView2.setFitHeight(18);
         imageView2.setFitWidth(18);
-
+        
         btnText.setGraphic(imageView2);
         btnLogo.setGraphic(imageView);
-
+        
         image = new Image(getClass().getResourceAsStream("/uk/chromis/fixedimages/reduser.png"));
         imgRed.setImage(image);
         image = new Image(getClass().getResourceAsStream("/uk/chromis/fixedimages/blueuser.png"));
@@ -207,37 +209,37 @@ public class GeneralPanelController implements Initializable, BaseController {
         imgRoyalBlue.setImage(image);
         image = new Image(getClass().getResourceAsStream("/uk/chromis/fixedimages/blackuser.png"));
         imgBlack.setImage(image);
-
+        
         paneRed.setOnMouseClicked((MouseEvent event) -> rbtnRed.fire());
-
+        
         paneGreen.setOnMouseClicked((MouseEvent event) -> rbtnGreen.fire());
-
+        
         paneBlue.setOnMouseClicked((MouseEvent event) -> rbtnBlue.fire());
-
+        
         paneRoyalBlue.setOnMouseClicked((MouseEvent event) -> rbtnRoyalBlue.fire());
-
+        
         paneOrange.setOnMouseClicked((MouseEvent event) -> rbtnOrange.fire());
-
+        
         paneBlack.setOnMouseClicked((MouseEvent event) -> rbtnBlack.fire());
-
+        
         rbtnRed.setOnAction(event -> strIconColour = "red");
-
+        
         rbtnGreen.setOnAction(event -> strIconColour = "green");
-
+        
         rbtnBlue.setOnAction(event -> strIconColour = "blue");
-
+        
         rbtnRoyalBlue.setOnAction(event -> strIconColour = "royalblue");
-
+        
         rbtnOrange.setOnAction(event -> strIconColour = "orange");
-
+        
         rbtnBlack.setOnAction(event -> strIconColour = "black");
-
+        
         iconColour.selectedToggleProperty().addListener((obs, oldValue, newValue) -> dirty.setValue(true));
-
+        
         load();
-
+        
     }
-
+    
     public void handleSelectLogoFile() {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
@@ -245,7 +247,7 @@ public class GeneralPanelController implements Initializable, BaseController {
             startUpLogo.setText(selectedFile.getAbsoluteFile().toString());
         }
     }
-
+    
     public void handleSelectTextFile() {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(null);
@@ -253,15 +255,15 @@ public class GeneralPanelController implements Initializable, BaseController {
             startUpText.setText(selectedFile.getAbsoluteFile().toString());
         }
     }
-
+    
     public void handleClearText() {
         startUpText.setText("");
     }
-
+    
     public void handleClearLogo() {
         startUpLogo.setText("");
     }
-
+    
     @Override
     public void load() {
         machineName.setText(AppConfig.getInstance().getProperty("machine.hostname"));
@@ -279,7 +281,7 @@ public class GeneralPanelController implements Initializable, BaseController {
         tsFooter.setSelected(AppConfig.getInstance().getBoolean("till.hideinfo"));
         startUpLogo.setText(AppConfig.getInstance().getProperty("start.logo"));
         startUpText.setText(AppConfig.getInstance().getProperty("start.text"));
-
+        
         strIconColour = (AppConfig.getInstance().getProperty("icon.colour") == null ? "" : AppConfig.getInstance().getProperty("icon.colour"));
         switch (strIconColour) {
             case "red":
@@ -304,19 +306,19 @@ public class GeneralPanelController implements Initializable, BaseController {
                 iconColour.selectToggle(clear);
                 break;
         }
-
+        
         dirty.setValue(false);
     }
-
+    
     @Override
     public void save() {
         AppConfig.getInstance().setProperty("machine.hostname", machineName.getText());
-
+        
         LAFInfo laf = (LAFInfo) lafskins.get(skin.getSelected());
         AppConfig.getInstance().setProperty("swing.defaultlaf", laf == null
                 ? System.getProperty("swing.defaultlaf", "javax.swing.plaf.metal.MetalLookAndFeel")
                 : laf.getClassName());
-
+        
         AppConfig.getInstance().setProperty("machine.screenmode", comboValue(screenType.getSelected()));
         AppConfig.getInstance().setProperty("machine.ticketsbag", comboValue(salesType.getSelected()));
         AppConfig.getInstance().setBoolean("till.hideinfo", tsFooter.isSelected());
@@ -325,43 +327,43 @@ public class GeneralPanelController implements Initializable, BaseController {
         AppConfig.getInstance().setProperty("icon.colour", strIconColour);
         dirty.setValue(false);
     }
-
+    
     private String comboValue(Object value) {
         return value == null ? "" : value.toString();
     }
-
+    
     @Override
     public Boolean isDirty() {
         return dirty.getValue();
     }
-
+    
     @Override
     public void setDirty(Boolean value) {
         dirty.setValue(value);
     }
-
+    
     private static class LAFInfo {
-
+        
         private final String name;
         private final String classname;
-
+        
         public LAFInfo(String name, String classname) {
             this.name = name;
             this.classname = classname;
         }
-
+        
         public String getName() {
             return name;
         }
-
+        
         public String getClassName() {
             return classname;
         }
-
+        
         @Override
         public String toString() {
             return name;
         }
     }
-
+    
 }

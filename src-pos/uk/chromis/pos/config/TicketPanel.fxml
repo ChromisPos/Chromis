@@ -5,22 +5,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import uk.chromis.custom.controls.LabeledTextField?>
 <?import uk.chromis.custom.controls.TitledSeparator?>
-<?import uk.chromis.custom.switches.ToggleSwitch?>
+<?import uk.chromis.custom.controls.LabeledToggleSwitch?>
 
 <AnchorPane id="AnchorPane" fx:id="pane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.chromis.pos.config.TicketPanelController">
    <children>
-      <ToggleSwitch fx:id="receiptPrinterOff" layoutX="70.0" layoutY="105.0" />
-      <ToggleSwitch fx:id="serviceChargeOff" layoutX="70.0" layoutY="170.0" prefHeight="25.0" />
-      <ToggleSwitch fx:id="layawayId" layoutX="70.0" layoutY="280.0" />
-      <ToggleSwitch fx:id="createOnOrderOnly" layoutX="400.0" layoutY="310.0" />
-      <ToggleSwitch fx:id="layawayPopup" layoutX="70.0" layoutY="310.0" />
+      <LabeledToggleSwitch fx:id="receiptPrinterOff" layoutX="70.0" layoutY="105.0" />
+      <LabeledToggleSwitch fx:id="serviceChargeOff" layoutX="70.0" layoutY="170.0" prefHeight="25.0" />
+      <LabeledToggleSwitch fx:id="layawayId" layoutX="70.0" layoutY="280.0" />
+      <LabeledToggleSwitch fx:id="createOnOrderOnly" layoutX="400.0" layoutY="310.0" />
+      <LabeledToggleSwitch fx:id="layawayPopup" layoutX="70.0" layoutY="310.0" />
       <LabeledTextField fx:id="receiptPrefix" layoutX="330.0" layoutY="40.0" prefHeight="25.0" prefWidth="225.0" />
       <Label fx:id="receiptLength" layoutX="70.0" layoutY="40.0" prefHeight="25.0" prefWidth="152.0" text="Label" />
       <Label fx:id="pickupLength" layoutX="70.0" layoutY="70.0" prefHeight="25.0" prefWidth="145.0" text="Label" />
       <Spinner fx:id="receiptSpinner" layoutX="235.0" layoutY="40.0" prefHeight="25.0" prefWidth="52.0" />
       <Spinner fx:id="pickupSpinner" layoutX="235.0" layoutY="70.0" prefHeight="25.0" prefWidth="52.0" />
       <Label fx:id="ticketExample" layoutX="575.0" layoutY="42.0" prefHeight="25.0" prefWidth="104.0" style="-fx-border-width: 1 1 1 1; -fx-border-color: #a0a0a0; -fx-border-radius: 4;" text="1" />
-      <ToggleSwitch fx:id="SCRestaurant" layoutX="400.0" layoutY="202.0" />
+      <LabeledToggleSwitch fx:id="SCRestaurant" layoutX="400.0" layoutY="202.0" />
       <LabeledTextField fx:id="textSCRate" layoutX="107.0" layoutY="200.0" prefHeight="25.0" prefWidth="249.0" />
       <Label fx:id="percent" layoutX="366.0" layoutY="204.0" text="\%" />
       <TitledSeparator fx:id="receiptSetup" layoutX="5.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="739.0" />

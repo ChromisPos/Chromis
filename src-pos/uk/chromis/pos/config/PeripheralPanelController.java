@@ -42,7 +42,7 @@ import uk.chromis.custom.controls.DeviceConfig;
 import uk.chromis.custom.controls.LabeledComboBox;
 import uk.chromis.custom.controls.LabeledTextField;
 import uk.chromis.custom.controls.ScannerConfig;
-import uk.chromis.custom.switches.ToggleSwitch;
+import uk.chromis.custom.controls.LabeledToggleSwitch;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 import uk.chromis.pos.util.StringParser;
@@ -57,12 +57,12 @@ public class PeripheralPanelController implements Initializable, BaseController 
     public LabeledComboBox customerDisplay;
     public LabeledComboBox customerDisplayMode;
     public LabeledComboBox customerDisplayPort;
-    public ToggleSwitch customerDisplayToggle;
+    public LabeledToggleSwitch customerDisplayToggle;
     public LabeledTextField customerDisplayJavaName;
 
     public LabeledComboBox printer;
     public ComboBox printerList;
-    public ToggleSwitch receiptToggle;
+    public LabeledToggleSwitch receiptToggle;
     public LabeledComboBox printerMode;
     public LabeledComboBox printerPort;
     public LabeledTextField oposPrinter;
@@ -70,7 +70,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
 
     public LabeledComboBox printer2;
     public ComboBox printerList2;
-    public ToggleSwitch receiptToggle2;
+    public LabeledToggleSwitch receiptToggle2;
     public LabeledComboBox printerMode2;
     public LabeledComboBox printerPort2;
     public LabeledTextField oposPrinter2;
@@ -78,7 +78,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
 
     public LabeledComboBox printer3;
     public ComboBox printerList3;
-    public ToggleSwitch receiptToggle3;
+    public LabeledToggleSwitch receiptToggle3;
     public LabeledComboBox printerMode3;
     public LabeledComboBox printerPort3;
     public LabeledTextField oposPrinter3;
@@ -86,7 +86,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
 
     public LabeledComboBox printer4;
     public ComboBox printerList4;
-    public ToggleSwitch receiptToggle4;
+    public LabeledToggleSwitch receiptToggle4;
     public LabeledComboBox printerMode4;
     public LabeledComboBox printerPort4;
     public LabeledTextField oposPrinter4;
@@ -94,7 +94,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
 
     public LabeledComboBox printer5;
     public ComboBox printerList5;
-    public ToggleSwitch receiptToggle5;
+    public LabeledToggleSwitch receiptToggle5;
     public LabeledComboBox printerMode5;
     public LabeledComboBox printerPort5;
     public LabeledTextField oposPrinter5;
@@ -102,7 +102,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
 
     public LabeledComboBox printer6;
     public ComboBox printerList6;
-    public ToggleSwitch receiptToggle6;
+    public LabeledToggleSwitch receiptToggle6;
     public LabeledComboBox printerMode6;
     public LabeledComboBox printerPort6;
     public LabeledTextField oposPrinter6;
@@ -173,10 +173,11 @@ public class PeripheralPanelController implements Initializable, BaseController 
                 "(Show dialog)");
         systemprinters.addAll(printernames);
 
-        //Build the options in the panel
+        //Build the options in the panel        
+        customerDisplayToggle.setLabelWidth(175.0);
         createPrinter("Label.MachineDisplay", customerDisplay, null, customerDisplayToggle, customerDisplayMode, customerDisplayPort, customerDisplayJavaName, null);
-        customerDisplay.addItemList(displays);
-        customerDisplayToggle.setSwitchLabel(AppLocal.getIntString("label.customerscreen"));
+        customerDisplay.addItemList(displays);        
+        customerDisplayToggle.setText(AppLocal.getIntString("label.customerscreen"));
         createPrinter("Label.MachinePrinter", printer, printerList, receiptToggle, printerMode, printerPort, oposPrinter, oposDrawer);
         createPrinter("Label.MachinePrinter2", printer2, printerList2, receiptToggle2, printerMode2, printerPort2, oposPrinter2, oposDrawer2);
         createPrinter("Label.MachinePrinter3", printer3, printerList3, receiptToggle3, printerMode3, printerPort3, oposPrinter3, oposDrawer3);
@@ -202,13 +203,13 @@ public class PeripheralPanelController implements Initializable, BaseController 
         dirty.bindBidirectional(reportPrinter.dirty);
     }
 
-    private void createPrinter(String message, LabeledComboBox tPrinter, ComboBox tPrinterList, ToggleSwitch tReceiptToggle,
+    private void createPrinter(String message, LabeledComboBox tPrinter, ComboBox tPrinterList, LabeledToggleSwitch tReceiptToggle,
             LabeledComboBox tPrinterMode, LabeledComboBox tPrinterPort, LabeledTextField tOposPrinter, LabeledTextField tOposDrawer) {
 
         tPrinter.setLabel(AppLocal.getIntString(message));
         tPrinter.addItemList(printers);
         tReceiptToggle.setVisible(false);
-        tReceiptToggle.setSwitchLabel(AppLocal.getIntString("label.receiptprinter"));
+        tReceiptToggle.setText(AppLocal.getIntString("label.receiptprinter"));
         tOposPrinter.setVisible(false);
         tOposPrinter.setLayoutX(340);
         tOposPrinter.setWidthSizes(70.0, 100.0);
@@ -422,7 +423,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
         dirty.setValue(false);
     }
 
-    public void setParameters(String params, LabeledComboBox tPrinter, ComboBox tPrinterList, ToggleSwitch tReceiptToggle,
+    public void setParameters(String params, LabeledComboBox tPrinter, ComboBox tPrinterList, LabeledToggleSwitch tReceiptToggle,
             LabeledComboBox tPrinterMode, LabeledComboBox tPrinterPort, LabeledTextField tOposPrinter, LabeledTextField tOposDrawer) {
         StringParser p = new StringParser(params);
         String sparam = unifySerialInterface(p.nextToken(':'));
@@ -463,7 +464,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
                 : sparam;
     }
 
-    public String getParams(LabeledComboBox tPrinter, ComboBox tPrinterList, ToggleSwitch tReceiptToggle,
+    public String getParams(LabeledComboBox tPrinter, ComboBox tPrinterList, LabeledToggleSwitch tReceiptToggle,
             LabeledComboBox tPrinterMode, LabeledComboBox tPrinterPort, LabeledTextField tOposPrinter, LabeledTextField tOposDrawer) {
         String printer = tPrinter.getComboBox().getSelectionModel().getSelectedItem().toString();
         StringBuilder tmp;
