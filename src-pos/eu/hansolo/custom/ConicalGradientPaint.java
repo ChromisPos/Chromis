@@ -289,7 +289,6 @@ public final class ConicalGradientPaint implements java.awt.Paint
         final float GREEN_FRACTION = GREEN_DELTA / RANGE;
         final float BLUE_FRACTION = BLUE_DELTA / RANGE;
         final float ALPHA_FRACTION = ALPHA_DELTA / RANGE;
-        //System.out.println(DISTANCE + "     " + CURRENT_FRACTION);
 
         return new java.awt.Color(SOURCE_RED + RED_FRACTION * VALUE, SOURCE_GREEN + GREEN_FRACTION * VALUE, SOURCE_BLUE + BLUE_FRACTION * VALUE, SOURCE_ALPHA + ALPHA_FRACTION * VALUE);
     }

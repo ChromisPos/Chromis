@@ -62,12 +62,12 @@ public class SetDefaultSiteGUID implements liquibase.change.custom.CustomTaskCha
         try {
             conn = SessionFactory.getInstance().getSession().getConnection();
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from siteguid");
+            ResultSet rs = stmt.executeQuery("select * from SITEGUID");
             while (rs.next()) {
                 if (dbtype.equals("MySQL")) {
-                    SQL = "alter table " + table + " modify column siteguid varchar(50) default '" + rs.getString("guid") + "'";
+                    SQL = "alter table " + table.toUpperCase() + " modify column SITEGUID varchar(50) default '" + rs.getString("guid") + "'";
                 } else {
-                    SQL = "alter table " + table + " alter column siteguid set default '" + rs.getString("guid") + "'";
+                    SQL = "alter table " + table.toUpperCase() + " alter column SITEGUID set default '" + rs.getString("guid") + "'";
                 }
                 pstmt = conn.prepareStatement(SQL);
                 pstmt.executeUpdate();

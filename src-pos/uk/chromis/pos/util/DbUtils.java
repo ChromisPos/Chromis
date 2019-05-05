@@ -105,6 +105,7 @@ public class DbUtils {
         //String sJavaVersion = System.getProperty("java.version");
         //double dJavaVersion = Double.parseDouble(sJavaVersion.substring(0, sJavaVersion.indexOf('.', sJavaVersion.indexOf('.') + 1)));
 
+        System.out.println("Fx : " + com.sun.javafx.runtime.VersionInfo.getRuntimeVersion());
         if (dJavaVersion < 1.8) {
             StartupDialog dialog = new StartupDialog();
             JFrame frame = new JFrame("");

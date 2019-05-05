@@ -152,7 +152,7 @@ public class ProcessLiquibase {
             String decodedData = "";
             Statement stmt = (Statement) con.createStatement();
             // get the menu from the resources table
-            String SQL = "select * from resources where name='Menu.Root'";
+            String SQL = "select * from RESOURCES where name='Menu.Root'";
             ResultSet rs = stmt.executeQuery(SQL);
             while (rs.next()) {
                 byte[] bytesData = rs.getBytes("content");
@@ -203,7 +203,7 @@ public class ProcessLiquibase {
             String decodedData = "";
             Statement stmt = (Statement) con.createStatement();
             // get the menu from the resources table
-            String SQL = "select * from resources where name='Menu.Root'";
+            String SQL = "select * from RESOURCES where name='Menu.Root'";
             ResultSet rs = stmt.executeQuery(SQL);
             while (rs.next()) {
                 byte[] bytesData = rs.getBytes("content");
@@ -236,7 +236,7 @@ public class ProcessLiquibase {
             }
 
             byte[] bytesData = sb.toString().getBytes();
-            String SQL2 = "update resources set content = ? where name = 'Menu.Root' ";
+            String SQL2 = "update RESOURCES set content = ? where name = 'Menu.Root' ";
             PreparedStatement stmt2 = con.prepareStatement(SQL2);
             stmt2.setBytes(1, bytesData);
             stmt2.executeUpdate();
@@ -262,7 +262,7 @@ public class ProcessLiquibase {
             String decodedData = "";
             Statement stmt = (Statement) con.createStatement();
             // get the buttons from the resources table
-            String SQL = "select * from resources where name='Ticket.Buttons'";
+            String SQL = "select * from RESOURCES where name='Ticket.Buttons'";
             ResultSet rs = stmt.executeQuery(SQL);
             while (rs.next()) {
                 byte[] bytesData = rs.getBytes("content");
@@ -290,7 +290,7 @@ public class ProcessLiquibase {
                     sb.append("</configuration>");
                     decodedData = decodedData.replaceAll("</configuration>", sb.toString());
                     byte[] bytesData = decodedData.getBytes();
-                    String SQL2 = "update resources set content = ? where name = 'Ticket.Buttons' ";
+                    String SQL2 = "update RESOURCES set content = ? where name = 'Ticket.Buttons' ";
                     PreparedStatement stmt2 = con.prepareStatement(SQL2);
                     stmt2.setBytes(1, bytesData);
                     stmt2.executeUpdate();

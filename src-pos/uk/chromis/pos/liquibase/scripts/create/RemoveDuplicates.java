@@ -61,7 +61,7 @@ public class RemoveDuplicates implements liquibase.change.custom.CustomTaskChang
             //Check the siteguid table
             pstmt = conn.prepareStatement("SELECT * FROM DATABASECHANGELOG ");
             ResultSet rs = pstmt.executeQuery();
-            String insertSQL = "insert into databasechangelog  (ID, AUTHOR, FILENAME, DATEEXECUTED, ORDEREXECUTED, EXECTYPE, MD5SUM, DESCRIPTION, COMMENTS, TAG, LIQUIBASE, CONTEXTS, LABELS) values "
+            String insertSQL = "insert into DATABASECHANGELOG  (ID, AUTHOR, FILENAME, DATEEXECUTED, ORDEREXECUTED, EXECTYPE, MD5SUM, DESCRIPTION, COMMENTS, TAG, LIQUIBASE, CONTEXTS, LABELS) values "
                     + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             while (rs.next()) {

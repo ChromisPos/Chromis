@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -37,7 +38,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import uk.chromis.basic.BasicException;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.data.loader.Session;
+import uk.chromis.pos.dialogs.JAlertPane;
 import uk.chromis.pos.dialogs.JOpenWarningDlg;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
@@ -65,6 +68,30 @@ public class DbManager {
         this.admin = admin;
     }
 
+    public void checkSQLVersion() {
+        session = SessionFactory.getInstance().getSession();
+        m_dlSystem = new DataLogicSystem();
+        m_dlSystem.init(session);
+        if (m_dlSystem.getDBVersion().equalsIgnoreCase("mysql")) {
+            try {
+                DatabaseMetaData meta = ConnectionFactory.getConnection().getMetaData();
+                String sqlVersion = meta.getDatabaseProductVersion();
+                if (sqlVersion.startsWith("8.")) {
+                    JAlertPane.showAlertDialog(JAlertPane.WARNING,
+                            "MySQL Version Check",
+                            "Version " + sqlVersion.substring(0, 1) + " of MySQL in not supported.",
+                            "Unable to continue ",
+                            JAlertPane.OK_OPTION
+                    );
+                    System.exit(0);
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error ");
+            }
+        }
+
+    }
+
     public boolean DBChecks() {
 
         // if this is not a new setup then there should be a properties file
@@ -72,10 +99,7 @@ public class DbManager {
         if (!file.exists()) {
             //properties file does not exists - test for embedded first as this does not require properties file if everything is default
             if (DbManager.embeddedExists()) {
-                // embedded db exists so lets check for updates                
-                session = SessionFactory.getInstance().getSession();
-                m_dlSystem = new DataLogicSystem();
-                m_dlSystem.init(session);
+                // embedded db exists so lets check for updates                               
                 sDBVersion = readDataBaseVersion();
                 updateDB();
                 connectTest.remove();
@@ -88,15 +112,15 @@ public class DbManager {
                 }
             }
         } else {
+            session = SessionFactory.getInstance().getSession();
+            m_dlSystem = new DataLogicSystem();
+            m_dlSystem.init(session);
             //properties file does exists attempt to connect to the database in the file                
             connectTest.setVisible(true);
             testResult = testConnection();
             if (testResult) {
                 // we can coonect to the datbase but it might not have been initialized yet
                 // so lets check that            
-                session = SessionFactory.getInstance().getSession();
-                m_dlSystem = new DataLogicSystem();
-                m_dlSystem.init(session);
                 sDBVersion = readDataBaseVersion();
                 if (sDBVersion == null) {
                     configuration();
@@ -132,6 +156,9 @@ public class DbManager {
     }
 
     private void updateDB() {
+        session = SessionFactory.getInstance().getSession();
+        m_dlSystem = new DataLogicSystem();
+        m_dlSystem.init(session);
         connectTest.setVisible(false);
 
         int dbVersion;
@@ -140,13 +167,13 @@ public class DbManager {
                 // Ready for future release, this will prevent upgrade running against older version
                 // if (AppLocal.APP_VERSIONINT > readDataBaseIntVersion()) {
 
-                dbVersion =m_dlSystem.getVerisonInt();
+                dbVersion = m_dlSystem.getVerisonInt();
             } catch (BasicException ex) {
                 dbVersion = 1;
 
             }
 
-            if (AppLocal.APP_VERSIONINT > dbVersion){
+            if (AppLocal.APP_VERSIONINT > dbVersion) {
                 UpdateDB updb = new UpdateDB();
                 updb.setVersion(readDataBaseVersion());
                 SwingUtilities.invokeLater(() -> updb.initSwingComponents());

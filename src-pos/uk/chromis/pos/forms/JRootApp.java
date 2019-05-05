@@ -30,9 +30,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
@@ -960,20 +957,21 @@ public class JRootApp extends JPanel implements AppView {
             currentPath = System.getProperty("user.dir") + "\\chromispos.jar";
         }
 
-        String md5 = null;
-        try {
-            FileInputStream fis = new FileInputStream(new File(currentPath));
-            md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
-            fis.close();
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(JRootApp.class
-                    .getName()).log(Level.SEVERE, null, ex);
-
-        } catch (IOException ex) {
-            Logger.getLogger(JRootApp.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
+        
+//        String md5 = null;
+//        try {
+//            FileInputStream fis = new FileInputStream(new File(currentPath));
+//            md5 = org.apache.commons.codec.digest.DigestUtils.md5Hex(fis);
+//            fis.close();
+//
+//        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(JRootApp.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(JRootApp.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//        }
 
         int mb = 1024 * 1024;
         //Getting the runtime reference from system
@@ -1000,7 +998,7 @@ public class JRootApp extends JPanel implements AppView {
         model.addColumn("Value");
         model.addRow(new Object[]{"Database Version", readDataBaseVersion()});
         model.addRow(new Object[]{"Java Version", System.getProperty("java.version")});
-        model.addRow(new Object[]{"Jar MD5", md5});
+        model.addRow(new Object[]{"JavaFX Version", com.sun.javafx.runtime.VersionInfo.getRuntimeVersion()});
         model.addRow(new Object[]{"Operating System", System.getProperty("os.name")});
        // model.addRow(new Object[]{"Sync library", Sync.getVersion()});
         model.addRow(new Object[]{"Memory Used", ((runtime.totalMemory() - runtime.freeMemory()) / mb) + " MB"});

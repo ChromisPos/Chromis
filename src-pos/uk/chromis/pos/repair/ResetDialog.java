@@ -61,7 +61,6 @@ public class ResetDialog extends javax.swing.JPanel {
 
         connection = getConnection();
         if (connection == null) {
-            System.out.println("no connection");
             System.exit(0);
         }
 

@@ -1,9 +1,9 @@
 /*
-**    Chromis POS  - The New Dynamic Open Source POS
-**    Copyright (c) 2015-2019 Chromis and previous contributing parties (Unicenta & Openbravo)
+**    Chromis POS  - The New Face of Open Source POS
+**    Copyright (c) 2015-2018
 **    http://www.chromis.co.uk
 **
-**    This file is part of Chromis POS Version v1.00 1902-15
+**    This file is part of Chromis POS Version V0.60.2 beta
 **
 **    Chromis POS is free software: you can redistribute it and/or modify
 **    it under the terms of the GNU General Public License as published by

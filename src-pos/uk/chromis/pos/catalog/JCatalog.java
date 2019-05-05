@@ -385,7 +385,6 @@ public class JCatalog extends JPanel implements ListSelectionListener, CatalogSe
                         cl.show(m_jProducts, "PRODUCT." + id);
                     }
                 } catch (BasicException eb) {
-                    System.out.println(eb);
                     m_productsset.put(id, null);
                     if (showingcategory == null) {
                         showRootCategoriesPanel();

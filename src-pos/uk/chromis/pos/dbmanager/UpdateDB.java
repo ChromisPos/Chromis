@@ -57,7 +57,7 @@ public class UpdateDB {
           uframe.setIconImage(icon);
         }
         uframe.add(jfxPanel, BorderLayout.CENTER);
-        uframe.setSize(520, 300);
+        uframe.setSize(520, 330);
         uframe.setLocationRelativeTo(null);
         uframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         uframe.setVisible(true);
@@ -69,7 +69,7 @@ public class UpdateDB {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/uk/chromis/pos/dbmanager/Update.fxml"));
             Parent root = loader.load();
             UpdateController controller = loader.getController();
-            Scene scene = new Scene(root, 520, 300);
+            Scene scene = new Scene(root, 520, 330);
             controller.setDBVersion(sDBVersion);           
             jfxPanel.setScene(scene);
             root.requestFocus();

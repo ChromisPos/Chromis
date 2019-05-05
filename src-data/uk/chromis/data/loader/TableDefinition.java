@@ -283,8 +283,6 @@ public class TableDefinition {
             sent.delete(0, sent.length());
             sent.append(AppLocal.LIST_BY_RIGHTS);
         }
-        //System.out.println("*********************************************************************************");
-        //System.out.println("Sent value :" + sent.toString());
         return sent.toString();
     }
 

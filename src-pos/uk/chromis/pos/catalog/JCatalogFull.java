@@ -73,8 +73,6 @@ public class JCatalogFull extends JPanel implements ListSelectionListener, Catal
         this.pricevisible = pricevisible;
         this.taxesincluded = taxesincluded;
         initComponents();
-        System.out.println("w : " + width);
-        System.out.println("h : " + height);
         tnbbutton = new ThumbNailBuilder(width, height, "uk/chromis/images/package.png");
 
         dlSync = new DataLogicSync();

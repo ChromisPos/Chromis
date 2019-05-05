@@ -74,7 +74,6 @@ public class UpdateController implements Initializable {
             @Override
             public void run() {
                 txtDbVersion.setText(dbVersion);
-                //txtDbVersion.setText("0.58");
                 dbUpdateMsg.setText(AppLocal.getIntString("message.updatedatabase"));
             }
         });
@@ -125,8 +124,6 @@ public class UpdateController implements Initializable {
                             updateDB.setDisable(true);
                             exit.setDisable(false);
                             dbUpdate = true;
-                            //UpdateDB.uframe.setVisible(false);
-                            //UpdateDB.uframe.dispose();
 
                         }
                     });

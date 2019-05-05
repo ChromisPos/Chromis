@@ -84,7 +84,6 @@ public class JImageEditor extends javax.swing.JPanel {
         return new TransferHandler() {
             @Override
             public boolean importData(JComponent comp, Transferable t) {
-               System.out.println("flavor " + (DataFlavor.imageFlavor));
                 if (t.isDataFlavorSupported(DataFlavor.imageFlavor)) {
                     try {
                         Image image = (Image) t.getTransferData(DataFlavor.imageFlavor);                        

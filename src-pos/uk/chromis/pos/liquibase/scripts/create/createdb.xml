@@ -356,9 +356,7 @@
             <column name="STARTDATE" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="ENDDATE" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
+            <column name="ENDDATE" type="timestamp"/>
             <column name="NOTES" type="varchar(255)"/>
             <column name="SFLAG" type="${boolean.type}" defaultValueBoolean="true"/>
         </createTable>

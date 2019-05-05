@@ -50,10 +50,10 @@
         <modifyDataType 
             columnName="dob"
             newDataType="datetime"
-            tableName="customers"/>                                                
+            tableName="CUSTOMERS"/>                                                
     </changeSet>       
           
-    <changeSet author="Chromis POS" id="Dynamic remove_menuentry table (db V1.0)">
+    <changeSet author="Chromis POS" id="Dynamic remove_menuentry tables (db V1.0)">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="remove_menuentry"/>
@@ -103,152 +103,152 @@
     </changeSet> 
   
     <changeSet author="Chromis POS" id="Set new column in dbPermissions to">
-        <sql>update dbpermissions set userdefined = false where description = '##label.description1'</sql>      
-        <sql>update dbpermissions set userdefined = false where description = '##label.description2'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description3'</sql>         
-        <sql>update dbpermissions set userdefined = false where description = '##label.description4'</sql>         
-        <sql>update dbpermissions set userdefined = false where description = '##label.description5'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description6'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description7'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description8'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description9'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description10'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description11'</sql> 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description12'</sql> 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description13'</sql> 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description14'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description15'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description16'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description17'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description18'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description19'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description20'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description21'</sql> 					
-        <sql>update dbpermissions set userdefined = false where description = '##label.description22'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description23'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description24'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description25'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description26'</sql> 						
-        <sql>update dbpermissions set userdefined = false where description = '##label.description27'</sql> 					
-        <sql>update dbpermissions set userdefined = false where description = '##label.description28'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description29'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description30'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description31'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description32'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description33'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description34'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description35'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description36'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description37'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description38'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description39'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description40'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description41'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description42'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description43'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description44'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description45'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description46'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description47'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description48'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description49'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description50'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description51'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description52'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description53'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description54'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description55'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description56'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description57'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description58'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description59'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description60'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description61'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description62'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description63'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description64'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description65'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description66'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description67'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description68'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description69'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description70'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description71'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description72'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description73'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description74'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description75'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description76'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description77'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description78'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description79'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description80'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description81'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description82'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description83'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description84'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description85'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description86'</sql> 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description87'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description88'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description89'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description90'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description91'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description92'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description93'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description94'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description95'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description96'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description97'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description98'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description99'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description100'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description101'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description102'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description103'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description104'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description105'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description106'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description107'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description108'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description109'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description110'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description111'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description112'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description113'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description114'</sql> 				
-        <sql>update dbpermissions set userdefined = false where description = '##label.description115'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description116'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description117'</sql> 			  
-        <sql>update dbpermissions set userdefined = false where description = '##label.description118'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description119'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description120'</sql> 			 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description121'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description122'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description123'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description124'</sql> 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description125'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description126'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description127'</sql> 
-        <sql>update dbpermissions set userdefined = false where description = '##label.description128'</sql> 		
-        <sql>update dbpermissions set userdefined = false where description = '##label.description129'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description130'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description131'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description132'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description133'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description134'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description135'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description138'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description139'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description136'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description137'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description140'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description141'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description142'</sql> 			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-        <sql>update dbpermissions set userdefined = false where description = '##label.description143'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description144'</sql> 			
-        <sql>update dbpermissions set userdefined = false where description = '##label.description145'</sql>
-        <sql>update dbpermissions set userdefined = false where description = '##label.description146'</sql>	
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description1'</sql>      
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description2'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description3'</sql>         
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description4'</sql>         
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description5'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description6'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description7'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description8'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description9'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description10'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description11'</sql> 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description12'</sql> 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description13'</sql> 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description14'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description15'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description16'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description17'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description18'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description19'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description20'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description21'</sql> 					
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description22'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description23'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description24'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description25'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description26'</sql> 						
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description27'</sql> 					
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description28'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description29'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description30'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description31'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description32'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description33'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description34'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description35'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description36'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description37'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description38'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description39'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description40'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description41'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description42'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description43'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description44'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description45'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description46'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description47'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description48'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description49'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description50'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description51'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description52'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description53'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description54'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description55'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description56'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description57'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description58'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description59'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description60'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description61'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description62'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description63'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description64'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description65'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description66'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description67'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description68'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description69'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description70'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description71'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description72'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description73'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description74'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description75'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description76'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description77'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description78'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description79'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description80'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description81'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description82'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description83'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description84'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description85'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description86'</sql> 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description87'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description88'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description89'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description90'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description91'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description92'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description93'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description94'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description95'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description96'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description97'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description98'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description99'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description100'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description101'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description102'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description103'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description104'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description105'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description106'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description107'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description108'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description109'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description110'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description111'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description112'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description113'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description114'</sql> 				
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description115'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description116'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description117'</sql> 			  
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description118'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description119'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description120'</sql> 			 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description121'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description122'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description123'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description124'</sql> 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description125'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description126'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description127'</sql> 
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description128'</sql> 		
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description129'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description130'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description131'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description132'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description133'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description134'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description135'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description138'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description139'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description136'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description137'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description140'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description141'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description142'</sql> 			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description143'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description144'</sql> 			
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description145'</sql>
+        <sql>update DBPERMISSIONS set userdefined = false where description = '##label.description146'</sql>	
     </changeSet>
       
       
@@ -290,23 +290,23 @@
     </changeSet>          
           
             
-    <changeSet author="Chromis POS" id="Update taxcategories baseversion column">
-        <sql>update taxcategories set baseversion = true</sql>
+    <changeSet author="Chromis POS" id="Update TAXCATEGORIES baseversion column">
+        <sql>update TAXCATEGORIES set baseversion = true</sql>
     </changeSet> 
            
-    <changeSet author="Chromis POS" id="Update taxes baseversion column">
-        <sql>update taxes set baseversion = true</sql>
+    <changeSet author="Chromis POS" id="Update TAXES baseversion column">
+        <sql>update TAXES set baseversion = true</sql>
     </changeSet>    
     
         
     <changeSet author="Chromis POS" id="Update taxcustcategories baseversion column">
-        <sql>update taxcustcategories set baseversion = true</sql>
+        <sql>update TAXCUSTCATEGORIES set baseversion = true</sql>
     </changeSet>    
           
-    <changeSet author="Chromis POS" id="Update to Chromis version to v0.95.3 build 1902-01">    
+    <changeSet author="Chromis POS" id="Update to Chromis version to v0.95.4 build 1905-04">    
         <update tableName="APPLICATIONS">
-            <column name="VERSION" value="0.95.3 build 1902-01"/>   
-            <column name="VERSIONINT" valueNumeric="20190201"/>         
+            <column name="VERSION" value="0.95.4 build 1905-04"/>   
+            <column name="VERSIONINT" valueNumeric="20190504"/>         
         </update>  
     </changeSet> 
                                             

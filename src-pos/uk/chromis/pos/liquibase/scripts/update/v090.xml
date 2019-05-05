@@ -73,20 +73,20 @@
     <changeSet author="Chromis POS" id="remove old menuentries">    
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="menuentries"/>
+                <tableExists tableName="MENUENTRIES"/>
             </not>
         </preConditions> 
         <dropTable tableName="menuentries"/>
     </changeSet> 
   
 
-    <changeSet author="Chromis POS" id="remove newbutton">    
+    <changeSet author="Chromis POS" id="remove newbutton table from database">    
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="newbutton"/>
+                <tableExists tableName="NEWBUTTON"/>
             </not>
         </preConditions> 
-        <dropTable tableName="newbutton"/>
+        <dropTable tableName="NEWBUTTON"/>
     </changeSet> 
   
     <changeSet author="Chromis POS" id="Dynamic add_newmenuentry table (db V1.0)">
@@ -106,6 +106,22 @@
             <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
         </modifySql>
     </changeSet>                                                                                                 
+    
+    
+        <changeSet author="Chromis POS" id="Dynamic remove_menuentry table (db V1.0)">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="remove_menuentry"/>
+            </not>
+        </preConditions>   
+
+        <createTable tableName="remove_menuentry">
+            <column name="entry" type="varchar(255)" />               
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE = InnoDB DEFAULT CHARSET=utf8  "/>
+        </modifySql>
+    </changeSet> 
     
     <changeSet author="Chromis POS" id="Dynamic add_newbutton entry table">    
         <preConditions onFail="MARK_RAN">

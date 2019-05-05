@@ -49,6 +49,7 @@ import uk.chromis.pos.dbmanager.DbManager;
 import uk.chromis.pos.util.AltEncrypter;
 import uk.chromis.pos.util.DbUtils;
 
+
 public class StartPOS {
 
     private static final Logger logger = Logger.getLogger("uk.chromis.pos.forms.StartPOS");
@@ -70,7 +71,9 @@ public class StartPOS {
     }
 
     public static void main(final String args[]) {
-
+        DbUtils.checkJava();
+        
+        
         if (args.length != 0) {
             for (String s : args) {
                 if (s.startsWith("-allowmulti")) {
@@ -145,21 +148,23 @@ public class StartPOS {
 
         DbUtils.checkJava();
 
-       
         DbManager manager = new DbManager(false);
+
         if (!manager.DBChecks()) {
             System.exit(0);
         }
-         /*
+
+        manager.checkSQLVersion();
+        /*
         DatabaseManager dbMan = new DatabaseManager();
         dbMan.checkDatabase();        
-        */
-         
-         startApp();
+         */
+
+        startApp();
     }
 
     public static void startApp() {
-        // check if there are any repair scripts to run       
+// check if there are any repair scripts to run       
         String db_password = (AppConfig.getInstance().getProperty("db.password"));
         if (AppConfig.getInstance().getProperty("db.user") != null && db_password != null && db_password.startsWith("crypt:")) {
             AltEncrypter cypher = new AltEncrypter("cypherkey" + AppConfig.getInstance().getProperty("db.user"));
