@@ -44,6 +44,7 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.DatabaseException;
 import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.DriverWrapper;
 import uk.chromis.pos.util.AltEncrypter;
@@ -76,7 +77,7 @@ public class ProcessLiquibase {
 
         Liquibase liquibase = null;
         try {
-            Connection con = DriverManager.getConnection(db_url, db_user, db_password);
+            Connection con =  ConnectionFactory.getInstance().getConnection();
             ClassLoader cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
             DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
 // lets check if the database has passed new database test
@@ -134,7 +135,6 @@ public class ProcessLiquibase {
             if (con != null) {
                 try {
                     con.rollback();
-                    con.close();
                 } catch (SQLException e) {
                     //nothing to do
                 }
@@ -148,7 +148,7 @@ public class ProcessLiquibase {
 
     private static void insertMenuEntry(String db_user, String db_url, String db_password) {
         try {
-            Connection con = DriverManager.getConnection(db_url, db_user, db_password);
+            Connection con =  ConnectionFactory.getInstance().getConnection();
             String decodedData = "";
             Statement stmt = (Statement) con.createStatement();
             // get the menu from the resources table
@@ -187,19 +187,12 @@ public class ProcessLiquibase {
             stmt2.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProcessLiquibase.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
+        } 
     }
 
     private static void removeMenuEntry(String db_user, String db_url, String db_password) {
         try {
-            Connection con = DriverManager.getConnection(db_url, db_user, db_password);
+            Connection con =  ConnectionFactory.getInstance().getConnection();
             String decodedData = "";
             Statement stmt = (Statement) con.createStatement();
             // get the menu from the resources table
@@ -246,19 +239,12 @@ public class ProcessLiquibase {
             stmt2.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Remove table does not yet exist");
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
+        } 
     }
 
     private static void insertNewButtons(String db_user, String db_url, String db_password) {
         try {
-            Connection con = DriverManager.getConnection(db_url, db_user, db_password);
+            Connection con = ConnectionFactory.getInstance().getConnection();
             String decodedData = "";
             Statement stmt = (Statement) con.createStatement();
             // get the buttons from the resources table
@@ -301,13 +287,6 @@ public class ProcessLiquibase {
             stmt2.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ProcessLiquibase.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
+        } 
     }
 }

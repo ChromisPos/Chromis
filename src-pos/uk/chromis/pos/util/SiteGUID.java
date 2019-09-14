@@ -19,8 +19,7 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
+ */
 package uk.chromis.pos.util;
 
 import java.io.File;
@@ -40,6 +39,7 @@ import liquibase.exception.CustomChangeException;
 import liquibase.exception.SetupException;
 import liquibase.exception.ValidationErrors;
 import liquibase.resource.ResourceAccessor;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.data.loader.Session;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.DriverWrapper;
@@ -49,7 +49,6 @@ import uk.chromis.pos.forms.DriverWrapper;
  */
 public class SiteGUID implements liquibase.change.custom.CustomTaskChange {
 
-        
     @Override
     public void execute(Database dtbs) throws CustomChangeException {
         String db_user = (AppConfig.getInstance().getProperty("db.user"));
@@ -63,19 +62,11 @@ public class SiteGUID implements liquibase.change.custom.CustomTaskChange {
         }
 
         ClassLoader cloader;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement pstmt;
         String guid = UUID.randomUUID().toString();
 
-        try {
-            cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
-            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
-            Session session = new Session(db_url, db_user, db_password);
-            conn = session.getConnection();
-
-        } catch (MalformedURLException | SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(SiteGUID.class.getName()).log(Level.SEVERE, null, ex);            
-        }
+        conn = ConnectionFactory.getInstance().getConnection();
 
         try {
             pstmt = conn.prepareStatement("INSERT INTO SITEGUID (GUID) VALUES (?)");
@@ -257,8 +248,6 @@ public class SiteGUID implements liquibase.change.custom.CustomTaskChange {
             SQL = "ALTER TABLE VOUCHERS ADD COLUMN SITEGUID VARCHAR(50) NOT NULL DEFAULT '" + guid + "'";
             pstmt = conn.prepareStatement(SQL);
             pstmt.executeUpdate();
-             
-            conn.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(SiteGUID.class.getName()).log(Level.SEVERE, null, ex);

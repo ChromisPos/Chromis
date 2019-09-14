@@ -63,6 +63,7 @@ import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
 import uk.chromis.pos.forms.DriverWrapper;
 import uk.chromis.pos.util.AltEncrypter;
+import uk.chromis.pos.util.SessionFactory;
 
 /**
  * FXML Controller class
@@ -100,6 +101,8 @@ public class NewDBController implements Initializable {
     private Task dbconnection;
     private Task testCreateWorker;
     private Boolean checkdb;
+    private Connection connection;
+    private Session session;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -174,8 +177,8 @@ public class NewDBController implements Initializable {
                     ClassLoader cloader = new URLClassLoader(new URL[]{new File(driverlib).toURI().toURL()});
                     DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(driver, true, cloader).newInstance()));
 
-                    Session session = new Session(url, user, password);
-                    Connection connection = session.getConnection();
+                    session = SessionFactory.getInstance().getSession();
+                    connection = session.getConnection();
                     boolean isValid;
                     isValid = (connection == null) ? false : connection.isValid(1000);
                     if (isValid) {
@@ -213,6 +216,7 @@ public class NewDBController implements Initializable {
                     });
                 }
                 dbconnection.cancel(true);
+               // session.close();
                 return null;
             }
         };
@@ -250,6 +254,7 @@ public class NewDBController implements Initializable {
                     });
                 }
                 worker.cancel(true);
+               // session.close();
                 return null;
             }
         };
@@ -268,8 +273,8 @@ public class NewDBController implements Initializable {
                     ClassLoader cloader = new URLClassLoader(new URL[]{new File(driverlib).toURI().toURL()});
                     DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(driver, true, cloader).newInstance()));
 
-                    Session session = new Session(url, user, password);
-                    Connection connection = session.getConnection();                   
+                    session = SessionFactory.getInstance().getSession();
+                    connection = session.getConnection();                   
                     boolean isValid;
                     isValid = (connection == null) ? false : connection.isValid(1000);
                     if (isValid) {                       
@@ -339,6 +344,7 @@ public class NewDBController implements Initializable {
                         }
                     });
                 }
+                //session.close();
                 testCreateWorker.cancel(true);
                 return null;
             }
@@ -460,7 +466,6 @@ public class NewDBController implements Initializable {
                         AppConfig.getInstance().setProperty("db.password", "crypt:" + cypher.encrypt(dbPassword.getText()));
                         try {
                             AppConfig.getInstance().save();
-
                         } catch (IOException ex) {
                             Logger.getLogger(NewDBController.class
                                     .getName()).log(Level.SEVERE, null, ex);
@@ -470,10 +475,10 @@ public class NewDBController implements Initializable {
                 }
             });
         }
-        if (dbBuilt) {
-            NewDB.setWorking(false);
-            return;
-        }
+//        if (dbBuilt) {
+//            NewDB.setWorking(false);
+//            return;
+//        }
         System.exit(0);
     }
 

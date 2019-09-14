@@ -19,17 +19,10 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
+ */
 package uk.chromis.pos.util;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,9 +35,7 @@ import liquibase.exception.CustomChangeException;
 import liquibase.exception.SetupException;
 import liquibase.exception.ValidationErrors;
 import liquibase.resource.ResourceAccessor;
-import uk.chromis.data.loader.Session;
-import uk.chromis.pos.forms.AppConfig;
-import uk.chromis.pos.forms.DriverWrapper;
+import uk.chromis.data.loader.ConnectionFactory;
 
 /**
  * @author John Lewis
@@ -54,31 +45,13 @@ public class DrawerOpenedGUID implements liquibase.change.custom.CustomTaskChang
     @Override
     public void execute(Database dtbs) throws CustomChangeException {
 
-        String db_user = (AppConfig.getInstance().getProperty("db.user"));
-        String db_url = (AppConfig.getInstance().getProperty("db.URL"));
-        String db_password = (AppConfig.getInstance().getProperty("db.password"));
-
-        if (db_user != null && db_password != null && db_password.startsWith("crypt:")) {
-            // the password is encrypted
-            AltEncrypter cypher = new AltEncrypter("cypherkey" + db_user);
-            db_password = cypher.decrypt(db_password.substring(6));
-        }
-
-        ClassLoader cloader;
-        Connection conn = null;
+        Connection conn;
         PreparedStatement pstmt;
         String guid = UUID.randomUUID().toString();
         ResultSet rs;
 
-        try {
-            cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
-            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
-            Session session = new Session(db_url, db_user, db_password);
-            conn = session.getConnection();
+        conn = ConnectionFactory.getInstance().getConnection();
 
-        } catch (MalformedURLException | SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(SiteGUID.class.getName()).log(Level.SEVERE, null, ex);
-        }
         try {
             Statement stmt = (Statement) conn.createStatement();
 
@@ -110,7 +83,6 @@ public class DrawerOpenedGUID implements liquibase.change.custom.CustomTaskChang
 
             pstmt = conn.prepareStatement("DELETE FROM DRAWEROPENED WHERE ID IS NULL");
             pstmt.executeUpdate();
-            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(SiteGUID.class.getName()).log(Level.SEVERE, null, ex);
         }

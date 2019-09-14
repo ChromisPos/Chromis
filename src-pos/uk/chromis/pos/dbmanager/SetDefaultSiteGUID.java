@@ -34,6 +34,7 @@ import liquibase.exception.CustomChangeException;
 import liquibase.exception.SetupException;
 import liquibase.exception.ValidationErrors;
 import liquibase.resource.ResourceAccessor;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.pos.util.SessionFactory;
 
 /**
@@ -60,7 +61,7 @@ public class SetDefaultSiteGUID implements liquibase.change.custom.CustomTaskCha
     @Override
     public void execute(Database dtbs) throws CustomChangeException {
         try {
-            conn = SessionFactory.getInstance().getSession().getConnection();
+            conn = ConnectionFactory.getInstance().getConnection();
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select * from SITEGUID");
             while (rs.next()) {
@@ -74,13 +75,7 @@ public class SetDefaultSiteGUID implements liquibase.change.custom.CustomTaskCha
             }
         } catch (SQLException ex) {
             Logger.getLogger(SetDefaultSiteGUID.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SetDefaultSiteGUID.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
     }
 
     @Override

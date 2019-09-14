@@ -74,7 +74,7 @@ public class ConnectionFactory {
         return INSTANCE;
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         if (connection != null) {
             return connection;
         }
@@ -82,11 +82,6 @@ public class ConnectionFactory {
             ClassLoader cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
             DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
             connection = (Connection) DriverManager.getConnection(db_url, db_user, db_password);
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("select name from applications where id = 'chromispos' ");
-            while (rs.next()){
-                dbValid = (rs.getString("name").equals("Chromis POS")?true:false);
-            }
             return connection;
         } catch (SQLException ex) {
 
@@ -96,7 +91,7 @@ public class ConnectionFactory {
         return null;
     }
 
-    public static Boolean isDbValid(){
+    public Boolean isDbValid(){
         getConnection();
         return dbValid;
     }

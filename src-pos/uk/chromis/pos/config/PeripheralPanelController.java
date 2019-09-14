@@ -176,7 +176,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
         //Build the options in the panel        
         customerDisplayToggle.setLabelWidth(175.0);
         createPrinter("Label.MachineDisplay", customerDisplay, null, customerDisplayToggle, customerDisplayMode, customerDisplayPort, customerDisplayJavaName, null);
-        customerDisplay.addItemList(displays);        
+        customerDisplay.addItemList(displays);
         customerDisplayToggle.setText(AppLocal.getIntString("label.customerscreen"));
         createPrinter("Label.MachinePrinter", printer, printerList, receiptToggle, printerMode, printerPort, oposPrinter, oposDrawer);
         createPrinter("Label.MachinePrinter2", printer2, printerList2, receiptToggle2, printerMode2, printerPort2, oposPrinter2, oposDrawer2);
@@ -228,7 +228,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
         tPrinterMode.getComboBox().getSelectionModel().selectFirst();
         tPrinterPort.setVisible(false);
         tPrinterPort.setLayoutX(530);
-        tPrinterPort.setWidthSizes(55.0, 100.0);
+        tPrinterPort.setWidthSizes(55.0, 200.0);
         tPrinterPort.setLabel(AppLocal.getIntString("label.machinedisplayport"));
         tPrinterPort.addItemList(ports);
         tPrinterPort.getComboBox().getSelectionModel().selectFirst();
@@ -266,6 +266,8 @@ public class PeripheralPanelController implements Initializable, BaseController 
                         }
                         tPrinterMode.setVisible(false);
                         tPrinterPort.setVisible(false);
+                        tPrinterPort.setWidthSizes(55.0, 200.0);
+                        tPrinterPort.getComboBox().setEditable(true);
                         break;
                     case "javapos":
                         if (tPrinterList != null) {
@@ -283,7 +285,7 @@ public class PeripheralPanelController implements Initializable, BaseController 
                     case "window":
                         if (tPrinterList != null) {
                             tPrinterList.setVisible(false);
-                        }                       
+                        }
                         tOposPrinter.setVisible(false);
                         if (tOposDrawer != null) {
                             tOposDrawer.setVisible(false);
@@ -303,6 +305,8 @@ public class PeripheralPanelController implements Initializable, BaseController 
                         }
                         tPrinterMode.setVisible(true);
                         tPrinterPort.setVisible(true);
+                        tPrinterPort.setWidthSizes(55.0, 200.0);
+                        tPrinterPort.getComboBox().setEditable(true);
                         break;
                 }
             }

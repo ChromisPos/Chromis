@@ -23,16 +23,9 @@
 
 package uk.chromis.pos.forms;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import uk.chromis.basic.BasicException;
 import uk.chromis.data.loader.Session;
-import uk.chromis.pos.util.AltEncrypter;
+import uk.chromis.data.loader.SessionFactory;
 
 /**
  *
@@ -55,29 +48,8 @@ public class AppViewConnection {
     }
 
     
-    public static Session createSession() throws BasicException {               
-        try{
-            if (isJavaWebStart()) {
-                Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, Thread.currentThread().getContextClassLoader());
-            } else {
-                ClassLoader cloader = new URLClassLoader(new URL[] {new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
-                DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
-            }
-
-            String sDBUser = AppConfig.getInstance().getProperty("db.user");
-            String sDBPassword = AppConfig.getInstance().getProperty("db.password");        
-            if (sDBUser != null && sDBPassword != null && sDBPassword.startsWith("crypt:")) {
-                // the password is encrypted
-                AltEncrypter cypher = new AltEncrypter("cypherkey" + sDBUser);
-                sDBPassword = cypher.decrypt(sDBPassword.substring(6));
-            }   
-             return new Session(AppConfig.getInstance().getProperty("db.URL"), sDBUser,sDBPassword);     
-
-        } catch (InstantiationException | IllegalAccessException | MalformedURLException | ClassNotFoundException e) {
-            throw new BasicException(AppLocal.getIntString("message.databasedrivererror"), e);
-        } catch (SQLException eSQL) {
-            throw new BasicException(AppLocal.getIntString("message.databaseconnectionerror"), eSQL);
-        }   
+    public static Session createSession() throws BasicException {                 
+             return SessionFactory.getInstance().getSession();
     }    
     
     

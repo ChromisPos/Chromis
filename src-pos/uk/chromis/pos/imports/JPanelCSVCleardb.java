@@ -121,7 +121,6 @@ public class JPanelCSVCleardb extends JPanel implements JPanelView {
     public boolean deactivate() {
         try {
             stmt.close();
-            con.close();
         } catch (Exception e) {
         }
 

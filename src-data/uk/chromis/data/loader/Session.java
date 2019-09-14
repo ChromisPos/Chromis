@@ -19,8 +19,7 @@
 **    along with Chromis POS.  If not, see <http://www.gnu.org/licenses/>
 **
 **
-*/
-
+ */
 package uk.chromis.data.loader;
 
 import java.sql.Connection;
@@ -87,9 +86,7 @@ public final class Session {
         close();
 
         // creamos una nueva conexion.
-        m_c = (m_sappuser == null && m_spassword == null)
-                ? DriverManager.getConnection(m_surl)
-                : DriverManager.getConnection(m_surl, m_sappuser, m_spassword);
+        m_c = ConnectionFactory.getInstance().getConnection();
         m_c.setAutoCommit(true);
         m_bInTransaction = false;
     }

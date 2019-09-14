@@ -35,6 +35,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import uk.chromis.basic.BasicException;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.data.loader.Session;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.AppLocal;
@@ -451,14 +452,14 @@ public class JProductLineEdit extends javax.swing.JDialog {
             db_password = cypher.decrypt(db_password.substring(6));
         }
         try {
-            session = AppViewConnection.createSession();
-            connection = DriverManager.getConnection(AppConfig.getInstance().getProperty("db.URL"), AppConfig.getInstance().getProperty("db.user"), db_password);
+           // session = AppViewConnection.createSession();
+            connection = ConnectionFactory.getInstance().getConnection();
             pstmt = connection.prepareStatement("UPDATE PRODUCTS SET PRICESELL = ? WHERE ID = ?");
             pstmt.setDouble(1, m_jPrice.getDoubleValue());
             pstmt.setString(2, productID);
             pstmt.executeUpdate();
             m_jButtonUpdate.setEnabled(false);
-        } catch (BasicException | SQLException e) {
+        } catch (SQLException e) {
             //put error messsage here
             return;
         }

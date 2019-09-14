@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import uk.chromis.pos.forms.AppConfig;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.pos.forms.StartupDialog;
 
 /**
@@ -86,17 +86,17 @@ public class DbUtils {
     }
 
     public static Connection getConnection() {
-        String sDBUser = AppConfig.getInstance().getProperty("db.user");
-        String sDBPassword = AppConfig.getInstance().getProperty("db.password");
-        if (sDBUser != null && sDBPassword != null && sDBPassword.startsWith("crypt:")) {
-            cypher = new AltEncrypter("cypherkey" + sDBUser);
-            sDBPassword = cypher.decrypt(sDBPassword.substring(6));
-        }
-        try {
-            return DriverManager.getConnection(AppConfig.getInstance().getProperty("db.url"), sDBUser, sDBPassword);
-        } catch (SQLException ex) {
-            return null;
-        }
+//        String sDBUser = AppConfig.getInstance().getProperty("db.user");
+//        String sDBPassword = AppConfig.getInstance().getProperty("db.password");
+//        if (sDBUser != null && sDBPassword != null && sDBPassword.startsWith("crypt:")) {
+//            cypher = new AltEncrypter("cypherkey" + sDBUser);
+//            sDBPassword = cypher.decrypt(sDBPassword.substring(6));
+//        }
+//        try {
+            return  ConnectionFactory.getInstance().getConnection();
+//        } catch (SQLException ex) {
+//            return null;
+//        }
     }
 
     public static void checkJava() {

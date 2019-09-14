@@ -74,7 +74,8 @@ public class DbManager {
         m_dlSystem.init(session);
         if (m_dlSystem.getDBVersion().equalsIgnoreCase("mysql")) {
             try {
-                DatabaseMetaData meta = ConnectionFactory.getConnection().getMetaData();
+                
+                DatabaseMetaData meta = ConnectionFactory.getInstance().getConnection().getMetaData();
                 String sqlVersion = meta.getDatabaseProductVersion();
                 if (sqlVersion.startsWith("8.")) {
                     JAlertPane.showAlertDialog(JAlertPane.WARNING,
@@ -212,25 +213,13 @@ public class DbManager {
         }
 
         Connection connection = null;
-
-        String dbURL = (AppConfig.getInstance().getProperty("db.URL"));
-        String sDBUser = AppConfig.getInstance().getProperty("db.user");
-        String sDBPassword = AppConfig.getInstance().getProperty("db.password");
-        if (sDBUser != null && sDBPassword != null && sDBPassword.startsWith("crypt:")) {
-            AltEncrypter cypher = new AltEncrypter("cypherkey" + sDBUser);
-            sDBPassword = cypher.decrypt(sDBPassword.substring(6));
-        }
-        try {
-            connection = DriverManager.getConnection(dbURL, sDBUser, sDBPassword);
-        } catch (SQLException ex) {
-        }
+            connection = ConnectionFactory.getInstance().getConnection();
         if (connection == null) {
         } else {
             connectTest.setVisible(false);
             return true;
         }
         try {
-            connection.close();
             connectTest.setVisible(false);
             return true;
         } catch (Exception e) {
@@ -283,19 +272,11 @@ public class DbManager {
     }
 
     public static Boolean exists() {
-        // routine to check for database and create if required
-        // get the details from the properties file
-        String db_user = (AppConfig.getInstance().getProperty("db.user"));
-        String db_url = (AppConfig.getInstance().getProperty("db.URL"));
-        String db_password = (AppConfig.getInstance().getProperty("db.password"));
-        if (db_user != null && db_password != null && db_password.startsWith("crypt:")) {
-            AltEncrypter cypher = new AltEncrypter("cypherkey" + db_user);
-            db_password = cypher.decrypt(db_password.substring(6));
-        }
+
         // test for an application table
         Boolean dbFound = false;
         try {
-            Connection tmpConnection = getRemoteConnection(db_user, db_password, db_url);
+            Connection tmpConnection = ConnectionFactory.getInstance().getConnection();
             // we have a connection to the database so look for application table
             String sql = "select * from applications";
             Statement stmt;

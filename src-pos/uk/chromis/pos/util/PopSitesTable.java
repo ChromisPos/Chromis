@@ -41,6 +41,7 @@ import liquibase.exception.CustomChangeException;
 import liquibase.exception.SetupException;
 import liquibase.exception.ValidationErrors;
 import liquibase.resource.ResourceAccessor;
+import uk.chromis.data.loader.ConnectionFactory;
 import uk.chromis.data.loader.Session;
 import uk.chromis.pos.forms.AppConfig;
 import uk.chromis.pos.forms.DriverWrapper;
@@ -64,20 +65,12 @@ public class PopSitesTable implements liquibase.change.custom.CustomTaskChange {
         }
 
         ClassLoader cloader;
-        Connection conn = null;
+        Connection conn;
         String Guid = null;
         PreparedStatement pstmt;
         ResultSet rs;
 
-        try {
-            cloader = new URLClassLoader(new URL[]{new File(AppConfig.getInstance().getProperty("db.driverlib")).toURI().toURL()});
-            DriverManager.registerDriver(new DriverWrapper((Driver) Class.forName(AppConfig.getInstance().getProperty("db.driver"), true, cloader).newInstance()));
-            Session session = new Session(db_url, db_user, db_password);
-            conn = session.getConnection();
-
-        } catch (MalformedURLException | SQLException | ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(PopSitesTable.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        conn = ConnectionFactory.getInstance().getConnection();
 
         try {
             pstmt = conn.prepareStatement("SELECT * FROM SITEGUID");
@@ -107,8 +100,6 @@ public class PopSitesTable implements liquibase.change.custom.CustomTaskChange {
             pstmt.executeUpdate();
             }
             pstmt.close();
-            
-            conn.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(PopSitesTable.class.getName()).log(Level.SEVERE, null, ex);
